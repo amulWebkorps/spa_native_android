@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <include
+        android:id="@+id/includeToolbar"
+        layout="@layout/layout_common_toolbar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewBankDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/font_medium.black.30"
+        android:textFontWeight="500"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/dp_17"
+        android:text="@string/label_bank_details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/includeToolbar"/>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dp_13"
+        android:layout_marginBottom="@dimen/dp_68"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewBankDetails"
+        app:layout_constraintBottom_toTopOf="@id/buttonBankDetail">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextAccountNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:boxStrokeColor="@color/colorGrey7C"
+        app:hintTextColor="@color/colorGrey7C"
+        android:hint="@string/account_number"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        app:layout_constraintTop_toBottomOf="@id/textViewSignUnSubHead">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputAccountNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/font_regular.black.16"
+            android:layout_marginStart="-14dp"
+            android:imeOptions="actionNext"
+            android:inputType="numberPassword"
+            android:maxLength="16"
+            android:singleLine="true"
+            android:backgroundTint="@color/colorGrey7C"
+            android:background="@android:color/transparent"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextConfirmAccountNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/dp_24"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:boxStrokeColor="@color/colorGrey7C"
+        app:hintTextColor="@color/colorGrey7C"
+        android:hint="Confirm Account Number"
+        android:layout_marginHorizontal="@dimen/dp_20"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputConfirmAccountNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/font_regular.black.16"
+            android:layout_marginStart="-14dp"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
+            android:maxLength="16"
+            android:inputType="numberPassword"
+            android:backgroundTint="@color/colorGrey7C"
+            android:background="@android:color/transparent"
+
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageEmailVerify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/dp_13"
+                android:visibility="invisible"
+                android:src="@drawable/ic_verified"
+                app:layout_constraintTop_toTopOf="@id/editTextConfirmAccountNumber"
+                app:layout_constraintBottom_toBottomOf="@id/editTextConfirmAccountNumber"
+                app:layout_constraintEnd_toEndOf="@id/editTextConfirmAccountNumber" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTextCode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_24"
+            android:background="@android:color/transparent"
+            app:boxStrokeColor="@color/colorGrey7C"
+            app:hintTextColor="@color/colorGrey7C"
+            android:hint="Code"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            app:layout_constraintTop_toBottomOf="@id/textViewSignUnSubHead">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/font_regular.black.16"
+                android:layout_marginStart="-14dp"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:backgroundTint="@color/colorGrey7C"
+                android:background="@android:color/transparent"
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTextNameAccountHolder"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_24"
+            android:background="@android:color/transparent"
+            app:boxStrokeColor="@color/colorGrey7C"
+            app:hintTextColor="@color/colorGrey7C"
+            android:hint="@string/name_account_holder"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            app:layout_constraintTop_toBottomOf="@id/textViewSignUnSubHead">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputNameAccountHolder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/font_regular.black.16"
+                android:layout_marginStart="-14dp"
+                android:imeOptions="actionNext"
+                android:singleLine="true"
+                android:backgroundTint="@color/colorGrey7C"
+                android:background="@android:color/transparent"
+
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonBankDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ButtonCommon"
+        android:layout_marginBottom="@dimen/dp_126"
+        android:layout_marginHorizontal="@dimen/dp_32"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Add Bank Details"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

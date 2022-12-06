@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPhone"
+        style="@style/font_medium.grey7c.12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_phone_number"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorGreyF5"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/dp_14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPhone"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/ccp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ccp_showArrow="false"
+            android:padding="0dp"
+            app:ccp_showFlag="true"
+            android:drawableEnd="@drawable/ic_bottom_arrow"
+            app:ccp_showNameCode="false" />
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editTextPhoneNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/dp_19"
+        android:background="@android:color/transparent"
+        style="@style/font_regular.black.16"
+        app:layout_constraintStart_toEndOf="@id/view"
+        app:hintTextColor="#CC555B61"
+        android:inputType="phone"
+        android:hint="@string/label_phone_number"
+        app:layout_constraintTop_toBottomOf="@id/textViewPhone"/>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#CC555B61"
+        android:layout_marginTop="@dimen/dp_14"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextPhoneNumber"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

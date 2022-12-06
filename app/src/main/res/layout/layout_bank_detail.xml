@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="@dimen/dp_2"
+    android:layout_marginHorizontal="@dimen/dp_20"
+android:layout_marginVertical="@dimen/dp_8"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/dp_4">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginVertical="@dimen/dp_13"
+        android:layout_marginStart="@dimen/dp_13"/>
+
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/dp_18"
+    android:orientation="vertical"
+    app:layout_constraintStart_toEndOf="@id/imageViewBg"
+    app:layout_constraintTop_toTopOf="@id/imageViewBg"
+    app:layout_constraintBottom_toBottomOf="@id/imageViewBg">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewAED"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/arpit_patidar"
+        style="@style/font_medium.black.16"
+        android:textFontWeight="500"
+        />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewBankName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/al_qadar_bank"
+        style="@style/font_medium.grey7c.12"
+        android:textSize="@dimen/sp_14"
+        android:textFontWeight="500"
+        />
+</LinearLayout>
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginVertical="@dimen/dp_13"
+        android:layout_marginEnd="@dimen/dp_21"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

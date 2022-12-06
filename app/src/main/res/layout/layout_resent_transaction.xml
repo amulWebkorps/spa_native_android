@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:cardElevation="@dimen/dp_2"
+    android:layout_marginHorizontal="@dimen/dp_8"
+android:layout_marginVertical="@dimen/dp_8"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/dp_4">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPlumbings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="plumbing"
+        style="@style/font_bold.black.10"
+        android:textFontWeight="500"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/dp_11"
+        android:layout_marginStart="@dimen/dp_9"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_20_november"
+        style="@style/font_bold.black.10"
+        android:textFontWeight="500"
+        android:textColor="#A5B4CB"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPlumbings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/dp_9"
+        android:layout_marginBottom="@dimen/dp_9"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewAED"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/aed_180_00"
+        style="@style/font_bold.black.10"
+        android:textFontWeight="500"
+        app:layout_constraintStart_toEndOf="@id/textViewPlumbings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/dp_36"
+        android:layout_marginEnd="@dimen/dp_10"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

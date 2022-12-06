@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/includeToolbar"
+        layout="@layout/layout_common_toolbar" />
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPhoneVerification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/font_medium.black.40"
+        android:textSize="@dimen/sp_26"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/dp_137"
+        android:text="@string/phone_verification"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/includeToolbar"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPhoneVerificationSubHead"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/font_medium.grey7c.12"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/dp_16"
+        android:text="@string/we_sent_a_code_to_your_number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPhoneVerification"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewPhoneVerificationNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/font_medium.grey7c.12"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="9(173)605-76-05 Change"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPhoneVerificationSubHead"/>
+    <com.chaos.view.PinView
+        android:id="@+id/otp_view"
+        style="@style/PinWidget.PinView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:cursorVisible="true"
+        android:inputType="number"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:cursorWidth="2dp"
+        app:hideLineWhenFilled="false"
+        app:itemCount="4"
+        app:itemRadius="4dp"
+        app:itemSpacing="10dp"
+        app:lineColor="@drawable/bg_pin_view"
+        app:cursorColor="@color/black"
+        app:viewType="rectangle"
+        android:layout_marginTop="@dimen/dp_30"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewPhoneVerificationNumber"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewDontReceive"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/font_medium.grey7c.12"
+        android:layout_gravity="center"
+        app:layout_constraintTop_toBottomOf="@id/otp_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="@dimen/dp_17"
+        android:text="@string/don_t_receive_your_code_resend" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonSubmit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ButtonCommon"
+        android:layout_marginHorizontal="@dimen/dp_41"
+        android:layout_marginTop="@dimen/dp_68"
+        app:layout_constraintTop_toBottomOf="@id/textViewDontReceive"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Submit"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

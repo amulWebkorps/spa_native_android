@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <include
+        android:id="@+id/includeToolbar"
+        layout="@layout/layout_common_toolbar" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewBankDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/font_medium.black.30"
+        android:textFontWeight="500"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="@dimen/dp_17"
+        android:text="@string/label_bank_details"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/includeToolbar"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleViewBankDetail"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        tools:listitem="@layout/layout_bank_detail"
+        tools:itemCount="4"
+        android:layout_marginBottom="@dimen/dp_16"
+        app:layout_constraintTop_toBottomOf="@id/textViewBankDetails"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/buttonBankDetail"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonBankDetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/ButtonCommon"
+        android:layout_marginBottom="@dimen/dp_126"
+        android:layout_marginHorizontal="@dimen/dp_32"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="Add Bank Details"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

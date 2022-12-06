@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewEnterAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_amount"
+        android:layout_marginTop="@dimen/dp_22"
+        android:layout_marginStart="@dimen/dp_22"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/enter_amount"
+        android:src="@drawable/ic_cut"
+        app:layout_constraintTop_toTopOf="@id/textViewEnterAmount"
+        app:layout_constraintBottom_toBottomOf="@id/textViewEnterAmount"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="@dimen/dp_22"/>
+    <androidx.appcompat.widget.AppCompatEditText
+        android:id="@+id/editTextEnterAmount"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/dp_80"
+        app:layout_constraintTop_toBottomOf="@id/textViewEnterAmount"
+        android:background="@drawable/bg_edit_text_bottom_sheet"
+        android:inputType="number"
+        android:maxLength="6"
+        android:gravity="center"
+        android:hint="@string/enter_amount"
+        style="@style/font_medium.black.40"
+        android:layout_marginTop="@dimen/dp_55"
+        android:layout_marginHorizontal="@dimen/dp_22"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonWithdrawal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Withdraw AED"
+        style="@style/font_bold.white"
+        android:textSize="@dimen/sp_15"
+        android:textFontWeight="600"
+        android:layout_marginHorizontal="@dimen/dp_21"
+        android:paddingVertical="@dimen/dp_16"
+        android:layout_marginTop="@dimen/dp_60"
+        android:layout_marginBottom="@dimen/dp_40"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editTextEnterAmount"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/bg_generate_button_bottom"/>
+</androidx.constraintlayout.widget.ConstraintLayout>
