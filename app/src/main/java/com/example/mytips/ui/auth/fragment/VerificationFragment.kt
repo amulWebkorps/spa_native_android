@@ -23,6 +23,7 @@ import com.example.mytips.utilities.showMessage
 import com.example.mytips.utilities.validation.ApplicationException
 import com.example.mytips.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.layout_phone_number.view.*
 
 class VerificationFragment : BaseFragment() {
     lateinit var value:String
@@ -42,19 +43,12 @@ class VerificationFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val value = requireArguments().getString(Constants.AUTH)
+
         binding.textViewPhoneVerificationNumber.text = session.countryCode+"-"+session.phoneNumber + " Change"
         setClick()
         response()
-        responseSendOtp()
 
-//        lifecycleScope.launchWhenCreated {
-//            authViewModel.sendOtp(
-//                User(
-//                    country_code = session.countryCode,
-//                    mobile_number = session.phoneNumber
-//                )
-//            )
-//        }
+        showMessage(binding.root , getString(R.string.otp_send))
 
     }
 
@@ -74,27 +68,16 @@ class VerificationFragment : BaseFragment() {
         }
         binding.buttonSubmit.setOnClickListener {
             if (isValidationSuccess()) {
-
-
-                if (value == Constants.FORGOT_PASSWORD) {
-                    listener?.replaceFragment(Screen.RESET_PASSWORD,Constants.FORGOT_PASSWORD)
-                }else{
-                    session.isLogin = true
-                    val intent= Intent(requireContext(), HomeActivity::class.java)
-                    requireActivity().finish()
-                    startActivity(intent)
-
-//                    val phone = value.split("-")
-//                    lifecycleScope.launchWhenCreated {
-//                        authViewModel.verifyOtp(
-//                            User(
-//                                otp_code = binding.otpView.toString(),
-//                                mobile_number = phone[1]
-//                            )
-//                        )
-//                    }
-
-               }
+                    toggleLoader(true)
+                    lifecycleScope.launchWhenCreated {
+                        authViewModel.verifyOtp(
+                            User(
+                                country_code= session.countryCode,
+                                mobile_number= session.phoneNumber,
+                                otp_code = binding.otpView.text.toString()
+                            )
+                        )
+                }
             }
         }
     }
@@ -112,47 +95,33 @@ class VerificationFragment : BaseFragment() {
     }
 
 
-    private fun responseSendOtp(){
-        lifecycleScope.launchWhenCreated {
-            authViewModel.sendOtp.collect { result ->
-                when (result) {
-                    is Resource.Error -> {
-                        Log.e("TAG", "fg: $result", )
-                        result.message?.let {
-                            Log.e("TAG", "response: $it", )
-                            showMessage(binding.root,it)
-                        }
-                    }
-                    is Resource.Loading -> {}
-                    is Resource.Success -> {
-                        showMessage(binding.root , getString(R.string.otp_send))
-                    }
-                }
-            }
-        }
-    }
-
 
     private fun response(){
         lifecycleScope.launchWhenCreated {
             authViewModel.verifyOtp.collect { result ->
                 when (result) {
                     is Resource.Error -> {
-                        Log.e("TAG", "fg: $result", )
+                        toggleLoader(false)
                         result.message?.let {
-                            Log.e("TAG", "response: $it", )
                             showMessage(binding.root,it)
                         }
                     }
                     is Resource.Loading -> {}
                     is Resource.Success -> {
+                        toggleLoader(false)
                         result.data?.let { it ->
-                            session.token = it.token
-                            Log.e("TAG", "response: $it",)
-                            session.isLogin = true
-                            val intent= Intent(requireContext(), HomeActivity::class.java)
-                            requireActivity().finish()
-                            startActivity(intent)
+                            if (value == Constants.FORGOT_PASSWORD) {
+                                listener?.replaceFragment(
+                                    Screen.RESET_PASSWORD,
+                                    Constants.FORGOT_PASSWORD
+                                )
+                            }else {
+                                session.token = it.token
+                                session.isLogin = true
+                                val intent = Intent(requireContext(), HomeActivity::class.java)
+                                requireActivity().finish()
+                                startActivity(intent)
+                            }
                         }
                     }
                 }

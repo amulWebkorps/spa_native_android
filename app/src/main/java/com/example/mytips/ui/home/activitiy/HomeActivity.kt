@@ -58,7 +58,6 @@ class HomeActivity : AppCompatActivity() , Listener {
                 R.id.send->setCurrentFragment(firstFragment)
                 R.id.transaction->setCurrentFragment(secondFragment)
                 R.id.settings->setCurrentFragment(thirdFragment)
-
             }
             true
         }

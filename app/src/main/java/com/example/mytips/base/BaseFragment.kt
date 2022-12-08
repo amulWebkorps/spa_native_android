@@ -1,6 +1,7 @@
 package com.example.mytips.base
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.Context
 import android.graphics.Bitmap
 import android.media.ThumbnailUtils
@@ -12,6 +13,7 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.OnTouchListener
+import androidx.appcompat.app.ActionBar
 import androidx.fragment.app.Fragment
 import com.example.mytips.R
 import com.example.mytips.base.listener.IsolatedListener
@@ -35,6 +37,8 @@ open class BaseFragment : Fragment(), OnTouchListener, View.OnClickListener{
 //    var fragmentNavigator: FragmentNavigationListener? = null
 //
 //    protected set
+    internal var progressDialog: Dialog? = null
+
     protected var density = 0f
     @Inject
     lateinit var validator: Validator
@@ -60,6 +64,17 @@ open class BaseFragment : Fragment(), OnTouchListener, View.OnClickListener{
         density = resources.displayMetrics.density
         validator=Validator()
         session = Session(requireContext())
+
+        progressDialog = Dialog(requireContext())
+//        progressDialog!!.setMessage("Please wait...")
+        progressDialog!!.setCancelable(false)
+        progressDialog!!.setContentView(R.layout.dialog_loader)
+        progressDialog!!.setCanceledOnTouchOutside(false)
+        progressDialog!!.window?.setLayout(
+            ActionBar.LayoutParams.MATCH_PARENT,
+            ActionBar.LayoutParams.WRAP_CONTENT
+        )
+        progressDialog!!.window?.setBackgroundDrawableResource(android.R.color.transparent)
     }
 
     override fun onStart() {
@@ -224,6 +239,19 @@ open class BaseFragment : Fragment(), OnTouchListener, View.OnClickListener{
         }
     }
 
+
+    fun toggleLoader(show: Boolean) {
+        try {
+            if (show) {
+                if (!progressDialog!!.isShowing)
+                    progressDialog!!.show()
+            } else {
+                if (progressDialog!!.isShowing)
+                    progressDialog!!.dismiss()
+            }
+        } catch (e: Exception) {
+        }
+    }
 
 
 

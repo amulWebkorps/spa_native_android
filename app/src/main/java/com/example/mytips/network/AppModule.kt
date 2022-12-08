@@ -4,7 +4,7 @@ import android.content.Context
 import com.example.mytips.Url
 import com.example.mytips.data.remote.AuthApi
 import com.example.mytips.data.remote.PhotoApi
-import com.example.mytips.data.repository.AuthRepositoryImpl
+import com.example.mytips.data.repository.AuthService
 import com.example.mytips.data.repository.PhotoRepositoryImpl
 import com.example.mytips.repo.PhotoRepository
 import com.example.mytips.repo.auth.AuthRepository
@@ -54,7 +54,7 @@ class AppModule {
     @Singleton
     @Provides
     fun provideAuthRepository(authApi: AuthApi): AuthRepository {
-        return AuthRepositoryImpl(authApi)
+        return AuthService(authApi)
     }
 
     @Singleton

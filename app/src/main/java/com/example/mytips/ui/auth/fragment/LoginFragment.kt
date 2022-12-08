@@ -66,38 +66,22 @@ class LoginFragment :  BaseFragment() {
         }
         binding.buttonLogin.setOnClickListener {
             if (isValidationSuccess()) {
-                session.isLogin = true
-                val intent= Intent(requireContext(), HomeActivity::class.java)
-                requireActivity().finish()
-                startActivity(intent)
+          toggleLoader(true)
 
-//                binding.progressBar.visibility=View.VISIBLE
-//                lifecycleScope.launchWhenCreated {
-//                    authViewModel.loginUser(
-//                        User(
-//                            mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
-//                            password= binding.textInputPassword.text.toString(),
-//                        )
-//                    )
-//                }
+                lifecycleScope.launchWhenCreated {
+                    authViewModel.loginUser(
+                        User(
+                            country_code= binding.layoutPhone.ccp.selectedCountryCode,
+                            mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
+                            password= binding.textInputPassword.text.toString(),
+                        )
+                    )
+                }
 
             }
         }
     }
 
-//
-//    private fun isValidEmail(): Boolean {
-//        try {
-//            validator.submit(binding.textInputEmail)
-//                .checkEmpty().errorMessage(getString(R.string.error_enter_email))
-//                .checkValidEmail().errorMessage(getString(R.string.error_valid_message))
-//                .check()
-//
-//        } catch (e: ApplicationException) {
-//            return false
-//        }
-//        return true
-//    }
     private fun isValidationSuccess(): Boolean {
         try {
             validator.submit(binding.Phone.editTextPhoneNumber)
@@ -120,18 +104,19 @@ class LoginFragment :  BaseFragment() {
          authViewModel.loginUser.collect { result ->
              when (result) {
                  is Resource.Error -> {
-                     binding.progressBar.visibility=View.GONE
-                        }
+                     toggleLoader(false)
+                     result.message?.let { showMessage(binding.root, it) }
+                 }
                  is Resource.Loading -> {}
                  is Resource.Success -> {
-                     binding.progressBar.visibility=View.GONE
-                     result.data?.let { it ->
-                         session.token = it.token.toString()
-                         session.isLogin = true
-                         val intent= Intent(requireContext(), HomeActivity::class.java)
-                         requireActivity().finish()
-                         startActivity(intent)
-                     }
+                     toggleLoader(false)
+//                     result.data?.let { it ->
+//                         session.token = it.token.toString()
+//                         session.isLogin = true
+//                         val intent= Intent(requireContext(), HomeActivity::class.java)
+//                         requireActivity().finish()
+//                         startActivity(intent)
+//                     }
                  }
              }
          }

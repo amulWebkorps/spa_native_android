@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.Gson
+import okhttp3.ResponseBody
 
 class ErrorUtil {
   @SuppressLint("SuspiciousIndentation")
@@ -29,6 +31,7 @@ class ErrorUtil {
     fun err(tag: String, msg: String) {
         Log.e(tag,msg)
     }
+
 
 
 }
@@ -57,5 +60,28 @@ fun showMessage(view: View,message: String, isError: Boolean = false) {
 //
     //    val textView = snackbarView.findViewById<View>(R.id.snackbar_text) as TextView
     snackbar.show()
+}
+
+fun getErrorResponse(error: ResponseBody?): Errors{
+    val gson = Gson()
+    var baseResponse = Errors()
+    baseResponse.errors = "Something went wrong"
+    try {
+        baseResponse = gson.fromJson(error!!.charStream(), Errors::class.java)
+        baseResponse.errors = baseResponse.errors
+    } catch (e: Exception) {
+    }
+    return baseResponse
+}
+fun getErrorMessageResponse(error: ResponseBody?): Errors{
+    val gson = Gson()
+    var baseResponse = Errors()
+    baseResponse.message = "Something went wrong"
+    try {
+        baseResponse = gson.fromJson(error!!.charStream(), Errors::class.java)
+        baseResponse.message = baseResponse.message
+    } catch (e: Exception) {
+    }
+    return baseResponse
 }
 

@@ -72,23 +72,21 @@ class SignUpFragment :  BaseFragment()  {
             session.phoneNumber = binding.layoutPhone.editTextPhoneNumber.text.toString()
 
             if (isValidationSuccess()){
-                listener?.replaceFragment(Screen.VERIFICATION,"+"+binding.layoutPhone.ccp.selectedCountryCode.toString() + "-" + binding.layoutPhone.editTextPhoneNumber.text.toString())
+                 toggleLoader(true)
+                lifecycleScope.launchWhenCreated {
+                    authViewModel.getRegister(RegisterRequest(
+                        User(
+                            country_code= binding.layoutPhone.ccp.selectedCountryCode,
+                            email= binding.textInputEmailAddress.text.toString(),
+                            first_name= binding.textInputFirstName.text.toString(),
+                            last_name =binding.textInputLastName.text.toString(),
+                            mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
+                            password= binding.textInputPassword.text.toString(),
+                            password_confirmation= binding.textInputConfirmPassword.text.toString()
+                        )
 
-//                binding.progressBar.visibility=View.VISIBLE
-//                lifecycleScope.launchWhenCreated {
-//                    authViewModel.getRegister(RegisterRequest(
-//                        User(
-//                            country_code= binding.layoutPhone.ccp.selectedCountryCode,
-//                            email= binding.textInputEmailAddress.text.toString(),
-//                            first_name= binding.textInputFirstName.text.toString(),
-//                            last_name =binding.textInputLastName.text.toString(),
-//                            mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
-//                            password= binding.textInputPassword.text.toString(),
-//                            password_confirmation= binding.textInputConfirmPassword.text.toString()
-//                        )
-//
-//                    ))
-//               }
+                    ))
+               }
             }
         }
 
@@ -118,11 +116,12 @@ class SignUpFragment :  BaseFragment()  {
             authViewModel.register.collect { result ->
                 when (result) {
                     is Resource.Error -> {
-                        binding.progressBar.visibility=View.GONE
+                        toggleLoader(false)
                         result.message?.let {it->                         }
                     }
                     is Resource.Loading -> {}
                     is Resource.Success -> {
+                        toggleLoader(false)
                         result.data?.let { it ->
                             listener?.replaceFragment(Screen.VERIFICATION,"+"+binding.layoutPhone.ccp.selectedCountryCode.toString() + "-" + binding.layoutPhone.editTextPhoneNumber.text.toString())
                             Log.e("TAG", "response: $it", )

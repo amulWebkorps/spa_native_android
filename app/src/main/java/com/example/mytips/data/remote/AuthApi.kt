@@ -1,9 +1,11 @@
 package com.example.mytips.data.remote
 
 import android.util.Log
+import com.example.mytips.Url
 import com.example.mytips.data.request.RegisterRequest
 import com.example.mytips.data.request.User
 import com.example.mytips.data.response.*
+import com.example.mytips.utilities.Resource
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -24,7 +26,7 @@ interface AuthApi {
     suspend fun verifyOtp(@Body user: User): Response<VerifyOtpResponse>
 
 
-    @POST("/users/login")
+    @POST(Url.LOGIN)
     suspend fun login(@Body user: User): Response<Login>
 
 }

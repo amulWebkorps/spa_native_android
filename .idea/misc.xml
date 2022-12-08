@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/spa_android/spa_native_android/app/src/main/res/layout/dialog_loader.xml" value="0.22192028985507245" />
+        <entry key="..\:/spa_android/spa_native_android/app/src/main/res/layout/fragment_login.xml" value="0.12158054711246201" />
+        <entry key="..\:/spa_android/spa_native_android/app/src/main/res/layout/fragment_reset_password.xml" value="0.10989583333333333" />
+        <entry key="..\:/spa_android/spa_native_android/app/src/main/res/layout/fragment_verification.xml" value="0.10989583333333333" />
+        <entry key="..\:/spa_android/spa_native_android/app/src/main/res/layout/layout_phone_number.xml" value="0.22192028985507245" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>

@@ -30,4 +30,5 @@ data class User(
 
     @SerializedName("otp_code")
     val otp_code: String?=null,
+
 ): Parcelable

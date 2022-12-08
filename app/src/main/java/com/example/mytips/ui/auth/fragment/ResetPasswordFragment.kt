@@ -42,6 +42,9 @@ class ResetPasswordFragment :BaseFragment() {
             binding.textInputConfirmPassword.showPassword(binding.checkboxPassword.isChecked)
             binding.textInputConfirmPassword.setEnd()
         }
+        binding.includeToolbar.imageViewBack.setOnClickListener {
+            listener?.goBack()
+        }
         binding.buttonContinue.setOnClickListener {
             if (isValidationSuccess()){
                 session.isLogin = true
