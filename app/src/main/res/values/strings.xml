@@ -76,4 +76,12 @@
     <string name="button_no">No</string>
     <string name="otp_send">otp sent to mobile number</string>
     <string name="logout">Logout</string>
+    <string name="label_bank_name">Bank Name</string>
+    <string name="account_type">Account Type</string>
+    <string name="saving">Saving</string>
+    <string name="error_bank_name">Please enter bank name</string>
+    <string name="bank_detail_added_successfully">Bank details added successfully</string>
+    <string name="user_update_success">User update successfully</string>
+    <string name="no_bank_account_added">No bank account added</string>
+    <string name="label_submit">Submit</string>
 </resources>

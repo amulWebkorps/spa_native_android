@@ -1,11 +1,9 @@
 package com.example.mytips.ui.auth.fragment
 
 
-import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,14 +12,11 @@ import androidx.lifecycle.lifecycleScope
 import com.example.mytips.R
 import com.example.mytips.base.BaseFragment
 import com.example.mytips.base.listener.Screen
-import com.example.mytips.data.request.RegisterRequest
 import com.example.mytips.data.request.User
 import com.example.mytips.databinding.FragmentSignUpBinding
 import com.example.mytips.utilities.*
 import com.example.mytips.utilities.validation.ApplicationException
 import com.example.mytips.viewmodel.AuthViewModel
-import com.example.mytips.viewmodel.PhotoListViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
 class SignUpFragment :  BaseFragment()  {
     private lateinit var binding: FragmentSignUpBinding
@@ -41,7 +36,7 @@ class SignUpFragment :  BaseFragment()  {
         super.onViewCreated(view, savedInstanceState)
         setClick()
         response()
-
+        responseSendOtp()
         binding.textInputConfirmPassword.showPassword(binding.checkboxPassword.isChecked)
         binding.textInputPassword.showPassword(binding.checkboxPassword.isChecked)
     }
@@ -74,8 +69,7 @@ class SignUpFragment :  BaseFragment()  {
             if (isValidationSuccess()){
                  toggleLoader(true)
                 lifecycleScope.launchWhenCreated {
-                    authViewModel.getRegister(RegisterRequest(
-                        User(
+                    authViewModel.getRegister(User(
                             country_code= binding.layoutPhone.ccp.selectedCountryCode,
                             email= binding.textInputEmailAddress.text.toString(),
                             first_name= binding.textInputFirstName.text.toString(),
@@ -83,8 +77,6 @@ class SignUpFragment :  BaseFragment()  {
                             mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
                             password= binding.textInputPassword.text.toString(),
                             password_confirmation= binding.textInputConfirmPassword.text.toString()
-                        )
-
                     ))
                }
             }
@@ -117,15 +109,26 @@ class SignUpFragment :  BaseFragment()  {
                 when (result) {
                     is Resource.Error -> {
                         toggleLoader(false)
-                        result.message?.let {it->                         }
+                        result.message?.let {it->
+                            showMessage(binding.root,it)
+                        }
                     }
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         toggleLoader(false)
                         result.data?.let { it ->
-                            listener?.replaceFragment(Screen.VERIFICATION,"+"+binding.layoutPhone.ccp.selectedCountryCode.toString() + "-" + binding.layoutPhone.editTextPhoneNumber.text.toString())
-                            Log.e("TAG", "response: $it", )
-                         }
+                            session.countryCode=it.country_code
+                            session.phoneNumber=it.mobile_number
+                            session.user=it
+                            lifecycleScope.launchWhenCreated {
+                                authViewModel.sendOtp(
+                                    User(
+                                        country_code= it.country_code,
+                                        mobile_number=it.mobile_number,
+                                    )
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -183,4 +186,23 @@ class SignUpFragment :  BaseFragment()  {
         return true
     }
 
+    private fun responseSendOtp(){
+        lifecycleScope.launchWhenCreated {
+            authViewModel.sendOtp.collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        toggleLoader(false)
+                        result.message?.let {
+                            showMessage(binding.root,it)
+                        }
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        toggleLoader(false)
+                        listener?.replaceFragment(Screen.VERIFICATION)
+                    }
+                }
+            }
+        }
+    }
 }

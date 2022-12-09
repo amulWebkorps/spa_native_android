@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.example.mytips.R
 import com.example.mytips.base.BaseFragment
 import com.example.mytips.databinding.FragmentResetPasswordBinding
+import com.example.mytips.ui.auth.activity.AuthActivity
 import com.example.mytips.ui.home.activitiy.HomeActivity
 import com.example.mytips.utilities.setEnd
 import com.example.mytips.utilities.showMessage
@@ -47,8 +48,7 @@ class ResetPasswordFragment :BaseFragment() {
         }
         binding.buttonContinue.setOnClickListener {
             if (isValidationSuccess()){
-                session.isLogin = true
-                val intent= Intent(requireContext(), HomeActivity::class.java)
+                val intent= Intent(requireContext(), AuthActivity::class.java)
                 requireActivity().finish()
                 startActivity(intent)
             }

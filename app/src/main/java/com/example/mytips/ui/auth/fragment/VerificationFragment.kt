@@ -2,7 +2,6 @@ package com.example.mytips.ui.auth.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.mytips.R
 import com.example.mytips.base.BaseFragment
 import com.example.mytips.base.listener.Screen
-import com.example.mytips.data.request.RegisterRequest
 import com.example.mytips.data.request.User
 import com.example.mytips.databinding.FragmentVerificationBinding
-import com.example.mytips.ui.auth.activity.AuthActivity
 import com.example.mytips.ui.home.activitiy.HomeActivity
 import com.example.mytips.utilities.Constants
 import com.example.mytips.utilities.Resource
@@ -22,8 +19,6 @@ import com.example.mytips.utilities.setSpan
 import com.example.mytips.utilities.showMessage
 import com.example.mytips.utilities.validation.ApplicationException
 import com.example.mytips.viewmodel.AuthViewModel
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.layout_phone_number.view.*
 
 class VerificationFragment : BaseFragment() {
     lateinit var value:String
@@ -62,7 +57,11 @@ class VerificationFragment : BaseFragment() {
             R.color.black,
             true
         ) {
-            listener?.replaceFragment(Screen.FORGOT_PASSWORD,Constants.CHANGE)
+            if(value==Constants.FORGOT_PASSWORD){
+                listener?.goBack()
+            }else {
+                listener?.replaceFragment(Screen.FORGOT_PASSWORD, Constants.CHANGE)
+            }
         }
         binding.textViewDontReceive.setSpan("Resend", R.font.poppins_medium, R.color.colorBlue72) {
         }
@@ -117,6 +116,7 @@ class VerificationFragment : BaseFragment() {
                                 )
                             }else {
                                 session.token = it.token
+                                session.user = it.user
                                 session.isLogin = true
                                 val intent = Intent(requireContext(), HomeActivity::class.java)
                                 requireActivity().finish()

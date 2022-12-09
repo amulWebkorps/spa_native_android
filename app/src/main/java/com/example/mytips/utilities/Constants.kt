@@ -13,6 +13,8 @@ class Constants {
         const val ADD_BANK_DETAIL = "addBankDetail"
         const val WALLET = "wallet"
         const val SHARE_QR = "share_qr"
+
+        const val MAX_PHONE = 10
     }
 
 

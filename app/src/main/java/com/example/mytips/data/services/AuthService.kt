@@ -1,39 +1,33 @@
-package com.example.mytips.data.repository
+package com.example.mytips.data.services
 
-import android.util.Log
 import com.example.mytips.data.remote.AuthApi
-import com.example.mytips.data.request.RegisterRequest
 import com.example.mytips.data.request.User
 import com.example.mytips.data.response.*
 import com.example.mytips.repo.auth.AuthRepository
-import com.example.mytips.utilities.ErrorUtil
 import com.example.mytips.utilities.Resource
 import com.example.mytips.utilities.getErrorMessageResponse
 import com.example.mytips.utilities.getErrorResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import org.json.JSONException
-import org.json.JSONObject
 import retrofit2.HttpException
 import java.io.IOException
-import java.security.cert.Extension
 
 class AuthService constructor(
     private val authApi: AuthApi
 ) : AuthRepository {
 
-    override suspend fun registerUser(registerRequest: RegisterRequest): Flow<Resource<RegisterResponse>> {
+    override suspend fun registerUser(user: User): Flow<Resource<GetUser>> {
         return flow {
             emit(Resource.Loading(true))
 
             try {
-                val response = authApi.registerUser(registerRequest)
+                val response = authApi.registerUser(user)
                 if (response.isSuccessful) {
                     emit(Resource.Loading(false))
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(response.message()))
+                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors!!))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
@@ -103,7 +97,73 @@ class AuthService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorMessageResponse(response.errorBody()).message!!))
+                    emit(Resource.Error(getErrorMessageResponse(response.errorBody()).errors!!))
+                }
+            } catch (e: IOException) {
+                emit(Resource.Loading(false))
+                emit(Resource.Error("Something went wrong"))
+            } catch (e: HttpException) {
+                emit(Resource.Loading(false))
+                emit(Resource.Error("Something went wrong"))
+            }
+        }
+    }
+
+    override suspend fun getUser(token: String): Flow<Resource<GetUser>> {
+        return flow {
+            emit(Resource.Loading(true))
+            try {
+                val response = authApi.getUser(token)
+                if (response.isSuccessful && response!=null) {
+                    emit(Resource.Loading(false))
+                    emit(Resource.Success(response.body()))
+                } else {
+                    emit(Resource.Loading(false))
+                    emit(Resource.Error(getErrorMessageResponse(response.errorBody()).errors!!))
+                }
+            } catch (e: IOException) {
+                emit(Resource.Loading(false))
+                emit(Resource.Error("Something went wrong"))
+            } catch (e: HttpException) {
+                emit(Resource.Loading(false))
+                emit(Resource.Error("Something went wrong"))
+            }
+        }
+    }
+
+    override suspend fun updateMobileNumber(user: User): Flow<Resource<UpdateMobileNumber>> {
+        return flow {
+            emit(Resource.Loading(true))
+            try {
+                val response = authApi.updateMobileNumber(user)
+                if (response.isSuccessful && response!=null) {
+                    emit(Resource.Loading(false))
+                    emit(Resource.Success(response.body()))
+                } else {
+                    emit(Resource.Loading(false))
+                    emit(Resource.Error(getErrorMessageResponse(response.errorBody()).errors.toString()!!))
+                }
+            } catch (e: IOException) {
+                emit(Resource.Loading(false))
+                emit(Resource.Error("Something went wrong"))
+            } catch (e: HttpException) {
+                emit(Resource.Loading(false))
+                emit(Resource.Error("Something went wrong"))
+            }
+        }
+    }
+
+    override suspend fun updateUserDetails(token: String,user: User): Flow<Resource<UpdateUser>> {
+        return flow {
+            emit(Resource.Loading(true))
+            try {
+                val response = authApi.updateUserDetails(token,user)
+                if (response.isSuccessful && response!=null) {
+                    emit(Resource.Loading(false))
+                    emit(Resource.Success(response.body()))
+                } else {
+                    emit(Resource.Loading(false))
+                    emit(Resource.Error(getErrorMessageResponse(response.errorBody()).errors.toString()!!))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))

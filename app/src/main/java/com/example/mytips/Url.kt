@@ -9,8 +9,15 @@ import retrofit.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object Url {
-    const val BASE_URL = "https://51bb-103-17-99-145.in.ngrok.io"
+    const val BASE_URL = "https://d28b-183-87-13-140.in.ngrok.io/"
 
     const val USER = "/users"
     const val LOGIN = "$USER/login"
+    const val REGISTER = "$USER/registration"
+    const val USER_PROFILE = "$USER/profile"
+    const val UPDATE_PHONE = "$USER/update_mobile_number"
+
+    const val BANK_ACCOUNTS="/bank_accounts"
+    const val DELETE_BANK_ACCOUNTS="/bank_accounts/"
+    const val USER_UPDATE="$USER/update"
 }

@@ -40,6 +40,7 @@ class ForgotPasswordFragment :BaseFragment() {
         setView()
         setClick()
         responseSendOtp()
+        updateMobileNumberResponse()
 
     }
 
@@ -50,7 +51,15 @@ class ForgotPasswordFragment :BaseFragment() {
 
             if (isValidationSuccess()){
                 if (value == Constants.CHANGE){
-                    listener?.goBack()
+                    lifecycleScope.launchWhenCreated {
+                        authViewModel.updateMobileNumber(
+                            User(
+                                email = session.user!!.email,
+                                country_code= "+"+binding.layoutPhone.ccp.selectedCountryCode,
+                                mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
+                                )
+                        )
+                    }
                 }
                 else{
                     toggleLoader(true)
@@ -105,12 +114,45 @@ class ForgotPasswordFragment :BaseFragment() {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         toggleLoader(false)
-                        listener?.replaceFragment(Screen.VERIFICATION,Constants.FORGOT_PASSWORD)
+                        if (value == Constants.CHANGE) {
+                            listener?.goBack()
+                        } else {
+                            listener?.replaceFragment(
+                                Screen.VERIFICATION,
+                                Constants.FORGOT_PASSWORD
+                            )
+                        }
                     }
                 }
             }
         }
     }
+    private fun updateMobileNumberResponse(){
+        lifecycleScope.launchWhenCreated {
+            authViewModel.updateMobileNumber.collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        toggleLoader(false)
+                        result.message?.let {
+                            showMessage(binding.root,it)
+                        }
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        lifecycleScope.launchWhenCreated {
+                            authViewModel.sendOtp(
+                                User(
+                                    country_code= "+"+binding.layoutPhone.ccp.selectedCountryCode,
+                                    mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
+                                )
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
 
 }

@@ -1,21 +1,15 @@
 package com.example.mytips.data.remote
 
-import android.util.Log
 import com.example.mytips.Url
-import com.example.mytips.data.request.RegisterRequest
 import com.example.mytips.data.request.User
 import com.example.mytips.data.response.*
-import com.example.mytips.utilities.Resource
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface AuthApi {
 
-    @POST("/users/registration")
-    suspend fun registerUser(@Body registerRequest: RegisterRequest): Response<RegisterResponse>
+    @POST(Url.REGISTER)
+    suspend fun registerUser(@Body user: User): Response<GetUser>
 
 
     @POST("/users/generate_otp")
@@ -28,5 +22,15 @@ interface AuthApi {
 
     @POST(Url.LOGIN)
     suspend fun login(@Body user: User): Response<Login>
+
+
+    @GET(Url.USER_PROFILE)
+    suspend fun getUser(@Header("Authorization")token:String): Response<GetUser>
+
+    @PATCH(Url.UPDATE_PHONE)
+    suspend fun updateMobileNumber(@Body user: User): Response<UpdateMobileNumber>
+
+    @PUT(Url.USER_UPDATE)
+    suspend fun updateUserDetails(@Header("Authorization")token:String,@Body user: User): Response<UpdateUser>
 
 }

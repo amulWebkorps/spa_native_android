@@ -8,5 +8,5 @@ data class User(
     val id: Int,
     val last_name: String,
     val mobile_number: String,
-    val updated_at: String
+    val updated_at: String,
 )

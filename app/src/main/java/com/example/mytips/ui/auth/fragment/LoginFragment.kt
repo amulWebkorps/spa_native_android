@@ -2,26 +2,21 @@ package com.example.mytips.ui.auth.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.mytips.R
 import com.example.mytips.base.BaseFragment
 import com.example.mytips.base.listener.Screen
-import com.example.mytips.data.request.RegisterRequest
 import com.example.mytips.data.request.User
 import com.example.mytips.databinding.FragmentLoginBinding
 import com.example.mytips.ui.home.activitiy.HomeActivity
 import com.example.mytips.utilities.*
 import com.example.mytips.utilities.validation.ApplicationException
 import com.example.mytips.viewmodel.AuthViewModel
-import com.example.mytips.viewmodel.PhotoListViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.layout_phone_number.view.*
 
@@ -46,6 +41,8 @@ class LoginFragment :  BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         setClick()
         loginResponse()
+        getUserResponse()
+        responseSendOtp()
         binding.textInputPassword.showPassword(binding.checkboxPassword.isChecked)
           }
 
@@ -71,7 +68,7 @@ class LoginFragment :  BaseFragment() {
                 lifecycleScope.launchWhenCreated {
                     authViewModel.loginUser(
                         User(
-                            country_code= binding.layoutPhone.ccp.selectedCountryCode,
+                            country_code= "+"+binding.layoutPhone.ccp.selectedCountryCode,
                             mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
                             password= binding.textInputPassword.text.toString(),
                         )
@@ -110,16 +107,77 @@ class LoginFragment :  BaseFragment() {
                  is Resource.Loading -> {}
                  is Resource.Success -> {
                      toggleLoader(false)
-//                     result.data?.let { it ->
-//                         session.token = it.token.toString()
-//                         session.isLogin = true
-//                         val intent= Intent(requireContext(), HomeActivity::class.java)
-//                         requireActivity().finish()
-//                         startActivity(intent)
-//                     }
+                     result.data?.let { it ->
+
+                         Log.e("TAG", "loginResponse: $it", )
+                         lifecycleScope.launchWhenCreated {
+                             authViewModel.getUser(
+                                it.token
+                             )
+                         }
+                     }
                  }
              }
          }
      }
  }
+
+    private fun getUserResponse() {
+        lifecycleScope.launchWhenCreated {
+            authViewModel.getUser.collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        toggleLoader(false)
+                        result.message?.let { showMessage(binding.root, it) }
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        toggleLoader(false)
+                        result.data?.let { it ->
+                            session.phoneNumber=it.mobile_number
+                            session.countryCode=it.country_code
+                            session.user=it
+
+                            Log.e("TAG", "getUserResponse: $it", )
+                            if (it.is_mobile_verified) {
+                                session.isLogin = true
+                                val intent = Intent(requireContext(), HomeActivity::class.java)
+                                requireActivity().finish()
+                                startActivity(intent)
+                            }else{
+                                lifecycleScope.launchWhenCreated {
+                                    authViewModel.sendOtp(
+                                        User(
+                                            country_code= it.country_code,
+                                            mobile_number=it.mobile_number,
+                                        )
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun responseSendOtp(){
+        lifecycleScope.launchWhenCreated {
+            authViewModel.sendOtp.collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        toggleLoader(false)
+                        result.message?.let {
+                            showMessage(binding.root,it)
+                        }
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        toggleLoader(false)
+                        listener?.replaceFragment(Screen.VERIFICATION)
+                    }
+                }
+            }
+        }
+    }
 }

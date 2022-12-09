@@ -59,8 +59,8 @@
             style="@style/font_regular.black.16"
             android:layout_marginStart="-14dp"
             android:imeOptions="actionNext"
-            android:text="@string/arpit"
             android:singleLine="true"
+            android:drawableEnd="@drawable/ic_edit_image"
             android:backgroundTint="@color/colorGrey7C"
             android:background="@android:color/transparent"
 
@@ -75,10 +75,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="@dimen/dp_24"
+        android:hint="@string/label_last_name"
         android:background="@android:color/transparent"
         app:boxStrokeColor="@color/colorGrey7C"
         app:hintTextColor="@color/colorGrey7C"
-        android:hint="@string/label_last_name"
         android:layout_marginHorizontal="@dimen/dp_20">
 
         <com.google.android.material.textfield.TextInputEditText
@@ -89,7 +89,7 @@
             android:layout_marginStart="-14dp"
             android:imeOptions="actionNext"
             android:singleLine="true"
-            android:text="patidar"
+            android:drawableEnd="@drawable/ic_edit_image"
             android:backgroundTint="@color/colorGrey7C"
             android:background="@android:color/transparent"
             />
@@ -118,6 +118,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Submit"/>
+        android:text="@string/label_submit"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -3,18 +3,31 @@ package com.example.mytips.ui.home.fragment
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.mytips.R
 import com.example.mytips.base.BaseFragment
+import com.example.mytips.base.listener.Screen
+import com.example.mytips.data.request.AddBankDetailRequest
+import com.example.mytips.data.request.User
 import com.example.mytips.databinding.FragmentAddBankDetailBinding
+import com.example.mytips.utilities.Resource
 import com.example.mytips.utilities.showMessage
 import com.example.mytips.utilities.validation.ApplicationException
+import com.example.mytips.viewmodel.AuthViewModel
+import com.example.mytips.viewmodel.SettingsViewModel
 import kotlinx.android.synthetic.main.fragment_add_bank_detail.*
 
 
 class AddBankDetailFragment:BaseFragment() {
+
+    private val settingsViewModel: SettingsViewModel by viewModels()
 
     private lateinit var binding: FragmentAddBankDetailBinding
 
@@ -30,6 +43,10 @@ class AddBankDetailFragment:BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setClick()
+        responseAddBankDetail()
+        val items = listOf("Saving", "Current")
+        val adapter = ArrayAdapter(requireContext(), R.layout.layout_item, items)
+        (binding.textInputAccountType as? AutoCompleteTextView)?.setAdapter(adapter)
     }
 
     private fun setClick() {
@@ -57,7 +74,19 @@ class AddBankDetailFragment:BaseFragment() {
             })
             buttonBankDetail.setOnClickListener {
                 if (isValidationSuccess()){
-                    isolatedListener?.goBack()
+                    toggleLoader(true)
+                    lifecycleScope.launchWhenCreated {
+                        settingsViewModel.addBankDetail(
+                            session.token,
+                            AddBankDetailRequest(
+                            bank_name  = binding.textInputBankName.text.toString(),
+                            account_holder_name = binding.textInputNameAccountHolder.text.toString(),
+                            account_number  = binding.textInputConfirmAccountNumber.text.toString(),
+                            account_type =binding.textInputAccountType.text.toString(),
+                            ifsc_code = binding.textInputCode.text.toString(),
+                        )
+                      )
+                    }
                 }
             }
         }
@@ -93,10 +122,39 @@ class AddBankDetailFragment:BaseFragment() {
             validator.submit(binding.textInputNameAccountHolder)
                 .checkEmpty().errorMessage(getString(R.string.error_account_holder_name))
                 .check()
+            validator.submit(binding.textInputBankName)
+                .checkEmpty().errorMessage(getString(R.string.error_bank_name))
+                .check()
         } catch (e: ApplicationException) {
             showMessage(binding.root,e.message)
             return false
         }
         return true
+    }
+
+
+    private fun responseAddBankDetail(){
+        lifecycleScope.launchWhenCreated {
+            settingsViewModel.addBankDetails.collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        toggleLoader(false)
+                        result.message?.let {
+                            showMessage(binding.root,it)
+                        }
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        toggleLoader(false)
+                        result.data.let {
+                            showMessage(binding.root,getString(R.string.bank_detail_added_successfully))
+                            Log.e("TAG", "responseAddBankDetail: $it", )
+                            isolatedListener?.goBack()
+                        }
+
+                      }
+                }
+            }
+        }
     }
 }

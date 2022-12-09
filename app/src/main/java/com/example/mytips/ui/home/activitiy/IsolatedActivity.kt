@@ -10,7 +10,9 @@ import com.example.mytips.base.listener.IsolatedListener
 import com.example.mytips.databinding.ActivityIsolatedBinding
 import com.example.mytips.ui.home.fragment.*
 import com.example.mytips.utilities.Constants
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class IsolatedActivity : AppCompatActivity() , IsolatedListener {
 
     private lateinit var binding: ActivityIsolatedBinding

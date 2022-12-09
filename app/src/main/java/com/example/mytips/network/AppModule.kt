@@ -3,11 +3,11 @@ package com.example.mytips.network
 import android.content.Context
 import com.example.mytips.Url
 import com.example.mytips.data.remote.AuthApi
-import com.example.mytips.data.remote.PhotoApi
-import com.example.mytips.data.repository.AuthService
-import com.example.mytips.data.repository.PhotoRepositoryImpl
-import com.example.mytips.repo.PhotoRepository
+import com.example.mytips.data.remote.SettingsApi
+import com.example.mytips.data.services.AuthService
+import com.example.mytips.data.services.SettingsService
 import com.example.mytips.repo.auth.AuthRepository
+import com.example.mytips.repo.settings.SettingsRepository
 import com.example.mytips.utilities.core.Session
 import dagger.Module
 import dagger.Provides
@@ -24,22 +24,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class AppModule {
 
-    @Singleton
-    @Provides
-    fun providePhotoAPI(): PhotoApi {
-        return Retrofit.Builder()
-            .baseUrl(Url.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-            .create()
-    }
-
-    @Singleton
-    @Provides
-    fun providePhotoRepository(photoApi: PhotoApi): PhotoRepository {
-        return PhotoRepositoryImpl(photoApi)
-    }
-
 
     @Singleton
     @Provides
@@ -55,6 +39,23 @@ class AppModule {
     @Provides
     fun provideAuthRepository(authApi: AuthApi): AuthRepository {
         return AuthService(authApi)
+    }
+
+
+    @Singleton
+    @Provides
+    fun provideSettingAPI(): SettingsApi {
+        return Retrofit.Builder()
+            .baseUrl(Url.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create()
+    }
+
+    @Singleton
+    @Provides
+    fun provideSettingRepository(settingsApi: SettingsApi): SettingsRepository {
+        return SettingsService(settingsApi)
     }
 
     @Singleton

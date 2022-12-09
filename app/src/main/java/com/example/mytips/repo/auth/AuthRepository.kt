@@ -1,18 +1,16 @@
 package com.example.mytips.repo.auth
 
-import com.example.mytips.data.request.RegisterRequest
 import com.example.mytips.data.request.User
-import com.example.mytips.data.response.Login
-import com.example.mytips.data.response.RegisterResponse
-import com.example.mytips.data.response.SendOtpResponse
-import com.example.mytips.data.response.VerifyOtpResponse
+import com.example.mytips.data.response.*
 import com.example.mytips.utilities.Resource
 import kotlinx.coroutines.flow.Flow
-import retrofit2.Response
 
 interface AuthRepository {
-    suspend fun registerUser(registerRequest: RegisterRequest) : Flow<Resource<RegisterResponse>>
+    suspend fun registerUser(user: User) : Flow<Resource<GetUser>>
     suspend fun sendOtp(user: User) : Flow<Resource<SendOtpResponse>>
     suspend fun verifyOtp(user: User) : Flow<Resource<VerifyOtpResponse>>
     suspend fun loginUser(user: User) : Flow<Resource<Login>>
+    suspend fun getUser(token:String) : Flow<Resource<GetUser>>
+    suspend fun updateMobileNumber(user: User) : Flow<Resource<UpdateMobileNumber>>
+    suspend fun updateUserDetails(token:String,user: User) : Flow<Resource<UpdateUser>>
 }

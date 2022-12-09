@@ -3,6 +3,9 @@ package com.example.mytips.utilities.core
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import com.example.mytips.data.response.GetUser
+import com.example.mytips.data.response.User
+import com.google.gson.Gson
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -51,10 +54,28 @@ class Session(context: Context)  {
         get() = getString(TOKEN)
         set(value) {putString(TOKEN, value)}
 
+
+    private val gson: Gson = Gson()
+    var user: GetUser? = null
+    get() {
+        if (field == null) {
+            val userJSON = getString(USER_JSON)
+            field = gson.fromJson(userJSON, GetUser::class.java)
+        }
+        return field
+    }
+    set(value) {
+        field = value
+        val userJson = gson.toJson(value)
+        if (userJson != null)
+            putString(USER_JSON, userJson)
+    }
+
     companion object {
         const val IS_LOGIN = "is-login"
         const val COUNTRY_CODE = "country-code"
         const val PHONE_NUMBER = "phone-number"
         const val TOKEN = "token"
+        const val USER_JSON = "user_json"
     }
 }
