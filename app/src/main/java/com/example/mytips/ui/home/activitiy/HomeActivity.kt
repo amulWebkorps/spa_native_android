@@ -36,13 +36,13 @@ class HomeActivity : AppCompatActivity() , Listener {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        Log.e("TAG", "onCreate: ${session.user!!.first_name}", )
+        binding.includeToolbar.textViewName.text = session.user!!.first_name
         session = Session(this)
 
         binding.includeToolbar.imageViewWallet.setOnClickListener {
             openActivity(Constants.WALLET)
         }
-
         setFragment()
     }
 
@@ -69,11 +69,12 @@ class HomeActivity : AppCompatActivity() , Listener {
         intent.putExtra(Constants.SCREEN_NAME,fragment)
         startActivity(intent)
     }
+
     private fun setCurrentFragment(fragment: Fragment)=
         supportFragmentManager.beginTransaction().apply {
             replace(R.id.flFragment,fragment)
             commit()
-        }
+    }
 
     override fun replaceFragment(screen: Screen, value: String?) {
 

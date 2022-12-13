@@ -43,6 +43,7 @@ class LoginFragment :  BaseFragment() {
         loginResponse()
         getUserResponse()
         responseSendOtp()
+
         binding.textInputPassword.showPassword(binding.checkboxPassword.isChecked)
           }
 
@@ -108,7 +109,7 @@ class LoginFragment :  BaseFragment() {
                  is Resource.Success -> {
                      toggleLoader(false)
                      result.data?.let { it ->
-
+                         session.token = it.token
                          Log.e("TAG", "loginResponse: $it", )
                          lifecycleScope.launchWhenCreated {
                              authViewModel.getUser(

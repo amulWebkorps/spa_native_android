@@ -103,7 +103,7 @@
             style="@style/font_regular.black.16"
             android:layout_marginStart="-14dp"
             android:imeOptions="actionNext"
-            android:inputType="numberPassword"
+            android:inputType="number"
             android:maxLength="16"
             android:singleLine="true"
             android:backgroundTint="@color/colorGrey7C"

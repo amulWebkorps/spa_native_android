@@ -27,7 +27,7 @@ class AuthService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors!!))
+                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors.toString()!!))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
@@ -50,7 +50,7 @@ class AuthService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors!!))
+                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors.toString()!!))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
@@ -74,7 +74,7 @@ class AuthService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors!!))
+                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors.toString()!!))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
@@ -97,7 +97,7 @@ class AuthService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorMessageResponse(response.errorBody()).errors!!))
+                    emit(Resource.Error(getErrorMessageResponse(response.errorBody()).errors.toString()!!))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
@@ -119,7 +119,7 @@ class AuthService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorMessageResponse(response.errorBody()).errors!!))
+                    emit(Resource.Error(getErrorMessageResponse(response.errorBody()).errors.toString()!!))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
