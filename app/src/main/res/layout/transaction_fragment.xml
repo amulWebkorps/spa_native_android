@@ -4,6 +4,9 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    <include
+        android:id="@+id/noDataFoundLayout"
+        layout="@layout/no_data_found_layout" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewTransaction"
@@ -16,6 +19,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:textFontWeight="500"/>
+
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewFilter"
         android:layout_width="wrap_content"
@@ -34,17 +38,28 @@
         app:layout_constraintBottom_toBottomOf="@id/textViewTransaction"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+
+    <include
+        android:id="@+id/includeNoInternet"
+        layout="@layout/no_internet_layout"
+        />
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dp_32"
+        app:layout_constraintTop_toBottomOf="@id/textViewTransaction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewTransaction"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:listitem="@layout/layout_resent_transaction"
         tools:itemCount="4"
-        android:layout_marginHorizontal="@dimen/dp_32"
-        app:layout_constraintTop_toBottomOf="@id/textViewTransaction"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

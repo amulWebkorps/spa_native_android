@@ -4,6 +4,11 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <include
+        android:id="@+id/includeNoInternet"
+        layout="@layout/no_internet_layout"
+        />
     <LinearLayout
         android:id="@+id/layoutAmount"
         android:layout_width="match_parent"
@@ -48,6 +53,7 @@
 
     </LinearLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layoutGraph"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"

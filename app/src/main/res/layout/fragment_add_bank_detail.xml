@@ -61,6 +61,14 @@
                 />
 
         </com.google.android.material.textfield.TextInputLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_type"
+            android:layout_marginTop="@dimen/dp_24"
+            android:textColor="@color/colorGrey7C"
+            android:textSize="@dimen/sp_12"
+            android:layout_marginHorizontal="@dimen/dp_20"/>
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/editTextAccountType"
             android:layout_width="match_parent"
@@ -68,7 +76,6 @@
             android:background="@android:color/transparent"
             app:boxStrokeColor="@color/colorGrey7C"
             app:hintTextColor="@color/colorGrey7C"
-            android:layout_marginTop="@dimen/dp_24"
             android:layout_marginHorizontal="@dimen/dp_20"
             app:endIconMode="dropdown_menu">
 
@@ -77,10 +84,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/saving"
+                style="@style/font_regular.black.16"
                 android:inputType="none"
                 android:backgroundTint="@android:color/transparent"
-                android:background="@android:color/transparent"
-                android:paddingBottom="@dimen/dp_14" />
+                android:background="@android:color/transparent" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -104,7 +111,7 @@
             android:layout_marginStart="-14dp"
             android:imeOptions="actionNext"
             android:inputType="number"
-            android:maxLength="16"
+            android:maxLength="18"
             android:singleLine="true"
             android:backgroundTint="@color/colorGrey7C"
             android:background="@android:color/transparent"
@@ -130,6 +137,7 @@
         android:layout_marginHorizontal="@dimen/dp_20"
         >
 
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputConfirmAccountNumber"
             android:layout_width="match_parent"
@@ -138,7 +146,7 @@
             android:layout_marginStart="-14dp"
             android:imeOptions="actionNext"
             android:singleLine="true"
-            android:maxLength="16"
+            android:maxLength="18"
             android:inputType="numberPassword"
             android:backgroundTint="@color/colorGrey7C"
             android:background="@android:color/transparent"
@@ -158,6 +166,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/editTextConfirmAccountNumber"
                 app:layout_constraintEnd_toEndOf="@id/editTextConfirmAccountNumber" />
         </androidx.constraintlayout.widget.ConstraintLayout>
+        
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/editTextCode"
             android:layout_width="match_parent"

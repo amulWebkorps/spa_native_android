@@ -16,6 +16,6 @@ dependencyResolutionManagement {
         }
     }
 }
-rootProject.name = "mytips"
+rootProject.name = "spa"
 include ':app'
 include ':ccp'

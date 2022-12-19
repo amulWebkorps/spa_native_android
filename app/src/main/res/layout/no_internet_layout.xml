@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutNoInternet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:visibility="gone"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewNoInternet"
+        android:layout_width="@dimen/dp_126"
+        android:layout_height="@dimen/dp_126"
+        android:layout_marginTop="@dimen/dp_250"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/no_internet"/>
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewNoInternet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/font_medium.black.24"
+        android:layout_marginTop="@dimen/dp_24"
+        app:layout_constraintTop_toBottomOf="@id/imageViewNoInternet"
+        android:text="@string/no_internet_connection"
+        app:layout_constraintStart_toStartOf="@id/imageViewNoInternet"
+        app:layout_constraintEnd_toEndOf="@id/imageViewNoInternet"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/buttonTryAgain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/textViewNoInternet"
+        app:layout_constraintStart_toStartOf="@id/textViewNoInternet"
+        app:layout_constraintEnd_toEndOf="@id/textViewNoInternet"
+        android:layout_marginTop="@dimen/dp_16"
+        style="@style/ButtonRefresh"
+        android:text="@string/try_again"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

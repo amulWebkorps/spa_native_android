@@ -34,6 +34,11 @@
         app:layout_constraintBottom_toTopOf="@id/buttonBankDetail"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
+    <include
+        android:id="@+id/includeNoInternet"
+        layout="@layout/no_internet_layout"
+     />
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonBankDetail"
@@ -47,21 +52,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Add Bank Details"/>
 
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewNoBankAccountAdded"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        style="@style/font_medium.grey7c.12"
-        android:textSize="@dimen/dp_16"
-        android:gravity="center"
-        android:visibility="gone"
-        android:layout_marginHorizontal="@dimen/dp_24"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/no_bank_account_added"/>
+    <include
+        android:id="@+id/noDataFoundLayout"
+        layout="@layout/no_data_found_layout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

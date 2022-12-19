@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "588704640058",
+    "project_id": "spa-native-ios",
+    "storage_bucket": "spa-native-ios.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588704640058:android:091b3f89953ec4006b1903",
+        "android_client_info": {
+          "package_name": "com.example.spa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588704640058-76c20uhakakrpfls2uirs4s3gjub699g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEh7H7REaDpeK1pOBT2CQ4YJcgNB6BU_w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588704640058-76c20uhakakrpfls2uirs4s3gjub699g.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "588704640058-9of3odrj2callchuee5eu1qgs25hdl9c.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mytips.app"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

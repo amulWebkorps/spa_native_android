@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="@dimen/dp_2"
+    app:cardElevation="@dimen/dp_6"
+    android:background="@color/white"
     android:layout_marginHorizontal="@dimen/dp_20"
-android:layout_marginVertical="@dimen/dp_8"
+    android:layout_marginVertical="@dimen/dp_8"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="@dimen/dp_4">
+    app:cardCornerRadius="@dimen/dp_6">
 <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/bg"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     >
