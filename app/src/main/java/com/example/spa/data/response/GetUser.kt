@@ -37,5 +37,8 @@ data class GetUser(
     val updated_at: String,
 
     @SerializedName("user_wallet")
-    val user_wallet:@RawValue UserWallet
+    val user_wallet:@RawValue UserWallet,
+
+    @SerializedName("image")
+    val image: String,
 ): Parcelable

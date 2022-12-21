@@ -4,8 +4,10 @@ object Url {
     const val BASE_URL = "http://122.168.199.5:3000/"
 
     const val USER = "/users"
+    const val V2_USER = "api/v2/users"
     const val LOGIN = "$USER/login"
     const val REGISTER = "$USER/registration"
+    const val V2_REGISTER = "$V2_USER/registration"
     const val USER_PROFILE = "$USER/profile"
     const val UPDATE_PHONE = "$USER/update_mobile_number"
     const val RESET_PASSWORD = "$USER/reset_password"
@@ -14,4 +16,6 @@ object Url {
     const val BANK_ACCOUNTS="/bank_accounts"
     const val DELETE_BANK_ACCOUNTS="/bank_accounts/"
     const val USER_UPDATE="$USER/update"
+    const val V2_USER_UPDATE = "$V2_USER/update"
+
 }

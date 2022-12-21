@@ -1,27 +1,47 @@
 package com.example.spa.ui.auth.fragment
 
 
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.spa.R
+import com.example.spa.Url
 import com.example.spa.base.BaseFragment
 import com.example.spa.base.listener.Screen
+import com.example.spa.data.remote.AuthApi
+import com.example.spa.data.remote.RegisterApi
 import com.example.spa.data.request.User
+import com.example.spa.data.response.GetUser
 import com.example.spa.databinding.FragmentSignUpBinding
 import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import retrofit.Response
+import retrofit2.Call
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+import java.io.FileOutputStream
 
 class SignUpFragment :  BaseFragment()  {
     private lateinit var binding: FragmentSignUpBinding
     private val authViewModel: AuthViewModel by viewModels()
-
+     var imageUri :Uri? =  null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +55,7 @@ class SignUpFragment :  BaseFragment()  {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setClick()
-        response()
+       // response()
         responseSendOtp()
         binding.textInputConfirmPassword.showPassword(binding.checkboxPassword.isChecked)
         binding.textInputPassword.showPassword(binding.checkboxPassword.isChecked)
@@ -43,6 +63,7 @@ class SignUpFragment :  BaseFragment()  {
     private fun setClick() {
         binding.imageViewProfile.setOnClickListener {
             imagePicker { uri ->
+                imageUri = uri
                 binding?.imageViewProfile?.setImageURI(uri)
                 binding.imageViewAddPic.visibility = View.INVISIBLE
             }
@@ -63,21 +84,13 @@ class SignUpFragment :  BaseFragment()  {
         }
 
         binding.buttonRegister.setOnClickListener {
-            session.countryCode = "+"+binding.layoutPhone.ccp.selectedCountryCode
-            session.phoneNumber = binding.layoutPhone.editTextPhoneNumber.text.toString()
             if (isValidationSuccess()){
-                 toggleLoader(true)
-                lifecycleScope.launchWhenCreated {
-                    authViewModel.getRegister(User(
-                            country_code= "+"+binding.layoutPhone.ccp.selectedCountryCode,
-                            email= binding.textInputEmailAddress.text.toString(),
-                            first_name= binding.textInputFirstName.text.toString(),
-                            last_name =binding.textInputLastName.text.toString(),
-                            mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
-                            password= binding.textInputPassword.text.toString(),
-                            password_confirmation= binding.textInputConfirmPassword.text.toString(),
-                    ))
-               }
+                session.countryCode = "+"+binding.layoutPhone.ccp.selectedCountryCode
+               session.phoneNumber = binding.layoutPhone.editTextPhoneNumber.text.toString()
+                toggleLoader(true)
+                CoroutineScope(Dispatchers.IO).launch {
+                    upload()
+                }
             }
         }
 
@@ -150,9 +163,9 @@ class SignUpFragment :  BaseFragment()  {
 
     private fun isValidationSuccess(): Boolean {
         try {
-//            if (binding.imageViewProfile.drawable == null){
-//                validator.checkEmpty().errorMessage(getString(R.string.error_profile_photo)).check()
-//            }else {
+            if (binding.imageViewProfile.drawable == null){
+                validator.checkEmpty().errorMessage(getString(R.string.error_profile_photo)).check()
+            }else {
                 validator.submit(binding.textInputFirstName)
                     .checkEmpty().errorMessage(getString(R.string.error_firstName))
                     .check()
@@ -177,7 +190,7 @@ class SignUpFragment :  BaseFragment()  {
                     .errorMessage(getString(R.string.error_password_not_matched))
                     .check()
 
-//            }
+            }
         } catch (e: ApplicationException) {
             showMessage(binding.root,e.message)
             return false
@@ -202,6 +215,87 @@ class SignUpFragment :  BaseFragment()  {
                     }
                 }
             }
+        }
+    }
+
+
+    private suspend fun upload(){
+        val fileDir = requireContext().filesDir
+       val file = File(fileDir,"image.png")
+
+        if (imageUri != null) {
+            val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
+            val outputStream = FileOutputStream(file)
+            inputStream!!.copyTo(outputStream)
+        }
+        val requestFile: RequestBody = RequestBody.create(
+            "multipart/form-data".toMediaTypeOrNull(), file)
+
+        Log.e("TAG", "requestfile ${requestFile}", )
+
+        val part: MultipartBody.Part = MultipartBody.Part.createFormData(
+            "image", file.name.trim(), requestFile)
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Url.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(AuthApi::class.java)
+
+        val email: RequestBody = RequestBody.create(
+            "text/plain".toMediaTypeOrNull(),
+            binding.textInputEmailAddress.text.toString()
+        )
+        val firstName: RequestBody = RequestBody.create(
+            "text/plain".toMediaTypeOrNull(),
+            binding.textInputFirstName.text.toString()
+        )
+        val lastName: RequestBody = RequestBody.create(
+            "text/plain".toMediaTypeOrNull(),
+            binding.textInputLastName.text.toString()
+        )
+        val mobileNumber: RequestBody = RequestBody.create(
+            "text/plain".toMediaTypeOrNull(),
+            binding.layoutPhone.editTextPhoneNumber.text.toString()
+        )
+        val countryCode: RequestBody = RequestBody.create(
+            "text/plain".toMediaTypeOrNull(),
+            "+"+binding.layoutPhone.ccp.selectedCountryCode
+        )
+        val password: RequestBody = RequestBody.create(
+            "text/plain".toMediaTypeOrNull(),
+            binding.textInputPassword.text.toString()
+        )
+        val confirmPassword: RequestBody = RequestBody.create(
+            "text/plain".toMediaTypeOrNull(),
+            binding.textInputConfirmPassword.text.toString()
+        )
+
+        Log.e("TAG", "upload: $part", )
+        val call: retrofit2.Response<GetUser> =  retrofit.registerUserImage(
+            email, firstName,lastName,mobileNumber,countryCode,password,confirmPassword,
+            part
+        )
+
+        if(call.isSuccessful){
+            toggleLoader(false)
+            call.body()?.let { it ->
+                session.countryCode = it.country_code
+                session.phoneNumber = it.mobile_number
+                session.user = it
+                lifecycleScope.launchWhenCreated {
+                    authViewModel.sendOtp(
+                        User(
+                            country_code = it.country_code,
+                            mobile_number = it.mobile_number,
+                        )
+                    )
+                }
+                Log.e("TAG", "upload: ${call.body()}",)
+            }
+        }else{
+            toggleLoader(false)
+            showMessage(binding.root,getErrorResponseArray(call.errorBody()).errors[0].toString()!!)
         }
     }
 }

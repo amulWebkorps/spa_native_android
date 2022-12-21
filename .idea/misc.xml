@@ -5,9 +5,12 @@
       <map>
         <entry key="..\:/spa_android/spa_native_android/app/src/main/res/drawable/bg_button.xml" value="0.105" />
         <entry key="..\:/spa_android/spa_native_android/app/src/main/res/drawable/bg_button_refresh.xml" value="0.105" />
+        <entry key="..\:/spa_android/spa_native_android/app/src/main/res/drawable/bg_design_main.xml" value="0.121" />
         <entry key="..\:/spa_android/spa_native_android/app/src/main/res/layout/activity_auth.xml" value="0.10989583333333333" />
         <entry key="..\:/spa_android/spa_native_android/app/src/main/res/layout/activity_home.xml" value="0.31213872832369943" />
+        <entry key="..\:/spa_android/spa_native_android/app/src/main/res/layout/bottomsheet_image_picker.xml" value="0.659375" />
         <entry key="..\:/spa_android/spa_native_android/app/src/main/res/layout/dialog_loader.xml" value="0.22192028985507245" />
+        <entry key="..\:/spa_android/spa_native_android/app/src/main/res/layout/dialog_permission.xml" value="0.6" />
         <entry key="..\:/spa_android/spa_native_android/app/src/main/res/layout/fragment_add_bank_detail.xml" value="0.4668141592920354" />
         <entry key="..\:/spa_android/spa_native_android/app/src/main/res/layout/fragment_bank_detail.xml" value="0.2" />
         <entry key="..\:/spa_android/spa_native_android/app/src/main/res/layout/fragment_edit_profile.xml" value="0.1" />

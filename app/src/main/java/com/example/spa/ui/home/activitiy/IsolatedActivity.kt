@@ -39,15 +39,15 @@ class IsolatedActivity : AppCompatActivity() , IsolatedListener {
         }
     }
 
-//    override fun onBackPressed() {
-//        super.onBackPressed()
-//        if (intent.extras?.get(Constants.SCREEN_NAME) == Constants.EDIT_PROFILE) {
-//            val intent = Intent(this, HomeActivity::class.java)
-//            intent.putExtra(Constants.SCREEN_NAME, Constants.EDIT_PROFILE)
-//            startActivity(intent)
-//            this.finish()
-//        }
-//    }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if (intent.extras?.get(Constants.SCREEN_NAME) == Constants.EDIT_PROFILE) {
+            val intent = Intent(this, HomeActivity::class.java)
+            intent.putExtra(Constants.SCREEN_NAME, Constants.EDIT_PROFILE)
+            startActivity(intent)
+            this.finish()
+        }
+    }
      private fun loadFragment(fragment: Fragment){
          supportFragmentManager.beginTransaction().add(R.id.placeHolder, fragment).commit()
      }

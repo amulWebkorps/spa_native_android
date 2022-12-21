@@ -12,6 +12,7 @@ import com.example.spa.base.BaseFragment
 import com.example.spa.base.listener.Screen
 import com.example.spa.data.request.User
 import com.example.spa.databinding.FragmentVerificationBinding
+import com.example.spa.ui.auth.activity.AuthActivity
 import com.example.spa.ui.home.activitiy.HomeActivity
 import com.example.spa.utilities.Constants
 import com.example.spa.utilities.Resource
@@ -118,7 +119,7 @@ class VerificationFragment : BaseFragment() {
                                 session.token = it.token
                                 session.user = it.user
                                 session.isLogin = true
-                                val intent = Intent(requireContext(), HomeActivity::class.java)
+                                val intent = Intent(requireContext(), AuthActivity::class.java)
                                 requireActivity().finish()
                                 startActivity(intent)
                             }

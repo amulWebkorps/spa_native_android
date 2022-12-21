@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -16,6 +17,7 @@ import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
 import com.example.spa.R
 import com.example.spa.base.BaseBottomSheetDialogFragment
+import com.example.spa.base.DialogUtils
 import com.example.spa.databinding.BottomsheetImagePickerBinding
 import com.example.spa.utilities.lazyFast
 import com.fondesa.kpermissions.extension.*
@@ -65,6 +67,7 @@ class ImagePickerDialog : BaseBottomSheetDialogFragment() {
             Manifest.permission.READ_EXTERNAL_STORAGE*/
         ).build()
     }
+
 
     private val galleryPermission by lazyFast {
         permissionsBuilder(Manifest.permission.READ_EXTERNAL_STORAGE).build()
@@ -153,7 +156,7 @@ class ImagePickerDialog : BaseBottomSheetDialogFragment() {
                 openCamera()
             }else{
                 PermissionDialog().showPermissionDialog(requireContext()) {
-                openCamera()
+                    openCamera()
                 }
             }
         }
@@ -162,7 +165,11 @@ class ImagePickerDialog : BaseBottomSheetDialogFragment() {
         }
     }
     fun openCamera(){
+        if (cameraPermission.checkStatus()[0].permission == "android.permission.CAMERA") {
                 camera.launch(imageUri)
+        }else{
+            Log.e("TAG", "denied", )
+        }
         }
     private fun intentGallery() {
         val galleryIntent = Intent(

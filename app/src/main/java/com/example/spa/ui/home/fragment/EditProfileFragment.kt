@@ -1,28 +1,45 @@
 package com.example.spa.ui.home.fragment
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.spa.R
+import com.example.spa.Url
 import com.example.spa.base.BaseFragment
+import com.example.spa.data.remote.AuthApi
 import com.example.spa.data.request.User
+import com.example.spa.data.response.GetUser
+import com.example.spa.data.response.ResetPassword
+import com.example.spa.data.response.UpdateUserResponse
 import com.example.spa.databinding.FragmentEditProfileBinding
 import com.example.spa.ui.home.activitiy.HomeActivity
-import com.example.spa.utilities.Constants
-import com.example.spa.utilities.Resource
-import com.example.spa.utilities.showMessage
+import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.io.File
+import java.io.FileOutputStream
 
 class EditProfileFragment : BaseFragment() {
 
     private lateinit var binding: FragmentEditProfileBinding
     private val authViewModel: AuthViewModel by viewModels()
+    var imageUri : Uri? =  null
 
 
     override fun onCreateView(
@@ -43,6 +60,15 @@ class EditProfileFragment : BaseFragment() {
     }
 
     private fun setView() {
+        if (session.user!!.image != null){
+            GlideUtils.loadImage(
+                requireContext(),
+                session.user!!.image,
+                0,
+                0,
+                binding.imageViewProfile
+            )
+        }
         binding.layoutPhone.editTextPhoneNumber.inputType = InputType.TYPE_NULL
         binding.layoutPhone.ccp.setCcpClickable(false)
         binding.textInputFirstName.setText(session.user!!.first_name)
@@ -55,27 +81,32 @@ class EditProfileFragment : BaseFragment() {
         binding.buttonSave.setOnClickListener {
             if(isValidationSuccess()){
                 toggleLoader(true)
-                lifecycleScope.launchWhenCreated {
-                    authViewModel.updateUserDetail(
-                        session.token,
-                        User(
-                            email = session.user!!.email,
-                            first_name =  binding.textInputFirstName.text.toString(),
-                            last_name = binding.textInputLastName.text.toString(),
-                        )
-                    )
+                CoroutineScope(Dispatchers.IO).launch {
+                    upload()
                 }
+
+//                lifecycleScope.launchWhenCreated {
+//                    authViewModel.updateUserDetail(
+//                        session.token,
+//                        User(
+//                            email = session.user!!.email,
+//                            first_name =  binding.textInputFirstName.text.toString(),
+//                            last_name = binding.textInputLastName.text.toString(),
+//                        )
+//                    )
+//                }
             }
         }
         binding.imageViewProfile.setOnClickListener {
             imagePicker { uri ->
+                imageUri = uri
                 binding?.imageViewProfile?.setImageURI(uri)
             }
         }
         binding.includeToolbar.imageViewBack.setOnClickListener {
-//            val intent= Intent(requireContext(), HomeActivity::class.java)
-//            intent.putExtra(Constants.SCREEN_NAME,Constants.EDIT_PROFILE)
-//            startActivity(intent)
+            val intent= Intent(requireContext(), HomeActivity::class.java)
+            intent.putExtra(Constants.SCREEN_NAME,Constants.EDIT_PROFILE)
+            startActivity(intent)
             requireActivity().finish()
         }
     }
@@ -122,5 +153,65 @@ class EditProfileFragment : BaseFragment() {
             }
         }
     }
+    private suspend fun upload() {
+        val fileDir = requireContext().filesDir
+        val file = File(fileDir, "image.png")
+
+        Log.e("TAG", "upload: 1", )
+        if (imageUri != null) {
+            Log.e("TAG", "upload: 2", )
+            val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
+            val outputStream = FileOutputStream(file)
+            inputStream!!.copyTo(outputStream)
+        }
+        val requestFile: RequestBody = RequestBody.create(
+            "multipart/form-data".toMediaTypeOrNull(), file
+        )
+
+        Log.e("TAG", "requestfile ${requestFile}",)
+
+        val part: MultipartBody.Part = MultipartBody.Part.createFormData(
+            "image", file.name.trim(), requestFile
+        )
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(Url.BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(AuthApi::class.java)
+
+        val email: RequestBody = RequestBody.create(
+            "text/plain".toMediaTypeOrNull(),
+            session.user!!.email
+        )
+        val firstName: RequestBody = RequestBody.create(
+            "text/plain".toMediaTypeOrNull(),
+            binding.textInputFirstName.text.toString()
+        )
+        val lastName: RequestBody = RequestBody.create(
+            "text/plain".toMediaTypeOrNull(),
+            binding.textInputLastName.text.toString()
+        )
+
+        val call: retrofit2.Response<UpdateUserResponse> = retrofit.updateUserDetailsImage(session.token,
+            email, firstName, lastName,  part
+        )
+
+        if (call.isSuccessful) {
+            toggleLoader(false)
+            session.user = call.body()!!.user
+            val intent= Intent(requireContext(), HomeActivity::class.java)
+                          intent.putExtra(Constants.SCREEN_NAME,Constants.EDIT_PROFILE)
+                          startActivity(intent)
+            requireActivity().finish()
+        } else {
+            toggleLoader(false)
+            showMessage(
+                binding.root,
+                getErrorResponseArray(call.errorBody()).errors[0].toString()!!
+            )
+        }
+    }
+
 
 }

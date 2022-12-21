@@ -35,7 +35,7 @@ class SettingsFragment:BaseFragment() {
         binding.apply {
             includeProfile.layoutMain.setOnClickListener {
                openActivity(Constants.EDIT_PROFILE)
-                //requireActivity().finish()
+                requireActivity().finish()
             }
             includeBankDetail.layoutMain.setOnClickListener {
                 openActivity(Constants.BANK_DETAIL)

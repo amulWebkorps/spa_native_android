@@ -21,5 +21,8 @@
     <color name="pastel_orange_light">#FBE8DF</color>
     <color name="whiteB3">#F2FFFFFF</color>
     <color name="colorWhiteF0">#F0EEE5</color>
+    <color name="colorGold">#C7A981</color>
+
+    <color name="colorGreyLight">#F7F7F7</color>
 
 </resources>

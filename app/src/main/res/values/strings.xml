@@ -35,6 +35,9 @@
     <string name="label_forgot_password">Forgot Password</string>
     <string name="enter_your_mobile_number_for_the_verification_process_we_will_send_4_digit_code_to_your_number">Enter your mobile number for the verification process we will send 4 digit code to your number</string>
     <string name="label_continue">Continue</string>
+
+    <string name="message_permanently_denied">Permanently Denied</string>
+    <string name="message_camera_permission">Camera permission required to capture image!</string>
     <string name="label_change_phone_number">Change Number</string>
     <string name="label_mobile_number_subhead">Enter your new mobile number for the change mobile number process we will change your phone number</string>
     <string name="reset_password">Reset Password</string>
