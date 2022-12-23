@@ -56,7 +56,6 @@ class EditProfileFragment : BaseFragment() {
         updateUserResponse()
         clickListener()
         setView()
-
     }
 
     private fun setView() {
@@ -64,11 +63,12 @@ class EditProfileFragment : BaseFragment() {
             GlideUtils.loadImage(
                 requireContext(),
                 session.user!!.image,
-                0,
+                R.drawable.place_holder,
                 0,
                 binding.imageViewProfile
             )
         }
+
         binding.layoutPhone.editTextPhoneNumber.inputType = InputType.TYPE_NULL
         binding.layoutPhone.ccp.setCcpClickable(false)
         binding.textInputFirstName.setText(session.user!!.first_name)
@@ -158,21 +158,20 @@ class EditProfileFragment : BaseFragment() {
         val file = File(fileDir, "image.png")
 
         Log.e("TAG", "upload: 1", )
+
         if (imageUri != null) {
-            Log.e("TAG", "upload: 2", )
+            Log.e("TAG", "upload: 2",)
             val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
             val outputStream = FileOutputStream(file)
             inputStream!!.copyTo(outputStream)
         }
-        val requestFile: RequestBody = RequestBody.create(
-            "multipart/form-data".toMediaTypeOrNull(), file
-        )
+            val requestFile: RequestBody = RequestBody.create(
+                "multipart/form-data".toMediaTypeOrNull(), file
+            )
+          val part =  MultipartBody.Part.createFormData(
+                "image", file.name.trim(), requestFile
+            )
 
-        Log.e("TAG", "requestfile ${requestFile}",)
-
-        val part: MultipartBody.Part = MultipartBody.Part.createFormData(
-            "image", file.name.trim(), requestFile
-        )
 
         val retrofit = Retrofit.Builder()
             .baseUrl(Url.BASE_URL)

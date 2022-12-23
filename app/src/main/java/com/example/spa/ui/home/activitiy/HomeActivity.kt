@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity() , Listener {
             GlideUtils.loadImage(
                 this,
                 session.user!!.image,
-                0,
+                R.drawable.place_holder,
                 0,
                 binding.includeToolbar.imageViewProfile
             )

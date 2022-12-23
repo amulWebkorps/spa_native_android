@@ -15,7 +15,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:layout_marginTop="@dimen/dp_21"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
         <androidx.appcompat.widget.AppCompatEditText
@@ -67,7 +66,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="@dimen/dp_31"
-            android:layout_marginTop="@dimen/dp_31"
+            android:layout_marginTop="@dimen/dp_16"
             android:text="Activity Progress"
             style="@style/font_bold.black.16"/>
         <Spinner
@@ -85,10 +84,10 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/dp_31"
-            android:layout_marginTop="@dimen/dp_18"
+            android:layout_marginTop="@dimen/dp_8"
             app:cardCornerRadius="@dimen/dp_8"
             app:cardElevation="@dimen/dp_8"
-            android:layout_marginBottom="@dimen/dp_17"
+            android:layout_marginBottom="@dimen/dp_8"
             app:layout_constraintTop_toBottomOf="@id/textViewActivityProgress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

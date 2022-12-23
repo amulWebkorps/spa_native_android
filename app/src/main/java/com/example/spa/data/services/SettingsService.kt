@@ -5,7 +5,7 @@ import com.example.spa.data.request.AddBankDetailRequest
 import com.example.spa.data.response.*
 import com.example.spa.repo.settings.SettingsRepository
 import com.example.spa.utilities.Resource
-import com.example.spa.utilities.getErrorResponse
+import com.example.spa.utilities.getErrorResponseArray
 import com.example.spa.utilities.getErrorResponseArray
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -53,7 +53,7 @@ class SettingsService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors!!))
+                    emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0]!!.toString()))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
@@ -75,7 +75,8 @@ class SettingsService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors!!))
+                    emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0]!!.toString()))
+
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
@@ -97,7 +98,8 @@ class SettingsService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors!!))
+                    emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0]!!.toString()))
+
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))

@@ -13,6 +13,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
 import com.example.spa.R
@@ -30,6 +31,7 @@ import java.util.*
 
 class ImagePickerDialog : BaseBottomSheetDialogFragment() {
     private lateinit var cropImageFile: File
+    val REQUEST_CODE =101
 
     companion object {
         fun showDialog(
@@ -152,24 +154,42 @@ class ImagePickerDialog : BaseBottomSheetDialogFragment() {
         cropImageFile = createFile()
         imageUri = getUri(file)
         binding.constraintTakePhoto.setOnClickListener {
-            if (requireContext().checkCameraPermission()) {
+            //if (requireContext().checkCameraPermission()) {
                 openCamera()
-            }else{
-                PermissionDialog().showPermissionDialog(requireContext()) {
-                    openCamera()
-                }
-            }
+//            }else{
+//                PermissionDialog().showPermissionDialog(requireContext()) {
+//
+//                }
+//            }
         }
         binding.constraintOpenGallery.setOnClickListener {
             intentGallery()
         }
     }
     fun openCamera(){
-        if (cameraPermission.checkStatus()[0].permission == "android.permission.CAMERA") {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED -> {
                 camera.launch(imageUri)
-        }else{
-            Log.e("TAG", "denied", )
+            }
+            shouldShowRequestPermissionRationale("camera permission") -> {
+            // In an educational UI, explain to the user why your app requires this
+            // permission for a specific feature to behave as expected, and what
+            // features are disabled if it's declined. In this UI, include a
+            // "cancel" or "no thanks" button that lets the user continue
+            // using your app without granting the permission.
+
         }
+            else -> {
+                // You can directly ask for the permission.
+                requestPermissions(
+                    arrayOf(Manifest.permission.CAMERA),
+                    REQUEST_CODE)
+            }
+        }
+//                camera.launch(imageUri)
         }
     private fun intentGallery() {
         val galleryIntent = Intent(

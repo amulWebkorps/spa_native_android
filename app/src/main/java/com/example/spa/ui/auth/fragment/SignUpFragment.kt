@@ -42,6 +42,7 @@ class SignUpFragment :  BaseFragment()  {
     private lateinit var binding: FragmentSignUpBinding
     private val authViewModel: AuthViewModel by viewModels()
      var imageUri :Uri? =  null
+     var part :MultipartBody.Part? =  null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -163,9 +164,9 @@ class SignUpFragment :  BaseFragment()  {
 
     private fun isValidationSuccess(): Boolean {
         try {
-            if (binding.imageViewProfile.drawable == null){
-                validator.checkEmpty().errorMessage(getString(R.string.error_profile_photo)).check()
-            }else {
+//            if (binding.imageViewProfile.drawable == null){
+//                validator.checkEmpty().errorMessage(getString(R.string.error_profile_photo)).check()
+//            }else {
                 validator.submit(binding.textInputFirstName)
                     .checkEmpty().errorMessage(getString(R.string.error_firstName))
                     .check()
@@ -190,7 +191,7 @@ class SignUpFragment :  BaseFragment()  {
                     .errorMessage(getString(R.string.error_password_not_matched))
                     .check()
 
-            }
+//            }
         } catch (e: ApplicationException) {
             showMessage(binding.root,e.message)
             return false
@@ -223,19 +224,17 @@ class SignUpFragment :  BaseFragment()  {
         val fileDir = requireContext().filesDir
        val file = File(fileDir,"image.png")
 
-        if (imageUri != null) {
+        part = if (imageUri != null) {
             val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
             val outputStream = FileOutputStream(file)
             inputStream!!.copyTo(outputStream)
+            val requestFile: RequestBody = RequestBody.create(
+                "multipart/form-data".toMediaTypeOrNull(), file)
+            MultipartBody.Part.createFormData(
+                "image", file.name.trim(), requestFile)
+        }else {
+            null
         }
-        val requestFile: RequestBody = RequestBody.create(
-            "multipart/form-data".toMediaTypeOrNull(), file)
-
-        Log.e("TAG", "requestfile ${requestFile}", )
-
-        val part: MultipartBody.Part = MultipartBody.Part.createFormData(
-            "image", file.name.trim(), requestFile)
-
         val retrofit = Retrofit.Builder()
             .baseUrl(Url.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())

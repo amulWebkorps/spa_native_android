@@ -278,6 +278,7 @@ class SendFragment(context: Context) : BaseFragment() {
                 when (result) {
                     is Resource.Error -> {
                         toggleLoader(false)
+                        binding.LayoutResentTransaction.hideView()
                         result.message?.let {
                             showMessage(binding.root,it)
                         }

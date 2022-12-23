@@ -47,7 +47,7 @@ class AuthService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors.toString()!!))
+                        emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0].toString()!!))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
@@ -71,7 +71,7 @@ class AuthService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors.toString()!!))
+                        emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0].toString()!!))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
@@ -94,7 +94,7 @@ class AuthService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors.toString()!!))
+                        emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0].toString()!!))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
@@ -118,7 +118,7 @@ class AuthService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors.toString()!!))
+                        emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0].toString()!!))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
@@ -140,7 +140,7 @@ class AuthService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors.toString()!!))
+                        emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0].toString()!!))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
@@ -184,7 +184,7 @@ class AuthService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponse(response.errorBody()).errors.toString()!!))
+                        emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0].toString()!!))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))

@@ -38,7 +38,6 @@ class BankDetailsFragment:BaseFragment(), BankDetailAdapter.OnClick {
         bankListApi()
         bankListResponse()
         bankDeleteResponse()
-
         setAdapter()
         setClick()
 
@@ -47,7 +46,9 @@ class BankDetailsFragment:BaseFragment(), BankDetailAdapter.OnClick {
     private fun bankListApi() {
         if (hasInternet(requireContext())){
             binding.includeNoInternet.layoutNoInternet.hideView()
+            binding.recycleViewBankDetail.showView()
             toggleLoader(true)
+            bankListResponse()
             lifecycleScope.launchWhenCreated {
                 settingsViewModel.bankAccountsList(
                     session.token,

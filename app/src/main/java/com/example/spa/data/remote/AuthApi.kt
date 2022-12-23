@@ -24,7 +24,7 @@ interface AuthApi {
                                   @Part("country_code") country_code:RequestBody,
                                   @Part("password") password:RequestBody,
                                   @Part("password_confirmation") password_confirmation:RequestBody,
-                                  @Part image:MultipartBody.Part,
+                                  @Part image:MultipartBody.Part?,
                                   ): Response<GetUser>
 
 

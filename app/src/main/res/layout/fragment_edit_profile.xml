@@ -33,7 +33,7 @@
         android:layout_width="@dimen/dp_92"
         android:layout_height="@dimen/dp_92"
         android:layout_marginTop="@dimen/dp_20"
-        android:src="@drawable/ic_dummy_profile"
+        android:src="@drawable/place_holder"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textViewPersonalDetails"
