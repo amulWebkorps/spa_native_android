@@ -29,6 +29,7 @@ import kotlinx.coroutines.launch
 import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import retrofit.Response
@@ -37,6 +38,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.FileOutputStream
+import java.util.concurrent.TimeUnit
 
 class SignUpFragment :  BaseFragment()  {
     private lateinit var binding: FragmentSignUpBinding
@@ -85,12 +87,17 @@ class SignUpFragment :  BaseFragment()  {
         }
 
         binding.buttonRegister.setOnClickListener {
-            if (isValidationSuccess()){
-                session.countryCode = "+"+binding.layoutPhone.ccp.selectedCountryCode
-               session.phoneNumber = binding.layoutPhone.editTextPhoneNumber.text.toString()
-                toggleLoader(true)
-                CoroutineScope(Dispatchers.IO).launch {
-                    upload()
+
+                if (isValidationSuccess()) {
+                    if (hasInternet(requireContext())) {
+                    session.countryCode = "+" + binding.layoutPhone.ccp.selectedCountryCode
+                    session.phoneNumber = binding.layoutPhone.editTextPhoneNumber.text.toString()
+                    toggleLoader(true)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        upload()
+                    }
+                }else{
+                    showMessage(binding.root,getString(R.string.no_internet_connection))
                 }
             }
         }
@@ -175,7 +182,7 @@ class SignUpFragment :  BaseFragment()  {
                     .check()
                 validator.submit(binding.layoutPhone.editTextPhoneNumber)
                     .checkEmpty().errorMessage(getString(R.string.error_phone_number))
-                    .checkMinDigits(10).errorMessage(getString(R.string.error_valid_phone))
+                    .checkMinDigits(8).errorMessage(getString(R.string.error_valid_phone))
                     .check()
                 validator.submit(binding.textInputEmailAddress)
                     .checkEmpty().errorMessage(getString(R.string.error_enter_email))
@@ -224,19 +231,32 @@ class SignUpFragment :  BaseFragment()  {
         val fileDir = requireContext().filesDir
        val file = File(fileDir,"image.png")
 
-        part = if (imageUri != null) {
-            val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
-            val outputStream = FileOutputStream(file)
-            inputStream!!.copyTo(outputStream)
-            val requestFile: RequestBody = RequestBody.create(
-                "multipart/form-data".toMediaTypeOrNull(), file)
-            MultipartBody.Part.createFormData(
-                "image", file.name.trim(), requestFile)
+
+       if (imageUri != null) {
+           try {
+               val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
+               val outputStream = FileOutputStream(file)
+               inputStream!!.copyTo(outputStream)
+               val requestFile: RequestBody = RequestBody.create(
+                   "multipart/form-data".toMediaTypeOrNull(), file
+               )
+               part = MultipartBody.Part.createFormData(
+                   "image", file.name.trim(), requestFile
+               )
+           }catch (e:Exception){}
         }else {
-            null
+           part =  null
         }
+
+        var httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
+            .callTimeout(1, TimeUnit.MINUTES)
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(20, TimeUnit.SECONDS)
+            .writeTimeout(20, TimeUnit.SECONDS)
+
         val retrofit = Retrofit.Builder()
             .baseUrl(Url.BASE_URL)
+            .client(httpClient.build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AuthApi::class.java)
@@ -270,7 +290,7 @@ class SignUpFragment :  BaseFragment()  {
             binding.textInputConfirmPassword.text.toString()
         )
 
-        Log.e("TAG", "upload: $part", )
+        try {
         val call: retrofit2.Response<GetUser> =  retrofit.registerUserImage(
             email, firstName,lastName,mobileNumber,countryCode,password,confirmPassword,
             part
@@ -295,6 +315,10 @@ class SignUpFragment :  BaseFragment()  {
         }else{
             toggleLoader(false)
             showMessage(binding.root,getErrorResponseArray(call.errorBody()).errors[0].toString()!!)
+        }
+        }catch (e:Exception){
+            toggleLoader(false)
+            showMessage(binding.root,getString(R.string.no_internet_connection))
         }
     }
 }

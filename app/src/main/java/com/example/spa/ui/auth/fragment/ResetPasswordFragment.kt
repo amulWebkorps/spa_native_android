@@ -12,10 +12,7 @@ import com.example.spa.base.BaseFragment
 import com.example.spa.data.request.User
 import com.example.spa.databinding.FragmentResetPasswordBinding
 import com.example.spa.ui.auth.activity.AuthActivity
-import com.example.spa.utilities.Resource
-import com.example.spa.utilities.setEnd
-import com.example.spa.utilities.showMessage
-import com.example.spa.utilities.showPassword
+import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
 import kotlinx.android.synthetic.main.layout_phone_number.view.*
@@ -56,7 +53,7 @@ class ResetPasswordFragment :BaseFragment() {
         }
         binding.buttonContinue.setOnClickListener {
             if (isValidationSuccess()){
-
+              if (hasInternet(requireContext())){
                 lifecycleScope.launchWhenCreated {
                     authViewModel.resetPassword(session.token,
                         User(
@@ -67,7 +64,10 @@ class ResetPasswordFragment :BaseFragment() {
                     )
                 }
 
-            }
+            }else{
+                  showMessage(binding.root,getString(R.string.no_internet_connection))
+             }
+          }
         }
     }
 

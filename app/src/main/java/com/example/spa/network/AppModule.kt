@@ -14,9 +14,11 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
+import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 
@@ -25,11 +27,19 @@ import javax.inject.Singleton
 class AppModule {
 
 
+    var httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
+        .callTimeout(1, TimeUnit.MINUTES)
+        .connectTimeout(10, TimeUnit.SECONDS)
+        .readTimeout(20, TimeUnit.SECONDS)
+        .writeTimeout(20, TimeUnit.SECONDS)
+
+
     @Singleton
     @Provides
     fun provideAuthAPI(): AuthApi {
         return Retrofit.Builder()
             .baseUrl(Url.BASE_URL)
+            .client(httpClient.build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create()
@@ -47,6 +57,7 @@ class AppModule {
     fun provideSettingAPI(): SettingsApi {
         return Retrofit.Builder()
             .baseUrl(Url.BASE_URL)
+            .client(httpClient.build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create()

@@ -3,6 +3,7 @@ package com.example.spa.utilities
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
@@ -19,7 +20,9 @@ object GlideUtils {
             Glide
                 .with(it)
                 .load(resourceUrl)
+                .placeholder(placeHolderId)
                 .into(imageView)
+
             /* Glide
                 .with(it)
                 .load(if (isThumbnail) Utils.getThumbImage(resourceUrl) else resourceUrl)

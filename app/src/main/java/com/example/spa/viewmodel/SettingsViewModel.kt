@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.spa.data.request.AddBankDetailRequest
+import com.example.spa.data.request.GraphRequest
 import com.example.spa.data.response.*
 import com.example.spa.repo.settings.SettingsRepository
 import com.example.spa.utilities.Resource
@@ -29,6 +30,9 @@ class SettingsViewModel @Inject constructor(
 
     private val _transaction = MutableSharedFlow<Resource<Transaction>>()
     val transaction = _transaction.asSharedFlow()
+
+    private val _graphData = MutableSharedFlow<Resource<GraphResponse>>()
+    val graphData = _graphData.asSharedFlow()
 
 
     fun addBankDetail(token:String,addBankDetailRequest: AddBankDetailRequest){
@@ -116,6 +120,27 @@ class SettingsViewModel @Inject constructor(
         }
     }
 
+
+    fun graphDataResponse(token:String,graphRequest: GraphRequest){
+        viewModelScope.launch {
+            settingsRepository.graphData(token,graphRequest).collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        result.message?.let {
+                            _graphData.emit(Resource.Error(result.message))
+                        }
+                    }
+                    is Resource.Loading -> {
+                        _graphData.emit(Resource.Loading(result.isLoading))
+                    }
+                    is Resource.Success -> {
+                        _graphData.emit(Resource.Success(result.data))
+                    }
+                }
+                Log.e("TAG", "_graphData: $result")
+            }
+        }
+    }
 
 
 }

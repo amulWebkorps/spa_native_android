@@ -29,11 +29,15 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
+import okhttp3.OkHttpClient
 import okhttp3.RequestBody
+import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
+import java.util.concurrent.TimeUnit
 
 class EditProfileFragment : BaseFragment() {
 
@@ -80,11 +84,14 @@ class EditProfileFragment : BaseFragment() {
     private fun clickListener() {
         binding.buttonSave.setOnClickListener {
             if(isValidationSuccess()){
-                toggleLoader(true)
-                CoroutineScope(Dispatchers.IO).launch {
-                    upload()
+                if (hasInternet(requireContext())) {
+                    toggleLoader(true)
+                    CoroutineScope(Dispatchers.IO).launch {
+                        upload()
+                    }
+                }else{
+                    showMessage(binding.root,getString(R.string.no_internet_connection))
                 }
-
 //                lifecycleScope.launchWhenCreated {
 //                    authViewModel.updateUserDetail(
 //                        session.token,
@@ -159,12 +166,15 @@ class EditProfileFragment : BaseFragment() {
 
         Log.e("TAG", "upload: 1", )
 
-        if (imageUri != null) {
-            Log.e("TAG", "upload: 2",)
-            val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
-            val outputStream = FileOutputStream(file)
-            inputStream!!.copyTo(outputStream)
-        }
+        try {
+            if (imageUri != null) {
+                Log.e("TAG", "upload: 2",)
+                val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
+                val outputStream = FileOutputStream(file)
+                inputStream!!.copyTo(outputStream)
+            }
+        }catch (e:Exception){}
+
             val requestFile: RequestBody = RequestBody.create(
                 "multipart/form-data".toMediaTypeOrNull(), file
             )
@@ -192,25 +202,30 @@ class EditProfileFragment : BaseFragment() {
             binding.textInputLastName.text.toString()
         )
 
-        val call: retrofit2.Response<UpdateUserResponse> = retrofit.updateUserDetailsImage(session.token,
-            email, firstName, lastName,  part
-        )
 
-        if (call.isSuccessful) {
-            toggleLoader(false)
-            session.user = call.body()!!.user
-            val intent= Intent(requireContext(), HomeActivity::class.java)
-                          intent.putExtra(Constants.SCREEN_NAME,Constants.EDIT_PROFILE)
-                          startActivity(intent)
-            requireActivity().finish()
-        } else {
-            toggleLoader(false)
-            showMessage(
-                binding.root,
-                getErrorResponseArray(call.errorBody()).errors[0].toString()!!
+        try {
+            val call: retrofit2.Response<UpdateUserResponse> = retrofit.updateUserDetailsImage(session.token,
+                email, firstName, lastName,  part
             )
+            if (call.isSuccessful) {
+                toggleLoader(false)
+                session.user = call.body()!!.user
+                showMessage(binding.root,getString(R.string.user_update_success))
+
+//                val intent= Intent(requireContext(), HomeActivity::class.java)
+//                intent.putExtra(Constants.SCREEN_NAME,Constants.EDIT_PROFILE)
+//                startActivity(intent)
+//                requireActivity().finish()
+            } else {
+                toggleLoader(false)
+                showMessage(
+                    binding.root,
+                    getErrorResponseArray(call.errorBody()).errors[0].toString()!!
+                )
+                }
+        } catch (e: Exception) {
+            toggleLoader(false)
+            showMessage(binding.root,getString(R.string.no_internet_connection))
         }
     }
-
-
 }

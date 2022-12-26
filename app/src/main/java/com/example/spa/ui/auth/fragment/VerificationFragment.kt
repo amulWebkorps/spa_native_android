@@ -14,10 +14,7 @@ import com.example.spa.data.request.User
 import com.example.spa.databinding.FragmentVerificationBinding
 import com.example.spa.ui.auth.activity.AuthActivity
 import com.example.spa.ui.home.activitiy.HomeActivity
-import com.example.spa.utilities.Constants
-import com.example.spa.utilities.Resource
-import com.example.spa.utilities.setSpan
-import com.example.spa.utilities.showMessage
+import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
 
@@ -68,6 +65,7 @@ class VerificationFragment : BaseFragment() {
         }
         binding.buttonSubmit.setOnClickListener {
             if (isValidationSuccess()) {
+                if (hasInternet(requireContext())){
                     toggleLoader(true)
                     lifecycleScope.launchWhenCreated {
                         authViewModel.verifyOtp(
@@ -77,6 +75,9 @@ class VerificationFragment : BaseFragment() {
                                 otp_code = binding.otpView.text.toString()
                             )
                         )
+                }
+                }else{
+                    showMessage(binding.root,getString(R.string.no_internet_connection))
                 }
             }
         }
@@ -119,7 +120,7 @@ class VerificationFragment : BaseFragment() {
                                 session.token = it.token
                                 session.user = it.user
                                 session.isLogin = true
-                                val intent = Intent(requireContext(), AuthActivity::class.java)
+                                val intent = Intent(requireContext(), HomeActivity::class.java)
                                 requireActivity().finish()
                                 startActivity(intent)
                             }

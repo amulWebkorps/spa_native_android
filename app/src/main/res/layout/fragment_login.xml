@@ -123,10 +123,11 @@
             android:layout_height="wrap_content"
             style="@style/font_regular.black.16"
             android:layout_marginStart="-14dp"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
             android:maxLines="1"
             android:backgroundTint="@color/colorGrey7C"
             android:background="@android:color/transparent"
-
             />
 
     </com.google.android.material.textfield.TextInputLayout>

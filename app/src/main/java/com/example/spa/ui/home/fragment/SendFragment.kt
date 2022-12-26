@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.spa.R
 
 import com.example.spa.base.BaseFragment
+import com.example.spa.data.request.GraphRequest
 import com.example.spa.databinding.FragmentSendBinding
 import com.example.spa.ui.home.activitiy.IsolatedActivity
 import com.example.spa.ui.home.adapter.ResentTransactionAdapter
@@ -63,20 +65,42 @@ class SendFragment(context: Context) : BaseFragment() {
 
         resentTransactionResponse()
         apiCall()
+//        graphDataResponse()
+//        apiCallGraph()
     }
-
     private fun apiCall() {
         if (hasInternet(requireContext())) {
-            binding.includeNoInternet.layoutNoInternet.hideView()
-            binding.layoutAmount.showView()
-            binding.layoutGraph.showView()
-            binding.LayoutResentTransaction.showView()
-
+            internetManage(true)
             lifecycleScope.launchWhenCreated {
                  settingsViewModel.transactionList(
                     session.token, 0
                 )
             }
+        }else{
+            internetManage(false)
+        }
+    }
+
+    private fun apiCallGraph(){
+        if (hasInternet(requireContext())) {
+            internetManage(true)
+            lifecycleScope.launchWhenCreated {
+                settingsViewModel.graphDataResponse(
+                    session.token, GraphRequest("weekly")
+                )
+            }
+        }else{
+            internetManage(false)
+        }
+    }
+
+    private fun internetManage(boolean: Boolean){
+        if (boolean){
+            binding.includeNoInternet.layoutNoInternet.hideView()
+            binding.layoutAmount.showView()
+            binding.layoutGraph.showView()
+            binding.LayoutResentTransaction.showView()
+
         }else{
             binding.includeNoInternet.layoutNoInternet.showView()
             binding.layoutAmount.hideView()
@@ -84,7 +108,6 @@ class SendFragment(context: Context) : BaseFragment() {
             binding.LayoutResentTransaction.hideView()
         }
     }
-
     private fun openActivity(fragment: String){
         val intent= Intent(requireContext(), IsolatedActivity::class.java)
         intent.putExtra(Constants.SCREEN_NAME,fragment)
@@ -294,6 +317,30 @@ class SendFragment(context: Context) : BaseFragment() {
                                 resentTransactionAdapter.setListItem(it.list)
                             }
                            }
+                    }
+                }
+            }
+        }
+    }
+
+
+    private fun graphDataResponse(){
+        lifecycleScope.launchWhenCreated {
+            settingsViewModel.graphData.collect { result ->
+                toggleLoader(true)
+                when (result) {
+                    is Resource.Error -> {
+                        toggleLoader(false)
+                        result.message?.let {
+                            showMessage(binding.root,it)
+                        }
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        toggleLoader(false)
+                        result.data?.let { it ->
+                            Log.e("TAG", "graphDataResponse: ${it.list}", )
+                        }
                     }
                 }
             }

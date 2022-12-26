@@ -92,7 +92,7 @@ class ForgotPasswordFragment :BaseFragment() {
         try {
             validator.submit(binding.layoutPhone.editTextPhoneNumber)
                 .checkEmpty().errorMessage(getString(R.string.error_phone_number))
-                .checkMinDigits(10).errorMessage(getString(R.string.error_valid_phone))
+                .checkMinDigits(8).errorMessage(getString(R.string.error_valid_phone))
                 .check()
         } catch (e: ApplicationException) {
             showMessage(binding.root,e.message)

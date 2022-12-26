@@ -27,7 +27,7 @@
     <string name="error_password_not_matched">Password and confirm password not matched</string>
     <string name="error_firstName">Please enter first name</string>
     <string name="error_lastName">Please enter last name</string>
-    <string name="error_valid_phone">Please enter valid phone number</string>
+    <string name="error_valid_phone">Mobile number should be of atleast 8 digits and less than 10 digits.</string>
     <string name="error_phone_number">Please enter phone number</string>
     <string name="phone_verification">Phone verification</string>
     <string name="we_sent_a_code_to_your_number">We sent a code to your number</string>
@@ -59,10 +59,11 @@
     <string name="name_account_holder">Name Account Holder</string>
     <string name="label_error_contact_number">Please enter account number</string>
     <string name="label_error_acc">minimum 10 numbers required in account number</string>
-    <string name="error_account_not_matched">Account number not matched</string>
+    <string name="error_account_not_matched">Account number and confirm account number not match</string>
     <string name="error_enter_code">Please enter code</string>
     <string name="error_account_holder_name">Please enter account holder name</string>
     <string name="generate_qr_code">Generate QR Code</string>
+    <string name="update_user_detail">Update Detail</string>
     <string name="withdrawal">Withdrawal</string>
     <string name="total_amount">Total Amount</string>
     <string name="_4000_aed">4000 AED</string>
@@ -87,7 +88,7 @@
     <string name="user_update_success">User update successfully</string>
     <string name="no_bank_account_added">No bank account added</string>
     <string name="label_submit">Submit</string>
-    <string name="no_internet_connection">No Internet Connection</string>
+    <string name="no_internet_connection">Please cehck your internet connectivity</string>
     <string name="try_again">Try Again</string>
     <string name="no_data_found">No data found</string>
     <string name="active">Active</string>

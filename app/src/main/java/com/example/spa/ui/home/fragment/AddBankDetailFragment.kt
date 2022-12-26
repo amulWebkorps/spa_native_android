@@ -107,7 +107,7 @@ class AddBankDetailFragment:BaseFragment() {
         try {
             validator.submit(binding.textInputAccountNumber)
                 .checkEmpty().errorMessage(getString(R.string.label_error_contact_number))
-                .checkMinDigits(10).errorMessage(getString(R.string.label_error_acc))
+//                .checkMinDigits(10).errorMessage(getString(R.string.label_error_acc))
                 .check()
             validator.submit(binding.textInputConfirmAccountNumber)
                  .matchString(binding.textInputAccountNumber.text.toString()).errorMessage(getString(

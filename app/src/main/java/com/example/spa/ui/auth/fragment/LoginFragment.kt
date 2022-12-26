@@ -64,8 +64,8 @@ class LoginFragment :  BaseFragment() {
         }
         binding.buttonLogin.setOnClickListener {
             if (isValidationSuccess()) {
+                if (hasInternet(requireContext())){
           toggleLoader(true)
-
                 lifecycleScope.launchWhenCreated {
                     authViewModel.loginUser(
                         User(
@@ -75,6 +75,9 @@ class LoginFragment :  BaseFragment() {
                         )
                     )
                 }
+            }else{
+                    showMessage(binding.root,getString(R.string.no_internet_connection))
+            }
             }
         }
     }
@@ -83,7 +86,6 @@ class LoginFragment :  BaseFragment() {
         try {
             validator.submit(binding.Phone.editTextPhoneNumber)
                 .checkEmpty().errorMessage(getString(R.string.error_phone_number))
-                .checkMinDigits(10).errorMessage(getString(R.string.error_valid_phone))
                 .check()
             validator.submit(binding.textInputPassword)
                 .checkEmpty().errorMessage(getString(R.string.error_password))

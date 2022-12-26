@@ -16,5 +16,6 @@ object Url {
     const val BANK_ACCOUNTS="/bank_accounts"
     const val DELETE_BANK_ACCOUNTS="/bank_accounts/"
     const val USER_UPDATE="$USER/update"
+    const val GRAPH_DATA="$USER/graph_data"
     const val V2_USER_UPDATE = "$V2_USER/update"
 }

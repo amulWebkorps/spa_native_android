@@ -7,10 +7,10 @@ plugins {
     id 'com.google.gms.google-services'
     id 'com.google.firebase.crashlytics'
 }
+apply plugin: 'kotlin-android'
 
 android {
-    compileSdk 32
-
+    compileSdk 33
     defaultConfig {
         applicationId "com.example.spa"
         minSdk 22
@@ -105,5 +105,11 @@ dependencies {
 
     // Glide
     implementation "com.github.bumptech.glide:glide:4.11.0"
+    implementation "androidx.core:core-ktx:+"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
 }
+//repositories {
+//    mavenCentral()
+//}

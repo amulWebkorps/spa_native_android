@@ -2,6 +2,7 @@ package com.example.spa.data.remote
 
 import com.example.spa.Url
 import com.example.spa.data.request.AddBankDetailRequest
+import com.example.spa.data.request.GraphRequest
 import com.example.spa.data.response.*
 import com.example.spa.utilities.Constants
 import retrofit2.Response
@@ -22,5 +23,8 @@ interface SettingsApi {
 
     @GET(Url.TRANSACTION)
     suspend fun resentTransaction(@Header("Authorization")token:String ,@Query("page_number") page:Int): Response<Transaction>
+
+    @GET(Url.GRAPH_DATA)
+    suspend fun graphData(@Header("Authorization")token:String, @Body request: GraphRequest): Response<GraphResponse>
 
 }

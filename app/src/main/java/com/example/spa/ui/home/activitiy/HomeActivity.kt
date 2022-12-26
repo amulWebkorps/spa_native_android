@@ -36,7 +36,7 @@ class HomeActivity : AppCompatActivity() , Listener {
                 this,
                 session.user!!.image,
                 R.drawable.place_holder,
-                0,
+                R.drawable.place_holder,
                 binding.includeToolbar.imageViewProfile
             )
         }
