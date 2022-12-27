@@ -18,9 +18,9 @@ class WalletFragment:BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentWalletBinding.inflate(layoutInflater)
-        try {
-            binding.textViewAmount.text = session.user!!.user_wallet.balance.toString() + " AED"
-        }catch (e:Exception){}
+//        try {
+//            binding.textViewAmount.text = session.user!!.user_wallet.balance.toString() + " AED"
+//        }catch (e:Exception){}
         return binding.root
     }
 

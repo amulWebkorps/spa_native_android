@@ -1,6 +1,7 @@
 package com.example.spa.ui.auth.fragment
 
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
@@ -16,7 +17,6 @@ import com.example.spa.Url
 import com.example.spa.base.BaseFragment
 import com.example.spa.base.listener.Screen
 import com.example.spa.data.remote.AuthApi
-import com.example.spa.data.remote.RegisterApi
 import com.example.spa.data.request.User
 import com.example.spa.data.response.GetUser
 import com.example.spa.databinding.FragmentSignUpBinding
@@ -26,14 +26,10 @@ import com.example.spa.viewmodel.AuthViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody
-import okhttp3.RequestBody.Companion.asRequestBody
-import retrofit.Response
-import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
@@ -74,6 +70,11 @@ class SignUpFragment :  BaseFragment()  {
         binding.textViewAlreadyAccount.setSpan("Sign In" ,R.font.poppins_medium, R.color.colorBlue72){
             listener?.goBack()
         }
+
+        binding.textViewTermsAndConditions.setSpan("Terms and Conditions" ,R.font.poppins_medium, R.color.colorBlue72){
+            val url = "http://www.google.com"
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+        }
         binding.includeToolbar.imageViewBack.setOnClickListener {
             listener?.goBack()
         }
@@ -102,16 +103,16 @@ class SignUpFragment :  BaseFragment()  {
             }
         }
 
-        binding.textInputEmailAddress.addTextChangedListener (object : TextWatcher {
+        binding.layoutEmail.textInputEmailAddress.addTextChangedListener (object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (isValidEmail()){
-                    binding.imageEmailVerify.visibility=View.VISIBLE
+                    binding.layoutEmail.imageEmailVerify.visibility=View.VISIBLE
                 }else{
-                    binding.imageEmailVerify.visibility=View.INVISIBLE
+                    binding.layoutEmail.imageEmailVerify.visibility=View.INVISIBLE
                 }
             }
 
@@ -157,7 +158,7 @@ class SignUpFragment :  BaseFragment()  {
 
     private fun isValidEmail(): Boolean {
         try {
-            validator.submit(binding.textInputEmailAddress)
+            validator.submit(binding.layoutEmail.textInputEmailAddress)
                 .checkEmpty().errorMessage(getString(R.string.error_enter_email))
                 .checkValidEmail().errorMessage(getString(R.string.error_valid_message))
                 .check()
@@ -184,7 +185,7 @@ class SignUpFragment :  BaseFragment()  {
                     .checkEmpty().errorMessage(getString(R.string.error_phone_number))
                     .checkMinDigits(8).errorMessage(getString(R.string.error_valid_phone))
                     .check()
-                validator.submit(binding.textInputEmailAddress)
+                validator.submit(binding.layoutEmail.textInputEmailAddress)
                     .checkEmpty().errorMessage(getString(R.string.error_enter_email))
                     .checkValidEmail().errorMessage(getString(R.string.error_valid_message))
                     .check()
@@ -197,7 +198,9 @@ class SignUpFragment :  BaseFragment()  {
                     .matchString(binding.textInputPassword.text.toString())
                     .errorMessage(getString(R.string.error_password_not_matched))
                     .check()
-
+            if (!binding.checkBoxTermsAndConditions.isChecked) {
+                throw ApplicationException(getString(R.string.error_terms_condition))
+            }
 //            }
         } catch (e: ApplicationException) {
             showMessage(binding.root,e.message)
@@ -234,6 +237,7 @@ class SignUpFragment :  BaseFragment()  {
 
        if (imageUri != null) {
            try {
+               Log.e("TAG", "upload: 1", )
                val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
                val outputStream = FileOutputStream(file)
                inputStream!!.copyTo(outputStream)
@@ -245,25 +249,20 @@ class SignUpFragment :  BaseFragment()  {
                )
            }catch (e:Exception){}
         }else {
+           Log.e("TAG", "upload: 2", )
+
            part =  null
         }
 
-        var httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
-            .callTimeout(1, TimeUnit.MINUTES)
-            .connectTimeout(10, TimeUnit.SECONDS)
-            .readTimeout(20, TimeUnit.SECONDS)
-            .writeTimeout(20, TimeUnit.SECONDS)
-
         val retrofit = Retrofit.Builder()
             .baseUrl(Url.BASE_URL)
-            .client(httpClient.build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(AuthApi::class.java)
 
         val email: RequestBody = RequestBody.create(
             "text/plain".toMediaTypeOrNull(),
-            binding.textInputEmailAddress.text.toString()
+            binding.layoutEmail.textInputEmailAddress.text.toString()
         )
         val firstName: RequestBody = RequestBody.create(
             "text/plain".toMediaTypeOrNull(),
@@ -305,12 +304,12 @@ class SignUpFragment :  BaseFragment()  {
                 lifecycleScope.launchWhenCreated {
                     authViewModel.sendOtp(
                         User(
-                            country_code = it.country_code,
+                            country_code =  it.country_code,
                             mobile_number = it.mobile_number,
                         )
                     )
                 }
-                Log.e("TAG", "upload: ${call.body()}",)
+                Log.e("TAG", "upload: ${call.body()}")
             }
         }else{
             toggleLoader(false)

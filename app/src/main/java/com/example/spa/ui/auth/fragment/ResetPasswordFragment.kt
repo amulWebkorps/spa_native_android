@@ -101,9 +101,10 @@ class ResetPasswordFragment :BaseFragment() {
                     is Resource.Success -> {
                         toggleLoader(false)
                         result.data?.let { it ->
-                            showMessage(binding.root,"Reset password successfully")
+
                             val intent= Intent(requireContext(), AuthActivity::class.java)
                             requireActivity().finish()
+                            intent.putExtra(Constants.SCREEN_NAME,Constants.RESET_PASSWORD)
                             startActivity(intent)
                         }
                     }

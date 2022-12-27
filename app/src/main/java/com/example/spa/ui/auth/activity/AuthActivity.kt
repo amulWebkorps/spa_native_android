@@ -9,6 +9,7 @@ import com.example.spa.base.listener.Screen
 import com.example.spa.databinding.ActivityAuthBinding
 import com.example.spa.ui.auth.fragment.*
 import com.example.spa.utilities.Constants
+import com.example.spa.utilities.showMessage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +22,12 @@ class AuthActivity : AppCompatActivity() ,Listener {
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportFragmentManager.beginTransaction().add(R.id.placeHolder, LoginFragment()).commit()
-    }
+
+
+        if (intent.extras?.get(Constants.SCREEN_NAME) == Constants.RESET_PASSWORD) {
+            showMessage(binding.root,getString(R.string.reset_password_successfully))
+          }
+        }
 
     override fun replaceFragment(screen: Screen,value:String?) {
 
@@ -42,7 +48,7 @@ class AuthActivity : AppCompatActivity() ,Listener {
 
     }
     override fun goBack() {
-        val fm: FragmentManager = this.getSupportFragmentManager()
+        val fm: FragmentManager = this.supportFragmentManager
         fm.popBackStack()
     }
 

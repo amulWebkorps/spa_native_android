@@ -2,6 +2,7 @@ package com.example.spa.ui.auth.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,7 +41,7 @@ class VerificationFragment : BaseFragment() {
         binding.textViewPhoneVerificationNumber.text = session.countryCode+"-"+session.phoneNumber + " Change"
         setClick()
         response()
-
+        getUserResponse()
         showMessage(binding.root , getString(R.string.otp_send))
 
     }
@@ -119,10 +120,12 @@ class VerificationFragment : BaseFragment() {
                             }else {
                                 session.token = it.token
                                 session.user = it.user
-                                session.isLogin = true
-                                val intent = Intent(requireContext(), HomeActivity::class.java)
-                                requireActivity().finish()
-                                startActivity(intent)
+                                lifecycleScope.launchWhenCreated {
+                                    authViewModel.getUser(
+                                        it.token
+                                    )
+                                }
+
                             }
                         }
                     }
@@ -130,5 +133,37 @@ class VerificationFragment : BaseFragment() {
             }
         }
     }
+
+
+
+    private fun getUserResponse() {
+        lifecycleScope.launchWhenCreated {
+            authViewModel.getUser.collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        toggleLoader(false)
+                        result.message?.let { showMessage(binding.root, it) }
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        toggleLoader(false)
+                        result.data?.let { it ->
+                            session.phoneNumber=it.mobile_number
+                            session.countryCode=it.country_code
+                            session.user=it
+
+                            session.isLogin = true
+
+                            val intent = Intent(requireContext(), HomeActivity::class.java)
+                            requireActivity().finish()
+                            startActivity(intent)
+
+                        }
+                        }
+                    }
+                }
+            }
+        }
+
 
 }

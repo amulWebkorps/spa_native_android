@@ -47,6 +47,7 @@ class SendFragment(context: Context) : BaseFragment() {
     private lateinit var cancel:ImageView
     private lateinit var send:View
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

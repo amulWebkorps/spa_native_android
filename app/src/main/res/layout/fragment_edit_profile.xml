@@ -88,6 +88,7 @@
         app:hintTextColor="@color/colorGrey7C"
         android:layout_marginHorizontal="@dimen/dp_20">
 
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/textInputLastName"
             android:layout_width="match_parent"
@@ -102,6 +103,46 @@
             />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+<!--        <androidx.appcompat.widget.AppCompatTextView-->
+<!--            android:id="@+id/textViewPhone"-->
+<!--            style="@style/font_medium.grey7c.12"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/laebl_email"-->
+<!--            android:layout_marginHorizontal="@dimen/dp_20"-->
+<!--            android:layout_marginTop="@dimen/dp_24"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent" />-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTextEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="@dimen/dp_24"
+            app:boxStrokeColor="@color/colorGrey7C"
+            app:hintTextColor="@color/colorGrey7C"
+            android:hint="@string/label_email_address"
+            android:layout_marginHorizontal="@dimen/dp_20">
+
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInputEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/font_regular.grey80.14"
+                android:textColor="@color/colorGreyB2"
+                android:layout_marginStart="-14dp"
+                android:imeOptions="actionNext"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:inputType="textEmailAddress"
+                android:singleLine="true"
+                android:backgroundTint="@color/colorGrey7C"
+                android:background="@android:color/transparent"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

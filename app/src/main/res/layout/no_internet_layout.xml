@@ -10,21 +10,23 @@
         android:id="@+id/imageViewNoInternet"
         android:layout_width="@dimen/dp_126"
         android:layout_height="@dimen/dp_126"
-        android:layout_marginTop="@dimen/dp_250"
+        android:layout_marginTop="150dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/no_internet"/>
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewNoInternet"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        style="@style/font_medium.black.24"
+        style="@style/font_medium.black.20"
         android:layout_marginTop="@dimen/dp_24"
+        android:layout_marginHorizontal="@dimen/dp_24"
+        android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/imageViewNoInternet"
         android:text="@string/no_internet_connection"
-        app:layout_constraintStart_toStartOf="@id/imageViewNoInternet"
-        app:layout_constraintEnd_toEndOf="@id/imageViewNoInternet"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonTryAgain"
         android:layout_width="wrap_content"

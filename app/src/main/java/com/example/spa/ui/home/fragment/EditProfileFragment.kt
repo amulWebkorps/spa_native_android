@@ -3,11 +3,13 @@ package com.example.spa.ui.home.fragment
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.se.omapi.Session
 import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -44,8 +46,7 @@ class EditProfileFragment : BaseFragment() {
     private lateinit var binding: FragmentEditProfileBinding
     private val authViewModel: AuthViewModel by viewModels()
     var imageUri : Uri? =  null
-
-
+       var isImage = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -57,12 +58,12 @@ class EditProfileFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        updateUserResponse()
         clickListener()
         setView()
     }
 
     private fun setView() {
+        imageUri = session.user!!.image.toUri()
         if (session.user!!.image != null){
             GlideUtils.loadImage(
                 requireContext(),
@@ -78,7 +79,12 @@ class EditProfileFragment : BaseFragment() {
         binding.textInputFirstName.setText(session.user!!.first_name)
         binding.textInputLastName.setText(session.user!!.last_name)
         binding.layoutPhone.editTextPhoneNumber.setText(session.user!!.mobile_number)
+        binding.layoutPhone.editTextPhoneNumber.setTextColor(ContextCompat.getColor(requireContext(),R.color.colorGreyB2))
         binding.layoutPhone.ccp.setCountryForPhoneCode(session.countryCode.toInt())
+        binding.layoutPhone.ccp.showArrow(false)
+        binding.textInputEmailAddress.setText(session.user!!.email)
+        binding.textInputEmailAddress.isClickable = false
+
     }
 
     private fun clickListener() {
@@ -98,7 +104,7 @@ class EditProfileFragment : BaseFragment() {
 //                        User(
 //                            email = session.user!!.email,
 //                            first_name =  binding.textInputFirstName.text.toString(),
-//                            last_name = binding.textInputLastName.text.toString(),
+//                         Alast_name = binding.textInputLastName.text.toString(),
 //                        )
 //                    )
 //                }
@@ -106,6 +112,7 @@ class EditProfileFragment : BaseFragment() {
         }
         binding.imageViewProfile.setOnClickListener {
             imagePicker { uri ->
+                isImage = true
                 imageUri = uri
                 binding?.imageViewProfile?.setImageURI(uri)
             }
@@ -164,23 +171,22 @@ class EditProfileFragment : BaseFragment() {
         val fileDir = requireContext().filesDir
         val file = File(fileDir, "image.png")
 
-        Log.e("TAG", "upload: 1", )
+        Log.e("TAG", "upload: 1",)
 
         try {
-            if (imageUri != null) {
-                Log.e("TAG", "upload: 2",)
-                val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
-                val outputStream = FileOutputStream(file)
-                inputStream!!.copyTo(outputStream)
-            }
-        }catch (e:Exception){}
+            Log.e("TAG", "upload: 2",)
+            val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
+            val outputStream = FileOutputStream(file)
+            inputStream!!.copyTo(outputStream)
+        } catch (e: Exception) {
+        }
 
-            val requestFile: RequestBody = RequestBody.create(
-                "multipart/form-data".toMediaTypeOrNull(), file
-            )
-          val part =  MultipartBody.Part.createFormData(
-                "image", file.name.trim(), requestFile
-            )
+        val requestFile: RequestBody = RequestBody.create(
+            "multipart/form-data".toMediaTypeOrNull(), file
+        )
+        val part = MultipartBody.Part.createFormData(
+            "image", file.name.trim(), requestFile
+        )
 
 
         val retrofit = Retrofit.Builder()
@@ -202,30 +208,54 @@ class EditProfileFragment : BaseFragment() {
             binding.textInputLastName.text.toString()
         )
 
-
+        if (isImage) {
+            try {
+                val call: retrofit2.Response<UpdateUserResponse> = retrofit.updateUserDetailsImage(
+                    session.token,
+                    email, firstName, lastName, part
+                )
+                if (call.isSuccessful) {
+                    toggleLoader(false)
+                    Log.e("TAG", "upload: ${call.body()}",)
+                    session.user = call.body()!!.user
+                    showMessage(binding.root, getString(R.string.user_update_success))
+                } else {
+                    toggleLoader(false)
+                    showMessage(
+                        binding.root,
+                        getErrorResponseArray(call.errorBody()).errors[0].toString()!!
+                    )
+                }
+            } catch (e: Exception) {
+                toggleLoader(false)
+                showMessage(binding.root, getString(R.string.no_internet_connection))
+            }
+        }
+    else{
         try {
-            val call: retrofit2.Response<UpdateUserResponse> = retrofit.updateUserDetailsImage(session.token,
-                email, firstName, lastName,  part
+            val call: retrofit2.Response<UpdateUserResponse> = retrofit.updateUserDetailsWithoutImage(
+                session.token,User(
+                    email = session.user!!.email,
+                    first_name = binding.textInputFirstName.text.toString(),
+                    last_name = binding.textInputLastName.text.toString()
+                )
             )
             if (call.isSuccessful) {
                 toggleLoader(false)
+                Log.e("TAG", "upload: ${call.body()}",)
                 session.user = call.body()!!.user
-                showMessage(binding.root,getString(R.string.user_update_success))
-
-//                val intent= Intent(requireContext(), HomeActivity::class.java)
-//                intent.putExtra(Constants.SCREEN_NAME,Constants.EDIT_PROFILE)
-//                startActivity(intent)
-//                requireActivity().finish()
+                showMessage(binding.root, getString(R.string.user_update_success))
             } else {
                 toggleLoader(false)
                 showMessage(
                     binding.root,
                     getErrorResponseArray(call.errorBody()).errors[0].toString()!!
                 )
-                }
+            }
         } catch (e: Exception) {
             toggleLoader(false)
-            showMessage(binding.root,getString(R.string.no_internet_connection))
-        }
+            Log.e("TAG", "upload: ${e}", )
+              }
+    }
     }
 }

@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:cursorVisible="true"
-        android:inputType="number"
+        android:inputType="numberPassword"
         android:textSize="18sp"
         android:textStyle="bold"
         app:cursorWidth="2dp"

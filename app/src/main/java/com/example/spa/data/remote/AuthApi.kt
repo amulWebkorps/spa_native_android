@@ -28,6 +28,18 @@ interface AuthApi {
                                   ): Response<GetUser>
 
 
+    @Multipart
+    @POST(Url.V2_REGISTER)
+    suspend fun registerUserWithoutImage(@Part("email") email:RequestBody,
+                                  @Part("first_name") first_name:RequestBody,
+                                  @Part("last_name") last_name:RequestBody,
+                                  @Part("mobile_number") mobile_number:RequestBody,
+                                  @Part("country_code") country_code:RequestBody,
+                                  @Part("password") password:RequestBody,
+                                  @Part("password_confirmation") password_confirmation:RequestBody,
+    ): Response<GetUser>
+
+
 
     @POST("/users/generate_otp")
     suspend fun sendOtp(@Body user: User): Response<SendOtpResponse>
@@ -57,6 +69,12 @@ interface AuthApi {
                                   @Part("first_name") first_name:RequestBody,
                                   @Part("last_name") last_name:RequestBody,
                                   @Part image:MultipartBody.Part,
+    ): Response<UpdateUserResponse>
+
+
+    @PUT(Url.V2_USER_UPDATE)
+    suspend fun updateUserDetailsWithoutImage(@Header("Authorization")token:String,
+                                              @Body user: User,
     ): Response<UpdateUserResponse>
 
 

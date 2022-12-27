@@ -150,47 +150,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
-      <com.google.android.material.textfield.TextInputLayout
-          android:id="@+id/editTextEmailAddress"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          android:layout_marginTop="@dimen/dp_24"
-          android:background="@android:color/transparent"
-          app:boxStrokeColor="@color/colorGrey7C"
-          app:hintTextColor="@color/colorGrey7C"
-          android:hint="@string/label_email_address"
-          android:layout_marginHorizontal="@dimen/dp_20">
-
-
-          <com.google.android.material.textfield.TextInputEditText
-              android:id="@+id/textInputEmailAddress"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              style="@style/font_regular.black.16"
-              android:layout_marginStart="-14dp"
-              android:imeOptions="actionNext"
-              android:inputType="textEmailAddress"
-              android:singleLine="true"
-              android:backgroundTint="@color/colorGrey7C"
-              android:background="@android:color/transparent"
-              />
-      </com.google.android.material.textfield.TextInputLayout>
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageEmailVerify"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/dp_13"
-        android:visibility="invisible"
-        android:src="@drawable/ic_verified"
-        app:layout_constraintTop_toTopOf="@id/editTextEmailAddress"
-        app:layout_constraintBottom_toBottomOf="@id/editTextEmailAddress"
-        app:layout_constraintEnd_toEndOf="@id/editTextEmailAddress" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        android:id="@+id/layoutEmail"
+        layout="@layout/layout_email"
+        />
+     </androidx.constraintlayout.widget.ConstraintLayout>
       <androidx.constraintlayout.widget.ConstraintLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content">
@@ -218,7 +182,6 @@
               android:singleLine="true"
               android:backgroundTint="@color/colorGrey7C"
               android:background="@android:color/transparent"
-
               />
 
       </com.google.android.material.textfield.TextInputLayout>
@@ -278,6 +241,38 @@
               app:layout_constraintBottom_toBottomOf="@id/editTextConfirmPassword"
               app:layout_constraintEnd_toEndOf="@id/editTextConfirmPassword"
               app:layout_constraintTop_toTopOf="@id/editTextConfirmPassword" />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/layoutTermsAndCondition"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginHorizontal="@dimen/dp_20"
+          android:layout_marginTop="@dimen/dp_24">
+
+          <androidx.appcompat.widget.AppCompatCheckBox
+              android:id="@+id/checkBoxTermsAndConditions"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_marginTop="@dimen/dp_9"
+              android:button="@drawable/terms_selector"
+              android:minHeight="0dp"
+              android:paddingStart="@dimen/dp_13"
+              app:layout_constraintStart_toStartOf="parent"
+              app:layout_constraintTop_toTopOf="parent"/>
+
+          <androidx.appcompat.widget.AppCompatTextView
+              android:id="@+id/textViewTermsAndConditions"
+              style="@style/font_medium.black.12"
+              android:layout_width="0dp"
+              android:layout_height="wrap_content"
+              android:text="@string/terms_condition"
+              app:layout_constraintEnd_toEndOf="parent"
+              app:layout_constraintBottom_toBottomOf="@id/checkBoxTermsAndConditions"
+              app:layout_constraintStart_toEndOf="@id/checkBoxTermsAndConditions"
+              app:layout_constraintTop_toTopOf="@id/checkBoxTermsAndConditions" />
+
 
       </androidx.constraintlayout.widget.ConstraintLayout>
   </LinearLayout>

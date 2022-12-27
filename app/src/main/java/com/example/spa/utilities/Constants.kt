@@ -15,6 +15,7 @@ class Constants {
         const val SHARE_QR = "share_qr"
         const val ID = "id"
         const val MAX_PHONE = 10
+        const val RESET_PASSWORD = "resetPassword"
 
         const val DEFAULT_PAGE_SIZE=9
     }

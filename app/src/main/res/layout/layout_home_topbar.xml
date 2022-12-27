@@ -31,7 +31,6 @@
             android:layout_marginStart="@dimen/dp_16"
             style="@style/font_medium.black.24"
             android:drawablePadding="@dimen/dp_10"
-            android:drawableEnd="@drawable/ic_home_arrow"
             android:text="@string/arpit"/>
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatImageView

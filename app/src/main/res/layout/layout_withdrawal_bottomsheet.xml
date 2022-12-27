@@ -31,7 +31,7 @@
         android:background="@drawable/bg_edit_text_bottom_sheet"
         android:inputType="number"
         android:maxLength="6"
-        android:text="0.0"
+        android:text="00"
         android:gravity="center"
         style="@style/font_medium.black.40"
         android:layout_marginTop="@dimen/dp_55"

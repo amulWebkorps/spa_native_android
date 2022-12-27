@@ -31,6 +31,7 @@ class HomeActivity : AppCompatActivity() , Listener {
         setContentView(binding.root)
         session = Session(this)
 
+        Log.e("TAG", "onCreate: ${session.user!!.image}", )
         if (session.user!!.image != null) {
             GlideUtils.loadImage(
                 this,

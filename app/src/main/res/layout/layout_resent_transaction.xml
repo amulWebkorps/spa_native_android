@@ -4,7 +4,6 @@
     android:layout_height="wrap_content"
     app:cardElevation="@dimen/dp_2"
     android:layout_marginHorizontal="@dimen/dp_8"
-android:layout_marginVertical="@dimen/dp_8"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/dp_4">
 <androidx.constraintlayout.widget.ConstraintLayout

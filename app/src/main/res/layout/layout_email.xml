@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/editTextEmailAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/dp_24"
+        android:background="@android:color/transparent"
+        app:boxStrokeColor="@color/colorGrey7C"
+        app:hintTextColor="@color/colorGrey7C"
+        android:hint="@string/label_email_address"
+        android:layout_marginHorizontal="@dimen/dp_20">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textInputEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/font_regular.black.16"
+            android:layout_marginStart="-14dp"
+            android:imeOptions="actionNext"
+            android:inputType="textEmailAddress"
+            android:singleLine="true"
+            android:backgroundTint="@color/colorGrey7C"
+            android:background="@android:color/transparent"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageEmailVerify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/dp_13"
+        android:visibility="invisible"
+        android:src="@drawable/ic_verified"
+        app:layout_constraintTop_toTopOf="@id/editTextEmailAddress"
+        app:layout_constraintBottom_toBottomOf="@id/editTextEmailAddress"
+        app:layout_constraintEnd_toEndOf="@id/editTextEmailAddress" />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

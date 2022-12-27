@@ -105,6 +105,10 @@ class AddBankDetailFragment:BaseFragment() {
 
     private fun isValidationSuccess(): Boolean {
         try {
+
+            validator.submit(binding.textInputBankName)
+                .checkEmpty().errorMessage(getString(R.string.error_bank_name))
+                .check()
             validator.submit(binding.textInputAccountNumber)
                 .checkEmpty().errorMessage(getString(R.string.label_error_contact_number))
 //                .checkMinDigits(10).errorMessage(getString(R.string.label_error_acc))
@@ -118,9 +122,6 @@ class AddBankDetailFragment:BaseFragment() {
                 .check()
             validator.submit(binding.textInputNameAccountHolder)
                 .checkEmpty().errorMessage(getString(R.string.error_account_holder_name))
-                .check()
-            validator.submit(binding.textInputBankName)
-                .checkEmpty().errorMessage(getString(R.string.error_bank_name))
                 .check()
         } catch (e: ApplicationException) {
             showMessage(binding.root,e.message)
