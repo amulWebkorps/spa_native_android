@@ -55,9 +55,9 @@ class BankDetailAdapter(val onClick:OnClick) :
                 textViewAED.text = item.account_holder_name!!
                 textViewBankName.text = item.bank_name!!
                 textViewAccountTypeValue.text = item.account_type!!
-            item.ifsc_code?.let {
-                textViewIFSCValue.text = item.ifsc_code!!.toString()
-            }
+                  item.ifsc_code?.let {
+                textViewIFSCValue.text =item.ifsc_code!!.toString()
+               }
 
                 textViewAccountNumberValue.text = item.account_number!!
 

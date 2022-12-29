@@ -47,14 +47,15 @@ class SettingsFragment:BaseFragment() {
                     DialogUtils().showGeneralDialog(
                         requireContext(),
                         message = getString(R.string.message_logout),
-                        positiveText = getString(R.string.button_yes),
-                        negativeText = getString(R.string.button_no),
-                        onClick = {
+                        positiveText = getString(R.string.button_no),
+                        negativeText = getString(R.string.button_yes),
+                        onClick = {},
+                        onNoClick = {
                             session.isLogin = false
                             val intent= Intent(requireContext(), AuthActivity::class.java)
                             requireActivity().finish()
                             startActivity(intent)
-                        }, onNoClick = {})
+                        })
 
             }
         }

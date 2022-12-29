@@ -26,6 +26,7 @@ import com.example.spa.ui.home.activitiy.HomeActivity
 import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -63,16 +64,29 @@ class EditProfileFragment : BaseFragment() {
     }
 
     private fun setView() {
-        imageUri = session.user!!.image.toUri()
-        if (session.user!!.image != null){
-            GlideUtils.loadImage(
-                requireContext(),
-                session.user!!.image,
-                R.drawable.place_holder,
-                0,
-                binding.imageViewProfile
-            )
+
+        if (session.user!!.image != null && session.user!!.image.isNotEmpty()) {
+            Log.e("TAG", "onCreate: ${session.user!!.image}", )
+//            GlideUtils.loadImage(
+//                this,
+//                session.user!!.image,
+//                R.drawable.place_holder,
+//                0,
+//                binding.includeToolbar.imageViewProfile
+//            )
+
+
+//            Glide.with(this)
+//                .load(session.user!!.image)
+//                .placeholder(R.drawable.place_holder)
+//                .into(binding.includeToolbar.imageViewProfile)
+
+            Picasso.with(requireContext())
+                .load(session.user!!.image)
+                .placeholder(R.drawable.place_holder)
+                .into(binding.imageViewProfile);
         }
+
 
         binding.layoutPhone.editTextPhoneNumber.inputType = InputType.TYPE_NULL
         binding.layoutPhone.ccp.setCcpClickable(false)

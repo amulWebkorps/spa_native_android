@@ -38,11 +38,11 @@ class VerificationFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         val value = requireArguments().getString(Constants.AUTH)
 
-        binding.textViewPhoneVerificationNumber.text = session.countryCode+"-"+session.phoneNumber + " Change"
+        binding.textViewPhoneVerificationNumber.text = "("+session.countryCode+")"+"-"+session.phoneNumber + " Change"
         setClick()
         response()
         getUserResponse()
-        showMessage(binding.root , getString(R.string.otp_send))
+        responseSendOtp()
 
     }
 
@@ -62,7 +62,21 @@ class VerificationFragment : BaseFragment() {
                 listener?.replaceFragment(Screen.FORGOT_PASSWORD, Constants.CHANGE)
             }
         }
-        binding.textViewDontReceive.setSpan("Resend", R.font.poppins_medium, R.color.colorBlue72) {
+        binding.textViewDontReceive.setSpan("Resend" ,  R.font.poppins_medium, R.color.colorBlue72) {
+
+            if (hasInternet(requireContext())) {
+                toggleLoader(true)
+                lifecycleScope.launchWhenCreated {
+                    authViewModel.sendOtp(
+                        User(
+                            country_code = session.countryCode,
+                            mobile_number = session.phoneNumber,
+                        )
+                    )
+                }
+            }else{
+                showMessage(binding.root,getString(R.string.no_internet_connection))
+            }
         }
         binding.buttonSubmit.setOnClickListener {
             if (isValidationSuccess()) {
@@ -166,4 +180,23 @@ class VerificationFragment : BaseFragment() {
         }
 
 
+    private fun responseSendOtp(){
+        lifecycleScope.launchWhenCreated {
+            authViewModel.sendOtp.collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        toggleLoader(false)
+                        result.message?.let {
+                            showMessage(binding.root,it)
+                        }
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        toggleLoader(false)
+                        showMessage(binding.root , getString(R.string.otp_send))
+                    }
+                }
+            }
+        }
+    }
 }

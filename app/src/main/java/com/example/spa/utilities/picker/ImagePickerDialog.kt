@@ -12,6 +12,7 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
@@ -110,6 +111,21 @@ class ImagePickerDialog : BaseBottomSheetDialogFragment() {
             .start(requireContext(), this)
     }
 
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_CODE) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                openCamera()
+            } else {
+                Toast.makeText(requireContext(), "camera permission denied", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         when (requestCode) {
             requestGallery -> {
@@ -175,6 +191,7 @@ class ImagePickerDialog : BaseBottomSheetDialogFragment() {
                 camera.launch(imageUri)
             }
             shouldShowRequestPermissionRationale("camera permission") -> {
+                camera.launch(imageUri)
             // In an educational UI, explain to the user why your app requires this
             // permission for a specific feature to behave as expected, and what
             // features are disabled if it's declined. In this UI, include a
@@ -192,18 +209,23 @@ class ImagePickerDialog : BaseBottomSheetDialogFragment() {
 //                camera.launch(imageUri)
         }
     private fun intentGallery() {
+        Log.e("TAG", "intentGallery: 1", )
         val galleryIntent = Intent(
             Intent.ACTION_GET_CONTENT, MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         )
+        galleryIntent.setType("image/*");
         startActivityForResult(galleryIntent, requestGallery)
     }
     fun Context.checkCameraPermission(): Boolean {
+        Log.e("TAG", "intentGallery: 2", )
         val permission = Manifest.permission.CAMERA
         val res: Int = this.checkCallingOrSelfPermission(permission)
         return res == PackageManager.PERMISSION_GRANTED
     }
 
     private fun getUri(file: File): Uri {
+
+        Log.e("TAG", "intentGallery: 3", )
         return FileProvider.getUriForFile(
             requireActivity().applicationContext,
             requireActivity().packageName + ".fileprovider", file
@@ -212,6 +234,8 @@ class ImagePickerDialog : BaseBottomSheetDialogFragment() {
 
     @Throws(IOException::class)
     fun createFile(): File {
+
+        Log.e("TAG", "intentGallery: 4", )
         val fileName = SimpleDateFormat("dd_MM_yyyy_HH_mm_ss", Locale.ENGLISH).format(Date())
         val storageDir =
             File(requireContext().cacheDir, getString(R.string.app_name)).apply { mkdirs() }

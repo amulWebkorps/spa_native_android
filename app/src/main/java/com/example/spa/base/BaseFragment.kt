@@ -188,9 +188,12 @@ open class BaseFragment : Fragment(), OnTouchListener, View.OnClickListener{
         onCallBack: (Uri) -> Unit
     ) {
         val dialog = BottomSheetDialog(requireContext(), R.style.BaseBottomSheetDialog)
+        Log.e("TAG", "imagePicker: ", )
 
         when {
             isOnlyVideo -> {
+                Log.e("TAG", "imagePicker: 1", )
+
 //                VideoPickerDialog.showDialog(childFragmentManager, { uri, _ ->
 //                    val thumb: Bitmap = ThumbnailUtils.createVideoThumbnail(
 //                        uri.path.toString(),
@@ -201,6 +204,8 @@ open class BaseFragment : Fragment(), OnTouchListener, View.OnClickListener{
             }
             else -> {
                 if (isVideo) {
+                    Log.e("TAG", "imagePicker: 2", )
+
 //                    showSettingsBottomDialog(
 //                        dialog,
 //                        mediaOption()
@@ -226,6 +231,7 @@ open class BaseFragment : Fragment(), OnTouchListener, View.OnClickListener{
 //                        dialog.dismiss()
 //                    }
                 } else {
+                    Log.e("TAG", "imagePicker: 3", )
                     ImagePickerDialog.showDialog(childFragmentManager, { uri ->
                         onCallBack.invoke(uri)
                     }, {

@@ -12,7 +12,7 @@
         android:id="@+id/textViewTransaction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/transaction"
+        android:text="@string/transactions"
         style="@style/font_medium.black.20"
         android:layout_marginStart="@dimen/dp_20"
         android:layout_marginTop="@dimen/dp_26"

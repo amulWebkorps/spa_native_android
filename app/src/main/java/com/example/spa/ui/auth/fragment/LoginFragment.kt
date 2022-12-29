@@ -177,6 +177,7 @@ class LoginFragment :  BaseFragment() {
                     is Resource.Success -> {
                         toggleLoader(false)
                         listener?.replaceFragment(Screen.VERIFICATION)
+                        showMessage(binding.root , getString(R.string.otp_send))
                     }
                 }
             }

@@ -93,7 +93,7 @@
             style="@style/font_medium.black.12"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/account_number"/>
+            android:text="@string/account_number_"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textViewAccountNumberValue"
@@ -113,7 +113,7 @@
             style="@style/font_medium.black.12"
             app:layout_constraintTop_toBottomOf="@id/textViewAccountNumber"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/account_type"/>
+            android:text="@string/account_type_"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textViewAccountTypeValue"
@@ -132,7 +132,7 @@
             style="@style/font_medium.black.12"
             app:layout_constraintTop_toBottomOf="@id/textViewAccountType"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/ifsc_code"/>
+            android:text="@string/ifsc_code_"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/textViewIFSCValue"

@@ -29,9 +29,9 @@ class AppModule {
 
     var httpClient: OkHttpClient.Builder = OkHttpClient.Builder()
         .callTimeout(1, TimeUnit.MINUTES)
-        .connectTimeout(10, TimeUnit.SECONDS)
-        .readTimeout(20, TimeUnit.SECONDS)
-        .writeTimeout(20, TimeUnit.SECONDS)
+        .connectTimeout(3, TimeUnit.SECONDS)
+        .readTimeout(3, TimeUnit.SECONDS)
+        .writeTimeout(3, TimeUnit.SECONDS)
 
 
     @Singleton

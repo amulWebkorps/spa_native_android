@@ -1,6 +1,9 @@
 package com.example.spa.data.services
 
+import android.content.Context
+import android.provider.Settings.Global.getString
 import android.util.Log
+import com.example.spa.R
 import com.example.spa.data.remote.AuthApi
 import com.example.spa.data.request.User
 import com.example.spa.data.response.*
@@ -29,7 +32,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Couldn't load data"))
+                emit(Resource.Error("Please check your internet connectivity"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Couldn't load data"))
@@ -51,7 +54,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Something went wrong"))
+                emit(Resource.Error("Please check your internet connectivity"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -75,7 +78,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Something went wrong"))
+                emit(Resource.Error("Please check your internet connectivity"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -98,11 +101,9 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                Log.e("TAG", "loginUser1: $e", )
-                emit(Resource.Error("Something went wrong"))
+                emit(Resource.Error("Please check your internet connectivity"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
-                Log.e("TAG", "loginUser2: $e", )
                 emit(Resource.Error("Something went wrong"))
             }
         }
@@ -122,7 +123,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Something went wrong"))
+                emit(Resource.Error("Please check your internet connectivity"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -144,7 +145,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Something went wrong"))
+                emit(Resource.Error("Please check your internet connectivity"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -166,7 +167,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Something went wrong"))
+                emit(Resource.Error("Please check your internet connectivity"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -188,7 +189,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Something went wrong"))
+                emit(Resource.Error("Please check your internet connectivity"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))

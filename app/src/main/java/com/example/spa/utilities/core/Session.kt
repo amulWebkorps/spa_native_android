@@ -39,6 +39,10 @@ class Session(context: Context)  {
     get() = getBoolean(IS_LOGIN)
     set(value) {putBoolean(IS_LOGIN, value)}
 
+    var isOtp: Boolean
+        get() = getBoolean(IS_OTP)
+        set(value) {putBoolean(IS_OTP, value)}
+
     var countryCode: String
         get() = getString(COUNTRY_CODE)
         set(value) {putString(COUNTRY_CODE, value)}
@@ -74,5 +78,6 @@ class Session(context: Context)  {
         const val PHONE_NUMBER = "phone-number"
         const val TOKEN = "token"
         const val USER_JSON = "user_json"
+        const val IS_OTP = "is_otp"
     }
 }

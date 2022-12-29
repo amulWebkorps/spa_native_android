@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import com.example.spa.R
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -33,7 +34,7 @@ fun TextView.setSpan(
 
         val spannableString = SpannableString(text)
 
-        //highlightColor = ContextCompat.getColor(context, clickableColor)
+        highlightColor = ContextCompat.getColor(context, R.color.white)
 
         spannableString.setSpan(
             CustomTypefaceSpan(ResourcesCompat.getFont(context!!, clickableFont), ""),

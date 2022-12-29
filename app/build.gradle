@@ -109,6 +109,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
+    // piccaso
+    implementation "com.squareup.picasso:picasso:2.5.2"
+
 }
 //repositories {
 //    mavenCentral()

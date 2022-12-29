@@ -71,7 +71,7 @@ class SignUpFragment :  BaseFragment()  {
             listener?.goBack()
         }
 
-        binding.textViewTermsAndConditions.setSpan("Terms and Conditions" ,R.font.poppins_medium, R.color.colorBlue72){
+        binding.textViewTermsAndConditions.setSpan("Terms & Conditions" ,R.font.poppins_medium, R.color.colorBlue72){
             val url = "http://www.google.com"
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         }
@@ -83,13 +83,12 @@ class SignUpFragment :  BaseFragment()  {
             binding.textInputPassword.setEnd()
         }
         binding.checkboxConfirmPassword.setOnClickListener {
-            binding.textInputConfirmPassword.showPassword(binding.checkboxPassword.isChecked)
+            binding.textInputConfirmPassword.showPassword(binding.checkboxConfirmPassword.isChecked)
             binding.textInputConfirmPassword.setEnd()
         }
 
         binding.buttonRegister.setOnClickListener {
-
-                if (isValidationSuccess()) {
+               if (isValidationSuccess()) {
                     if (hasInternet(requireContext())) {
                     session.countryCode = "+" + binding.layoutPhone.ccp.selectedCountryCode
                     session.phoneNumber = binding.layoutPhone.editTextPhoneNumber.text.toString()
@@ -195,6 +194,7 @@ class SignUpFragment :  BaseFragment()  {
                     .checkMinDigits(8).errorMessage(getString(R.string.error_min_password))
                     .check()
                 validator.submit(binding.textInputConfirmPassword)
+                    .checkEmpty().errorMessage(getString(R.string.empty_confirm_password))
                     .matchString(binding.textInputPassword.text.toString())
                     .errorMessage(getString(R.string.error_password_not_matched))
                     .check()
@@ -222,6 +222,8 @@ class SignUpFragment :  BaseFragment()  {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         toggleLoader(false)
+
+                        showMessage(binding.root , getString(R.string.otp_send))
                         listener?.replaceFragment(Screen.VERIFICATION)
                     }
                 }
@@ -309,7 +311,7 @@ class SignUpFragment :  BaseFragment()  {
                         )
                     )
                 }
-                Log.e("TAG", "upload: ${call.body()}")
+                Log.e("TAG", "upload: ${it}")
             }
         }else{
             toggleLoader(false)

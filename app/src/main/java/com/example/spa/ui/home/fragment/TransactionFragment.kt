@@ -1,6 +1,7 @@
 package com.example.spa.ui.home.fragment
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -87,6 +88,9 @@ class TransactionFragment:BaseFragment() {
             settingsViewModel.transaction.collect { result ->
                 if (page == 0) {
                     toggleLoader(true)
+                    Handler().postDelayed({
+                        toggleLoader(false)
+                    }, 3000)
                 }
                 when (result) {
                     is Resource.Error -> {

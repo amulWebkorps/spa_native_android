@@ -68,7 +68,7 @@
             android:paddingBottom="10dp"
             android:singleLine="true"
             style="@style/font_medium.black"
-            android:text="Reason"
+            android:text="My Reason"
             android:textAlignment="center"
             tools:ignore="LabelFor" />
 

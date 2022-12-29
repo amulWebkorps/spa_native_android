@@ -1,6 +1,7 @@
 package com.example.spa.ui.auth.fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,6 +61,8 @@ class ForgotPasswordFragment :BaseFragment() {
                                 )
                         )
                     }
+
+
                 }
                 else{
                     toggleLoader(true)
@@ -84,6 +87,8 @@ class ForgotPasswordFragment :BaseFragment() {
         if (value == Constants.CHANGE){
             binding.textViewForgotPassword.text = getString(R.string.label_change_phone_number)
             binding.textViewForgotPasswordSubHead.text = getString(R.string.label_mobile_number_subhead)
+            binding.layoutPhone.editTextPhoneNumber.setText(session.phoneNumber)
+            binding.layoutPhone.ccp.setCountryForPhoneCode(session.countryCode.toInt())
         }
     }
 
@@ -113,6 +118,7 @@ class ForgotPasswordFragment :BaseFragment() {
                     }
                     is Resource.Loading -> {}
                     is Resource.Success -> {
+                        showMessage(binding.root , getString(R.string.otp_send))
                         toggleLoader(false)
                         if (value == Constants.CHANGE) {
                             listener?.goBack()
@@ -138,7 +144,7 @@ class ForgotPasswordFragment :BaseFragment() {
                         }
                     }
                     is Resource.Loading -> {}
-                    is Resource.Success -> {
+                     is Resource.Success -> {
                         lifecycleScope.launchWhenCreated {
                             authViewModel.sendOtp(
                                 User(

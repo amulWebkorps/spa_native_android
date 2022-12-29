@@ -16,16 +16,6 @@
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintBottom_toBottomOf="parent"/>
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/includeToolbar"
-        app:layout_constraintBottom_toBottomOf="parent">
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSignUp"
         android:layout_width="wrap_content"
@@ -35,7 +25,7 @@
         android:layout_marginTop="@dimen/dp_17"
         android:text="@string/sign_up"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/includeToolbar"/>
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSignUnSubHead"
@@ -69,14 +59,26 @@
         app:layout_constraintStart_toStartOf="@id/imageViewProfile"
         app:layout_constraintTop_toTopOf="@id/imageViewProfile"
         android:src="@drawable/ic_camera"/>
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageViewProfile"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
   <LinearLayout
       android:id="@+id/layoutEditText"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:orientation="vertical"
-      app:layout_constraintTop_toBottomOf="@id/imageViewProfile"
+      app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toTopOf="@id/layoutButton">
-
 
 
       <com.google.android.material.textfield.TextInputLayout
@@ -191,7 +193,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginEnd="@dimen/dp_13"
-              android:button="@drawable/ic_password"
+              android:button="@drawable/ic_checkable"
               android:minWidth="0dp"
               android:minHeight="0dp"
               app:layout_constraintBottom_toBottomOf="@id/editTextPassword"
@@ -235,7 +237,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_marginEnd="@dimen/dp_13"
-              android:button="@drawable/ic_password"
+              android:button="@drawable/ic_checkable"
               android:minWidth="0dp"
               android:minHeight="0dp"
               app:layout_constraintBottom_toBottomOf="@id/editTextConfirmPassword"
@@ -264,7 +266,7 @@
 
           <androidx.appcompat.widget.AppCompatTextView
               android:id="@+id/textViewTermsAndConditions"
-              style="@style/font_medium.black.12"
+              style="@style/font_medium.grey7c.12"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
               android:text="@string/terms_condition"

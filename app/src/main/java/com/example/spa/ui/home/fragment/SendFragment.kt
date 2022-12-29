@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -299,6 +300,9 @@ class SendFragment(context: Context) : BaseFragment() {
         lifecycleScope.launchWhenCreated {
             settingsViewModel.transaction.collect { result ->
                 toggleLoader(true)
+                Handler().postDelayed({
+                    toggleLoader(false)
+                }, 3000)
                 when (result) {
                     is Resource.Error -> {
                         toggleLoader(false)
