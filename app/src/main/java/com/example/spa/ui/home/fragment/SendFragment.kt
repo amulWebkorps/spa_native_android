@@ -18,6 +18,7 @@ import com.example.spa.R
 
 import com.example.spa.base.BaseFragment
 import com.example.spa.data.request.GraphRequest
+import com.example.spa.data.response.GraphDataList
 import com.example.spa.databinding.FragmentSendBinding
 import com.example.spa.ui.home.activitiy.IsolatedActivity
 import com.example.spa.ui.home.adapter.ResentTransactionAdapter
@@ -67,8 +68,8 @@ class SendFragment(context: Context) : BaseFragment() {
 
         resentTransactionResponse()
         apiCall()
-//        graphDataResponse()
-//        apiCallGraph()
+        graphDataResponse()
+        apiCallGraph("weekly")
     }
     private fun apiCall() {
         if (hasInternet(requireContext())) {
@@ -83,12 +84,12 @@ class SendFragment(context: Context) : BaseFragment() {
         }
     }
 
-    private fun apiCallGraph(){
+    private fun apiCallGraph(day:String){
         if (hasInternet(requireContext())) {
             internetManage(true)
             lifecycleScope.launchWhenCreated {
                 settingsViewModel.graphDataResponse(
-                    session.token, GraphRequest("weekly")
+                    session.token, day
                 )
             }
         }else{
@@ -192,79 +193,87 @@ class SendFragment(context: Context) : BaseFragment() {
     }
 
     //BarChart
-    private val listChartDayValues = mutableListOf<ChartDays>()
+    private val listChartDayValues = mutableListOf<GraphDataList>()
     private var listBarEntry = mutableListOf<BarEntry>()
-    private var listDays = mutableListOf<Days>()
-    private var listMonths = mutableListOf<Days>()
+    private var listDays = mutableListOf<GraphDataList>()
+    private var listMonths = mutableListOf<GraphDataList>()
 
     private fun fillBarChartData() {
         listChartDayValues.clear()
         listBarEntry.clear()
 
         if (pos ==0) {
-            listChartDayValues.add(ChartDays(1F, 9F))
-            listChartDayValues.add(ChartDays(2F, 4F))
-            listChartDayValues.add(ChartDays(3F, 8F))
-            listChartDayValues.add(ChartDays(4F, 6F))
-            listChartDayValues.add(ChartDays(5F, 4.2F))
-            listChartDayValues.add(ChartDays(6F, 4.3F))
-            listChartDayValues.add(ChartDays(7F, 9.6F))
+            apiCallGraph("weekly")
+//            listChartDayValues.add(ChartDays(1F, 9F))
+//            listChartDayValues.add(ChartDays(2F, 4F))
+//            listChartDayValues.add(ChartDays(3F, 8F))
+//            listChartDayValues.add(ChartDays(4F, 6F))
+//            listChartDayValues.add(ChartDays(5F, 4.2F))
+//            listChartDayValues.add(ChartDays(6F, 4.3F))
+//            listChartDayValues.add(ChartDays(7F, 9.6F))
         }else{
-            listChartDayValues.add(ChartDays(1F, 90F))
-            listChartDayValues.add(ChartDays(2F, 40F))
-            listChartDayValues.add(ChartDays(3F, 88F))
-            listChartDayValues.add(ChartDays(4F, 63F))
-            listChartDayValues.add(ChartDays(5F, 42F))
-            listChartDayValues.add(ChartDays(6F, 43F))
-            listChartDayValues.add(ChartDays(7F, 90F))
-            listChartDayValues.add(ChartDays(8F, 92F))
-            listChartDayValues.add(ChartDays(9F, 42F))
-            listChartDayValues.add(ChartDays(10F, 58F))
-            listChartDayValues.add(ChartDays(11F, 76F))
-            listChartDayValues.add(ChartDays(12F, 42F))
+
+            apiCallGraph("monthly")
+//            listChartDayValues.add(ChartDays(1F, 90F))
+//            listChartDayValues.add(ChartDays(2F, 40F))
+//            listChartDayValues.add(ChartDays(3F, 88F))
+//            listChartDayValues.add(ChartDays(4F, 63F))
+//            listChartDayValues.add(ChartDays(5F, 42F))
+//            listChartDayValues.add(ChartDays(6F, 43F))
+//            listChartDayValues.add(ChartDays(7F, 90F))
+//            listChartDayValues.add(ChartDays(8F, 92F))
+//            listChartDayValues.add(ChartDays(9F, 42F))
+//            listChartDayValues.add(ChartDays(10F, 58F))
+//            listChartDayValues.add(ChartDays(11F, 76F))
+//            listChartDayValues.add(ChartDays(12F, 42F))
         }
         //After add data call barchart setup
-        setUpBarChart()
+//        setUpBarChart()
     }
 
     private fun setUpBarChart() {
-        listDays.add(Days("Mon"))
-        listDays.add(Days("Tue"))
-        listDays.add(Days("Wed"))
-        listDays.add(Days("Thu"))
-        listDays.add(Days("Fri"))
-        listDays.add(Days("Sat"))
-        listDays.add(Days("Sun"))
+        Log.e("TAG", "setUpBarChart:${listDays} ", )
+//        listDays.add(Days("Mon"))
+//        listDays.add(Days("Tue"))
+//        listDays.add(Days("Wed"))
+//        listDays.add(Days("Thu"))
+//        listDays.add(Days("Fri"))
+//        listDays.add(Days("Sat"))
+//        listDays.add(Days("Sun"))
+//
+//        listMonths.add(Days("Jan"))
+//        listMonths.add(Days("Feb"))
+//        listMonths.add(Days("Mar"))
+//        listMonths.add(Days("Apr"))
+//        listMonths.add(Days("May"))
+//        listMonths.add(Days("Jun"))
+//        listMonths.add(Days("July"))
+//        listMonths.add(Days("Aug"))
+//        listMonths.add(Days("Sep"))
+//        listMonths.add(Days("Oct"))
+//        listMonths.add(Days("Nov"))
+//        listMonths.add(Days("Dec"))
 
-        listMonths.add(Days("Jan"))
-        listMonths.add(Days("Feb"))
-        listMonths.add(Days("Mar"))
-        listMonths.add(Days("Apr"))
-        listMonths.add(Days("May"))
-        listMonths.add(Days("Jun"))
-        listMonths.add(Days("July"))
-        listMonths.add(Days("Aug"))
-        listMonths.add(Days("Sep"))
-        listMonths.add(Days("Oct"))
-        listMonths.add(Days("Nov"))
-        listMonths.add(Days("Dec"))
 
+        barChartStyle = if(pos == 0) {
 
-        barChartStyle = if(pos == 1) {
-            BarChartStyle(
-                requireContext(),
-                listMonths,
-                ANALYTICS.DAYS(TIMES = listMonths.size)
-            )
-        }else{
+            Log.e("TAG", "setUpBarChart: ${listDays.size}", )
             BarChartStyle(
                 requireContext(),
                 listDays,
                 ANALYTICS.DAYS(TIMES = listDays.size)
             )
+        }else{
+
+            Log.e("TAG", "setUpBarChart: 2", )
+            BarChartStyle(
+                requireContext(),
+                listMonths,
+                ANALYTICS.DAYS(TIMES = listMonths.size)
+            )
         }
         listChartDayValues.forEachIndexed { index, chartDays ->
-            listBarEntry.add(BarEntry(index.toFloat(), chartDays.value))
+            listBarEntry.add(BarEntry(index.toFloat(), chartDays.amount.toFloat()))
         }
 
         val barDataSet = BarDataSet(listBarEntry, "BarChartStyle")
@@ -344,6 +353,22 @@ class SendFragment(context: Context) : BaseFragment() {
                     is Resource.Success -> {
                         toggleLoader(false)
                         result.data?.let { it ->
+                            if (pos == 0) {
+                                listDays.clear()
+                                for (i in 0 until it.list.size) {
+                                    listDays.add(it.list[i])
+                                    listChartDayValues.add(i,it.list[i])
+                                }
+                                setUpBarChart()
+                            }else{
+
+                                listMonths.clear()
+                                for (i in 0 until it.list.size) {
+                                    listMonths.add(it.list[i])
+                                    listChartDayValues.add(i,it.list[i])
+                                }
+                                setUpBarChart()
+                            }
                             Log.e("TAG", "graphDataResponse: ${it.list}", )
                         }
                     }

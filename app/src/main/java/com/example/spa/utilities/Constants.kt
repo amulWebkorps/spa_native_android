@@ -17,6 +17,7 @@ class Constants {
         const val MAX_PHONE = 10
         const val RESET_PASSWORD = "resetPassword"
         const val OTP = "otp"
+        const val TYPE = "type"
 
         const val DEFAULT_PAGE_SIZE=9
     }

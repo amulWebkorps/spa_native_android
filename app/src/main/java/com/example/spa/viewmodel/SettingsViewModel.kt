@@ -121,9 +121,9 @@ class SettingsViewModel @Inject constructor(
     }
 
 
-    fun graphDataResponse(token:String,graphRequest: GraphRequest){
+    fun graphDataResponse(token:String,type:String){
         viewModelScope.launch {
-            settingsRepository.graphData(token,graphRequest).collect { result ->
+            settingsRepository.graphData(token,type).collect { result ->
                 when (result) {
                     is Resource.Error -> {
                         result.message?.let {

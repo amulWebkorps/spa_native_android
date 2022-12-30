@@ -62,8 +62,17 @@ class IsolatedActivity : AppCompatActivity() , IsolatedListener {
         args.putString(Constants.AUTH, value)
         fragment.arguments = args
 
-        supportFragmentManager.beginTransaction().replace(R.id.placeHolder, fragment)
-            .addToBackStack(null).commit()
+        val fm=supportFragmentManager.beginTransaction()
+        fm.replace(R.id.placeHolder, fragment)
+            .addToBackStack(null)
+        val bsc = supportFragmentManager.backStackEntryCount
+//        if (bsc > 1) {
+            supportFragmentManager.popBackStack()
+//        }
+        fm.commit()
+
+//        supportFragmentManager.beginTransaction().replace(R.id.placeHolder, fragment)
+//            .addToBackStack(null).commit()
 
     }
 

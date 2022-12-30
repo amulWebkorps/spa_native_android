@@ -3,6 +3,7 @@ package com.example.spa.ui.auth.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.commit
 import com.example.spa.R
 import com.example.spa.base.listener.Listener
 import com.example.spa.base.listener.Screen
@@ -41,11 +42,14 @@ class AuthActivity : AppCompatActivity() ,Listener {
         val args = Bundle()
         args.putString(Constants.AUTH, value)
         fragment.arguments = args
-
-        supportFragmentManager.beginTransaction().replace(R.id.placeHolder, fragment)
-            .addToBackStack(null).commit()
-
-
+        val fm=supportFragmentManager.beginTransaction()
+        fm.replace(R.id.placeHolder, fragment)
+            .addToBackStack(null)
+        val bsc = supportFragmentManager.backStackEntryCount
+      //  if (bsc > 1) {
+            supportFragmentManager.popBackStack()
+       // }
+        fm.commit()
     }
     override fun goBack() {
         val fm: FragmentManager = this.supportFragmentManager

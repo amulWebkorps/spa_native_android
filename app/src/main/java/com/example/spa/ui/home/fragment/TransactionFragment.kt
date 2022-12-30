@@ -105,6 +105,7 @@ class TransactionFragment:BaseFragment() {
                         toggleLoader(false)
                         loading = false
                         result.data?.let { it ->
+                            Log.e("TAG", "resentTransactionResponse: ${it.list}", )
                             page=it.page_number
                                 if (it.page_number == 1) {
                                     if (it.list.isEmpty()){

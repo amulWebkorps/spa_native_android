@@ -7,7 +7,9 @@
         <entry key="..\:/spa_android/app/src/main/res/drawable/bg_inactive.xml" value="0.173" />
         <entry key="..\:/spa_android/app/src/main/res/drawable/ic_checkable.xml" value="0.118" />
         <entry key="..\:/spa_android/app/src/main/res/drawable/terms_selector.xml" value="0.118" />
+        <entry key="..\:/spa_android/app/src/main/res/layout/activity_auth.xml" value="0.1" />
         <entry key="..\:/spa_android/app/src/main/res/layout/activity_home.xml" value="0.23007246376811594" />
+        <entry key="..\:/spa_android/app/src/main/res/layout/activity_isolated.xml" value="0.1" />
         <entry key="..\:/spa_android/app/src/main/res/layout/activity_splash.xml" value="0.10989583333333333" />
         <entry key="..\:/spa_android/app/src/main/res/layout/enter_reason_dialouge.xml" value="0.20521590423257802" />
         <entry key="..\:/spa_android/app/src/main/res/layout/fragment_add_bank_detail.xml" value="0.23007246376811594" />
@@ -17,6 +19,7 @@
         <entry key="..\:/spa_android/app/src/main/res/layout/fragment_login.xml" value="0.264" />
         <entry key="..\:/spa_android/app/src/main/res/layout/fragment_reset_password.xml" value="0.20521590423257802" />
         <entry key="..\:/spa_android/app/src/main/res/layout/fragment_send.xml" value="0.10029251984956122" />
+        <entry key="..\:/spa_android/app/src/main/res/layout/fragment_settings.xml" value="0.20521590423257802" />
         <entry key="..\:/spa_android/app/src/main/res/layout/fragment_share_qr.xml" value="0.20521590423257802" />
         <entry key="..\:/spa_android/app/src/main/res/layout/fragment_sign_up.xml" value="0.264" />
         <entry key="..\:/spa_android/app/src/main/res/layout/fragment_verification.xml" value="0.20521590423257802" />

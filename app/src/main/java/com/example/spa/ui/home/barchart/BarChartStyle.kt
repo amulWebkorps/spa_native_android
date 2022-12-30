@@ -1,9 +1,11 @@
 package com.example.spa.ui.home.barchart
 
 import android.content.Context
+import android.util.Log
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.example.spa.R
+import com.example.spa.data.response.GraphDataList
 import com.example.spa.utilities.coolNumberFormat
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
@@ -20,9 +22,10 @@ sealed class ANALYTICS {
 
 class BarChartStyle(
     private val context: Context,
-    private val listDays: List<Days>,
+    private val listDays: List<GraphDataList>,
     private val analytics: ANALYTICS
 ) {
+
 
     fun styleBarChart(barChart: BarChart) = barChart.apply {
 
@@ -53,6 +56,7 @@ class BarChartStyle(
         }
 
         xAxis.apply {
+            Log.e("TAG", "styleBarChart: ${listDays}", )
             valueFormatter = MyXAxisValueFormat(listDays, analytics)
 
             /*axisMinimum = 0f
@@ -126,7 +130,7 @@ class BarChartStyle(
         }
     }
 
-    private class MyXAxisValueFormat(val listDays: List<Days>, val analytics: ANALYTICS) :
+    private class MyXAxisValueFormat(val listDays: List<GraphDataList>, val analytics: ANALYTICS) :
         ValueFormatter() {
         //val listDays = mutableListOf("Sun","Mon","Tue","Wed","Thu","Fri","Sat")
         override fun getFormattedValue(value: Float): String {
@@ -139,10 +143,11 @@ class BarChartStyle(
 //                        listDays[value.toInt()].month.subSequence(0, 3).toString()
 //                    }
 //                    is ANALYTICS.MONTH -> {
-//                        listDays[value.toInt()].date.subSequence(6, 8).toString()
+//                        listDays[value.toInt()].value_for.subSequence(6, 8).toString()
 //                    }
                     else -> {
-                        listDays[value.toInt()].day.subSequence(0, 3).toString()
+//                        listDays[value.toInt()].day.subSequence(0, 3).toString()
+                        listDays[value.toInt()].value_for.subSequence(0, 3).toString()
                     }
                 }
             } catch (e: Exception) {

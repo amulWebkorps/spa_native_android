@@ -114,12 +114,12 @@ class SettingsService constructor(
 
     override suspend fun graphData(
         token: String,
-        graphRequest: GraphRequest
+        type:String
     ): Flow<Resource<GraphResponse>> {
         return flow {
             emit(Resource.Loading(true))
             try {
-                val response = settingsApi.graphData(token,graphRequest)
+                val response = settingsApi.graphData(token,type)
                 if (response.isSuccessful) {
                     emit(Resource.Loading(false))
                     emit(Resource.Success(response.body()))

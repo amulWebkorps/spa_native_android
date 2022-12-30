@@ -11,5 +11,5 @@ interface SettingsRepository {
     suspend fun bankAccountsList(token:String) : Flow<Resource<BankAccountList>>
     suspend fun deleteBankAccount(token:String,id:String) : Flow<Resource<GeneralResponse>>
     suspend fun transactionList(token:String,page:Int) : Flow<Resource<Transaction>>
-    suspend fun graphData(token:String,graphRequest: GraphRequest) : Flow<Resource<GraphResponse>>
+    suspend fun graphData(token:String,type:String) : Flow<Resource<GraphResponse>>
 }

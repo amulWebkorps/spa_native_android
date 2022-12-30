@@ -24,7 +24,9 @@ interface SettingsApi {
     @GET(Url.TRANSACTION)
     suspend fun resentTransaction(@Header("Authorization")token:String ,@Query("page_number") page:Int): Response<Transaction>
 
-    @GET(Url.GRAPH_DATA)
-    suspend fun graphData(@Header("Authorization")token:String, @Body request: GraphRequest): Response<GraphResponse>
+    @POST(Url.GRAPH_DATA)
+    suspend fun graphData(@Header("Authorization")token:String, @Query(
+        Constants.TYPE
+    )type :String): Response<GraphResponse>
 
 }
