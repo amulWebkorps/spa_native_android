@@ -107,4 +107,7 @@
     <string name="reset_password_successfully">Reset password successfully</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="dot">: </string>
+    <string name="weekly">Weekly</string>
+    <string name="frequency">Frequency</string>
+    <string name="frequency_">Frequency : </string>
 </resources>

@@ -131,7 +131,7 @@ fun convertDate(dateString: String): Date? {
 
 fun formatDateGraph(date: String): String {
     val convertedDate = convertDateGraph(date)
-    return SimpleDateFormat("dd").format(convertedDate)
+    return SimpleDateFormat("dd/MM").format(convertedDate)
 }
 
 fun convertDateGraph(dateString: String): Date? {

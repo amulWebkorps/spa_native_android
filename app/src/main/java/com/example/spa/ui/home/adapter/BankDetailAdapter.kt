@@ -57,6 +57,7 @@ class BankDetailAdapter(val onClick:OnClick) :
                 textViewAccountTypeValue.text = item.account_type!!
                   item.ifsc_code?.let {
                 textViewIFSCValue.text =item.ifsc_code!!.toString()
+                textViewFrequencyValue.text =item.frequency!!.toString()
                }
 
                 textViewAccountNumberValue.text = item.account_number!!

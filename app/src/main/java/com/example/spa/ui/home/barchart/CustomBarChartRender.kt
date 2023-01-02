@@ -27,7 +27,7 @@ class CustomBarChartRender(
         mBarBorderPaint.color = dataSet.barBorderColor
         mBarBorderPaint.strokeWidth = Utils.convertDpToPixel(dataSet.barBorderWidth)
         mShadowPaint.color = dataSet.barShadowColor
-        val drawBorder = dataSet.barBorderWidth > 0f
+//        val drawBorder = dataSet.barBorderWidth > 0f
         val phaseX = mAnimator.phaseX
         val phaseY = mAnimator.phaseY
         if (mChart.isDrawBarShadowEnabled) {
@@ -115,15 +115,15 @@ class CustomBarChartRender(
                 ), mRadius.toFloat(), mRadius.toFloat(), tl = true, tr = true, br = false, bl = false
             )
             c.drawPath(path2, mRenderPaint)
-            if (drawBorder) {
-                val path: Path = roundRect(
-                    RectF(
-                        buffer.buffer[j], buffer.buffer[j + 1], buffer.buffer[j + 2],
-                        buffer.buffer[j + 3]
-                    ), mRadius.toFloat(), mRadius.toFloat(), tl = true, tr = true, br = false, bl = false
-                )
-                c.drawPath(path, mBarBorderPaint)
-            }
+//            if (drawBorder) {
+//                val path: Path = roundRect(
+//                    RectF(
+//                        buffer.buffer[j], buffer.buffer[j + 1], buffer.buffer[j + 2],
+//                        buffer.buffer[j + 3]
+//                    ), mRadius.toFloat(), mRadius.toFloat(), tl = true, tr = true, br = false, bl = false
+//                )
+//                c.drawPath(path, mBarBorderPaint)
+//            }
             j += 4
         }
     }

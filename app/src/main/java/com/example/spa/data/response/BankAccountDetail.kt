@@ -7,6 +7,7 @@ data class BankAccountDetail(
     val address: Any="",
     val bank_name: String="",
     val created_at: String="",
+    val frequency: String="",
     val id: Int=0,
     val ifsc_code: Any? = null ,
     var is_active: Boolean = false,

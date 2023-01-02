@@ -16,10 +16,10 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 
 
 sealed class ANALYTICS {
-    data class DAYS(val TIMES: Int = 10) : ANALYTICS()
+    data class DAYS(val TIMES: Int = 7) : ANALYTICS()
     data class WEEK(val TIMES: Int = 7) : ANALYTICS()
     data class MONTH(val TIMES: Int = 12) : ANALYTICS()
-    data class YEAR(val TIMES: Int = 10) : ANALYTICS()
+    data class YEAR(val TIMES: Int = 7) : ANALYTICS()
 }
 
 class BarChartStyle(
@@ -27,6 +27,7 @@ class BarChartStyle(
     private val listDays: List<GraphDataList>,
     private val analytics: ANALYTICS
 ) {
+
 
 
     fun styleBarChart(barChart: BarChart) = barChart.apply {
@@ -41,7 +42,8 @@ class BarChartStyle(
         axisLeft.apply {
             isEnabled = true
 
-//           axisMinimum = 500F
+            Log.e("TAG", "styleBarChart: ${listDays}", )
+           axisMinimum = 1F
            // axisMaximum = 10F*/
             granularity = 1F
 
@@ -58,7 +60,6 @@ class BarChartStyle(
         }
 
         xAxis.apply {
-            Log.e("TAG", "styleBarChart: ${listDays}", )
             valueFormatter = MyXAxisValueFormat(listDays, analytics)
 
 //            axisMinimum = 0f
@@ -68,16 +69,16 @@ class BarChartStyle(
             granularity = 1F
             setDrawGridLines(false)
             setDrawAxisLine(false)
-            //labelCount = 2
+//            labelCount = 7
             position = XAxis.XAxisPosition.BOTTOM
-            //setLabelCount(7, false)
+//            setLabelCount(7, false)
             when (analytics) {
                 is ANALYTICS.DAYS -> setLabelCount(analytics.TIMES, false)
                 is ANALYTICS.MONTH -> setLabelCount(analytics.TIMES, false)
                 is ANALYTICS.WEEK -> setLabelCount(analytics.TIMES, false)
                 is ANALYTICS.YEAR -> setLabelCount(analytics.TIMES, false)
             }
-            //setCenterAxisLabels(false)
+            setCenterAxisLabels(false)
             mLabelWidth = 10
 
             //spaceMin = 2f
@@ -125,10 +126,11 @@ class BarChartStyle(
 
     private class MyAxisValueFormat : ValueFormatter() {
         override fun getFormattedValue(value: Float): String {
-            //val numberWithOutDot = String.format("%.0f", value / 1000000000)
-            /*val numberWithOutDot = String.format("%.0f", value)
-            return "${numberWithOutDot}k     "*/
-            return "${value.toLong().coolNumberFormat()}     "
+//            val numberWithOutDot = String.format("%.0f", value / 1000000000)
+//            val numberWithOutDot = String.format("%.0f", value)
+//            return "${numberWithOutDot.toLong().coolNumberFormat()}    "
+
+            return "${value.toLong().coolNumberFormat()}"
         }
     }
 
@@ -148,8 +150,8 @@ class BarChartStyle(
                         listDays[value.toInt()].value_for.subSequence(0, 3).toString()
                     }
                     else -> {
-                 //       formatDateGraph(listDays[value.toInt()].date)
-                        listDays[value.toInt()].value_for.subSequence(0, 3).toString()
+                        formatDateGraph(listDays[value.toInt()].date)
+                      //  listDays[value.toInt()].value_for.subSequence(0, 3).toString()
                     }
                 }
             } catch (e: Exception) {

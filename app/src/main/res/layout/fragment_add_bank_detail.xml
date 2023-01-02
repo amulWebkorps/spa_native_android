@@ -92,7 +92,37 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_24"
+            android:text="@string/frequency"
+            android:textColor="@color/colorGrey7C"
+            android:textSize="@dimen/sp_12" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/editTextFrequencyType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:boxStrokeColor="@color/colorGrey7C"
+            app:hintTextColor="@color/colorGrey7C"
+            android:layout_marginHorizontal="@dimen/dp_20"
+            app:endIconMode="dropdown_menu">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/textInputFrequencyType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/weekly"
+                style="@style/font_regular.black.16"
+                android:inputType="none"
+                android:backgroundTint="@android:color/transparent"
+                android:background="@android:color/transparent" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/editTextAccountNumber"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

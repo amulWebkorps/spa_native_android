@@ -230,7 +230,7 @@ class EditProfileFragment : BaseFragment() {
                 )
                 if (call.isSuccessful) {
                     toggleLoader(false)
-                    Log.e("TAG", "upload: ${call.body()}",)
+                    Log.e("TAG", "upload: ${call.body()!!.user}",)
                     session.user = call.body()!!.user
                     showMessage(binding.root, getString(R.string.user_update_success))
                 } else {

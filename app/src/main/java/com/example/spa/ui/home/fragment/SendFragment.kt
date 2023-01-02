@@ -64,12 +64,10 @@ class SendFragment(context: Context) : BaseFragment() {
 
         setAdapter()
         setClick()
-        fillBarChartData()
-
         resentTransactionResponse()
         apiCall()
         graphDataResponse()
-        apiCallGraph("weekly")
+       // apiCallGraph("weekly")
     }
     private fun apiCall() {
         if (hasInternet(requireContext())) {
@@ -142,6 +140,7 @@ class SendFragment(context: Context) : BaseFragment() {
                   (parent.getChildAt(0) as TextView?)!!.compoundDrawablePadding = 10;
                   pos = position
                   fillBarChartData()
+
               }catch (e : Exception){}
             }
 
@@ -204,76 +203,34 @@ class SendFragment(context: Context) : BaseFragment() {
 
         if (pos ==0) {
             apiCallGraph("weekly")
-//            listChartDayValues.add(ChartDays(1F, 9F))
-//            listChartDayValues.add(ChartDays(2F, 4F))
-//            listChartDayValues.add(ChartDays(3F, 8F))
-//            listChartDayValues.add(ChartDays(4F, 6F))
-//            listChartDayValues.add(ChartDays(5F, 4.2F))
-//            listChartDayValues.add(ChartDays(6F, 4.3F))
-//            listChartDayValues.add(ChartDays(7F, 9.6F))
         }else{
-
             apiCallGraph("monthly")
-//            listChartDayValues.add(ChartDays(1F, 90F))
-//            listChartDayValues.add(ChartDays(2F, 40F))
-//            listChartDayValues.add(ChartDays(3F, 88F))
-//            listChartDayValues.add(ChartDays(4F, 63F))
-//            listChartDayValues.add(ChartDays(5F, 42F))
-//            listChartDayValues.add(ChartDays(6F, 43F))
-//            listChartDayValues.add(ChartDays(7F, 90F))
-//            listChartDayValues.add(ChartDays(8F, 92F))
-//            listChartDayValues.add(ChartDays(9F, 42F))
-//            listChartDayValues.add(ChartDays(10F, 58F))
-//            listChartDayValues.add(ChartDays(11F, 76F))
-//            listChartDayValues.add(ChartDays(12F, 42F))
         }
-        //After add data call barchart setup
-//        setUpBarChart()
     }
 
     private fun setUpBarChart() {
-        Log.e("TAG", "setUpBarChart:${listDays} ", )
-//        listDays.add(Days("Mon"))
-//        listDays.add(Days("Tue"))
-//        listDays.add(Days("Wed"))
-//        listDays.add(Days("Thu"))
-//        listDays.add(Days("Fri"))
-//        listDays.add(Days("Sat"))
-//        listDays.add(Days("Sun"))
-//
-//        listMonths.add(Days("Jan"))
-//        listMonths.add(Days("Feb"))
-//        listMonths.add(Days("Mar"))
-//        listMonths.add(Days("Apr"))
-//        listMonths.add(Days("May"))
-//        listMonths.add(Days("Jun"))
-//        listMonths.add(Days("July"))
-//        listMonths.add(Days("Aug"))
-//        listMonths.add(Days("Sep"))
-//        listMonths.add(Days("Oct"))
-//        listMonths.add(Days("Nov"))
-//        listMonths.add(Days("Dec"))
 
 
-        barChartStyle = if(pos == 0) {
+        barChartStyle = if(pos == 1) {
 
-            Log.e("TAG", "setUpBarChart: ${listDays.size}", )
-            BarChartStyle(
-                requireContext(),
-                listDays,
-                ANALYTICS.DAYS(TIMES = listDays.size)
-            )
-        }else{
-
-            Log.e("TAG", "setUpBarChart: 2", )
             BarChartStyle(
                 requireContext(),
                 listMonths,
                 ANALYTICS.MONTH(TIMES = listMonths.size)
             )
+        }else{
+            BarChartStyle(
+                requireContext(),
+                listDays,
+                ANALYTICS.WEEK(TIMES = listDays.size)
+            )
         }
         listChartDayValues.forEachIndexed { index, chartDays ->
-            listBarEntry.add(BarEntry(index.toFloat(), chartDays.amount.toFloat()))
+           // if (chartDays.amount.toFloat() == 0f) {
+                //chartDays.amount = 100
+            //}
+                listBarEntry.add(BarEntry(index.toFloat(), chartDays.amount.toFloat()))
+
         }
 
         val barDataSet = BarDataSet(listBarEntry, "BarChartStyle")
@@ -361,7 +318,6 @@ class SendFragment(context: Context) : BaseFragment() {
                                 }
                                 setUpBarChart()
                             }else{
-
                                 listMonths.clear()
                                 for (i in 0 until it.list.size) {
                                     listMonths.add(it.list[i])
@@ -369,7 +325,6 @@ class SendFragment(context: Context) : BaseFragment() {
                                 }
                                 setUpBarChart()
                             }
-                            Log.e("TAG", "graphDataResponse: ${it.list}", )
                         }
                     }
                 }
