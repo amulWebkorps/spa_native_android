@@ -269,7 +269,7 @@ class SendFragment(context: Context) : BaseFragment() {
             BarChartStyle(
                 requireContext(),
                 listMonths,
-                ANALYTICS.DAYS(TIMES = listMonths.size)
+                ANALYTICS.MONTH(TIMES = listMonths.size)
             )
         }
         listChartDayValues.forEachIndexed { index, chartDays ->

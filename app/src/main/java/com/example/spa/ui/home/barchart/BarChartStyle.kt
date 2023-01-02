@@ -7,6 +7,8 @@ import androidx.core.content.res.ResourcesCompat
 import com.example.spa.R
 import com.example.spa.data.response.GraphDataList
 import com.example.spa.utilities.coolNumberFormat
+import com.example.spa.utilities.formatDate
+import com.example.spa.utilities.formatDateGraph
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarDataSet
@@ -39,8 +41,8 @@ class BarChartStyle(
         axisLeft.apply {
             isEnabled = true
 
-            /*axisMinimum = 0F
-            axisMaximum = 10F*/
+//           axisMinimum = 500F
+           // axisMaximum = 10F*/
             granularity = 1F
 
             setDrawGridLines(false)
@@ -59,8 +61,8 @@ class BarChartStyle(
             Log.e("TAG", "styleBarChart: ${listDays}", )
             valueFormatter = MyXAxisValueFormat(listDays, analytics)
 
-            /*axisMinimum = 0f
-            axisMaximum = 29f*/
+//            axisMinimum = 0f
+            //axisMaximum = 29f*/
 
             isGranularityEnabled = true
             granularity = 1F
@@ -142,11 +144,11 @@ class BarChartStyle(
 //                    is ANALYTICS.YEAR -> {
 //                        listDays[value.toInt()].month.subSequence(0, 3).toString()
 //                    }
-//                    is ANALYTICS.MONTH -> {
-//                        listDays[value.toInt()].value_for.subSequence(6, 8).toString()
-//                    }
+                    is ANALYTICS.MONTH -> {
+                        listDays[value.toInt()].value_for.subSequence(0, 3).toString()
+                    }
                     else -> {
-//                        listDays[value.toInt()].day.subSequence(0, 3).toString()
+                 //       formatDateGraph(listDays[value.toInt()].date)
                         listDays[value.toInt()].value_for.subSequence(0, 3).toString()
                     }
                 }

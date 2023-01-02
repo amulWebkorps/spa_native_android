@@ -129,3 +129,12 @@ fun convertDate(dateString: String): Date? {
     return SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(dateString)
 }
 
+fun formatDateGraph(date: String): String {
+    val convertedDate = convertDateGraph(date)
+    return SimpleDateFormat("dd").format(convertedDate)
+}
+
+fun convertDateGraph(dateString: String): Date? {
+    return SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").parse(dateString)
+}
+
