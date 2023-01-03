@@ -21,5 +21,9 @@ data class AddBankDetailRequest(
     val bank_name: String,
 
     @SerializedName("ifsc_code")
-    val ifsc_code: String
+    val ifsc_code: String,
+
+    @SerializedName("frequency")
+    val frequency: String,
+
 ): Parcelable

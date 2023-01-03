@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.Glide.with
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.with
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.with
+import com.example.spa.App
 import com.example.spa.R
 import com.example.spa.base.listener.Listener
 import com.example.spa.base.listener.Screen
@@ -46,7 +47,7 @@ class HomeActivity : AppCompatActivity() , Listener {
         setContentView(binding.root)
         session = Session(this)
 
-        if (session.user!!.image != null && session.user!!.image.isNotEmpty()) {
+        if ((this.application as App).session.user!!.image != null && session.user!!.image.isNotEmpty()) {
             Log.e("TAG", "onCreate: ${session.user!!.image}", )
 //            GlideUtils.loadImage(
 //                this,
@@ -63,7 +64,7 @@ class HomeActivity : AppCompatActivity() , Listener {
 //                .into(binding.includeToolbar.imageViewProfile)
 
             Picasso.with(this)
-                .load(session.user!!.image)
+                .load((this.application as App).session.user!!.image)
                 .placeholder(R.drawable.place_holder)
                 .into(binding.includeToolbar.imageViewProfile);
         }

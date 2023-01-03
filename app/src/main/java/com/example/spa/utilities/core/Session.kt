@@ -12,9 +12,11 @@ class Session(context: Context)  {
 
     private val sharedPreferences: SharedPreferences = context.getSharedPreferences(AppPreferences.SHARED_PREF_NAME, Context.MODE_PRIVATE)
 
+    var editor =  sharedPreferences.edit()
+
     @SuppressLint("CommitPrefEdits")
     fun putBoolean(name: String, value: Boolean) {
-        val editor = sharedPreferences.edit()
+         editor = sharedPreferences.edit()
         editor!!.putBoolean(name, value)
         editor.apply()
     }
@@ -26,22 +28,24 @@ class Session(context: Context)  {
 
     @SuppressLint("CommitPrefEdits")
     fun putString(name: String, value: String) {
-        val editor = sharedPreferences.edit()
+        editor = sharedPreferences.edit()
         editor!!.putString(name, value)
         editor.apply()
     }
+
 
     fun getString(name: String): String {
         return sharedPreferences.getString(name, "")!!
     }
 
+
     var isLogin: Boolean
     get() = getBoolean(IS_LOGIN)
     set(value) {putBoolean(IS_LOGIN, value)}
 
-    var isOtp: Boolean
-        get() = getBoolean(IS_OTP)
-        set(value) {putBoolean(IS_OTP, value)}
+    var isNotFirstTime: Boolean
+        get() = getBoolean(IS_FIRST_TIME)
+        set(value) {putBoolean(IS_FIRST_TIME, value)}
 
     var countryCode: String
         get() = getString(COUNTRY_CODE)
@@ -54,6 +58,7 @@ class Session(context: Context)  {
     var token: String
         get() = getString(TOKEN)
         set(value) {putString(TOKEN, value)}
+
 
 
     private val gson: Gson = Gson()
@@ -79,5 +84,6 @@ class Session(context: Context)  {
         const val TOKEN = "token"
         const val USER_JSON = "user_json"
         const val IS_OTP = "is_otp"
+        const val IS_FIRST_TIME = "is_first_time"
     }
 }

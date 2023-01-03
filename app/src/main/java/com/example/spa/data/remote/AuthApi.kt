@@ -1,7 +1,9 @@
 package com.example.spa.data.remote
 
+import android.content.Context
 import com.example.spa.Url
 import com.example.spa.data.request.User
+import com.example.spa.data.request.VersionRequest
 import com.example.spa.data.response.*
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -80,5 +82,8 @@ interface AuthApi {
 
     @PATCH(Url.RESET_PASSWORD)
     suspend fun resetPassword(@Header("Authorization")token:String,@Body user: User): Response<ResetPassword>
+
+    @POST(Url.VERSION_MANAGER)
+    suspend fun versionManager(@Body versionRequest: VersionRequest): Response<VersionResponse>
 
 }

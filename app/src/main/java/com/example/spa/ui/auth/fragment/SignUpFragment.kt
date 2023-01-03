@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.spa.App
 import com.example.spa.R
 import com.example.spa.Url
 import com.example.spa.base.BaseFragment
@@ -139,7 +140,7 @@ class SignUpFragment :  BaseFragment()  {
                         result.data?.let { it ->
                             session.countryCode=it.country_code
                             session.phoneNumber=it.mobile_number
-                            session.user=it
+                            (requireActivity().application as App).session.user=it
                             lifecycleScope.launchWhenCreated {
                                 authViewModel.sendOtp(
                                     User(
@@ -302,7 +303,7 @@ class SignUpFragment :  BaseFragment()  {
             call.body()?.let { it ->
                 session.countryCode = it.country_code
                 session.phoneNumber = it.mobile_number
-                session.user = it
+//                (requireActivity().application as App).session.user = it
                 lifecycleScope.launchWhenCreated {
                     authViewModel.sendOtp(
                         User(

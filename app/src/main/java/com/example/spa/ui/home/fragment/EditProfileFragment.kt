@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.spa.App
 import com.example.spa.R
 import com.example.spa.Url
 import com.example.spa.base.BaseFragment
@@ -48,6 +49,7 @@ class EditProfileFragment : BaseFragment() {
     private val authViewModel: AuthViewModel by viewModels()
     var imageUri : Uri? =  null
        var isImage = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -65,24 +67,12 @@ class EditProfileFragment : BaseFragment() {
 
     private fun setView() {
 
-        if (session.user!!.image != null && session.user!!.image.isNotEmpty()) {
+        if ((requireActivity().application as App).session.user!!.image != null && session.user!!.image.isNotEmpty()) {
             Log.e("TAG", "onCreate: ${session.user!!.image}", )
-//            GlideUtils.loadImage(
-//                this,
-//                session.user!!.image,
-//                R.drawable.place_holder,
-//                0,
-//                binding.includeToolbar.imageViewProfile
-//            )
 
-
-//            Glide.with(this)
-//                .load(session.user!!.image)
-//                .placeholder(R.drawable.place_holder)
-//                .into(binding.includeToolbar.imageViewProfile)
 
             Picasso.with(requireContext())
-                .load(session.user!!.image)
+                .load((requireActivity().application as App).session.user!!.image)
                 .placeholder(R.drawable.place_holder)
                 .into(binding.imageViewProfile);
         }
@@ -231,7 +221,7 @@ class EditProfileFragment : BaseFragment() {
                 if (call.isSuccessful) {
                     toggleLoader(false)
                     Log.e("TAG", "upload: ${call.body()!!.user}",)
-                    session.user = call.body()!!.user
+                    (requireActivity().application as App).session.user = call.body()!!.user
                     showMessage(binding.root, getString(R.string.user_update_success))
                 } else {
                     toggleLoader(false)
@@ -242,6 +232,8 @@ class EditProfileFragment : BaseFragment() {
                 }
             } catch (e: Exception) {
                 toggleLoader(false)
+
+                Log.e("TAG", "upload: ${e}", )
                 showMessage(binding.root, getString(R.string.no_internet_connection))
             }
         }

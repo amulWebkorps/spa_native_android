@@ -91,6 +91,7 @@ class AddBankDetailFragment:BaseFragment() {
                             account_number  = binding.textInputConfirmAccountNumber.text.toString(),
                             account_type =binding.textInputAccountType.text.toString(),
                             ifsc_code = binding.textInputCode.text.toString(),
+                            frequency = binding.textInputFrequencyType.text.toString()
                         )
                       )
                     }

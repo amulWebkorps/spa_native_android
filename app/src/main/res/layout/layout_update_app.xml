@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewBG"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/blue_bg"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewRocket"
+        app:layout_constraintStart_toStartOf="@id/imageViewRocket"
+        app:layout_constraintEnd_toEndOf="@id/imageViewRocket"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imageViewRocket"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/rocket"
+        android:layout_marginBottom="@dimen/dp_11"
+        app:layout_constraintBottom_toBottomOf="@id/imageViewBG"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center|top"
+        android:orientation="vertical"
+        android:background="@drawable/popup_update"
+        app:layout_constraintTop_toBottomOf="@id/imageViewRocket"
+        app:layout_constraintStart_toStartOf="@id/imageViewRocket"
+        app:layout_constraintEnd_toEndOf="@id/imageViewRocket">
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewUpdateYourApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/font_medium.black.16"
+        android:layout_marginTop="@dimen/dp_14"
+        android:text="@string/update_your_app"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewThereIS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="29dp"
+        android:layout_marginHorizontal="@dimen/dp_16"
+        style="@style/font_regular.black.14"
+        android:text="@string/there_is_newer_version_available_for_download_please_update_the_app_by_visiting_the_store"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ButtonCommon"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginTop="29dp"
+            android:layout_marginBottom="@dimen/dp_19"
+            android:text="@string/update"/>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/buttonSkip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/ButtonGrey"
+            android:layout_marginHorizontal="@dimen/dp_16"
+            android:layout_marginBottom="@dimen/dp_16"
+            android:text="@string/skip"/>
+
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,11 +1,16 @@
 package com.example.spa.utilities
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
+import com.example.spa.ui.auth.activity.AuthActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
 import okhttp3.ResponseBody
@@ -80,7 +85,29 @@ fun getErrorResponseArray(error:ResponseBody?) : ErrorsArray{
     try {
         baseResponse = gson.fromJson(error!!.charStream(), ErrorsArray::class.java)
         baseResponse.errors = baseResponse.errors
+
     } catch (e: Exception) {
     }
     return baseResponse
 }
+
+fun getErrorResponseArray2(error:ResponseBody?,code:Int?,context: Context) : ErrorsArray{
+    val gson = Gson()
+    var baseResponse = ErrorsArray()
+    baseResponse.errors = arrayOf("Something went wrong")
+    try {
+        baseResponse = gson.fromJson(error!!.charStream(), ErrorsArray::class.java)
+        baseResponse.errors = baseResponse.errors
+
+      //  session.isLogin = false
+        if (code == 401) {
+
+            val intent = Intent(context, AuthActivity::class.java)
+            (context as Activity).finish()
+            context.startActivity(intent)
+        }
+    } catch (e: Exception) {
+    }
+    return baseResponse
+}
+

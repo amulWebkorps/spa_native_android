@@ -12,14 +12,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.core.content.ContentProviderCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.spa.App
 import com.example.spa.R
 
 import com.example.spa.base.BaseFragment
 import com.example.spa.data.request.GraphRequest
 import com.example.spa.data.response.GraphDataList
 import com.example.spa.databinding.FragmentSendBinding
+import com.example.spa.ui.auth.activity.AuthActivity
 import com.example.spa.ui.home.activitiy.IsolatedActivity
 import com.example.spa.ui.home.adapter.ResentTransactionAdapter
 import com.example.spa.ui.home.barchart.*
@@ -293,7 +297,6 @@ class SendFragment(context: Context) : BaseFragment() {
             }
         }
     }
-
 
     private fun graphDataResponse(){
         lifecycleScope.launchWhenCreated {

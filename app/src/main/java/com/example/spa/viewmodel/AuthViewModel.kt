@@ -1,9 +1,11 @@
 package com.example.spa.viewmodel
 
+import android.content.Context
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.spa.data.request.User
+import com.example.spa.data.request.VersionRequest
 import com.example.spa.data.response.*
 import com.example.spa.repo.auth.AuthRepository
 import com.example.spa.utilities.Resource
@@ -42,6 +44,10 @@ class AuthViewModel @Inject constructor(
 
     private val _resetPassword = MutableSharedFlow<Resource<ResetPassword>>()
     val resetPassword = _resetPassword.asSharedFlow()
+
+
+    private val _versionManager = MutableSharedFlow<Resource<VersionResponse>>()
+    val versionManager = _versionManager.asSharedFlow()
 
 
     fun getRegister(user: User){
@@ -208,6 +214,27 @@ class AuthViewModel @Inject constructor(
                     }
                 }
                 Log.e("TAG", "resetPasseord: $result")
+            }
+        }
+    }
+
+    fun checkVersion(versionRequest: VersionRequest){
+        viewModelScope.launch {
+            authRepository.versionRequest(versionRequest).collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        result.message?.let {
+                            _versionManager.emit(Resource.Error(result.message))
+                        }
+                    }
+                    is Resource.Loading -> {
+                        _versionManager.emit(Resource.Loading(result.isLoading))
+                    }
+                    is Resource.Success -> {
+                        _versionManager.emit(Resource.Success(result.data))
+                    }
+                }
+                Log.e("TAG", "verison: $result")
             }
         }
     }

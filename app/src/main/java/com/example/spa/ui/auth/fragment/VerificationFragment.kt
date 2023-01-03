@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.spa.App
 import com.example.spa.R
 import com.example.spa.base.BaseFragment
 import com.example.spa.base.listener.Screen
@@ -133,7 +134,7 @@ class VerificationFragment : BaseFragment() {
                                 )
                             }else {
                                 session.token = it.token
-                                session.user = it.user
+                                //(requireActivity().application as App).session.user = it.user
                                 lifecycleScope.launchWhenCreated {
                                     authViewModel.getUser(
                                         it.token
@@ -164,8 +165,7 @@ class VerificationFragment : BaseFragment() {
                         result.data?.let { it ->
                             session.phoneNumber=it.mobile_number
                             session.countryCode=it.country_code
-                            session.user=it
-
+                            (requireActivity().application as App).session.user = it
                             session.isLogin = true
 
                             val intent = Intent(requireContext(), HomeActivity::class.java)

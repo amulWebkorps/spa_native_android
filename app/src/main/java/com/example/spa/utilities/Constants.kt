@@ -16,6 +16,7 @@ class Constants {
         const val ID = "id"
         const val MAX_PHONE = 10
         const val RESET_PASSWORD = "resetPassword"
+        const val SESSION_EXPIRE = "sessionExpire"
         const val OTP = "otp"
         const val TYPE = "type"
 

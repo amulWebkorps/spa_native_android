@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.spa.App
 import com.example.spa.R
 import com.example.spa.base.BaseFragment
 import com.example.spa.base.DialogUtils
@@ -51,7 +52,8 @@ class SettingsFragment:BaseFragment() {
                         negativeText = getString(R.string.button_yes),
                         onClick = {},
                         onNoClick = {
-                            session.isLogin = false
+                            (requireActivity().application as App).session.isLogin = false
+                             session.editor.clear()
                             val intent= Intent(requireContext(), AuthActivity::class.java)
                             requireActivity().finish()
                             startActivity(intent)

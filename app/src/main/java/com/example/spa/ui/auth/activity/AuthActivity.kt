@@ -24,6 +24,9 @@ class AuthActivity : AppCompatActivity() ,Listener {
         setContentView(binding.root)
         supportFragmentManager.beginTransaction().add(R.id.placeHolder, LoginFragment()).commit()
 
+        if (intent.extras?.get(Constants.SESSION_EXPIRE) == true){
+            showMessage(binding.root , getString(R.string.session_expire))
+        }
 
         if (intent.extras?.get(Constants.SCREEN_NAME) == Constants.RESET_PASSWORD) {
             showMessage(binding.root,getString(R.string.reset_password_successfully))

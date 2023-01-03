@@ -82,6 +82,7 @@
     <string name="button_yes">Yes</string>
     <string name="button_no">No</string>
     <string name="otp_send">OTP sent to mobile number</string>
+    <string name="session_expire">Please log in again. We\'re sorry for this inconvenience.</string>
     <string name="logout">LogOut</string>
     <string name="label_bank_name">Bank Name</string>
     <string name="account_type">Account Type</string>
@@ -108,6 +109,13 @@
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="dot">: </string>
     <string name="weekly">Weekly</string>
+    <string name="monthly">Monthly</string>
+    <string name="quarterly">Quarterly</string>
+    <string name="yearly">Yearly</string>
     <string name="frequency">Frequency</string>
     <string name="frequency_">Frequency : </string>
+    <string name="update_your_app">Update Your App</string>
+    <string name="there_is_newer_version_available_for_download_please_update_the_app_by_visiting_the_store">There is newer version available for download! Please update the app by visiting the Store.</string>
+    <string name="update">Update</string>
+    <string name="skip">Skip</string>
 </resources>

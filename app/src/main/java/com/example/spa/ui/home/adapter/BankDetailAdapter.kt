@@ -57,7 +57,20 @@ class BankDetailAdapter(val onClick:OnClick) :
                 textViewAccountTypeValue.text = item.account_type!!
                   item.ifsc_code?.let {
                 textViewIFSCValue.text =item.ifsc_code!!.toString()
-                textViewFrequencyValue.text =item.frequency!!.toString()
+                      when {
+                          item.frequency!!.toString() == context.getString(R.string.weekly) -> {
+                              textViewFrequencyValue.text = context.getString(R.string.weekly)
+                          }
+                          item.frequency!!.toString() == context.getString(R.string.monthly) -> {
+                              textViewFrequencyValue.text = context.getString(R.string.monthly)
+                          }
+                          item.frequency!!.toString() == context.getString(R.string.quarterly) -> {
+                              textViewFrequencyValue.text = context.getString(R.string.quarterly)
+                          }
+                          else -> {
+                              textViewFrequencyValue.text = context.getString(R.string.yearly)
+                          }
+                      }
                }
 
                 textViewAccountNumberValue.text = item.account_number!!

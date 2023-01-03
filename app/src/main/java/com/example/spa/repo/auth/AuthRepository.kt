@@ -1,6 +1,7 @@
 package com.example.spa.repo.auth
 
 import com.example.spa.data.request.User
+import com.example.spa.data.request.VersionRequest
 import com.example.spa.data.response.*
 import com.example.spa.utilities.Resource
 import kotlinx.coroutines.flow.Flow
@@ -14,4 +15,5 @@ interface AuthRepository {
     suspend fun updateMobileNumber(user: User) : Flow<Resource<UpdateMobileNumber>>
     suspend fun updateUserDetails(token:String,user: User) : Flow<Resource<UpdateUser>>
     suspend fun resetPassword(token:String,user: User) : Flow<Resource<ResetPassword>>
+    suspend fun versionRequest(versionRequest: VersionRequest) : Flow<Resource<VersionResponse>>
 }

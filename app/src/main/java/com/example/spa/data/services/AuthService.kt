@@ -6,6 +6,7 @@ import android.util.Log
 import com.example.spa.R
 import com.example.spa.data.remote.AuthApi
 import com.example.spa.data.request.User
+import com.example.spa.data.request.VersionRequest
 import com.example.spa.data.response.*
 import com.example.spa.repo.auth.AuthRepository
 import com.example.spa.utilities.*
@@ -195,5 +196,28 @@ class AuthService constructor(
                 emit(Resource.Error("Something went wrong"))
             }
         }
+    }
+
+    override suspend fun versionRequest(versionRequest: VersionRequest): Flow<Resource<VersionResponse>> {
+        return flow {
+        emit(Resource.Loading(true))
+        try {
+            val response = authApi.versionManager(versionRequest)
+            if (response.isSuccessful && response != null) {
+                emit(Resource.Loading(false))
+                emit(Resource.Success(response.body()))
+            } else {
+                emit(Resource.Loading(false))
+                emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0].toString()!!))
+            }
+        } catch (e: IOException) {
+            emit(Resource.Loading(false))
+            Log.e("TAG", "versionRequest: ${e}", )
+            emit(Resource.Error("Please check your internet connectivity"))
+        } catch (e: HttpException) {
+            emit(Resource.Loading(false))
+            emit(Resource.Error("Something went wrong"))
+        }
+    }
     }
 }
