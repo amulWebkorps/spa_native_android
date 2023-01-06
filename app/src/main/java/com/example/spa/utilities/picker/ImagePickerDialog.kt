@@ -80,8 +80,8 @@ class ImagePickerDialog : BaseBottomSheetDialogFragment() {
         if (it && imageUri != null) {
             /*dismiss()
             onImageSelected.invoke(imageUri!!)*/
-            imageUri?.let { uri -> cropImage(uri) }
-        }
+                imageUri?.let { uri -> cropImage(uri) }
+            }
     }
 
     fun showDialog(
@@ -104,11 +104,14 @@ class ImagePickerDialog : BaseBottomSheetDialogFragment() {
     }
 
     private fun cropImage(uri: Uri) {
-        CropImage.activity(uri)
-            .setFixAspectRatio(true)
-            .setAspectRatio(1, 1)
-            .setOutputUri(getUri(cropImageFile))
-            .start(requireContext(), this)
+        Log.e("TAG", "cropImage: ${cropImageFile}", )
+        try {
+            CropImage.activity(uri)
+                .setFixAspectRatio(true)
+                .setAspectRatio(1, 1)
+                .setOutputUri(getUri(cropImageFile))
+                .start(requireContext(), this)
+        }catch (e:Exception){}
     }
 
     override fun onRequestPermissionsResult(
@@ -141,14 +144,14 @@ class ImagePickerDialog : BaseBottomSheetDialogFragment() {
                 onImageError.invoke("Error in select image!")
             }
             CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE -> {
-                dismiss()
-                val result = CropImage.getActivityResult(data)
-                if (result != null) {
-                    if (result.uri != null) {
-                        result?.let { onImageSelected.invoke(result.uri) }
+                    dismiss()
+                    val result = CropImage.getActivityResult(data)
+                    if (result != null) {
+                        if (result.uri != null) {
+                            result?.let { onImageSelected.invoke(result.uri) }
+                        }
                     }
-                }
-            }
+               }
         }
     }
 
@@ -184,29 +187,35 @@ class ImagePickerDialog : BaseBottomSheetDialogFragment() {
     }
     fun openCamera(){
         when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.CAMERA
-            ) == PackageManager.PERMISSION_GRANTED -> {
-                camera.launch(imageUri)
-            }
-            shouldShowRequestPermissionRationale("camera permission") -> {
-                camera.launch(imageUri)
-            // In an educational UI, explain to the user why your app requires this
-            // permission for a specific feature to behave as expected, and what
-            // features are disabled if it's declined. In this UI, include a
-            // "cancel" or "no thanks" button that lets the user continue
-            // using your app without granting the permission.
+                ContextCompat.checkSelfPermission(
+                    requireContext(),
+                    Manifest.permission.CAMERA
+                ) == PackageManager.PERMISSION_GRANTED -> {
+                    try {
+                        camera.launch(imageUri)
+                    }catch (e:Exception){}
+                }
+                shouldShowRequestPermissionRationale("camera permission") -> {
+                    try {
+                    camera.launch(imageUri)
+                        }catch (e:Exception){}
+                    // In an educational UI, explain to the user why your app requires this
+                    // permission for a specific feature to behave as expected, and what
+                    // features are disabled if it's declined. In this UI, include a
+                    // "cancel" or "no thanks" button that lets the user continue
+                    // using your app without granting the permission.
 
-        }
-            else -> {
-                // You can directly ask for the permission.
-                requestPermissions(
-                    arrayOf(Manifest.permission.CAMERA),
-                    REQUEST_CODE)
-            }
-        }
+                }
+                else -> {
+                    // You can directly ask for the permission.
+                    requestPermissions(
+                        arrayOf(Manifest.permission.CAMERA),
+                        REQUEST_CODE
+                    )
+                }
+
 //                camera.launch(imageUri)
+        }
         }
     private fun intentGallery() {
         Log.e("TAG", "intentGallery: 1", )

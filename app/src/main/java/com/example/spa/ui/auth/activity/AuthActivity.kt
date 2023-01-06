@@ -42,6 +42,7 @@ class AuthActivity : AppCompatActivity() ,Listener {
             Screen.FORGOT_PASSWORD -> ForgotPasswordFragment()
             Screen.RESET_PASSWORD -> ResetPasswordFragment()
         }
+
         val args = Bundle()
         args.putString(Constants.AUTH, value)
         fragment.arguments = args

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment
 import com.example.spa.R
 import com.example.spa.base.listener.IsolatedListener
 import com.example.spa.base.listener.Listener
+import com.example.spa.base.listener.TutorialListener
 import com.example.spa.utilities.core.Session
 import com.example.spa.utilities.picker.ImagePickerDialog
 import com.example.spa.utilities.validation.Validator
@@ -28,6 +29,7 @@ open class BaseFragment : Fragment(), OnTouchListener, View.OnClickListener{
 
     var listener: Listener? = null
     var isolatedListener: IsolatedListener? = null
+    var tutorialListener: TutorialListener? = null
 
 
     private val displayMetrics = DisplayMetrics()
@@ -49,6 +51,9 @@ open class BaseFragment : Fragment(), OnTouchListener, View.OnClickListener{
                 listener = context }
             else if (context is IsolatedListener){
                 isolatedListener = context
+            }
+            else if (context is TutorialListener){
+                tutorialListener = context
             }
             else {
                 //throw RuntimeException("$context must implement LoginListener")

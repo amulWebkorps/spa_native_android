@@ -79,6 +79,24 @@ class AddBankDetailFragment:BaseFragment() {
                 }
 
             })
+            textInputAccountNumber.addTextChangedListener (object : TextWatcher {
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
+                }
+
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    if (isValidAccountNumber()){
+                        binding.imageEmailVerify.visibility=View.VISIBLE
+                    }else{
+                        binding.imageEmailVerify.visibility=View.INVISIBLE
+                    }
+                }
+
+                override fun afterTextChanged(p0: Editable?) {
+
+                }
+
+            })
             buttonBankDetail.setOnClickListener {
                 if (isValidationSuccess()){
                     toggleLoader(true)
@@ -102,15 +120,7 @@ class AddBankDetailFragment:BaseFragment() {
 
 
     private fun isValidAccountNumber(): Boolean {
-        try {
-            validator.submit(binding.textInputConfirmAccountNumber)
-                .matchString(binding.textInputAccountNumber.text.toString()).errorMessage(getString(
-                    R.string.error_account_not_matched))
-                .check()
-        } catch (e: ApplicationException) {
-            return false
-        }
-        return true
+        return binding.textInputAccountNumber.text.toString().compareTo(binding.textInputConfirmAccountNumber.text.toString())==0
     }
 
 

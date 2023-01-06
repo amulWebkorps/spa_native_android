@@ -1,16 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SPA</string>
-    <string name="string_my_tips">My Tips</string>
-    <string name="you_can_create_create_your_own_profile_for_n_receiving_your_tips">You can create create your own profile for \n receiving your TIPS .</string>
-    <string name="join_and_n_get_your_tips">Join and \nGet Your Tips</string>
-    <string name="sign_in">Sign In</string>
-    <string name="sign_up">Sign Up</string>
-    <string name="label_welcome_back">Welcome back! You can continue\nto manage your finances</string>
-    <string name="label_create_an">Create an account so you can manage your\npersonal finances</string>
-    <string name="laebl_email">Email</string>
-    <string name="label_first_name">First Name</string>
-    <string name="label_last_name">Last Name</string>
-    <string name="label_phone_number">Phone Number</string>
+    <string name="string_my_tips">Mes conseils</string>
+    <string name="you_can_create_create_your_own_profile_for_n_receiving_your_tips">Vous pouvez créer créer votre propre profil pour \n recevoir vos TIPS .</string>
+    <string name="join_and_n_get_your_tips">Inscrivez-vous et \nObtenez vos conseils</string>
+    <string name="sign_in">S\'identifier</string>
+    <string name="sign_up">S\'inscrire</string>
+    <string name="label_welcome_back">Content de te revoir! Vous pouvez continuer\nà gérer vos finances</string>
+    <string name="label_create_an">Créez un compte pour gérer vos\nfinances personnelles</string>
+    <string name="laebl_email">E-mail</string>
+    <string name="label_first_name">Prénom</string>
+    <string name="label_last_name">Nom de famille</string>
+    <string name="label_phone_number">Numéro de téléphone</string>
     <string name="label_email_address">Email Address</string>
     <string name="label_confirm_password">Confirm Password</string>
     <string name="label_password">Password</string>

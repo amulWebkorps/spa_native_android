@@ -9,7 +9,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.activity.viewModels
@@ -40,7 +39,7 @@ class SplashMainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+        setContentView(R.layout.fragment_my_tips)
         binding = ActivitySplashMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         session = Session(this)
@@ -95,9 +94,14 @@ class SplashMainActivity : AppCompatActivity() {
 
         Handler(Looper.myLooper()!!).postDelayed({
 
+
+//            val intent= Intent(this, TutorialActivity::class.java)
+//            startActivity(intent)
+//            this.finishAffinity();
+
             when {
                  !session.isNotFirstTime -> {
-                    val intent= Intent(this, SplashActivity::class.java)
+                    val intent= Intent(this, TutorialActivity::class.java)
                     startActivity(intent)
                     this.finishAffinity();
                 }

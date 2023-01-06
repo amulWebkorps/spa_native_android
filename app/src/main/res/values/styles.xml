@@ -63,6 +63,10 @@
         <item name="android:textColor">@color/colorGrey80</item>
     </style>
 
+    <style name="font_medium.blue">
+        <item name="android:textColor">@color/colorBlue72</item>
+    </style>
+
     <style name="font_bold.white.20">
         <item name="android:textSize">@dimen/sp_20</item>
     </style>
@@ -77,6 +81,10 @@
 
     <style name="font_regular.white.14">
         <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="font_medium.blue.16">
+        <item name="android:textSize">@dimen/sp_16</item>
     </style>
 
     <style name="font_regular.white.16">
@@ -109,6 +117,11 @@
 
     <style name="font_medium.grey7c.12">
         <item name="android:textSize">@dimen/sp_12</item>
+    </style>
+
+
+    <style name="font_medium.grey7c.16">
+        <item name="android:textSize">@dimen/sp_16</item>
     </style>
 
     <style name="font_regular.grey80.14">

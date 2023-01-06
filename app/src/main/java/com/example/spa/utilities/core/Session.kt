@@ -55,6 +55,11 @@ class Session(context: Context)  {
         get() = getString(PHONE_NUMBER)
         set(value) {putString(PHONE_NUMBER, value)}
 
+
+    var language: String
+        get() = getString(LANGUAGE)
+        set(value) {putString(LANGUAGE, value)}
+
     var token: String
         get() = getString(TOKEN)
         set(value) {putString(TOKEN, value)}
@@ -85,5 +90,6 @@ class Session(context: Context)  {
         const val USER_JSON = "user_json"
         const val IS_OTP = "is_otp"
         const val IS_FIRST_TIME = "is_first_time"
+        const val LANGUAGE = "language"
     }
 }

@@ -112,6 +112,9 @@ dependencies {
     // piccaso
     implementation "com.squareup.picasso:picasso:2.5.2"
 
+    // View Pager Dot Indicator
+    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
+
 }
 //repositories {
 //    mavenCentral()
