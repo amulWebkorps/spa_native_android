@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.lifecycleScope
 import com.example.spa.R
 import com.example.spa.data.request.VersionRequest
@@ -21,6 +22,7 @@ import com.example.spa.ui.home.activitiy.HomeActivity
 import com.example.spa.utilities.Resource
 import com.example.spa.utilities.core.Session
 import com.example.spa.utilities.hideView
+import com.example.spa.utilities.setAppLocale
 import com.example.spa.utilities.showMessage
 import com.example.spa.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,10 +41,17 @@ class SplashMainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.fragment_my_tips)
         binding = ActivitySplashMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         session = Session(this)
+
+        if (session.language == getString(R.string.french)){
+            setAppLocale(this, "fr")
+        }else{
+            setAppLocale(this, "en")
+        }
 
         val pm: PackageManager = applicationContext.packageManager
         val pkgName = applicationContext.packageName

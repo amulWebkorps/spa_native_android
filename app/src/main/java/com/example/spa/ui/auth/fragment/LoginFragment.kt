@@ -53,7 +53,7 @@ class LoginFragment :  BaseFragment() {
    binding.viewForgotPassword.setOnClickListener {
        listener?.replaceFragment(Screen.FORGOT_PASSWORD,"login")
    }
-        binding.textViewCreateAccount.setSpan("Register",R.font.poppins_medium,R.color.colorBlue72){
+        binding.textViewCreateAccount.setSpan(getString(R.string.label_register),R.font.poppins_medium,R.color.colorBlue72){
             listener?.replaceFragment(Screen.SIGN_UP)
         }
         binding.checkboxPassword.setOnClickListener {
