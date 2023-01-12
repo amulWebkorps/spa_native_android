@@ -35,17 +35,17 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp_60"
         android:layout_marginBottom="@dimen/dp_126"
-        app:dotsColor="@color/grey"
+        app:dotsColor="@color/colorGreyC4"
         app:dotsSize="@dimen/dp_10"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:selectedDotColor="@color/colorBlue72" />
+        app:selectedDotColor="@color/colorRedEF" />
 
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSkip"
-        style="@style/font_medium.grey7c.16"
+        style="@style/font_medium.black.16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dp_32"
@@ -71,10 +71,11 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonGettingStarted"
         style="@style/ButtonCommon"
-        android:layout_width="wrap_content"
+        android:layout_width="201dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dp_24"
         android:paddingHorizontal="@dimen/dp_32"
+        android:layout_marginHorizontal="@dimen/dp_46"
         android:text="@string/getting_started"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"

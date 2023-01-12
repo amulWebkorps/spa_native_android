@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">SPA</string>
     <string name="string_my_tips">My Tips</string>
-    <string name="you_can_create_create_your_own_profile_for_n_receiving_your_tips">You can create create your own profile for \n receiving your TIPS .</string>
-    <string name="join_and_n_get_your_tips">Join and \nGet Your Tips</string>
+    <string name="you_can_create_create_your_own_profile_for_n_receiving_your_tips">You can create create your own profile for receiving your TIPS .</string>
+    <string name="join_and_n_get_your_tips">Join and Get Your Tips</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="label_welcome_back">Welcome back! You can continue\nto manage your finances</string>
@@ -118,9 +118,14 @@
     <string name="skip">Skip</string>
     <string name="label_skip">Skip</string>
     <string name="labelnext">Next</string>
-    <string name="getting_started">Getting Started</string>
+    <string name="getting_started">Get Started</string>
     <string name="english">English</string>
-    <string name="french">French</string>
+    <string name="french">français</string>
     <string name="tutorial_1">Tutorial 1</string>
     <string name="tutorial_2">Tutorial 2</string>
+    <string name="profile">Profile</string>
+    <string name="activity_progress">Activity Progress</string>
+    <string name="resend">Resend</string>
+    <string name="text_terms">Terms &amp; Conditions</string>
+    <string name="add_bank_details">Add Bank Details</string>
 </resources>

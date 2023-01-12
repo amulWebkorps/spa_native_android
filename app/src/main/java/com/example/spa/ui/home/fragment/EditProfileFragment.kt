@@ -3,14 +3,12 @@ package com.example.spa.ui.home.fragment
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.se.omapi.Session
 import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.spa.App
@@ -19,11 +17,9 @@ import com.example.spa.Url
 import com.example.spa.base.BaseFragment
 import com.example.spa.data.remote.AuthApi
 import com.example.spa.data.request.User
-import com.example.spa.data.response.GetUser
-import com.example.spa.data.response.ResetPassword
 import com.example.spa.data.response.UpdateUserResponse
 import com.example.spa.databinding.FragmentEditProfileBinding
-import com.example.spa.ui.home.activitiy.HomeActivity
+import com.example.spa.ui.home.activity.HomeActivity
 import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
@@ -33,15 +29,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
 import okhttp3.RequestBody
-import retrofit2.HttpException
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.FileOutputStream
-import java.io.IOException
-import java.util.concurrent.TimeUnit
 
 class EditProfileFragment : BaseFragment() {
 

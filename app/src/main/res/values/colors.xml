@@ -16,6 +16,7 @@
     <color name="colorGreyF5">#F5F7F9</color>
     <color name="colorGreyE5">#E5E9EF</color>
     <color name="colorGreyB2">#B2A5B4CB</color>
+    <color name="colorGreyC4">#C4C4C4</color>
     <color name="colorGreyA5">#A5B4CB</color>
     <color name="colorGreen7D">#7DCAC7</color>
     <color name="pastel_orange_light">#FBE8DF</color>
@@ -24,6 +25,7 @@
     <color name="colorGold">#C7A981</color>
     <color name="colorRed">#FF0026</color>
     <color name="colorGreen">#74C69D</color>
+    <color name="colorRedEF">#EF4050</color>
 
     <color name="colorGreyLight">#F7F7F7</color>
 

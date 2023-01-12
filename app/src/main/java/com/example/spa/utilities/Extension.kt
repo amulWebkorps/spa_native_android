@@ -10,6 +10,7 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.LinkMovementMethod
 import android.text.method.PasswordTransformationMethod
 import android.text.style.ClickableSpan
+import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -21,6 +22,7 @@ import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.math.ln
+import kotlin.math.log
 
 
 fun TextView.setSpan(
@@ -30,10 +32,13 @@ fun TextView.setSpan(
         isUnderline: Boolean = false,
         onClick: () -> Unit
     ) {
+
         val clickablePartStart = text.indexOf(clickableString)
 
         val spannableString = SpannableString(text)
-
+    Log.e("TAG", "setSpan1: ${spannableString}", )
+    Log.e("TAG", "setSpan: ${clickablePartStart}", )
+    Log.e("TAG", "setSpan3: ${clickableString}", )
         highlightColor = ContextCompat.getColor(context, R.color.white)
 
         spannableString.setSpan(

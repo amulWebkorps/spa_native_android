@@ -11,7 +11,7 @@ import com.example.spa.base.BaseFragment
 import com.example.spa.base.DialogUtils
 import com.example.spa.databinding.FragmentSettingsBinding
 import com.example.spa.ui.auth.activity.AuthActivity
-import com.example.spa.ui.home.activitiy.IsolatedActivity
+import com.example.spa.ui.home.activity.IsolatedActivity
 import com.example.spa.utilities.Constants
 
 class SettingsFragment:BaseFragment() {

@@ -14,7 +14,7 @@ import com.example.spa.base.BaseFragment
 import com.example.spa.base.listener.Screen
 import com.example.spa.data.request.User
 import com.example.spa.databinding.FragmentLoginBinding
-import com.example.spa.ui.home.activitiy.HomeActivity
+import com.example.spa.ui.home.activity.HomeActivity
 import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel

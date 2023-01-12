@@ -29,10 +29,12 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewHead"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/font_medium.white.40"
         android:layout_marginBottom="@dimen/dp_16"
+        android:layout_marginEnd="@dimen/dp_92"
+        app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/join_and_n_get_your_tips"
         app:layout_constraintBottom_toTopOf="@id/textViewSubHead"
         app:layout_constraintStart_toStartOf="@id/textViewSubHead"/>
@@ -40,10 +42,12 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSubHead"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/font_regular.white.14"
         android:layout_marginBottom="@dimen/dp_48"
+        android:layout_marginEnd="@dimen/dp_68"
+        app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/you_can_create_create_your_own_profile_for_n_receiving_your_tips"
         app:layout_constraintBottom_toTopOf="@id/layoutBottom"
         app:layout_constraintStart_toStartOf="@id/layoutBottom"/>

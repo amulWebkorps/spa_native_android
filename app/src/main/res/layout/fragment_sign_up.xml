@@ -139,6 +139,39 @@
 
       </com.google.android.material.textfield.TextInputLayout>
 
+      <com.google.android.material.textfield.TextInputLayout
+          android:id="@+id/editTextDOB"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          android:layout_marginTop="@dimen/dp_24"
+          android:background="@android:color/transparent"
+          app:boxStrokeColor="@color/colorGrey7C"
+          app:hintTextColor="@color/colorGrey7C"
+          android:hint="DOB"
+          android:visibility="gone"
+          android:layout_marginHorizontal="@dimen/dp_20"
+          app:layout_constraintTop_toBottomOf="@id/textViewSignUnSubHead">
+
+          <com.google.android.material.textfield.TextInputEditText
+              android:id="@+id/textInputDOB"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              style="@style/font_regular.black.16"
+              android:layout_marginStart="-14dp"
+              android:imeOptions="actionNext"
+              android:inputType="none"
+              android:focusable="false"
+              android:focusableInTouchMode="false"
+              android:cursorVisible="false"
+              android:backgroundTint="@color/colorGrey7C"
+              android:background="@android:color/transparent"
+
+              />
+
+      </com.google.android.material.textfield.TextInputLayout>
+
 
       <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"

@@ -13,10 +13,12 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewBankDetails"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         style="@style/font_medium.black.30"
         android:textFontWeight="500"
+        android:gravity="center"
+        android:layout_marginHorizontal="@dimen/dp_32"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="@dimen/dp_17"
         android:text="@string/label_bank_details"
@@ -260,7 +262,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="Add Bank Details"/>
+        android:text="@string/add_bank_details"/>
 
     </LinearLayout>
     </androidx.core.widget.NestedScrollView>

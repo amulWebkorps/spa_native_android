@@ -11,7 +11,7 @@
     android:id="@+id/textViewHead"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="Profile"
+    android:text="@string/profile"
     style="@style/font_medium.black"
     android:textSize="@dimen/dp_16"
     android:layout_margin="@dimen/dp_17"

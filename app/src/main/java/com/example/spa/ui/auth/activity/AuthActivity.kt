@@ -50,9 +50,9 @@ class AuthActivity : AppCompatActivity() ,Listener {
         fm.replace(R.id.placeHolder, fragment)
             .addToBackStack(null)
         val bsc = supportFragmentManager.backStackEntryCount
-      //  if (bsc > 1) {
+        if (bsc > 1) {
             supportFragmentManager.popBackStack()
-       // }
+        }
         fm.commit()
     }
     override fun goBack() {

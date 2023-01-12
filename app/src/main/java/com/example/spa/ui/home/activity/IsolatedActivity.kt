@@ -1,4 +1,4 @@
-package com.example.spa.ui.home.activitiy
+package com.example.spa.ui.home.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity

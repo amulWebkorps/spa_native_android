@@ -2,7 +2,6 @@ package com.example.spa.ui.auth.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,8 +13,7 @@ import com.example.spa.base.BaseFragment
 import com.example.spa.base.listener.Screen
 import com.example.spa.data.request.User
 import com.example.spa.databinding.FragmentVerificationBinding
-import com.example.spa.ui.auth.activity.AuthActivity
-import com.example.spa.ui.home.activitiy.HomeActivity
+import com.example.spa.ui.home.activity.HomeActivity
 import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
@@ -63,7 +61,7 @@ class VerificationFragment : BaseFragment() {
                 listener?.replaceFragment(Screen.FORGOT_PASSWORD, Constants.CHANGE)
             }
         }
-        binding.textViewDontReceive.setSpan("Resend" ,  R.font.poppins_medium, R.color.colorBlue72) {
+        binding.textViewDontReceive.setSpan(getString(R.string.resend) ,  R.font.poppins_medium, R.color.colorBlue72) {
 
             if (hasInternet(requireContext())) {
                 toggleLoader(true)

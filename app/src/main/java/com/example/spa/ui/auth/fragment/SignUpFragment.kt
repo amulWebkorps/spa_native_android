@@ -1,6 +1,8 @@
 package com.example.spa.ui.auth.fragment
 
 
+import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -10,6 +12,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.spa.App
@@ -29,19 +33,25 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.OkHttpClient
 import okhttp3.RequestBody
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.FileOutputStream
-import java.util.concurrent.TimeUnit
+import java.text.SimpleDateFormat
+import java.util.*
+
 
 class SignUpFragment :  BaseFragment()  {
     private lateinit var binding: FragmentSignUpBinding
     private val authViewModel: AuthViewModel by viewModels()
      var imageUri :Uri? =  null
      var part :MultipartBody.Part? =  null
+    var year: Int? = null
+    var month: Int? = null
+    var date: Int? = null
+
+    var calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,10 +67,33 @@ class SignUpFragment :  BaseFragment()  {
         setClick()
        // response()
         responseSendOtp()
+
         binding.textInputConfirmPassword.showPassword(binding.checkboxPassword.isChecked)
         binding.textInputPassword.showPassword(binding.checkboxPassword.isChecked)
     }
+    private fun updateDateInView() {
+        val myFormat = "MM/dd/yyyy" // mention the format you need
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        binding.textInputDOB!!.setText(sdf.format(calendar.time))
+    }
+
     private fun setClick() {
+        val dateSetListener =
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                calendar.set(Calendar.YEAR, year)
+                calendar.set(Calendar.MONTH, monthOfYear)
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateDateInView()
+            }
+
+        binding.textInputDOB.setOnClickListener {
+            DatePickerDialog(requireContext(),
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)).show()
+    }
         binding.imageViewProfile.setOnClickListener {
             imagePicker { uri ->
                 imageUri = uri
@@ -68,11 +101,11 @@ class SignUpFragment :  BaseFragment()  {
                 binding.imageViewAddPic.visibility = View.INVISIBLE
             }
         }
-        binding.textViewAlreadyAccount.setSpan("Sign In" ,R.font.poppins_medium, R.color.colorBlue72){
+        binding.textViewAlreadyAccount.setSpan(getString(R.string.sign_in) ,R.font.poppins_medium, R.color.colorBlue72){
             listener?.goBack()
         }
 
-        binding.textViewTermsAndConditions.setSpan("Terms & Conditions" ,R.font.poppins_medium, R.color.colorBlue72){
+        binding.textViewTermsAndConditions.setSpan(getString(R.string.text_terms) ,R.font.poppins_medium, R.color.colorBlue72){
             val url = "http://www.google.com"
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         }
@@ -105,7 +138,6 @@ class SignUpFragment :  BaseFragment()  {
 
         binding.layoutEmail.textInputEmailAddress.addTextChangedListener (object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -240,7 +272,7 @@ class SignUpFragment :  BaseFragment()  {
 
        if (imageUri != null) {
            try {
-               Log.e("TAG", "upload: 1", )
+               Log.e("TAG", "upload: 1")
                val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
                val outputStream = FileOutputStream(file)
                inputStream!!.copyTo(outputStream)
@@ -252,7 +284,7 @@ class SignUpFragment :  BaseFragment()  {
                )
            }catch (e:Exception){}
         }else {
-           Log.e("TAG", "upload: 2", )
+           Log.e("TAG", "upload: 2")
 
            part =  null
         }

@@ -12,19 +12,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import androidx.core.content.ContentProviderCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.spa.App
 import com.example.spa.R
 
 import com.example.spa.base.BaseFragment
-import com.example.spa.data.request.GraphRequest
 import com.example.spa.data.response.GraphDataList
 import com.example.spa.databinding.FragmentSendBinding
-import com.example.spa.ui.auth.activity.AuthActivity
-import com.example.spa.ui.home.activitiy.IsolatedActivity
+import com.example.spa.ui.home.activity.IsolatedActivity
 import com.example.spa.ui.home.adapter.ResentTransactionAdapter
 import com.example.spa.ui.home.barchart.*
 import com.example.spa.utilities.*
@@ -33,7 +28,6 @@ import com.example.spa.viewmodel.SettingsViewModel
 import com.github.mikephil.charting.data.BarData
 import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
-import kotlinx.android.synthetic.main.layout_phone_number.view.*
 
 
 class SendFragment(context: Context) : BaseFragment() {
@@ -199,6 +193,8 @@ class SendFragment(context: Context) : BaseFragment() {
     private val listChartDayValues = mutableListOf<GraphDataList>()
     private var listBarEntry = mutableListOf<BarEntry>()
     private var listDays = mutableListOf<GraphDataList>()
+    private var totalCount = mutableListOf<GraphDataList>()
+    private var monthlyTotalCount = mutableListOf<GraphDataList>()
     private var listMonths = mutableListOf<GraphDataList>()
 
     private fun fillBarChartData() {
@@ -234,26 +230,21 @@ class SendFragment(context: Context) : BaseFragment() {
                 //chartDays.amount = 100
             //}
                 listBarEntry.add(BarEntry(index.toFloat(), chartDays.amount.toFloat()))
-
         }
 
         val barDataSet = BarDataSet(listBarEntry, "BarChartStyle")
         val barData = BarData(barDataSet)
 
         binding.barChart.apply {
-
             val barChartRender =
                 CustomBarChartRender(this, this.animator, this.viewPortHandler)
             barChartRender.setRadius(20)
             this.renderer = barChartRender
-
             val mv = CustomMarkerViewBarChart(requireActivity(), listBarEntry)
             mv.chartView = this
             marker = mv
-
             data = barData
             //xAxis.valueFormatter = IndexAxisValueFormatter(listLabelName)
-//
             barChartStyle.styleBarChart(this)
             barChartStyle.styleBarDataSet(barDataSet)
         }
@@ -315,16 +306,40 @@ class SendFragment(context: Context) : BaseFragment() {
                         result.data?.let { it ->
                             if (pos == 0) {
                                 listDays.clear()
+                                totalCount.clear()
+
                                 for (i in 0 until it.list.size) {
                                     listDays.add(it.list[i])
                                     listChartDayValues.add(i,it.list[i])
+                                    if(it.list[i].amount != 0){
+                                        totalCount.add(it.list[i])
+                                    }
+                                }
+
+                                if (totalCount.size == 0){
+                                    binding.barChart.hideView()
+                                    binding.textViewGraphNoDataFound.showView()
+                                }else{
+                                    binding.barChart.showView()
+                                    binding.textViewGraphNoDataFound.hideView()
                                 }
                                 setUpBarChart()
                             }else{
                                 listMonths.clear()
+                                totalCount.clear()
                                 for (i in 0 until it.list.size) {
                                     listMonths.add(it.list[i])
                                     listChartDayValues.add(i,it.list[i])
+                                    if(it.list[i].amount != 0){
+                                        monthlyTotalCount.add(it.list[i])
+                                    }
+                                }
+                                if (monthlyTotalCount.size == 0){
+                                    binding.barChart.hideView()
+                                    binding.textViewGraphNoDataFound.showView()
+                                }else{
+                                    binding.barChart.showView()
+                                    binding.textViewGraphNoDataFound.hideView()
                                 }
                                 setUpBarChart()
                             }

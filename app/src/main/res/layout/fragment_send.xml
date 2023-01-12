@@ -66,7 +66,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginStart="@dimen/dp_31"
             android:layout_marginTop="@dimen/dp_16"
-            android:text="Activity Progress"
+            android:text="@string/activity_progress"
             style="@style/font_bold.black.16"/>
         <Spinner
             android:id="@+id/spinner2"
@@ -92,6 +92,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent">
 
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewGraphNoDataFound"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                style="@style/font_medium.black.16"
+                android:text="@string/no_data_found"/>
             <com.github.mikephil.charting.charts.BarChart
                 android:id="@+id/barChart"
                 android:layout_width="match_parent"

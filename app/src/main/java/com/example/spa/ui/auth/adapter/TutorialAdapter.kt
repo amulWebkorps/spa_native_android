@@ -33,9 +33,7 @@ class TutorialAdapter(): RecyclerView.Adapter<TutorialAdapter.tutorialViewHolder
 
     override fun onBindViewHolder(holder: tutorialViewHolder, position: Int) {
         holder.bind(arrayList[position])
-        Log.e("TAG", "onBindViewHolder: ${position}", )
-
-      }
+    }
 
     override fun getItemCount(): Int =
         arrayList.size
@@ -46,5 +44,4 @@ class TutorialAdapter(): RecyclerView.Adapter<TutorialAdapter.tutorialViewHolder
         arrayList.addAll(list)
         notifyDataSetChanged()
     }
-
 }

@@ -6,13 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
-import com.example.spa.R
 import com.example.spa.base.BaseFragment
 import com.example.spa.databinding.FragmentMyTipsBinding
-import com.example.spa.ui.home.activitiy.HomeActivity
-import com.example.spa.utilities.core.Session
-import javax.inject.Inject
+import com.example.spa.ui.home.activity.HomeActivity
 
 class MyTipsFragment : BaseFragment() {
 

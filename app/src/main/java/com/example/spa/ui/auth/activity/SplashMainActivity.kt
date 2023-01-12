@@ -10,15 +10,16 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.lifecycleScope
 import com.example.spa.R
 import com.example.spa.data.request.VersionRequest
 import com.example.spa.databinding.ActivitySplashMainBinding
-import com.example.spa.ui.home.activitiy.HomeActivity
+import com.example.spa.ui.home.activity.HomeActivity
 import com.example.spa.utilities.Resource
 import com.example.spa.utilities.core.Session
 import com.example.spa.utilities.hideView
@@ -42,10 +43,23 @@ class SplashMainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.fragment_my_tips)
+        setContentView(R.layout.activity_splash_main)
+
         binding = ActivitySplashMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         session = Session(this)
+//
+        val animation: Animation =
+            AnimationUtils.loadAnimation(applicationContext, R.anim.animation_left_right)
+        binding.textViewM.startAnimation(animation)
+        binding.textViewTi.startAnimation(animation)
+
+
+        val animation2: Animation =
+            AnimationUtils.loadAnimation(applicationContext, R.anim.animation_right_left)
+        binding.textViewY.startAnimation(animation2)
+        binding.textViewPs.startAnimation(animation2)
+
 
         if (session.language == getString(R.string.french)){
             setAppLocale(this, "fr")
@@ -93,16 +107,14 @@ class SplashMainActivity : AppCompatActivity() {
             dialog.dismiss()
             handler()
         }
-        update.setOnClickListener { dialog.dismiss()
-            handler()
+        update.setOnClickListener {
+         dialog.dismiss()
+         handler()
         }
         dialog.show();
-
     }
     private fun handler(){
-
         Handler(Looper.myLooper()!!).postDelayed({
-
 
 //            val intent= Intent(this, TutorialActivity::class.java)
 //            startActivity(intent)
@@ -134,7 +146,6 @@ class SplashMainActivity : AppCompatActivity() {
 
 
     private fun response(){
-
         lifecycleScope.launchWhenCreated {
             authViewModel.versionManager.collect { result ->
                 when (result) {
