@@ -15,6 +15,8 @@ import android.view.ViewGroup
 import androidx.core.content.FileProvider
 import androidx.fragment.app.FragmentManager
 import com.example.spa.R
+import com.example.spa.databinding.BottomsheetImagePickerBinding
+import com.example.spa.databinding.FragmentForgotPasswordBinding
 import com.fondesa.kpermissions.allGranted
 import com.fondesa.kpermissions.extension.permissionsBuilder
 import com.fondesa.kpermissions.extension.send
@@ -22,7 +24,7 @@ import com.fondesa.kpermissions.extension.send
 
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.android.synthetic.main.bottomsheet_image_picker.*
+//import kotlinx.android.synthetic.main.bottomsheet_image_picker.*
 
 import java.io.File
 
@@ -34,6 +36,7 @@ class ImagePickerDialog2 : BottomSheetDialogFragment() {
     private var onImageSelected: (Uri) -> (Unit) = {}
     private var onImageError: (String) -> (Unit) = {}
 
+    private lateinit var binding: BottomsheetImagePickerBinding
     companion object {
         fun showDialog(
             fragmentManager: FragmentManager,
@@ -57,7 +60,7 @@ class ImagePickerDialog2 : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        constraintTakePhoto.setOnClickListener {
+        binding.constraintTakePhoto.setOnClickListener {
             permissionsBuilder(
                 Manifest.permission.CAMERA,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -70,7 +73,7 @@ class ImagePickerDialog2 : BottomSheetDialogFragment() {
                 }
 
         }
-        constraintOpenGallery.setOnClickListener {
+        binding.constraintOpenGallery.setOnClickListener {
 
             permissionsBuilder(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 .build()

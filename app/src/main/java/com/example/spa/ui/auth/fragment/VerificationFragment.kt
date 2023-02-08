@@ -62,7 +62,6 @@ class VerificationFragment : BaseFragment() {
             }
         }
         binding.textViewDontReceive.setSpan(getString(R.string.resend) ,  R.font.poppins_medium, R.color.colorBlue72) {
-
             if (hasInternet(requireContext())) {
                 toggleLoader(true)
                 lifecycleScope.launchWhenCreated {

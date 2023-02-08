@@ -34,7 +34,6 @@ class AuthActivity : AppCompatActivity() ,Listener {
         }
 
     override fun replaceFragment(screen: Screen,value:String?) {
-
         val fragment = when (screen) {
             Screen.LOGIN -> LoginFragment()
             Screen.SIGN_UP -> SignUpFragment()

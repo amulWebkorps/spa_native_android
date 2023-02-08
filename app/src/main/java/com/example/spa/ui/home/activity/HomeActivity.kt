@@ -18,7 +18,7 @@ import com.example.spa.utilities.core.Session
 import com.squareup.picasso.Picasso
 
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.activity_home.*
+//import kotlinx.android.synthetic.main.activity_home.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -81,7 +81,7 @@ class HomeActivity : AppCompatActivity() , Listener {
             setCurrentFragment(firstFragment)
         }
 
-        bottomNavigationView.setOnNavigationItemSelectedListener {
+        binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.send->setCurrentFragment(firstFragment)
                 R.id.transaction->setCurrentFragment(secondFragment)

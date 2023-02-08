@@ -19,7 +19,6 @@ import com.example.spa.utilities.Resource
 import com.example.spa.utilities.showMessage
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.SettingsViewModel
-import kotlinx.android.synthetic.main.fragment_add_bank_detail.*
 
 
 class AddBankDetailFragment:BaseFragment() {

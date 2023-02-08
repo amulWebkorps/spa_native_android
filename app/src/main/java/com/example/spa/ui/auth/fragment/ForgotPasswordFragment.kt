@@ -17,7 +17,7 @@ import com.example.spa.utilities.Resource
 import com.example.spa.utilities.showMessage
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
-import kotlinx.android.synthetic.main.layout_phone_number.view.*
+//import kotlinx.android.synthetic.main.layout_phone_number.view.*
 
 
 class ForgotPasswordFragment :BaseFragment() {

@@ -18,8 +18,8 @@ import com.example.spa.utilities.hideView
 import com.example.spa.utilities.setAppLocale
 import com.example.spa.utilities.showView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_tutorial.*
-import kotlinx.android.synthetic.main.fragment_tutorial.view.*
+//import kotlinx.android.synthetic.main.fragment_tutorial.*
+//import kotlinx.android.synthetic.main.fragment_tutorial.view.*
 
 @AndroidEntryPoint
 class SelectLanguageFragment :  BaseFragment(), LanguageAdapter.OnClick {

@@ -19,13 +19,18 @@ import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.layout_phone_number.view.*
+//import kotlinx.android.synthetic.main.layout_phone_number.view.*
 
 @AndroidEntryPoint
 class LoginFragment :  BaseFragment() {
 
 
-    private lateinit var binding: FragmentLoginBinding
+//    private lateinit var binding: FragmentLoginBinding
+
+    private var _binding: FragmentLoginBinding? = null
+    // This property is only valid between onCreateView and
+// onDestroyView.
+    private val binding get() = _binding!!
 
     private val authViewModel: AuthViewModel by viewModels()
 
@@ -34,8 +39,11 @@ class LoginFragment :  BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentLoginBinding.inflate(layoutInflater)
-        return binding.root
+//        binding = FragmentLoginBinding.inflate(layoutInflater)
+//        return binding.root
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
+        val view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -70,8 +78,8 @@ class LoginFragment :  BaseFragment() {
                 lifecycleScope.launchWhenCreated {
                     authViewModel.loginUser(
                         User(
-                            country_code= "+"+binding.layoutPhone.ccp.selectedCountryCode,
-                            mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
+                            country_code= "+"+binding.Phone.ccp.selectedCountryCode,
+                            mobile_number= binding.Phone.editTextPhoneNumber.text.toString(),
                             password= binding.textInputPassword.text.toString(),
                         )
                     )

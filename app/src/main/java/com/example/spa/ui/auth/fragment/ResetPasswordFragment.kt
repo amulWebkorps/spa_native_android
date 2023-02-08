@@ -15,7 +15,7 @@ import com.example.spa.ui.auth.activity.AuthActivity
 import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
-import kotlinx.android.synthetic.main.layout_phone_number.view.*
+//import kotlinx.android.synthetic.main.layout_phone_number.view.*
 
 class ResetPasswordFragment :BaseFragment() {
     private lateinit var binding: FragmentResetPasswordBinding
