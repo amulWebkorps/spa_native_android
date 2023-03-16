@@ -44,6 +44,9 @@ class SettingsFragment:BaseFragment() {
             includeWallet.layoutMain.setOnClickListener {
                 openActivity(Constants.WALLET)
             }
+            includeMyQrCode.layoutMain.setOnClickListener {
+                openActivity(Constants.SHARE_QR_ONE_TIME)
+            }
             buttonLogout.setOnClickListener {
                     DialogUtils().showGeneralDialog(
                         requireContext(),
@@ -72,7 +75,7 @@ class SettingsFragment:BaseFragment() {
         binding.apply {
             includeWallet.textViewHead.text = getString(R.string.wallet)
             includeBankDetail.textViewHead.text = getString(R.string.bank_detail)
-//            includeLogOut.textViewHead.text = getString(R.string.label_logout)
+            includeMyQrCode.textViewHead.text = getString(R.string.my_qr_code)
 
         }
     }

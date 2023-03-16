@@ -1,5 +1,6 @@
 package com.example.spa.ui.home.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.spa.base.BaseFragment
 import com.example.spa.databinding.TransactionFragmentBinding
+import com.example.spa.ui.home.activity.IsolatedActivity
 import com.example.spa.ui.home.adapter.ResentAdapter
 import com.example.spa.utilities.*
 import com.example.spa.viewmodel.SettingsViewModel
@@ -55,13 +57,19 @@ class TransactionFragment:BaseFragment() {
 
 
     private fun setClick() {
+        binding.buttonWithdrawal.setOnClickListener {
+            openActivity(Constants.WALLET)
+           }
         binding.includeNoInternet.buttonTryAgain.setOnClickListener {
             page = 0
             apiCall()
-            Log.e("TAG", "setClick: try", )
         }
     }
-
+    private fun openActivity(fragment: String){
+        val intent= Intent(requireContext(), IsolatedActivity::class.java)
+        intent.putExtra(Constants.SCREEN_NAME,fragment)
+        startActivity(intent)
+    }
     private fun setAdapter() {
         binding.recycleViewTransaction.adapter = resentTransactionAdapter
         setUpLoadMoreListener()

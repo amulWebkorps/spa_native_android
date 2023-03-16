@@ -36,6 +36,10 @@ class IsolatedActivity : AppCompatActivity() , IsolatedListener {
             Constants.SHARE_QR -> {
                 loadFragment(ShareQRFragment())
             }
+            Constants.SHARE_QR_ONE_TIME -> {
+                loadFragment(ShareQROneTimeFragment())
+            }
+
         }
     }
 
@@ -57,6 +61,7 @@ class IsolatedActivity : AppCompatActivity() , IsolatedListener {
         val fragment = when (screen) {
             BankDetailScreen.BANK_DETAIL -> BankDetailsFragment()
             BankDetailScreen.ADD_BANK_DETAIL -> AddBankDetailFragment()
+            BankDetailScreen.PAYMENT_SUCCESS -> TransactionSuccessfulFragment()
         }
         val args = Bundle()
         args.putString(Constants.AUTH, value)

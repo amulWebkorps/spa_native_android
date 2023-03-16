@@ -28,5 +28,7 @@
     <color name="colorRedEF">#EF4050</color>
 
     <color name="colorGreyLight">#F7F7F7</color>
+    <color name="colorBlue43">#4359CA</color>
+    <color name="colorBlueED">#EDEDED</color>
 
 </resources>

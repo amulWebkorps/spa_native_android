@@ -33,7 +33,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Please check your internet connectivity"))
+                emit(Resource.Error("Something went wrong"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Couldn't load data"))
@@ -55,7 +55,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Please check your internet connectivity"))
+                emit(Resource.Error("Something went wrong"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -79,7 +79,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Please check your internet connectivity"))
+                emit(Resource.Error("Something went wrong"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -102,7 +102,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Please check your internet connectivity"))
+                emit(Resource.Error("Something went wrong"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -124,7 +124,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Please check your internet connectivity"))
+                emit(Resource.Error("Something went wrong"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -146,7 +146,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Please check your internet connectivity"))
+                emit(Resource.Error("Something went wrong"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -168,7 +168,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Please check your internet connectivity"))
+                emit(Resource.Error("Something went wrong"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -190,7 +190,7 @@ class AuthService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Please check your internet connectivity"))
+                emit(Resource.Error("Something went wrong"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -213,7 +213,7 @@ class AuthService constructor(
         } catch (e: IOException) {
             emit(Resource.Loading(false))
             Log.e("TAG", "versionRequest: ${e}", )
-            emit(Resource.Error("Please check your internet connectivity"))
+            emit(Resource.Error("Something went wrong"))
         } catch (e: HttpException) {
             emit(Resource.Loading(false))
             emit(Resource.Error("Something went wrong"))

@@ -124,13 +124,14 @@ class VerificationFragment : BaseFragment() {
                     is Resource.Success -> {
                         toggleLoader(false)
                         result.data?.let { it ->
+
+                            session.token = it.token
                             if (value == Constants.FORGOT_PASSWORD) {
                                 listener?.replaceFragment(
                                     Screen.RESET_PASSWORD,
                                     Constants.FORGOT_PASSWORD
                                 )
                             }else {
-                                session.token = it.token
                                 //(requireActivity().application as App).session.user = it.user
                                 lifecycleScope.launchWhenCreated {
                                     authViewModel.getUser(

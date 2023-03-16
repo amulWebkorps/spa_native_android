@@ -28,7 +28,6 @@ class AuthViewModel @Inject constructor(
     private val _verifyOtp = MutableSharedFlow<Resource<VerifyOtpResponse>>()
     val verifyOtp = _verifyOtp.asSharedFlow()
 
-
     private val _loginUser = MutableSharedFlow<Resource<Login>>()
     val loginUser = _loginUser.asSharedFlow()
 

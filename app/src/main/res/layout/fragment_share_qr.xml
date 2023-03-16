@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/black">
+    android:background="@color/white">
     <include
         android:id="@+id/includeToolbar"
         layout="@layout/layout_common_toolbar" />
@@ -32,10 +32,10 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center"
-        style="@style/font_regular.white.16"
+        style="@style/font_regular.black.16"
         android:textFontWeight="400"
         app:layout_constraintStart_toStartOf="parent"
-        android:text="Scan QA code to Generate Payment Link of 100 AED  "
+        android:text="@string/scan_qa_code_to_generate_payment_link_of_100_aed"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="44dp"
         android:layout_marginTop="@dimen/dp_28"

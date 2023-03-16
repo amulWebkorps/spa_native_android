@@ -128,4 +128,8 @@
     <string name="resend">Resend</string>
     <string name="text_terms">Terms &amp; Conditions</string>
     <string name="add_bank_details">Add Bank Details</string>
+    <string name="my_qr_code">My QR Code</string>
+    <string name="transaction_successful">Transaction Successful!!</string>
+    <string name="scan_qa_code_to_generate_payment_link_of_100_aed">Scan QA code to Generate Payment Link of 100 AED</string>
+    <string name="share_qr_one_time_text">If you enjoyed your experience, a tip would be greatly appreciated</string>
 </resources>

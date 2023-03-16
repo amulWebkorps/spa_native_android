@@ -1,5 +1,6 @@
 package com.example.spa.ui.home.fragment
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -34,6 +35,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EditProfileFragment : BaseFragment() {
 
@@ -41,6 +44,8 @@ class EditProfileFragment : BaseFragment() {
     private val authViewModel: AuthViewModel by viewModels()
     var imageUri : Uri? =  null
        var isImage = false
+
+    var calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,8 +87,28 @@ class EditProfileFragment : BaseFragment() {
         binding.textInputEmailAddress.isClickable = false
 
     }
-
+    private fun updateDateInView() {
+        val myFormat = "dd MMM yyyy" // mention the format you need
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        binding.textInputDOB!!.setText(sdf.format(calendar.time))
+    }
     private fun clickListener() {
+        val dateSetListener =
+            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+                calendar.set(Calendar.YEAR, year)
+                calendar.set(Calendar.MONTH, monthOfYear)
+                calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateDateInView()
+            }
+
+        binding.textInputDOB.setOnClickListener {
+            DatePickerDialog(requireContext(),
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                calendar.get(Calendar.YEAR),
+                calendar.get(Calendar.MONTH),
+                calendar.get(Calendar.DAY_OF_MONTH)).show()
+        }
         binding.buttonSave.setOnClickListener {
             if(isValidationSuccess()){
                 if (hasInternet(requireContext())) {

@@ -42,6 +42,11 @@
     </style>
 
 
+    <style name="font_medium.blue43">
+        <item name="android:textColor">@color/colorBlue43</item>
+    </style>
+
+
     <style name="font_light.black">
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>

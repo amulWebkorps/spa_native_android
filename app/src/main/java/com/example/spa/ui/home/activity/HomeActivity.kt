@@ -111,4 +111,9 @@ class HomeActivity : AppCompatActivity() , Listener {
 
     override fun goBack() {
     }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
+    }
 }

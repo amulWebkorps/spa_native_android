@@ -36,7 +36,7 @@ class SettingsService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Please check your internet connectivity"))
+                emit(Resource.Error("Something went wrong"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -58,7 +58,7 @@ class SettingsService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Please check your internet connectivity"))
+                emit(Resource.Error("Something went wrong"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -81,7 +81,7 @@ class SettingsService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Please check your internet connectivity"))
+                emit(Resource.Error("Something went wrong"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -104,7 +104,7 @@ class SettingsService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Please check your internet connectivity"))
+                emit(Resource.Error("Something went wrong"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))
@@ -130,7 +130,7 @@ class SettingsService constructor(
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))
-                emit(Resource.Error("Please check your internet connectivity"))
+                emit(Resource.Error("Something went wrong"))
             } catch (e: HttpException) {
                 emit(Resource.Loading(false))
                 emit(Resource.Error("Something went wrong"))

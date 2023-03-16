@@ -108,7 +108,7 @@ class BarChartStyle(
     }
 
     fun styleBarDataSet(barDataSet: BarDataSet) = barDataSet.apply {
-        color = ContextCompat.getColor(context, R.color.colorBlue72)
+        color = ContextCompat.getColor(context, R.color.black)
         valueTextColor = ContextCompat.getColor(context, R.color.grey)
         setDrawValues(false)
         isHighlightEnabled = false

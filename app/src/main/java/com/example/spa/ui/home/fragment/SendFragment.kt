@@ -14,13 +14,16 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.spa.R
 
 import com.example.spa.base.BaseFragment
+import com.example.spa.data.remote.AddMoney
 import com.example.spa.data.response.GraphDataList
 import com.example.spa.databinding.FragmentSendBinding
 import com.example.spa.ui.home.activity.IsolatedActivity
 import com.example.spa.ui.home.adapter.ResentTransactionAdapter
+import com.example.spa.ui.home.adapter.SelectMoneyAdapter
 import com.example.spa.ui.home.barchart.*
 import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
@@ -30,17 +33,19 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 
 
-class SendFragment(context: Context) : BaseFragment() {
+class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclick {
 
 
     private val settingsViewModel: SettingsViewModel by viewModels()
 
     val resentTransactionAdapter = ResentTransactionAdapter()
+    val selectMoneyAdapter=SelectMoneyAdapter(this)
 
+    val list= ArrayList<AddMoney>()
     private lateinit var binding: FragmentSendBinding
     private lateinit var barChartStyle: BarChartStyle
     var pos:Int = 0
-    var LIST = arrayOf("Item 1", "Item 2", "Item 3", "Item 4")
+    var LIST = arrayOf("Restoration", "Concierge & Hotel Services", "Transportations", "Sale","Other")
     var LIST_MONTHLY = arrayOf("weekly", "Monthly")
     var dialog: Dialog = Dialog(context)
     private lateinit var editText:AutoCompleteTextView
@@ -62,9 +67,10 @@ class SendFragment(context: Context) : BaseFragment() {
 
         setAdapter()
         setClick()
-        resentTransactionResponse()
-        apiCall()
+//        resentTransactionResponse()
+      //  apiCall()
         graphDataResponse()
+        setRecycleView()
        // apiCallGraph("weekly")
     }
     private fun apiCall() {
@@ -118,6 +124,21 @@ class SendFragment(context: Context) : BaseFragment() {
         binding.spinner2.setSelection(0, true);
     }
 
+    private fun setRecycleView() {
+
+//        val layoutManager =
+//            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+//        binding!!.recycleViewAmount.layoutManager = layoutManager;
+
+        val list = mutableListOf<AddMoney>()
+        list.add(AddMoney("+20"))
+        list.add(AddMoney("+50"))
+        list.add(AddMoney("+100"))
+        list.add(AddMoney("+150"))
+        list.add(AddMoney("+170"))
+        selectMoneyAdapter.setListItem(list)
+        binding!!.recycleViewAmount.adapter = selectMoneyAdapter
+    }
     private fun setClick() {
         val adapter2: ArrayAdapter<String> = ArrayAdapter(
             requireContext(),
@@ -349,4 +370,30 @@ class SendFragment(context: Context) : BaseFragment() {
             }
         }
     }
+
+    override fun onClick(value: String) {
+        binding.apply {
+            when (value) {
+                "+20" -> {
+                    editTextAmount.setText("20")
+                }
+                "+50" -> {
+                    editTextAmount.setText("50")
+                }
+                "+100" -> {
+                    editTextAmount.setText("100")
+                }
+                "+150" -> {
+                    editTextAmount.setText("150")
+                }
+                "+170" -> {
+                    editTextAmount.setText("170")
+                }else ->{
+                   editTextAmount.setText("")
+                }
+            }
+
+        }
+    }
+
 }

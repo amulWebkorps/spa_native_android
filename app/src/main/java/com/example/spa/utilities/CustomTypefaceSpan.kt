@@ -5,9 +5,6 @@ import android.graphics.Typeface
 import android.text.TextPaint
 import android.text.style.TypefaceSpan
 
-/**
- * Created by Ronak Doshi on 25/6/18.
- */
 class CustomTypefaceSpan constructor(typeface: Typeface?, family: String = "") : TypefaceSpan(family) {
 
     private val newTypeface = typeface

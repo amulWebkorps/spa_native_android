@@ -18,6 +18,7 @@ class ResentTransactionAdapter() :
     private val arrayList = mutableListOf<TransactionList>()
 
 
+
     inner class AwardsShopViewHolder( val binding: LayoutResentTransactionBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {

@@ -13,18 +13,17 @@ import com.example.spa.utilities.showToast
 import com.example.spa.utilities.validation.ApplicationException
 import com.google.android.material.snackbar.Snackbar
 
-class AddAmountBottomSheet:BaseBottomSheetDialogFragment() {
+class AddAmountBottomSheet(private val onclick:(Int)->Unit):BaseBottomSheetDialogFragment() {
 
-    private var onClick: (Int) -> (Unit) = {}
     private var binding: LayoutWithdrawalBottomsheetBinding? = null
 
     companion object {
         fun showDialog(
             fragmentManager: FragmentManager,
-//            onClick: Unit
+        //    onClick: Unit
         ) {
-            return AddAmountBottomSheet().apply {
-                //this.onClick = onClick
+            return AddAmountBottomSheet({}).apply {
+          //      this.onClick = onClick
             }.show(fragmentManager, AddAmountBottomSheet::class.java.simpleName)
         }
     }
@@ -33,11 +32,11 @@ class AddAmountBottomSheet:BaseBottomSheetDialogFragment() {
     override fun onReady() {
         binding.apply {
             this!!.imageViewBack.setOnClickListener {
-                dismiss()
+                onclick.invoke(it!!.id)
             }
 
             this!!.buttonWithdrawal.setOnClickListener {
-                    dismiss()
+                  onclick.invoke(it!!.id)
               }
 
             editTextEnterAmount.addTextChangedListener (object : TextWatcher {
