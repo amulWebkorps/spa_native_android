@@ -47,6 +47,9 @@ class SettingsFragment:BaseFragment() {
             includeMyQrCode.layoutMain.setOnClickListener {
                 openActivity(Constants.SHARE_QR_ONE_TIME)
             }
+            includeChangeLanguage.layoutMain.setOnClickListener {
+                openActivity(Constants.CHANGE_LANGUAGE)
+            }
             buttonLogout.setOnClickListener {
                     DialogUtils().showGeneralDialog(
                         requireContext(),
@@ -76,6 +79,7 @@ class SettingsFragment:BaseFragment() {
             includeWallet.textViewHead.text = getString(R.string.wallet)
             includeBankDetail.textViewHead.text = getString(R.string.bank_detail)
             includeMyQrCode.textViewHead.text = getString(R.string.my_qr_code)
+            includeChangeLanguage.textViewHead.text = getString(R.string.change_language)
 
         }
     }

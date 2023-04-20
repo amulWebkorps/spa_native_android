@@ -45,8 +45,9 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
     private lateinit var binding: FragmentSendBinding
     private lateinit var barChartStyle: BarChartStyle
     var pos:Int = 0
-    var LIST = arrayOf("Restoration", "Concierge & Hotel Services", "Transportations", "Sale","Other")
-    var LIST_MONTHLY = arrayOf("weekly", "Monthly")
+    var LIST_MONTHLY = arrayOf(context.getString(R.string.weekly), context.getString(R.string.monthly))
+    var LIST = arrayOf(context.getString(R.string.restoration), context.getString(R.string.concierge_hotel_services),context.getString(R.string.transportations),context.getString(R.string.sale),context.getString(R.string.other))
+
     var dialog: Dialog = Dialog(context)
     private lateinit var editText:AutoCompleteTextView
     private lateinit var cancel:ImageView
@@ -230,8 +231,6 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
     }
 
     private fun setUpBarChart() {
-
-
         barChartStyle = if(pos == 1) {
 
             BarChartStyle(

@@ -10,12 +10,13 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import android.widget.Button
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.gif.GifDrawable
+import com.bumptech.glide.request.target.ImageViewTarget
 import com.example.spa.R
 import com.example.spa.data.request.VersionRequest
 import com.example.spa.databinding.ActivitySplashMainBinding
@@ -48,18 +49,19 @@ class SplashMainActivity : AppCompatActivity() {
         binding = ActivitySplashMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         session = Session(this)
+        handler()
+//        binding.gifImageView.setImageResource(R.drawable.splash_animation)
 //
-        val animation: Animation =
-            AnimationUtils.loadAnimation(applicationContext, R.anim.animation_left_right)
-        binding.textViewM.startAnimation(animation)
-        binding.textViewTi.startAnimation(animation)
-
-
-        val animation2: Animation =
-            AnimationUtils.loadAnimation(applicationContext, R.anim.animation_right_left)
-        binding.textViewY.startAnimation(animation2)
-        binding.textViewPs.startAnimation(animation2)
-
+//        val animation: Animation =
+//            AnimationUtils.loadAnimation(applicationContext, R.anim.animation_left_right)
+//        binding.textViewM.startAnimation(animation)
+//        binding.textViewTi.startAnimation(animation)
+//
+//
+//        val animation2: Animation =
+//            AnimationUtils.loadAnimation(applicationContext, R.anim.animation_right_left)
+//        binding.textViewY.startAnimation(animation2)
+//        binding.textViewPs.startAnimation(animation2)
 
         if (session.language == getString(R.string.french)){
             setAppLocale(this, "fr")
@@ -67,52 +69,14 @@ class SplashMainActivity : AppCompatActivity() {
             setAppLocale(this, "en")
         }
 
-        val pm: PackageManager = applicationContext.packageManager
-        val pkgName = applicationContext.packageName
-        var pkgInfo: PackageInfo? = null
-        try {
-            pkgInfo = pm.getPackageInfo(pkgName, 0)
-        } catch (e: PackageManager.NameNotFoundException) {
-            e.printStackTrace()
-        }
-        val ver: String = pkgInfo!!.versionName
-
-        response()
-        lifecycleScope.launchWhenCreated {
-            authViewModel.checkVersion(
-            VersionRequest(
-                device_type = "android",
-                version = ver
-            )
-          )
-        }
+        Glide.with(this).asGif().load(R.drawable.splash_anim).into(object : ImageViewTarget<GifDrawable>(binding.splash) {
+            override fun setResource(resource: GifDrawable?) {
+                binding.splash.setImageDrawable(resource)
+            }
+        })
     }
 
-    private fun showDialog(hideSkip : Boolean){
-        var dialog = Dialog(this)
-        dialog.setContentView(R.layout.layout_update_app);
-        dialog.window!!.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        dialog.setCancelable(true);
-        dialog.setCanceledOnTouchOutside(false)
-        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        skip = dialog.findViewById(R.id.buttonSkip)
-        update = dialog.findViewById(R.id.buttonUpdate)
-        if (hideSkip){
-            skip.hideView()
-        }
-        skip.setOnClickListener {
-            dialog.dismiss()
-            handler()
-        }
-        update.setOnClickListener {
-         dialog.dismiss()
-         handler()
-        }
-        dialog.show();
-    }
+
     private fun handler(){
         Handler(Looper.myLooper()!!).postDelayed({
 
@@ -141,37 +105,11 @@ class SplashMainActivity : AppCompatActivity() {
                     }
                 }
             }
-       }, 2000)
+       }, 1500)
     }
 
 
-    private fun response(){
-        lifecycleScope.launchWhenCreated {
-            authViewModel.versionManager.collect { result ->
-                when (result) {
-                    is Resource.Error -> {
-                        result.message?.let {it->
-                            showMessage(binding.root,it)
-                        }
-                    }
-                    is Resource.Loading -> {}
-                    is Resource.Success -> {
-                        result.data?.let { it ->
-                            when {
-                                it.isForceUpdate -> {
-                                    showDialog(true)
-                                }
-                                it.isSoftUpdate && !it.isForceUpdate -> {
-                                    showDialog(false)
-                                }
-                                else -> {
-                                    handler()
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+
+
+
 }

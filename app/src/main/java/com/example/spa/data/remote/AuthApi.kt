@@ -67,7 +67,7 @@ interface AuthApi {
     @Multipart
     @PUT(Url.V2_USER_UPDATE)
     suspend fun updateUserDetailsImage(@Header("Authorization")token:String,
-                                   @Part("email") email:RequestBody,
+                                  @Part("email") email:RequestBody,
                                   @Part("first_name") first_name:RequestBody,
                                   @Part("last_name") last_name:RequestBody,
                                   @Part image:MultipartBody.Part,

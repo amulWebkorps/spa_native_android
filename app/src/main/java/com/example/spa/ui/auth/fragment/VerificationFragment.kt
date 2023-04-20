@@ -37,7 +37,8 @@ class VerificationFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         val value = requireArguments().getString(Constants.AUTH)
 
-        binding.textViewPhoneVerificationNumber.text = "("+session.countryCode+")"+"-"+session.phoneNumber + " Change"
+        binding.textViewPhoneVerificationNumber.text = "("+session.countryCode+")"+"-"+session.phoneNumber + " "+getString(
+                    R.string.change)
         setClick()
         response()
         getUserResponse()
@@ -50,7 +51,8 @@ class VerificationFragment : BaseFragment() {
             listener?.goBack()
         }
         binding.textViewPhoneVerificationNumber.setSpan(
-            "Change",
+            getString(
+                R.string.change),
             R.font.poppins_medium,
             R.color.black,
             true

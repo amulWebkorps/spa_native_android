@@ -1,5 +1,6 @@
 package com.example.spa.utilities
 
+import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.os.Build
@@ -150,4 +151,5 @@ fun setAppLocale(context: Context, language: String) {
     config.setLocale(locale)
     context.createConfigurationContext(config)
     context.resources.updateConfiguration(config, context.resources.displayMetrics)
-}
+
+  }

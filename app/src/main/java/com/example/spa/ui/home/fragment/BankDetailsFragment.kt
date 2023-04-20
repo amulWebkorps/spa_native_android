@@ -110,7 +110,8 @@ class BankDetailsFragment:BaseFragment(), BankDetailAdapter.OnClick {
                         toggleLoader(false)
                         result.data.let {
                             Log.e("TAG", "bankListResponse: $it", )
-                            resentTransactionAdapter.setListItem(it!!.list)
+                            resentTransactionAdapter.
+                            setListItem(it!!.list)
                             resentTransactionAdapter.notifyDataSetChanged()
                             if (it.list.isEmpty()){
                                 binding.noDataFoundLayout.textViewNoBankAccountAdded.showView()

@@ -132,4 +132,17 @@
     <string name="transaction_successful">Transaction Successful!!</string>
     <string name="scan_qa_code_to_generate_payment_link_of_100_aed">Scan QA code to Generate Payment Link of 100 AED</string>
     <string name="share_qr_one_time_text">If you enjoyed your experience, a tip would be greatly appreciated</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="restoration">Restoration</string>
+    <string name="concierge_hotel_services"><![CDATA[Concierge & Hotel Services]]></string>
+    <string name="transportations">Transportations</string>
+    <string name="sale">Sale</string>
+    <string name="other">Other</string>
+    <string name="reason">Reason</string>
+    <string name="my_reason">My Reason</string>
+    <string name="change">Change</string>
+    <string name="date_of_birth_dob">Date Of Birth(Dob)</string>
+    <string name="change_language">Change Language</string>
+    <string name="send">Send</string>
+    <string name="settings">Settings</string>
 </resources>

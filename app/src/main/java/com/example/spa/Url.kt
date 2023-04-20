@@ -1,7 +1,7 @@
 package com.example.spa
 
 object Url {
-    const val BASE_URL = "http://125.99.200.202:3000/"
+    const val BASE_URL = "http://125.99.200.202:5000/"
 
     const val USER = "/users"
     const val V2_USER = "api/v2/users"

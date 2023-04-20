@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -46,6 +47,7 @@ class EditProfileFragment : BaseFragment() {
        var isImage = false
 
     var calendar = Calendar.getInstance()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -93,21 +95,37 @@ class EditProfileFragment : BaseFragment() {
         binding.textInputDOB!!.setText(sdf.format(calendar.time))
     }
     private fun clickListener() {
+//        calendar.add(Calendar.YEAR, -18);
         val dateSetListener =
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 calendar.set(Calendar.YEAR, year)
                 calendar.set(Calendar.MONTH, monthOfYear)
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                updateDateInView()
-            }
+
+                    updateDateInView()
+                }
+
+
 
         binding.textInputDOB.setOnClickListener {
-            DatePickerDialog(requireContext(),
+            // Create a calendar instance and set it to 18 years ago from the current date
+            val calendar = Calendar.getInstance()
+
+            val datePickerDialog = DatePickerDialog(
+                requireContext(),
                 dateSetListener,
-                // set DatePickerDialog to point to today's date when it loads up
+                // Set DatePickerDialog to point to today's date when it loads up
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)).show()
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
+
+
+            calendar.add(Calendar.YEAR, -18)
+            datePickerDialog.getDatePicker().setMaxDate(calendar.getTimeInMillis());
+
+            // Show the DatePickerDialog
+            datePickerDialog.show()
         }
         binding.buttonSave.setOnClickListener {
             if(isValidationSuccess()){

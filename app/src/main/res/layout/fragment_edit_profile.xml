@@ -154,7 +154,7 @@
             android:background="@android:color/transparent"
             app:boxStrokeColor="@color/colorGrey7C"
             app:hintTextColor="@color/colorGrey7C"
-            android:hint="DOB"
+            android:hint="@string/date_of_birth_dob"
             android:layout_marginHorizontal="@dimen/dp_20"
             app:layout_constraintTop_toBottomOf="@id/textViewSignUnSubHead">
 

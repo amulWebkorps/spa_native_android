@@ -29,6 +29,10 @@
     <include
         android:id="@+id/includeMyQrCode"
         layout="@layout/layout_settings"/>
+
+        <include
+            android:id="@+id/includeChangeLanguage"
+            layout="@layout/layout_settings"/>
     </LinearLayout>
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/buttonLogout"

@@ -9,6 +9,7 @@ import com.example.spa.R
 import com.example.spa.base.listener.BankDetailScreen
 import com.example.spa.base.listener.IsolatedListener
 import com.example.spa.databinding.ActivityIsolatedBinding
+import com.example.spa.ui.auth.fragment.SelectLanguageFragment
 import com.example.spa.ui.home.fragment.*
 import com.example.spa.utilities.Constants
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,19 +26,22 @@ class IsolatedActivity : AppCompatActivity() , IsolatedListener {
 
         when (intent.extras?.get(Constants.SCREEN_NAME)) {
             Constants.EDIT_PROFILE -> {
-                loadFragment(EditProfileFragment())
+                loadFragment(EditProfileFragment(),"")
             }
             Constants.BANK_DETAIL -> {
-                loadFragment(BankDetailsFragment())
+                loadFragment(BankDetailsFragment(),"")
             }
             Constants.WALLET -> {
-                loadFragment(WalletFragment())
+                loadFragment(WalletFragment(),"")
             }
             Constants.SHARE_QR -> {
-                loadFragment(ShareQRFragment())
+                loadFragment(ShareQRFragment(),"")
             }
             Constants.SHARE_QR_ONE_TIME -> {
-                loadFragment(ShareQROneTimeFragment())
+                loadFragment(ShareQROneTimeFragment(),"")
+            }
+            Constants.CHANGE_LANGUAGE -> {
+                loadFragment(SelectLanguageFragment(),Constants.SETTING)
             }
 
         }
@@ -52,7 +56,10 @@ class IsolatedActivity : AppCompatActivity() , IsolatedListener {
             this.finish()
         }
     }
-     private fun loadFragment(fragment: Fragment){
+     private fun loadFragment(fragment: Fragment,bundleValue: String){
+         val args = Bundle()
+         args.putString(Constants.ISOLATED,bundleValue)
+         fragment.arguments = args
          supportFragmentManager.beginTransaction().add(R.id.placeHolder, fragment).commit()
      }
 

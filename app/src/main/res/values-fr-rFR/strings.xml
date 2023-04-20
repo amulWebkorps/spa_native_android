@@ -129,4 +129,21 @@
     <string name="resend">Renvoyer</string>
     <string name="text_terms">Termes &amp; Les conditions</string>
     <string name="add_bank_details">Ajouter des coordonnées bancaires</string>
+    <string name="my_qr_code">Mon code QR</string>
+    <string name="transaction_successful">Opération réussie !!</string>
+    <string name="scan_qa_code_to_generate_payment_link_of_100_aed">Scannez le code QR pour générer un lien de paiement de 100 AED</string>
+    <string name="share_qr_one_time_text">Si vous avez apprécié votre expérience, un pourboire serait grandement apprécié</string>
+    <string name="withdraw">Retirer</string>
+    <string name="restoration">Restauration</string>
+    <string name="concierge_hotel_services"><![CDATA[Conciergerie & Services hôteliers]]></string>
+    <string name="transportations">Transport</string>
+    <string name="sale">Vente</string>
+    <string name="other">Autre</string>
+    <string name="reason">Raison</string>
+    <string name="my_reason">Ma raison</string>
+    <string name="change">Changement</string>
+    <string name="date_of_birth_dob">Date de naissance (Ddn)</string>
+    <string name="change_language">Changer de langue</string>
+    <string name="send">Envoyer</string>
+    <string name="settings">Paramètres</string>
 </resources>

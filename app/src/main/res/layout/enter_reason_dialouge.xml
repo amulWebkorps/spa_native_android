@@ -13,7 +13,7 @@
     android:id="@+id/textViewReason"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Reason"
+    android:text="@string/reason"
     style="@style/font_bold.black.16"
     android:layout_marginStart="@dimen/dp_40"
     android:layout_marginTop="@dimen/dp_13"
@@ -68,7 +68,7 @@
             android:paddingBottom="10dp"
             android:singleLine="true"
             style="@style/font_medium.blue43"
-            android:text="My Reason"
+            android:text="@string/my_reason"
             tools:ignore="LabelFor" />
 
     </com.google.android.material.textfield.TextInputLayout>

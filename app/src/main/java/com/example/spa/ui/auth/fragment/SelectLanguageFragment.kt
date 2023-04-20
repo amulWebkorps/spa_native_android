@@ -1,5 +1,6 @@
 package com.example.spa.ui.auth.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,20 +15,23 @@ import com.example.spa.ui.auth.adapter.LanguageAdapter
 import com.example.spa.ui.auth.adapter.TutorialAdapter
 import com.example.spa.ui.auth.dataClass.Language
 import com.example.spa.ui.auth.dataClass.Tutorial
+import com.example.spa.ui.home.activity.HomeActivity
+import com.example.spa.utilities.Constants
 import com.example.spa.utilities.hideView
 import com.example.spa.utilities.setAppLocale
 import com.example.spa.utilities.showView
 import dagger.hilt.android.AndroidEntryPoint
+
 //import kotlinx.android.synthetic.main.fragment_tutorial.*
 //import kotlinx.android.synthetic.main.fragment_tutorial.view.*
 
 @AndroidEntryPoint
-class SelectLanguageFragment :  BaseFragment(), LanguageAdapter.OnClick {
+class SelectLanguageFragment : BaseFragment(), LanguageAdapter.OnClick {
 
 
-    var  adapter:LanguageAdapter? = null
-    lateinit var list : ArrayList<Language>
-
+    var adapter: LanguageAdapter? = null
+    lateinit var list: ArrayList<Language>
+    var value = ""
     private lateinit var binding: FragmentSelectLanguageBinding
 
     override fun onCreateView(
@@ -42,35 +46,51 @@ class SelectLanguageFragment :  BaseFragment(), LanguageAdapter.OnClick {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        value = requireArguments().getString(Constants.ISOLATED).toString()
+
         binding.layoutToolBar.imageViewBack.setOnClickListener {
-            tutorialListener?.goBack()
+            if (value == Constants.SETTING) {
+                requireActivity().finish()
+            } else {
+                tutorialListener?.goBack()
+            }
         }
 
         list = ArrayList<Language>()
         list.add(
             Language(
-            getString(R.string.english),
+                getString(R.string.english),
             )
         )
 
-        list.add(Language(
-            getString(R.string.french),
-        ))
+        list.add(
+            Language(
+                getString(R.string.french),
+            )
+        )
 
-        adapter = LanguageAdapter(this,requireContext(),session.language)
+        adapter = LanguageAdapter(this, requireContext(), session.language)
         binding.recycleViewLanguage.adapter = adapter
         adapter?.setListItem(list)
     }
 
     override fun onClick(selectLanguage: String) {
 
-        if (selectLanguage == getString(R.string.french)){
+        if (selectLanguage == getString(R.string.french)) {
             setAppLocale(requireContext(), "fr")
-        }else{
+        } else {
             setAppLocale(requireContext(), "en")
         }
-        session.language=selectLanguage
-        tutorialListener?.goBack()
+        session.language = selectLanguage
+
+        if (value == Constants.SETTING) {
+            val intent = Intent(requireContext(), HomeActivity::class.java)
+            intent.putExtra(Constants.SCREEN_NAME, Constants.EDIT_PROFILE)
+            startActivity(intent)
+            requireActivity().finish()
+        } else {
+            tutorialListener!!.goBack()
+        }
     }
 
 
