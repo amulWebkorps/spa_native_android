@@ -60,6 +60,10 @@ class Session(context: Context)  {
         get() = getString(LANGUAGE)
         set(value) {putString(LANGUAGE, value)}
 
+    var appVersion: String
+        get() = getString(LANGUAGE)
+        set(value) {putString(LANGUAGE, value)}
+
     var token: String
         get() = getString(TOKEN)
         set(value) {putString(TOKEN, value)}

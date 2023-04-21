@@ -84,6 +84,7 @@ class HomeActivity : AppCompatActivity() , Listener {
             openActivity(Constants.WALLET)
         }
         setFragment()
+        versionApi()
 
 
     }
@@ -99,7 +100,7 @@ class HomeActivity : AppCompatActivity() , Listener {
             e.printStackTrace()
         }
         val ver: String = pkgInfo!!.versionName
-
+        session.appVersion = ver
 
         response()
         lifecycleScope.launchWhenCreated {

@@ -146,4 +146,5 @@
     <string name="change_language">Changer de langue</string>
     <string name="send">Envoyer</string>
     <string name="settings">Paramètres</string>
+    <string name="version">version</string>
 </resources>

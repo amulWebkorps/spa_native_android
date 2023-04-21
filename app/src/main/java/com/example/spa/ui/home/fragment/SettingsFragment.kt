@@ -76,6 +76,7 @@ class SettingsFragment:BaseFragment() {
 
     private fun setView() {
         binding.apply {
+            textViewVersion.text = getString(R.string.version) + " ("+session.appVersion+")"
             includeWallet.textViewHead.text = getString(R.string.wallet)
             includeBankDetail.textViewHead.text = getString(R.string.bank_detail)
             includeMyQrCode.textViewHead.text = getString(R.string.my_qr_code)

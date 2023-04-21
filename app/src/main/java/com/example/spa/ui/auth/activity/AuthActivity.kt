@@ -21,6 +21,7 @@ import com.example.spa.databinding.ActivityAuthBinding
 import com.example.spa.ui.auth.fragment.*
 import com.example.spa.utilities.Constants
 import com.example.spa.utilities.Resource
+import com.example.spa.utilities.core.Session
 import com.example.spa.utilities.hideView
 import com.example.spa.utilities.showMessage
 import com.example.spa.viewmodel.AuthViewModel
@@ -34,13 +35,14 @@ class AuthActivity : AppCompatActivity() ,Listener {
     private lateinit var binding: ActivityAuthBinding
     private lateinit var update: Button
     private lateinit var skip: Button
+    private lateinit var session : Session
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+          session= Session(this)
         val pm: PackageManager = applicationContext.packageManager
         val pkgName = applicationContext.packageName
         var pkgInfo: PackageInfo? = null
@@ -50,7 +52,7 @@ class AuthActivity : AppCompatActivity() ,Listener {
             e.printStackTrace()
         }
         val ver: String = pkgInfo!!.versionName
-
+         session.appVersion = ver
 
         response()
         lifecycleScope.launchWhenCreated {
