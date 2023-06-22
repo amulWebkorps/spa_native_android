@@ -146,4 +146,6 @@
     <string name="send">Send</string>
     <string name="settings">Settings</string>
     <string name="version">version</string>
+    <string name="label_address">Address (Optional)</string>
+    <string name="label_dob">Date of Birth (Optional)</string>
 </resources>

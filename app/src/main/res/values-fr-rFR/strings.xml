@@ -147,4 +147,6 @@
     <string name="send">Envoyer</string>
     <string name="settings">Paramètres</string>
     <string name="version">version</string>
+    <string name="label_address">Last Name</string>
+    <string name="label_dob">Date of Birth (Optional)</string>
 </resources>

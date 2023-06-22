@@ -2,7 +2,6 @@ package com.example.spa.ui.auth.fragment
 
 
 import android.app.DatePickerDialog
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -12,8 +11,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.spa.App
@@ -42,11 +39,11 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class SignUpFragment :  BaseFragment()  {
+class SignUpFragment : BaseFragment() {
     private lateinit var binding: FragmentSignUpBinding
     private val authViewModel: AuthViewModel by viewModels()
-     var imageUri :Uri? =  null
-     var part :MultipartBody.Part? =  null
+    var imageUri: Uri? = null
+    var part: MultipartBody.Part? = null
     var year: Int? = null
     var month: Int? = null
     var date: Int? = null
@@ -65,14 +62,16 @@ class SignUpFragment :  BaseFragment()  {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setClick()
-       // response()
+        // response()
         responseSendOtp()
 
         binding.textInputConfirmPassword.showPassword(binding.checkboxPassword.isChecked)
         binding.textInputPassword.showPassword(binding.checkboxPassword.isChecked)
     }
+
     private fun updateDateInView() {
-        val myFormat = "MM/dd/yyyy" // mention the format you need
+        //val myFormat = "MM/dd/yyyy" // mention the format you need
+        val myFormat = "dd MMM yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         binding.textInputDOB!!.setText(sdf.format(calendar.time))
     }
@@ -87,13 +86,28 @@ class SignUpFragment :  BaseFragment()  {
             }
 
         binding.textInputDOB.setOnClickListener {
-            DatePickerDialog(requireContext(),
+            val mCurrentDate = Calendar.getInstance();
+            mCurrentDate.set(
+                mCurrentDate.get(Calendar.YEAR) - 18,
+                mCurrentDate.get(Calendar.MONTH),
+                mCurrentDate.get(Calendar.DAY_OF_MONTH)
+            )
+            var intYear=calendar.get(Calendar.YEAR) - 18
+            if (binding.textInputDOB!!.text.toString().isNotEmpty()) {
+                intYear=calendar.get(Calendar.YEAR)
+            }
+            val value: Long = mCurrentDate.timeInMillis
+            val mDatePicker = DatePickerDialog(
+                requireContext(),
                 dateSetListener,
                 // set DatePickerDialog to point to today's date when it loads up
-                calendar.get(Calendar.YEAR),
+                intYear,
                 calendar.get(Calendar.MONTH),
-                calendar.get(Calendar.DAY_OF_MONTH)).show()
-    }
+                calendar.get(Calendar.DAY_OF_MONTH)
+            )
+            mDatePicker.datePicker.maxDate = value
+            mDatePicker.show()
+        }
         binding.imageViewProfile.setOnClickListener {
             imagePicker { uri ->
                 imageUri = uri
@@ -101,11 +115,19 @@ class SignUpFragment :  BaseFragment()  {
                 binding.imageViewAddPic.visibility = View.INVISIBLE
             }
         }
-        binding.textViewAlreadyAccount.setSpan(getString(R.string.sign_in) ,R.font.poppins_medium, R.color.colorBlue72){
+        binding.textViewAlreadyAccount.setSpan(
+            getString(R.string.sign_in),
+            R.font.poppins_medium,
+            R.color.colorBlue72
+        ) {
             listener?.goBack()
         }
 
-        binding.textViewTermsAndConditions.setSpan(getString(R.string.text_terms) ,R.font.poppins_medium, R.color.colorBlue72){
+        binding.textViewTermsAndConditions.setSpan(
+            getString(R.string.text_terms),
+            R.font.poppins_medium,
+            R.color.colorBlue72
+        ) {
             val url = "http://www.google.com"
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
         }
@@ -122,29 +144,29 @@ class SignUpFragment :  BaseFragment()  {
         }
 
         binding.buttonRegister.setOnClickListener {
-               if (isValidationSuccess()) {
-                    if (hasInternet(requireContext())) {
-                    session.countryCode = "+" + binding.layoutPhone.ccp.selectedCountryCode
+            if (isValidationSuccess()) {
+                if (hasInternet(requireContext())) {
+                    session.countryCode = binding.layoutPhone.ccp.selectedCountryNameCode
                     session.phoneNumber = binding.layoutPhone.editTextPhoneNumber.text.toString()
                     toggleLoader(true)
                     CoroutineScope(Dispatchers.IO).launch {
                         upload()
                     }
-                }else{
-                    showMessage(binding.root,getString(R.string.no_internet_connection))
+                } else {
+                    showMessage(binding.root, getString(R.string.no_internet_connection))
                 }
             }
         }
 
-        binding.layoutEmail.textInputEmailAddress.addTextChangedListener (object : TextWatcher {
+        binding.layoutEmail.textInputEmailAddress.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (isValidEmail()){
-                    binding.layoutEmail.imageEmailVerify.visibility=View.VISIBLE
-                }else{
-                    binding.layoutEmail.imageEmailVerify.visibility=View.INVISIBLE
+                if (isValidEmail()) {
+                    binding.layoutEmail.imageEmailVerify.visibility = View.VISIBLE
+                } else {
+                    binding.layoutEmail.imageEmailVerify.visibility = View.INVISIBLE
                 }
             }
 
@@ -155,29 +177,29 @@ class SignUpFragment :  BaseFragment()  {
         })
     }
 
-    private fun response(){
+    private fun response() {
 
         lifecycleScope.launchWhenCreated {
             authViewModel.register.collect { result ->
                 when (result) {
                     is Resource.Error -> {
                         toggleLoader(false)
-                        result.message?.let {it->
-                            showMessage(binding.root,it)
+                        result.message?.let { it ->
+                            showMessage(binding.root, it)
                         }
                     }
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         toggleLoader(false)
                         result.data?.let { it ->
-                            session.countryCode=it.country_code
-                            session.phoneNumber=it.mobile_number
-                            (requireActivity().application as App).session.user=it
+                            session.countryCode = it.country_code
+                            session.phoneNumber = it.mobile_number
+                            (requireActivity().application as App).session.user = it
                             lifecycleScope.launchWhenCreated {
                                 authViewModel.sendOtp(
                                     User(
-                                        country_code= it.country_code,
-                                        mobile_number=it.mobile_number,
+                                        country_code = it.country_code,
+                                        mobile_number = it.mobile_number,
                                     )
                                 )
                             }
@@ -207,56 +229,56 @@ class SignUpFragment :  BaseFragment()  {
 //            if (binding.imageViewProfile.drawable == null){
 //                validator.checkEmpty().errorMessage(getString(R.string.error_profile_photo)).check()
 //            }else {
-                validator.submit(binding.textInputFirstName)
-                    .checkEmpty().errorMessage(getString(R.string.error_firstName))
-                    .check()
-                validator.submit(binding.textInputLastName)
-                    .checkEmpty().errorMessage(getString(R.string.error_lastName))
-                    .check()
-                validator.submit(binding.layoutPhone.editTextPhoneNumber)
-                    .checkEmpty().errorMessage(getString(R.string.error_phone_number))
-                    .checkMinDigits(8).errorMessage(getString(R.string.error_valid_phone))
-                    .check()
-                validator.submit(binding.layoutEmail.textInputEmailAddress)
-                    .checkEmpty().errorMessage(getString(R.string.error_enter_email))
-                    .checkValidEmail().errorMessage(getString(R.string.error_valid_message))
-                    .check()
+            validator.submit(binding.textInputFirstName)
+                .checkEmpty().errorMessage(getString(R.string.error_firstName))
+                .check()
+            validator.submit(binding.textInputLastName)
+                .checkEmpty().errorMessage(getString(R.string.error_lastName))
+                .check()
+            validator.submit(binding.layoutPhone.editTextPhoneNumber)
+                .checkEmpty().errorMessage(getString(R.string.error_phone_number))
+                .checkMinDigits(8).errorMessage(getString(R.string.error_valid_phone))
+                .check()
+            validator.submit(binding.layoutEmail.textInputEmailAddress)
+                .checkEmpty().errorMessage(getString(R.string.error_enter_email))
+                .checkValidEmail().errorMessage(getString(R.string.error_valid_message))
+                .check()
 
-                validator.submit(binding.textInputPassword)
-                    .checkEmpty().errorMessage(getString(R.string.error_password))
-                    .checkMinDigits(8).errorMessage(getString(R.string.error_min_password))
-                    .check()
-                validator.submit(binding.textInputConfirmPassword)
-                    .checkEmpty().errorMessage(getString(R.string.empty_confirm_password))
-                    .matchString(binding.textInputPassword.text.toString())
-                    .errorMessage(getString(R.string.error_password_not_matched))
-                    .check()
+            validator.submit(binding.textInputPassword)
+                .checkEmpty().errorMessage(getString(R.string.error_password))
+                .checkMinDigits(8).errorMessage(getString(R.string.error_min_password))
+                .check()
+            validator.submit(binding.textInputConfirmPassword)
+                .checkEmpty().errorMessage(getString(R.string.empty_confirm_password))
+                .matchString(binding.textInputPassword.text.toString())
+                .errorMessage(getString(R.string.error_password_not_matched))
+                .check()
             if (!binding.checkBoxTermsAndConditions.isChecked) {
                 throw ApplicationException(getString(R.string.error_terms_condition))
             }
 //            }
         } catch (e: ApplicationException) {
-            showMessage(binding.root,e.message)
+            showMessage(binding.root, e.message)
             return false
         }
         return true
     }
 
-    private fun responseSendOtp(){
+    private fun responseSendOtp() {
         lifecycleScope.launchWhenCreated {
             authViewModel.sendOtp.collect { result ->
                 when (result) {
                     is Resource.Error -> {
                         toggleLoader(false)
                         result.message?.let {
-                            showMessage(binding.root,it)
+                            showMessage(binding.root, it)
                         }
                     }
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         toggleLoader(false)
 
-                        showMessage(binding.root , getString(R.string.otp_send))
+                        showMessage(binding.root, getString(R.string.otp_send))
                         listener?.replaceFragment(Screen.VERIFICATION)
                     }
                 }
@@ -265,28 +287,29 @@ class SignUpFragment :  BaseFragment()  {
     }
 
 
-    private suspend fun upload(){
+    private suspend fun upload() {
         val fileDir = requireContext().filesDir
-       val file = File(fileDir,"image.png")
+        val file = File(fileDir, "image.png")
 
 
-       if (imageUri != null) {
-           try {
-               Log.e("TAG", "upload: 1")
-               val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
-               val outputStream = FileOutputStream(file)
-               inputStream!!.copyTo(outputStream)
-               val requestFile: RequestBody = RequestBody.create(
-                   "multipart/form-data".toMediaTypeOrNull(), file
-               )
-               part = MultipartBody.Part.createFormData(
-                   "image", file.name.trim(), requestFile
-               )
-           }catch (e:Exception){}
-        }else {
-           Log.e("TAG", "upload: 2")
+        if (imageUri != null) {
+            try {
+                Log.e("TAG", "upload: 1")
+                val inputStream = requireContext().contentResolver.openInputStream(imageUri!!)
+                val outputStream = FileOutputStream(file)
+                inputStream!!.copyTo(outputStream)
+                val requestFile: RequestBody = RequestBody.create(
+                    "multipart/form-data".toMediaTypeOrNull(), file
+                )
+                part = MultipartBody.Part.createFormData(
+                    "image", file.name.trim(), requestFile
+                )
+            } catch (e: Exception) {
+            }
+        } else {
+            Log.e("TAG", "upload: 2")
 
-           part =  null
+            part = null
         }
 
         val retrofit = Retrofit.Builder()
@@ -303,6 +326,19 @@ class SignUpFragment :  BaseFragment()  {
             "text/plain".toMediaTypeOrNull(),
             binding.textInputFirstName.text.toString()
         )
+        val myFormat = "dd/MM/yyyy"
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        var sDOB = ""
+        if (binding.textInputDOB!!.text.toString().isNotEmpty()) {
+            sDOB = sdf.format(calendar.time)
+        }
+        val dob: RequestBody = RequestBody.create(
+            "text/plain".toMediaTypeOrNull(),sDOB
+        )
+        val address: RequestBody = RequestBody.create(
+            "text/plain".toMediaTypeOrNull(),
+            binding.textInputAddress.text.toString()
+        )
         val lastName: RequestBody = RequestBody.create(
             "text/plain".toMediaTypeOrNull(),
             binding.textInputLastName.text.toString()
@@ -313,7 +349,7 @@ class SignUpFragment :  BaseFragment()  {
         )
         val countryCode: RequestBody = RequestBody.create(
             "text/plain".toMediaTypeOrNull(),
-            "+"+binding.layoutPhone.ccp.selectedCountryCode
+            binding.layoutPhone.ccp.selectedCountryNameCode
         )
         val password: RequestBody = RequestBody.create(
             "text/plain".toMediaTypeOrNull(),
@@ -325,34 +361,45 @@ class SignUpFragment :  BaseFragment()  {
         )
 
         try {
-        val call: retrofit2.Response<GetUser> =  retrofit.registerUserImage(
-            email, firstName,lastName,mobileNumber,countryCode,password,confirmPassword,
-            part
-        )
+            val call: retrofit2.Response<GetUser> = retrofit.registerUserImage(
+                email,
+                firstName,
+                lastName,
+                mobileNumber,
+                countryCode,
+                dob,
+                address,
+                password,
+                confirmPassword,
+                part
+            )
 
-        if(call.isSuccessful){
-            toggleLoader(false)
-            call.body()?.let { it ->
-                session.countryCode = it.country_code
-                session.phoneNumber = it.mobile_number
+            if (call.isSuccessful) {
+                toggleLoader(false)
+                call.body()?.let { it ->
+                    session.countryCode = it.country_code
+                    session.phoneNumber = it.mobile_number
 //                (requireActivity().application as App).session.user = it
-                lifecycleScope.launchWhenCreated {
-                    authViewModel.sendOtp(
-                        User(
-                            country_code =  it.country_code,
-                            mobile_number = it.mobile_number,
+                    lifecycleScope.launchWhenCreated {
+                        authViewModel.sendOtp(
+                            User(
+                                country_code = it.country_code,
+                                mobile_number = it.mobile_number,
+                            )
                         )
-                    )
+                    }
+                    Log.e("TAG", "upload: ${it}")
                 }
-                Log.e("TAG", "upload: ${it}")
+            } else {
+                toggleLoader(false)
+                showMessage(
+                    binding.root,
+                    getErrorResponseArray(call.errorBody()).errors[0].toString()!!
+                )
             }
-        }else{
+        } catch (e: Exception) {
             toggleLoader(false)
-            showMessage(binding.root,getErrorResponseArray(call.errorBody()).errors[0].toString()!!)
-        }
-        }catch (e:Exception){
-            toggleLoader(false)
-            showMessage(binding.root,getString(R.string.no_internet_connection))
+            showMessage(binding.root, getString(R.string.no_internet_connection))
         }
     }
 }

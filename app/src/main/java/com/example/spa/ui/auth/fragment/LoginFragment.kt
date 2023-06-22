@@ -78,7 +78,7 @@ class LoginFragment :  BaseFragment() {
                 lifecycleScope.launchWhenCreated {
                     authViewModel.loginUser(
                         User(
-                            country_code= "+"+binding.Phone.ccp.selectedCountryCode,
+                            country_code= binding.Phone.ccp.selectedCountryNameCode,
                             mobile_number= binding.Phone.editTextPhoneNumber.text.toString(),
                             password= binding.textInputPassword.text.toString(),
                         )

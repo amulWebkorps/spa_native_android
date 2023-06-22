@@ -24,6 +24,8 @@ interface AuthApi {
                                   @Part("last_name") last_name:RequestBody,
                                   @Part("mobile_number") mobile_number:RequestBody,
                                   @Part("country_code") country_code:RequestBody,
+                                  @Part("dob") dob:RequestBody,
+                                  @Part("address") address:RequestBody,
                                   @Part("password") password:RequestBody,
                                   @Part("password_confirmation") password_confirmation:RequestBody,
                                   @Part image:MultipartBody.Part?,

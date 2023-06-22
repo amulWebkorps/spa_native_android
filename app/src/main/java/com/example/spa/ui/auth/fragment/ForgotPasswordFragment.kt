@@ -47,7 +47,7 @@ class ForgotPasswordFragment :BaseFragment() {
 
     private fun setClick() {
         binding.buttonContinue.setOnClickListener {
-            session.countryCode = "+"+binding.layoutPhone.ccp.selectedCountryCode
+            session.countryCode = binding.layoutPhone.ccp.selectedCountryNameCode
             session.phoneNumber = binding.layoutPhone.editTextPhoneNumber.text.toString()
 
             if (isValidationSuccess()){
@@ -56,7 +56,7 @@ class ForgotPasswordFragment :BaseFragment() {
                         authViewModel.updateMobileNumber(
                             User(
                                 email = session.user!!.email,
-                                country_code= "+"+binding.layoutPhone.ccp.selectedCountryCode,
+                                country_code= binding.layoutPhone.ccp.selectedCountryNameCode,
                                 mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
                                 )
                         )
@@ -69,7 +69,7 @@ class ForgotPasswordFragment :BaseFragment() {
                     lifecycleScope.launchWhenCreated {
                         authViewModel.sendOtp(
                             User(
-                                country_code= "+"+binding.layoutPhone.ccp.selectedCountryCode,
+                                country_code= binding.layoutPhone.ccp.selectedCountryNameCode,
                                 mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
                             )
                         )
@@ -88,7 +88,7 @@ class ForgotPasswordFragment :BaseFragment() {
             binding.textViewForgotPassword.text = getString(R.string.label_change_phone_number)
             binding.textViewForgotPasswordSubHead.text = getString(R.string.label_mobile_number_subhead)
             binding.layoutPhone.editTextPhoneNumber.setText(session.phoneNumber)
-            binding.layoutPhone.ccp.setCountryForPhoneCode(session.countryCode.toInt())
+            binding.layoutPhone.ccp.setCountryForNameCode(session.countryCode)
         }
     }
 

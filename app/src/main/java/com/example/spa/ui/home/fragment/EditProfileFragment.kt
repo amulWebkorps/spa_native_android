@@ -83,7 +83,8 @@ class EditProfileFragment : BaseFragment() {
         binding.textInputLastName.setText(session.user!!.last_name)
         binding.layoutPhone.editTextPhoneNumber.setText(session.user!!.mobile_number)
         binding.layoutPhone.editTextPhoneNumber.setTextColor(ContextCompat.getColor(requireContext(),R.color.colorGreyB2))
-        binding.layoutPhone.ccp.setCountryForPhoneCode(session.countryCode.toInt())
+        //binding.layoutPhone.ccp.setCountryForPhoneCode(session.countryCode.toInt())
+        binding.layoutPhone.ccp.setCountryForNameCode(session.countryCode)
         binding.layoutPhone.ccp.showArrow(false)
         binding.textInputEmailAddress.setText(session.user!!.email)
         binding.textInputEmailAddress.isClickable = false
