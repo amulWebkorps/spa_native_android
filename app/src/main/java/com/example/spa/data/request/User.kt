@@ -32,5 +32,13 @@ data class User(
     @SerializedName("otp_code")
     val otp_code: String?=null,
 
+    @SerializedName("business_id_card")
+    val business_id_card: String?=null,
+
+    @SerializedName("about_me")
+    val about_me: String?=null,
+
+    @SerializedName("dob")
+    val dob: String?=null,
 
     ): Parcelable

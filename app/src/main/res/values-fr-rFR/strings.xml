@@ -148,5 +148,8 @@
     <string name="settings">Paramètres</string>
     <string name="version">version</string>
     <string name="label_address">Last Name</string>
+    <string name="b_id_card">Business ID Card</string>
     <string name="label_dob">Date of Birth (Optional)</string>
+    <string name="about_me">About Me</string>
+    <string name="about_me_hint">Tell us something about yourself...</string>
 </resources>

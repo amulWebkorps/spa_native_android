@@ -131,6 +131,10 @@ fun formatDate(date: String): String {
     return SimpleDateFormat("dd MMM yyyy").format(convertedDate)
 }
 
+fun formatDateDOB(date: String): String {
+    return SimpleDateFormat("dd MMM yyyy").format(SimpleDateFormat("yyyy-MM-dd").parse(date))
+}
+
 fun convertDate(dateString: String): Date? {
     return SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(dateString)
 }

@@ -36,6 +36,15 @@ data class GetUser(
     @SerializedName("updated_at")
     val updated_at: String,
 
+    @SerializedName("dob")
+    val dob: String,
+
+    @SerializedName("business_id_card")
+    val business_id_card: String,
+
+    @SerializedName("about_me")
+    val about_me: String,
+
     @SerializedName("user_wallet")
     val user_wallet:@RawValue UserWallet,
 

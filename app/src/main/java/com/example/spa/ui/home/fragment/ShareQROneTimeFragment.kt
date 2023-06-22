@@ -62,7 +62,7 @@ class ShareQROneTimeFragment:BaseFragment() {
 
         var dimen = if (width < height) width else height
         dimen = dimen * 3 / 4
-        qrgEncoder = QRGEncoder("please write string to generate qr", null, QRGContents.Type.TEXT, dimen)
+        qrgEncoder = QRGEncoder("https://spa-native.herokuapp.com/user_payment?user_id=10&product_name=Personal%20QR", null, QRGContents.Type.TEXT, dimen)
 
         try {
             // getting our qrcode in the form of bitmap.

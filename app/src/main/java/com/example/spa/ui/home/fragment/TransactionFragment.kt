@@ -17,9 +17,10 @@ import com.example.spa.ui.home.activity.IsolatedActivity
 import com.example.spa.ui.home.adapter.ResentAdapter
 import com.example.spa.utilities.*
 import com.example.spa.viewmodel.SettingsViewModel
+import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
-class TransactionFragment:BaseFragment() {
+class TransactionFragment : BaseFragment() {
 
 
     private var doubleTapTime: Long = 0L
@@ -46,12 +47,13 @@ class TransactionFragment:BaseFragment() {
         setAdapter()
         setClick()
         resentTransactionResponse()
+        page = 0
         apiCall()
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-                page = 0
-                apiCall()
-                binding.swipeRefreshLayout.isRefreshing = false
+            page = 0
+            apiCall()
+            binding.swipeRefreshLayout.isRefreshing = false
         }
     }
 
@@ -59,24 +61,26 @@ class TransactionFragment:BaseFragment() {
     private fun setClick() {
         binding.buttonWithdrawal.setOnClickListener {
             openActivity(Constants.WALLET)
-           }
+        }
         binding.includeNoInternet.buttonTryAgain.setOnClickListener {
             page = 0
             apiCall()
         }
     }
-    private fun openActivity(fragment: String){
-        val intent= Intent(requireContext(), IsolatedActivity::class.java)
-        intent.putExtra(Constants.SCREEN_NAME,fragment)
+
+    private fun openActivity(fragment: String) {
+        val intent = Intent(requireContext(), IsolatedActivity::class.java)
+        intent.putExtra(Constants.SCREEN_NAME, fragment)
         startActivity(intent)
     }
+
     private fun setAdapter() {
         binding.recycleViewTransaction.adapter = resentTransactionAdapter
         setUpLoadMoreListener()
     }
 
 
-    private fun apiCall(){
+    private fun apiCall() {
         if (hasInternet(requireContext())) {
             binding.includeNoInternet.layoutNoInternet.hideView()
             binding.swipeRefreshLayout.showView()
@@ -86,12 +90,13 @@ class TransactionFragment:BaseFragment() {
                     session.token, page
                 )
             }
-        }else{
+        } else {
             binding.includeNoInternet.layoutNoInternet.showView()
             binding.swipeRefreshLayout.hideView()
         }
     }
-    private fun resentTransactionResponse(){
+
+    private fun resentTransactionResponse() {
         lifecycleScope.launchWhenCreated {
             settingsViewModel.transaction.collect { result ->
                 if (page == 0) {
@@ -105,7 +110,7 @@ class TransactionFragment:BaseFragment() {
                         toggleLoader(false)
                         loading = false
                         result.message?.let {
-                            showMessage(binding.root,it)
+                            showMessage(binding.root, it)
                         }
                     }
                     is Resource.Loading -> {}
@@ -113,26 +118,25 @@ class TransactionFragment:BaseFragment() {
                         toggleLoader(false)
                         loading = false
                         result.data?.let { it ->
-                            Log.e("TAG", "resentTransactionResponse: ${it.list}", )
-                            page=it.page_number
-                                if (it.page_number == 1) {
-                                    if (it.list.isEmpty()){
-                                        binding.noDataFoundLayout.textViewNoBankAccountAdded.showView()
-                                    }else {
-                                        Log.e("TAG", "resentTransactionResponse: ${it.list}", )
-                                        binding.noDataFoundLayout.textViewNoBankAccountAdded.hideView()
-                                        resentTransactionAdapter.setListItem(it.list)
-                                    }
+                            Log.e("TAG", "resentTransactionResponse: ${it.list}")
+                            page = it.page_number
+                            if (it.page_number == 1) {
+                                if (it.list.isEmpty()) {
+                                    binding.noDataFoundLayout.textViewNoBankAccountAdded.showView()
                                 } else {
-                                    resentTransactionAdapter.setListItem2(it.list)
+                                    Log.e("TAG", "resentTransactionResponse: ${it.list}")
+                                    binding.noDataFoundLayout.textViewNoBankAccountAdded.hideView()
+                                    resentTransactionAdapter.setListItem(it.list)
                                 }
+                            } else {
+                                resentTransactionAdapter.setListItem2(it.list)
                             }
+                        }
                     }
                 }
             }
         }
     }
-
 
 
     private fun setUpLoadMoreListener() {
@@ -141,6 +145,7 @@ class TransactionFragment:BaseFragment() {
             override fun onScrolledItems(recyclerView: RecyclerView, newState: Int) {
 
             }
+
             override fun callWs(): Boolean {
                 return resentTransactionAdapter.arrayList.size > Constants.DEFAULT_PAGE_SIZE
             }
@@ -150,10 +155,10 @@ class TransactionFragment:BaseFragment() {
             }
 
             override fun loadMoreItems() {
-                if (page >= 0){
-                apiCall()
-                loading = true
-            }
+                if (page != -1) {
+                    apiCall()
+                    loading = true
+                }
             }
         })
     }

@@ -12,7 +12,7 @@ object Url {
     const val USER_PROFILE = "$USER/profile"
     const val UPDATE_PHONE = "$USER/update_mobile_number"
     const val RESET_PASSWORD = "$USER/reset_password"
-    const val TRANSACTION = "$USER/transactions"
+    const val TRANSACTION = "transactions"
     const val VERSION_MANAGER = "/version_manager"
 
     const val BANK_ACCOUNTS="/bank_accounts"
