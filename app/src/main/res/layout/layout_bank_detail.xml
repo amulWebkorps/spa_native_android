@@ -1,169 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cardView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="@dimen/dp_6"
-    android:background="@color/white"
     android:layout_marginHorizontal="@dimen/dp_20"
     android:layout_marginVertical="@dimen/dp_8"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="@dimen/dp_16">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/bg"
-    android:paddingBottom="@dimen/dp_12"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageViewBg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_bg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginVertical="@dimen/dp_13"
-        android:layout_marginStart="@dimen/dp_13"/>
-
-<LinearLayout
-    android:id="@+id/layoutData"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_marginStart="@dimen/dp_18"
-    android:orientation="vertical"
-    app:layout_constraintStart_toEndOf="@id/imageViewBg"
-    app:layout_constraintTop_toTopOf="@id/imageViewBg"
-    app:layout_constraintBottom_toBottomOf="@id/imageViewBg">
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewAED"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/arpit_patidar"
-        style="@style/font_medium.black.16"
-        android:textFontWeight="500"
-        />
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewBankName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/al_qadar_bank"
-        style="@style/font_medium.grey7c.12"
-        android:textSize="@dimen/sp_14"
-        android:textFontWeight="500"
-        />
-</LinearLayout>
-
-
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewActive"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/inactive"
-        android:textColor="@color/white"
-        android:paddingHorizontal="@dimen/dp_8"
-        android:paddingVertical="@dimen/dp_4"
-        android:background="@drawable/bg_inactive"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imageViewArrow"
-        android:layout_width="@dimen/dp_16"
-        android:layout_height="@dimen/dp_16"
-        android:src="@drawable/ic_bottom_arrow"
-        android:layout_marginTop="@dimen/dp_16"
-        app:layout_constraintTop_toBottomOf="@id/textViewActive"
-        app:layout_constraintStart_toStartOf="@id/textViewActive"
-        app:layout_constraintEnd_toEndOf="@id/textViewActive"/>
-
+    android:background="@color/white"
+    app:cardCornerRadius="@dimen/dp_16"
+    app:cardElevation="@dimen/dp_6">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/layoutDetails"
+        android:id="@+id/bg"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone"
-        android:layout_marginTop="@dimen/dp_16"
-        app:layout_constraintTop_toBottomOf="@id/layoutData">
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewAccountNumber"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_12">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewBg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_16"
-            style="@style/font_medium.black.12"
-            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginVertical="@dimen/dp_13"
+            android:layout_marginStart="@dimen/dp_13"
+            android:src="@drawable/ic_bg"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/account_number_"/>
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/layoutData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dp_18"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/imageViewBg"
+            app:layout_constraintStart_toEndOf="@id/imageViewBg"
+            app:layout_constraintTop_toTopOf="@id/imageViewBg">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewAED"
+                style="@style/font_medium.black.16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/arpit_patidar"
+                android:textFontWeight="500" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewBankName"
+                style="@style/font_medium.grey7c.12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/al_qadar_bank"
+                android:textFontWeight="500"
+                android:textSize="@dimen/sp_14" />
+        </LinearLayout>
+
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewAccountNumberValue"
+            android:id="@+id/textViewActive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_4"
-            style="@style/font_medium.grey7c.12"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toEndOf="@id/textViewAccountNumber"
-            android:text="123456789"/>
+            android:background="@drawable/bg_inactive"
+            android:paddingHorizontal="@dimen/dp_8"
+            android:paddingVertical="@dimen/dp_4"
+            android:text="@string/inactive"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewAccountType"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_16"
-            style="@style/font_medium.black.12"
-            app:layout_constraintTop_toBottomOf="@id/textViewAccountNumber"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/account_type_"/>
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imageViewArrow"
+            android:layout_width="@dimen/dp_16"
+            android:layout_height="@dimen/dp_16"
+            android:layout_marginTop="@dimen/dp_16"
+            android:src="@drawable/ic_bottom_arrow"
+            app:layout_constraintEnd_toEndOf="@id/textViewActive"
+            app:layout_constraintStart_toStartOf="@id/textViewActive"
+            app:layout_constraintTop_toBottomOf="@id/textViewActive" />
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewAccountTypeValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_4"
-            style="@style/font_medium.grey7c.12"
-            app:layout_constraintTop_toBottomOf="@id/textViewAccountNumber"
-            app:layout_constraintStart_toEndOf="@id/textViewAccountType"
-            android:text=""/>
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewIFSC"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_16"
-            style="@style/font_medium.black.12"
-            app:layout_constraintTop_toBottomOf="@id/textViewAccountType"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/ifsc_code_"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewIFSCValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_4"
-            style="@style/font_medium.grey7c.12"
-            app:layout_constraintTop_toBottomOf="@id/textViewAccountType"
-            app:layout_constraintStart_toEndOf="@id/textViewIFSC"
-            android:text=""/>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutDetails"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp_16"
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewFrequency"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_16"
-            style="@style/font_medium.black.12"
-            app:layout_constraintTop_toBottomOf="@id/textViewIFSC"
-            app:layout_constraintStart_toStartOf="parent"
-            android:text="@string/frequency_"/>
+            app:layout_constraintTop_toBottomOf="@id/layoutData">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/textViewFrequencyValue"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_4"
-            style="@style/font_medium.grey7c.12"
-            app:layout_constraintTop_toBottomOf="@id/textViewIFSC"
-            app:layout_constraintStart_toEndOf="@id/textViewFrequency"
-            android:text=""/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewAccountNumber"
+                style="@style/font_medium.black.12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:text="@string/account_number_"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewAccountNumberValue"
+                style="@style/font_medium.grey7c.12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_4"
+                android:text="123456789"
+                app:layout_constraintStart_toEndOf="@id/textViewAccountNumber"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imageViewDelete"
+                android:layout_marginEnd="@dimen/dp_16"
+                android:layout_marginTop="@dimen/dp_16"
+                android:layout_width="@dimen/dp_16"
+                android:layout_height="@dimen/dp_16"
+                android:src="@drawable/ic_delete"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewAccountType"
+                style="@style/font_medium.black.12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:text="@string/account_type_"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewAccountNumber" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewAccountTypeValue"
+                style="@style/font_medium.grey7c.12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_4"
+                android:text=""
+                app:layout_constraintStart_toEndOf="@id/textViewAccountType"
+                app:layout_constraintTop_toBottomOf="@id/textViewAccountNumber" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewIFSC"
+                style="@style/font_medium.black.12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:text="@string/ifsc_code_"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewAccountType" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewIFSCValue"
+                style="@style/font_medium.grey7c.12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_4"
+                android:text=""
+                app:layout_constraintStart_toEndOf="@id/textViewIFSC"
+                app:layout_constraintTop_toBottomOf="@id/textViewAccountType" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewFrequency"
+                style="@style/font_medium.black.12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_16"
+                android:text="@string/frequency_"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textViewIFSC" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/textViewFrequencyValue"
+                style="@style/font_medium.grey7c.12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_4"
+                android:text=""
+                app:layout_constraintStart_toEndOf="@id/textViewFrequency"
+                app:layout_constraintTop_toBottomOf="@id/textViewIFSC" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

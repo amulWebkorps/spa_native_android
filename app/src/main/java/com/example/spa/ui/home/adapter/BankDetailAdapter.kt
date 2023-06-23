@@ -9,9 +9,10 @@ import com.example.spa.databinding.FragmentTutorialBinding
 import com.example.spa.databinding.LayoutBankDetailBinding
 import com.example.spa.utilities.hideView
 import com.example.spa.utilities.showView
+
 //import kotlinx.android.synthetic.main.layout_bank_detail.view.*
 
-class BankDetailAdapter(val onClick:OnClick) :
+class BankDetailAdapter(val onClick: OnClick) :
     RecyclerView.Adapter<BankDetailAdapter.BankDetailViewHolder>() {
 
     private lateinit var binding: FragmentTutorialBinding
@@ -20,27 +21,30 @@ class BankDetailAdapter(val onClick:OnClick) :
     var isShow = false
 
 
-    inner class BankDetailViewHolder( val binding: LayoutBankDetailBinding) :
+    inner class BankDetailViewHolder(val binding: LayoutBankDetailBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
             binding.bg.setOnClickListener {
-                isShow = if (!isShow){
+                isShow = if (!isShow) {
                     binding.layoutDetails.showView()
                     binding.imageViewArrow.setImageResource(R.drawable.ic_up_arrow)
                     true
-                }else{
+                } else {
                     binding.layoutDetails.hideView()
                     binding.imageViewArrow.setImageResource(R.drawable.ic_bottom_arrow)
                     false
                 }
             }
-//            binding.imageViewDelete.setOnClickListener {
-//                onClick.onDeleteClick(absoluteAdapterPosition,arrayList[absoluteAdapterPosition].id)
-//            }
+            binding.imageViewDelete.setOnClickListener {
+                onClick.onDeleteClick(
+                    absoluteAdapterPosition,
+                    arrayList[absoluteAdapterPosition].id
+                )
             }
-
-
         }
+
+
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BankDetailViewHolder {
         val binding = LayoutBankDetailBinding.inflate(
@@ -93,8 +97,8 @@ class BankDetailAdapter(val onClick:OnClick) :
 
     override fun getItemCount(): Int = arrayList.size
 
-    interface OnClick{
-        fun onDeleteClick(pos:Int,id:Int)
+    interface OnClick {
+        fun onDeleteClick(pos: Int, id: Int)
     }
 
 
@@ -104,11 +108,11 @@ class BankDetailAdapter(val onClick:OnClick) :
         notifyDataSetChanged()
     }
 
-    fun deleteItem(pos:Int){
-        if (pos<arrayList.size) {
-                arrayList.removeAt(pos)
-                notifyDataSetChanged()
-            }
+    fun deleteItem(pos: Int) {
+        if (pos < arrayList.size) {
+            arrayList.removeAt(pos)
+            notifyDataSetChanged()
+        }
 
     }
 }
