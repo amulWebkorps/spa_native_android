@@ -2,6 +2,7 @@ package com.example.spa.data.remote
 
 import com.example.spa.Url
 import com.example.spa.data.request.AddBankDetailRequest
+import com.example.spa.data.request.AddQRCodeRequest
 import com.example.spa.data.request.GraphRequest
 import com.example.spa.data.response.*
 import com.example.spa.utilities.Constants
@@ -28,5 +29,9 @@ interface SettingsApi {
     suspend fun graphData(@Header("Authorization")token:String, @Query(
         Constants.TYPE
     )type :String): Response<GraphResponse>
+
+    @POST(Url.QR_CODES)
+    suspend fun getQRCodes(@Header("Authorization")token:String , @Body bankDetailRequest: AddQRCodeRequest): Response<AddQRCodeResponse>
+
 
 }

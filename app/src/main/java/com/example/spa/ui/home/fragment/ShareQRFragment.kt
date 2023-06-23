@@ -9,8 +9,18 @@ import android.util.Log
 import android.view.*
 import androidmads.library.qrgenearator.QRGContents
 import androidmads.library.qrgenearator.QRGEncoder
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.example.spa.R
 import com.example.spa.base.BaseFragment
+import com.example.spa.data.request.AddBankDetailRequest
+import com.example.spa.data.request.AddQRCodeRequest
 import com.example.spa.databinding.FragmentShareQrBinding
+import com.example.spa.utilities.Constants
+import com.example.spa.utilities.Resource
+import com.example.spa.utilities.showMessage
+import com.example.spa.viewmodel.AuthViewModel
+import com.example.spa.viewmodel.SettingsViewModel
 import com.google.zxing.WriterException
 
 
@@ -18,37 +28,53 @@ class ShareQRFragment : BaseFragment() {
     var bitmap: Bitmap? = null
     var qrgEncoder: QRGEncoder? = null
     private lateinit var binding: FragmentShareQrBinding
-
+    private var amountQR: String? = ""
+    private var reasonQR: String? = ""
+    private val settingsViewModel: SettingsViewModel by viewModels()
+    var linkUrl: String? = ""
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentShareQrBinding.inflate(layoutInflater)
+        amountQR = requireArguments().getString(Constants.AMOUNT_QR).toString()
+        reasonQR = requireArguments().getString(Constants.REASON_QR).toString()
+        Log.e("amountQR", "" + amountQR)
+        Log.e("reasonQR", "" + reasonQR)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        generateQR()
         setClick()
+        getQRCodesResponse()
+        getQRCodes()
     }
 
     private fun setClick() {
         binding.includeToolbar.imageViewBack.setOnClickListener {
             requireActivity().finish()
         }
+        binding.textView.text = String.format(
+            getString(R.string.scan_qa_code_to_generate_payment_link_of_100_aed),
+            amountQR
+        )
         binding.shareQRCode.setOnClickListener {
-            val shareIntent = Intent(Intent.ACTION_SEND)
-            shareIntent.type = "text/plain"
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Insert Subject here")
-            val app_url = qrgEncoder!!.encodeAsBitmap().toString()
-            shareIntent.putExtra(Intent.EXTRA_TEXT, app_url)
-            startActivity(Intent.createChooser(shareIntent, "Share Link"))
+            if (linkUrl!!.isNotEmpty()) {
+                val shareIntent = Intent(Intent.ACTION_SEND)
+                shareIntent.type = "text/plain"
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
+                //val app_url = qrgEncoder!!.encodeAsBitmap().toString()
+                shareIntent.putExtra(Intent.EXTRA_TEXT,
+                    "Greeting's from My Tips, ${session.user!!.first_name} ${session.user!!.last_name} has shared a payment link of $amountQR AED with you. Please click on the link to proceed with the payment :- $linkUrl"
+                )
+                startActivity(Intent.createChooser(shareIntent, "Share Link"))
+            }
         }
     }
 
-    private fun generateQR() {
+    private fun generateQR(paymentLink: String) {
 
         val manager = requireContext().getSystemService(WINDOW_SERVICE) as WindowManager?
         val display: Display = manager!!.defaultDisplay
@@ -61,7 +87,7 @@ class ShareQRFragment : BaseFragment() {
         var dimen = if (width < height) width else height
         dimen = dimen * 3 / 4
         qrgEncoder = QRGEncoder(
-            "https://spa-native.herokuapp.com/user_payment?user_id=10&product_name=Personal%20QR",
+            paymentLink,
             null,
             QRGContents.Type.TEXT,
             dimen
@@ -77,6 +103,42 @@ class ShareQRFragment : BaseFragment() {
             // this method is called for 
             // exception handling.
             Log.e("TAG", "generateQR: ${e.toString()}")
+        }
+    }
+
+    private fun getQRCodes() {
+        toggleLoader(true)
+        lifecycleScope.launchWhenCreated {
+            settingsViewModel.getQRCodes(
+                session.token, AddQRCodeRequest(
+                    product_name = reasonQR!!,
+                    amount = amountQR!!,
+                )
+            )
+        }
+    }
+
+    private fun getQRCodesResponse() {
+        Log.e("payment_link", "result")
+        lifecycleScope.launchWhenCreated {
+            settingsViewModel.getQRCodes.collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        toggleLoader(false)
+                        result.message?.let { showMessage(binding.root, it) }
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        toggleLoader(false)
+                        result.data?.let { it ->
+                            if (it?.url != null && it.url.isNotEmpty()) {
+                                linkUrl = it.url
+                                generateQR(it.url)
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 

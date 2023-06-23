@@ -2,6 +2,7 @@ package com.example.spa.data.services
 
 import com.example.spa.data.remote.SettingsApi
 import com.example.spa.data.request.AddBankDetailRequest
+import com.example.spa.data.request.AddQRCodeRequest
 import com.example.spa.data.request.GraphRequest
 import com.example.spa.data.response.*
 import com.example.spa.repo.settings.SettingsRepository
@@ -127,6 +128,32 @@ class SettingsService constructor(
                     emit(Resource.Loading(false))
                     emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0]!!.toString()))
 
+                }
+            } catch (e: IOException) {
+                emit(Resource.Loading(false))
+                emit(Resource.Error("Something went wrong"))
+            } catch (e: HttpException) {
+                emit(Resource.Loading(false))
+                emit(Resource.Error("Something went wrong"))
+            }
+        }
+    }
+
+    override suspend fun getQRCodes(
+        token: String,
+        bankDetailRequest: AddQRCodeRequest
+    ): Flow<Resource<AddQRCodeResponse>> {
+        return flow {
+            emit(Resource.Loading(true))
+
+            try {
+                val response = settingsApi.getQRCodes(token, bankDetailRequest)
+                if (response.isSuccessful) {
+                    emit(Resource.Loading(false))
+                    emit(Resource.Success(response.body()))
+                } else {
+                    emit(Resource.Loading(false))
+                    emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0]!!.toString()))
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))

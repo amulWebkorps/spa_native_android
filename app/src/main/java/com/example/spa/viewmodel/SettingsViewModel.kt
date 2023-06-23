@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.spa.data.request.AddBankDetailRequest
+import com.example.spa.data.request.AddQRCodeRequest
 import com.example.spa.data.request.GraphRequest
 import com.example.spa.data.response.*
 import com.example.spa.repo.settings.SettingsRepository
@@ -33,6 +34,9 @@ class SettingsViewModel @Inject constructor(
 
     private val _graphData = MutableSharedFlow<Resource<GraphResponse>>()
     val graphData = _graphData.asSharedFlow()
+
+    private val _getQRCodes = MutableSharedFlow<Resource<AddQRCodeResponse>>()
+    val getQRCodes = _getQRCodes.asSharedFlow()
 
 
     fun addBankDetail(token:String,addBankDetailRequest: AddBankDetailRequest){
@@ -138,6 +142,27 @@ class SettingsViewModel @Inject constructor(
                     }
                 }
                 Log.e("TAG", "_graphData: $result")
+            }
+        }
+    }
+
+    fun getQRCodes(token:String,addBankDetailRequest: AddQRCodeRequest){
+        viewModelScope.launch {
+            settingsRepository.getQRCodes(token,addBankDetailRequest).collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        result.message?.let {
+                            _getQRCodes.emit(Resource.Error(result.message))
+                        }
+                    }
+                    is Resource.Loading -> {
+                        _getQRCodes.emit(Resource.Loading(result.isLoading))
+                    }
+                    is Resource.Success -> {
+                        _getQRCodes.emit(Resource.Success(result.data))
+                    }
+                }
+                Log.e("TAG", "add bank detail: $result")
             }
         }
     }

@@ -20,4 +20,5 @@ object Url {
     const val USER_UPDATE="$USER/update"
     const val GRAPH_DATA="$USER/graph_data"
     const val V2_USER_UPDATE = "$V2_USER/update"
+    const val QR_CODES="/qr_codes"
 }

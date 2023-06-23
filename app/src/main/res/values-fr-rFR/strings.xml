@@ -131,7 +131,7 @@
     <string name="add_bank_details">Ajouter des coordonnées bancaires</string>
     <string name="my_qr_code">Mon code QR</string>
     <string name="transaction_successful">Opération réussie !!</string>
-    <string name="scan_qa_code_to_generate_payment_link_of_100_aed">Scannez le code QR pour générer un lien de paiement de 100 AED</string>
+    <string name="scan_qa_code_to_generate_payment_link_of_100_aed">Scannez le code QR pour générer un lien de paiement de %s AED</string>
     <string name="share_qr_one_time_text">Si vous avez apprécié votre expérience, un pourboire serait grandement apprécié</string>
     <string name="withdraw">Retirer</string>
     <string name="restoration">Restauration</string>

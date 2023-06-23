@@ -25,6 +25,8 @@ class Constants {
         const val SETTING = "setting"
 
         const val DEFAULT_PAGE_SIZE=9
+        const val AMOUNT_QR = "amount_qr"
+        const val REASON_QR = "reason_qr"
     }
 
 

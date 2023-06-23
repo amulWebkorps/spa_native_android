@@ -3,6 +3,7 @@ package com.example.spa.ui.home.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.spa.R
@@ -15,7 +16,7 @@ import com.example.spa.utilities.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class IsolatedActivity : AppCompatActivity() , IsolatedListener {
+class IsolatedActivity : AppCompatActivity(), IsolatedListener {
 
     private lateinit var binding: ActivityIsolatedBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,24 +25,27 @@ class IsolatedActivity : AppCompatActivity() , IsolatedListener {
         binding = ActivityIsolatedBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
         when (intent.extras?.get(Constants.SCREEN_NAME)) {
             Constants.EDIT_PROFILE -> {
-                loadFragment(EditProfileFragment(),"")
+                loadFragment(EditProfileFragment(), "")
             }
             Constants.BANK_DETAIL -> {
-                loadFragment(BankDetailsFragment(),"")
+                loadFragment(BankDetailsFragment(), "")
             }
             Constants.WALLET -> {
-                loadFragment(WalletFragment(),"")
+                loadFragment(WalletFragment(), "")
             }
             Constants.SHARE_QR -> {
-                loadFragment(ShareQRFragment(),"")
+                val amountQR = intent.extras?.get(Constants.AMOUNT_QR).toString()
+                val reasonQR = intent.extras?.get(Constants.REASON_QR).toString()
+                loadFragmentQR(ShareQRFragment(), "", amountQR, reasonQR)
             }
             Constants.SHARE_QR_ONE_TIME -> {
-                loadFragment(ShareQROneTimeFragment(),"")
+                loadFragment(ShareQROneTimeFragment(), "")
             }
             Constants.CHANGE_LANGUAGE -> {
-                loadFragment(SelectLanguageFragment(),Constants.SETTING)
+                loadFragment(SelectLanguageFragment(), Constants.SETTING)
             }
 
         }
@@ -56,12 +60,27 @@ class IsolatedActivity : AppCompatActivity() , IsolatedListener {
             this.finish()
         }
     }
-     private fun loadFragment(fragment: Fragment,bundleValue: String){
-         val args = Bundle()
-         args.putString(Constants.ISOLATED,bundleValue)
-         fragment.arguments = args
-         supportFragmentManager.beginTransaction().add(R.id.placeHolder, fragment).commit()
-     }
+
+    private fun loadFragment(fragment: Fragment, bundleValue: String) {
+        val args = Bundle()
+        args.putString(Constants.ISOLATED, bundleValue)
+        fragment.arguments = args
+        supportFragmentManager.beginTransaction().add(R.id.placeHolder, fragment).commit()
+    }
+
+    private fun loadFragmentQR(
+        fragment: Fragment,
+        bundleValue: String,
+        amountQR: String,
+        reasonQR: String
+    ) {
+        val args = Bundle()
+        args.putString(Constants.ISOLATED, bundleValue)
+        args.putString(Constants.AMOUNT_QR, amountQR)
+        args.putString(Constants.REASON_QR, reasonQR)
+        fragment.arguments = args
+        supportFragmentManager.beginTransaction().add(R.id.placeHolder, fragment).commit()
+    }
 
 
     override fun replaceFragment(screen: BankDetailScreen, value: String?) {
@@ -74,12 +93,12 @@ class IsolatedActivity : AppCompatActivity() , IsolatedListener {
         args.putString(Constants.AUTH, value)
         fragment.arguments = args
 
-        val fm=supportFragmentManager.beginTransaction()
+        val fm = supportFragmentManager.beginTransaction()
         fm.replace(R.id.placeHolder, fragment)
             .addToBackStack(null)
         val bsc = supportFragmentManager.backStackEntryCount
 //        if (bsc > 1) {
-            supportFragmentManager.popBackStack()
+        supportFragmentManager.popBackStack()
 //        }
         fm.commit()
 

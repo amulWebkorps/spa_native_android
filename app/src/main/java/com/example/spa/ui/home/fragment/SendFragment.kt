@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.spa.R
 
 import com.example.spa.base.BaseFragment
@@ -39,19 +38,26 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
     private val settingsViewModel: SettingsViewModel by viewModels()
 
     val resentTransactionAdapter = ResentTransactionAdapter()
-    val selectMoneyAdapter=SelectMoneyAdapter(this)
+    val selectMoneyAdapter = SelectMoneyAdapter(this)
 
-    val list= ArrayList<AddMoney>()
+    val list = ArrayList<AddMoney>()
     private lateinit var binding: FragmentSendBinding
     private lateinit var barChartStyle: BarChartStyle
-    var pos:Int = 0
-    var LIST_MONTHLY = arrayOf(context.getString(R.string.weekly), context.getString(R.string.monthly))
-    var LIST = arrayOf(context.getString(R.string.restoration), context.getString(R.string.concierge_hotel_services),context.getString(R.string.transportations),context.getString(R.string.sale),context.getString(R.string.other))
+    var pos: Int = 0
+    var LIST_MONTHLY =
+        arrayOf(context.getString(R.string.weekly), context.getString(R.string.monthly))
+    var LIST = arrayOf(
+        context.getString(R.string.restoration),
+        context.getString(R.string.concierge_hotel_services),
+        context.getString(R.string.transportations),
+        context.getString(R.string.sale),
+        context.getString(R.string.other)
+    )
 
     var dialog: Dialog = Dialog(context)
-    private lateinit var editText:AutoCompleteTextView
-    private lateinit var cancel:ImageView
-    private lateinit var send:View
+    private lateinit var editText: AutoCompleteTextView
+    private lateinit var cancel: ImageView
+    private lateinit var send: View
 
 
     override fun onCreateView(
@@ -69,25 +75,26 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
         setAdapter()
         setClick()
 //        resentTransactionResponse()
-      //  apiCall()
+        //  apiCall()
         graphDataResponse()
         setRecycleView()
-       // apiCallGraph("weekly")
+        // apiCallGraph("weekly")
     }
+
     private fun apiCall() {
         if (hasInternet(requireContext())) {
             internetManage(true)
             lifecycleScope.launchWhenCreated {
-                 settingsViewModel.transactionList(
+                settingsViewModel.transactionList(
                     session.token, 0
                 )
             }
-        }else{
+        } else {
             internetManage(false)
         }
     }
 
-    private fun apiCallGraph(day:String){
+    private fun apiCallGraph(day: String) {
         if (hasInternet(requireContext())) {
             internetManage(true)
             lifecycleScope.launchWhenCreated {
@@ -95,28 +102,31 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                     session.token, day
                 )
             }
-        }else{
+        } else {
             internetManage(false)
         }
     }
 
-    private fun internetManage(boolean: Boolean){
-        if (boolean){
+    private fun internetManage(boolean: Boolean) {
+        if (boolean) {
             binding.includeNoInternet.layoutNoInternet.hideView()
             binding.layoutAmount.showView()
             binding.layoutGraph.showView()
             binding.LayoutResentTransaction.showView()
 
-        }else{
+        } else {
             binding.includeNoInternet.layoutNoInternet.showView()
             binding.layoutAmount.hideView()
             binding.layoutGraph.hideView()
             binding.LayoutResentTransaction.hideView()
         }
     }
-    private fun openActivity(fragment: String){
-        val intent= Intent(requireContext(), IsolatedActivity::class.java)
-        intent.putExtra(Constants.SCREEN_NAME,fragment)
+
+    private fun openActivity(fragment: String, amountQR: String, reasonQR: String) {
+        val intent = Intent(requireContext(), IsolatedActivity::class.java)
+        intent.putExtra(Constants.SCREEN_NAME, fragment)
+        intent.putExtra(Constants.AMOUNT_QR, amountQR)
+        intent.putExtra(Constants.REASON_QR, reasonQR)
         startActivity(intent)
     }
 
@@ -140,28 +150,35 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
         selectMoneyAdapter.setListItem(list)
         binding!!.recycleViewAmount.adapter = selectMoneyAdapter
     }
+
     private fun setClick() {
         val adapter2: ArrayAdapter<String> = ArrayAdapter(
             requireContext(),
             R.layout.layout_item_monthly,
             LIST_MONTHLY
         )
-            binding.spinner2.adapter = adapter2;
-            binding.spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-              try {
-                  (parent.getChildAt(0) as TextView?)!!.setTextColor(Color.WHITE)
-                  (parent.getChildAt(0) as TextView?)!!.setCompoundDrawablesWithIntrinsicBounds(
-                      0,
-                      0,
-                      R.drawable.ic_bottom_arrow_white,
-                      0
-                  )
-                  (parent.getChildAt(0) as TextView?)!!.compoundDrawablePadding = 10;
-                  pos = position
-                  fillBarChartData()
+        binding.spinner2.adapter = adapter2;
+        binding.spinner2.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                try {
+                    (parent.getChildAt(0) as TextView?)!!.setTextColor(Color.WHITE)
+                    (parent.getChildAt(0) as TextView?)!!.setCompoundDrawablesWithIntrinsicBounds(
+                        0,
+                        0,
+                        R.drawable.ic_bottom_arrow_white,
+                        0
+                    )
+                    (parent.getChildAt(0) as TextView?)!!.compoundDrawablePadding = 10;
+                    pos = position
+                    fillBarChartData()
 
-              }catch (e : Exception){}
+                } catch (e: Exception) {
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -182,8 +199,13 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                 cancel = dialog.findViewById(R.id.imageViewCross)
                 send = dialog.findViewById(R.id.buttonSend)
                 send.setOnClickListener {
-                    openActivity(Constants.SHARE_QR)
-                     dialog.dismiss()
+                    if (editText.text.toString() == getString(R.string.my_reason)) {
+                        showMessage(binding.root, "Please select reason")
+                    } else {
+                        openActivity(Constants.SHARE_QR,binding.editTextAmount.text.toString(),editText.text.toString())
+                        dialog.dismiss()
+                    }
+
                 }
                 cancel.setOnClickListener { dialog.dismiss() }
                 val adapter: ArrayAdapter<String> = ArrayAdapter(
@@ -198,14 +220,13 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
     }
 
 
-
     private fun isValid(): Boolean {
         try {
             validator.submit(binding.editTextAmount)
                 .checkEmpty().errorMessage(getString(R.string.error_enter_amount))
                 .check()
         } catch (e: ApplicationException) {
-            showMessage(binding.root,e.message)
+            showMessage(binding.root, e.message)
             return false
         }
         return true
@@ -223,22 +244,22 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
         listChartDayValues.clear()
         listBarEntry.clear()
 
-        if (pos ==0) {
+        if (pos == 0) {
             apiCallGraph("weekly")
-        }else{
+        } else {
             apiCallGraph("monthly")
         }
     }
 
     private fun setUpBarChart() {
-        barChartStyle = if(pos == 1) {
+        barChartStyle = if (pos == 1) {
 
             BarChartStyle(
                 requireContext(),
                 listMonths,
                 ANALYTICS.MONTH(TIMES = listMonths.size)
             )
-        }else{
+        } else {
             BarChartStyle(
                 requireContext(),
                 listDays,
@@ -246,10 +267,10 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
             )
         }
         listChartDayValues.forEachIndexed { index, chartDays ->
-           // if (chartDays.amount.toFloat() == 0f) {
-                //chartDays.amount = 100
+            // if (chartDays.amount.toFloat() == 0f) {
+            //chartDays.amount = 100
             //}
-                listBarEntry.add(BarEntry(index.toFloat(), chartDays.amount.toFloat()))
+            listBarEntry.add(BarEntry(index.toFloat(), chartDays.amount.toFloat()))
         }
 
         val barDataSet = BarDataSet(listBarEntry, "BarChartStyle")
@@ -271,13 +292,12 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
     }
 
 
-
     private fun setAdapter() {
         binding.recycleViewTransaction.adapter = resentTransactionAdapter
     }
 
 
-    private fun resentTransactionResponse(){
+    private fun resentTransactionResponse() {
         lifecycleScope.launchWhenCreated {
             settingsViewModel.transaction.collect { result ->
                 toggleLoader(true)
@@ -289,27 +309,27 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                         toggleLoader(false)
                         binding.LayoutResentTransaction.hideView()
                         result.message?.let {
-                            showMessage(binding.root,it)
+                            showMessage(binding.root, it)
                         }
                     }
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         toggleLoader(false)
                         result.data?.let { it ->
-                            if (it.list.isEmpty()){
+                            if (it.list.isEmpty()) {
                                 binding.LayoutResentTransaction.hideView()
-                            }else{
+                            } else {
                                 binding.LayoutResentTransaction.showView()
                                 resentTransactionAdapter.setListItem(it.list)
                             }
-                           }
+                        }
                     }
                 }
             }
         }
     }
 
-    private fun graphDataResponse(){
+    private fun graphDataResponse() {
         lifecycleScope.launchWhenCreated {
             settingsViewModel.graphData.collect { result ->
                 toggleLoader(true)
@@ -317,7 +337,7 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                     is Resource.Error -> {
                         toggleLoader(false)
                         result.message?.let {
-                            showMessage(binding.root,it)
+                            showMessage(binding.root, it)
                         }
                     }
                     is Resource.Loading -> {}
@@ -330,34 +350,34 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
 
                                 for (i in 0 until it.list.size) {
                                     listDays.add(it.list[i])
-                                    listChartDayValues.add(i,it.list[i])
-                                    if(it.list[i].amount != 0){
+                                    listChartDayValues.add(i, it.list[i])
+                                    if (it.list[i].amount != 0) {
                                         totalCount.add(it.list[i])
                                     }
                                 }
 
-                                if (totalCount.size == 0){
+                                if (totalCount.size == 0) {
                                     binding.barChart.hideView()
                                     binding.textViewGraphNoDataFound.showView()
-                                }else{
+                                } else {
                                     binding.barChart.showView()
                                     binding.textViewGraphNoDataFound.hideView()
                                 }
                                 setUpBarChart()
-                            }else{
+                            } else {
                                 listMonths.clear()
                                 totalCount.clear()
                                 for (i in 0 until it.list.size) {
                                     listMonths.add(it.list[i])
-                                    listChartDayValues.add(i,it.list[i])
-                                    if(it.list[i].amount != 0){
+                                    listChartDayValues.add(i, it.list[i])
+                                    if (it.list[i].amount != 0) {
                                         monthlyTotalCount.add(it.list[i])
                                     }
                                 }
-                                if (monthlyTotalCount.size == 0){
+                                if (monthlyTotalCount.size == 0) {
                                     binding.barChart.hideView()
                                     binding.textViewGraphNoDataFound.showView()
-                                }else{
+                                } else {
                                     binding.barChart.showView()
                                     binding.textViewGraphNoDataFound.hideView()
                                 }
@@ -387,8 +407,9 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                 }
                 "+170" -> {
                     editTextAmount.setText("170")
-                }else ->{
-                   editTextAmount.setText("")
+                }
+                else -> {
+                    editTextAmount.setText("")
                 }
             }
 
