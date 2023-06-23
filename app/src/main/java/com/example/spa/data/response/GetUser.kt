@@ -50,4 +50,7 @@ data class GetUser(
 
     @SerializedName("image")
     val image: String,
+
+    @SerializedName("payment_link")
+    val payment_link: String,
 ): Parcelable

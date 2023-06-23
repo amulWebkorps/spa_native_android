@@ -14,10 +14,10 @@ import com.example.spa.databinding.FragmentShareQrBinding
 import com.google.zxing.WriterException
 
 
-class ShareQRFragment:BaseFragment() {
+class ShareQRFragment : BaseFragment() {
     var bitmap: Bitmap? = null
     var qrgEncoder: QRGEncoder? = null
-    private lateinit var binding:FragmentShareQrBinding
+    private lateinit var binding: FragmentShareQrBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +30,7 @@ class ShareQRFragment:BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-         generateQR()
+        generateQR()
         setClick()
     }
 
@@ -50,7 +50,7 @@ class ShareQRFragment:BaseFragment() {
 
     private fun generateQR() {
 
-         val manager = requireContext().getSystemService(WINDOW_SERVICE) as WindowManager?
+        val manager = requireContext().getSystemService(WINDOW_SERVICE) as WindowManager?
         val display: Display = manager!!.defaultDisplay
         val point = Point()
         display.getSize(point);
@@ -60,7 +60,12 @@ class ShareQRFragment:BaseFragment() {
 
         var dimen = if (width < height) width else height
         dimen = dimen * 3 / 4
-        qrgEncoder = QRGEncoder("https://spa-native.herokuapp.com/user_payment?user_id=10&product_name=Personal%20QR", null, QRGContents.Type.TEXT, dimen)
+        qrgEncoder = QRGEncoder(
+            "https://spa-native.herokuapp.com/user_payment?user_id=10&product_name=Personal%20QR",
+            null,
+            QRGContents.Type.TEXT,
+            dimen
+        )
 
         try {
             // getting our qrcode in the form of bitmap.
