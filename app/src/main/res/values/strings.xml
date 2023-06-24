@@ -68,7 +68,7 @@
     <string name="withdrawal">Withdrawal</string>
     <string name="total_amount">Total Amount</string>
     <string name="_4000_aed">4000 AED</string>
-    <string name="enter_amount">Enter Amount</string>
+    <string name="enter_amount">Enter Amount*</string>
     <string name="label_logout">Log out</string>
     <string name="camera">Camera</string>
     <string name="gallery">Gallery</string>

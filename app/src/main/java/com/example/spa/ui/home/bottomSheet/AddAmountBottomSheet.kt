@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
-import com.example.spa.App
 import com.example.spa.R
 import com.example.spa.base.BaseBottomSheetDialogFragment
 import com.example.spa.databinding.LayoutWithdrawalBottomsheetBinding
@@ -39,9 +38,7 @@ class AddAmountBottomSheet(private val onclick:(Int)->Unit):BaseBottomSheetDialo
             this!!.buttonWithdrawal.setOnClickListener {
                   onclick.invoke(it!!.id)
               }
-            try {
-                editTextEnterAmount.setText((requireActivity().application as App).session.user!!.user_wallet.balance.toString() + " AED")
-            }catch (e:Exception){}
+
             editTextEnterAmount.addTextChangedListener (object : TextWatcher {
                 override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 

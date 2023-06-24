@@ -69,7 +69,7 @@
     <string name="withdrawal">Retrait</string>
     <string name="total_amount">Montant total</string>
     <string name="_4000_aed">4000 AED</string>
-    <string name="enter_amount">Entrez le montant</string>
+    <string name="enter_amount">Entrez le montant*</string>
     <string name="label_logout">Se déconnecter</string>
     <string name="camera">Huis clos</string>
     <string name="gallery">Galerie</string>
