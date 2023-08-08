@@ -87,6 +87,10 @@
         <item name="android:textSize">@dimen/sp_40</item>
     </style>
 
+    <style name="font_medium.white.30">
+        <item name="android:textSize">@dimen/sp_30</item>
+    </style>
+
 
     <style name="font_regular.white.14">
         <item name="android:textSize">@dimen/sp_14</item>

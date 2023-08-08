@@ -150,6 +150,9 @@
     <string name="label_address">Nom de famille</string>
     <string name="label_dob">Date de naissance(facultatif)</string>
     <string name="about_me">Sur moi</string>
+    <string name="b_id_card">Carte d\'identité d\'entreprise</string>
     <string name="about_me_hint">Parlez-nous de vous....</string>
     <string name="swipe_right_to_start">Balayez vers la droite pour commencer</string>
+    <string name="welcome_to_my_tips">Welcome to My Tips</string>
+    <string name="manage_your_finance">Gérez vos finances</string>
 </resources>

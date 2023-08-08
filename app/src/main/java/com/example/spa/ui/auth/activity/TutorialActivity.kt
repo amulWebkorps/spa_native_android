@@ -8,6 +8,7 @@ import com.example.spa.base.listener.Screen
 import com.example.spa.base.listener.TutorialListener
 import com.example.spa.base.listener.TutorialScreen
 import com.example.spa.databinding.ActivityTutorialBinding
+import com.example.spa.ui.auth.fragment.AfterSignUpWelcomeScreen
 import com.example.spa.ui.auth.fragment.LoginFragment
 import com.example.spa.ui.auth.fragment.SelectLanguageFragment
 import com.example.spa.ui.auth.fragment.SignUpFragment

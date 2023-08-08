@@ -152,4 +152,6 @@
     <string name="about_me">About Me</string>
     <string name="about_me_hint">Tell us something about yourself...</string>
     <string name="swipe_right_to_start">Swipe Right to Start</string>
+    <string name="welcome_to_my_tips">Welcome to My Tips</string>
+    <string name="manage_your_finance">Manage your Finance</string>
 </resources>
