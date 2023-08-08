@@ -17,11 +17,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/textViewLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/font_medium.white.15"
+        android:background="@drawable/bg_change_language"
+        android:padding="@dimen/dp_8"
+        android:layout_marginTop="@dimen/dp_32"
+        android:layout_marginEnd="@dimen/dp_32"
+        android:drawablePadding="@dimen/dp_8"
+        android:drawableEnd="@drawable/ic_bottom_arrow_white"
+        android:text="@string/english"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.appcompat.widget.AppCompatImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/img_splash"
+        android:src="@drawable/tutorial_main"
         app:layout_constraintTop_toBottomOf="@id/textViewMyTips"
         app:layout_constraintBottom_toTopOf="@id/textViewHead"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +56,7 @@
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/textViewSubHead"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         style="@style/font_regular.white.14"
         android:layout_marginBottom="@dimen/dp_48"
         android:layout_marginEnd="@dimen/dp_68"
@@ -53,9 +66,9 @@
         app:layout_constraintStart_toStartOf="@id/layoutBottom"/>
     <LinearLayout
         android:id="@+id/layoutBottom"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dp_24"
+        android:layout_marginHorizontal="@dimen/dp_24"
         android:layout_marginBottom="@dimen/dp_32"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,5 +88,13 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_6"
             android:src="@drawable/ic_splash_arrow3"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_24"
+                style="@style/font_light.white.16"
+                android:text="@string/swipe_right_to_start"/>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

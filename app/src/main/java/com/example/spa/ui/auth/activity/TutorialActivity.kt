@@ -26,7 +26,7 @@ class TutorialActivity : AppCompatActivity(),TutorialListener {
         setContentView(R.layout.activity_tutorial)
         binding = ActivityTutorialBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        supportFragmentManager.beginTransaction().add(R.id.placeHolder, TutorialMainFragment()).commit()
+        supportFragmentManager.beginTransaction().add(R.id.placeHolder, MyTipsFragment()).commit()
     }
 
     override fun replaceFragment(screen: TutorialScreen, value: String?) {

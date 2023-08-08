@@ -151,4 +151,5 @@
     <string name="label_dob">Date of Birth (Optional)</string>
     <string name="about_me">About Me</string>
     <string name="about_me_hint">Tell us something about yourself...</string>
+    <string name="swipe_right_to_start">Swipe Right to Start</string>
 </resources>

@@ -147,9 +147,9 @@
     <string name="send">Envoyer</string>
     <string name="settings">Paramètres</string>
     <string name="version">version</string>
-    <string name="label_address">Last Name</string>
-    <string name="b_id_card">Business ID Card</string>
-    <string name="label_dob">Date of Birth (Optional)</string>
-    <string name="about_me">About Me</string>
-    <string name="about_me_hint">Tell us something about yourself...</string>
+    <string name="label_address">Nom de famille</string>
+    <string name="label_dob">Date de naissance(facultatif)</string>
+    <string name="about_me">Sur moi</string>
+    <string name="about_me_hint">Parlez-nous de vous....</string>
+    <string name="swipe_right_to_start">Balayez vers la droite pour commencer</string>
 </resources>
