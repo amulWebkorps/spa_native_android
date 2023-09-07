@@ -47,7 +47,8 @@ class ForgotPasswordFragment :BaseFragment() {
 
     private fun setClick() {
         binding.buttonContinue.setOnClickListener {
-            session.countryCode = binding.layoutPhone.ccp.selectedCountryNameCode
+            session.countryCode = binding.layoutPhone.ccp.selectedCountryCodeWithPlus
+            session.countryChars = binding.layoutPhone.ccp.selectedCountryNameCode
             session.phoneNumber = binding.layoutPhone.editTextPhoneNumber.text.toString()
 
             if (isValidationSuccess()){
@@ -56,9 +57,9 @@ class ForgotPasswordFragment :BaseFragment() {
                         authViewModel.updateMobileNumber(
                             User(
                                 email = session.user!!.email,
-                                country_code= binding.layoutPhone.ccp.selectedCountryNameCode,
+                                country_code= binding.layoutPhone.ccp.selectedCountryCodeWithPlus,
                                 mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
-                                )
+                            )
                         )
                     }
 
@@ -69,13 +70,13 @@ class ForgotPasswordFragment :BaseFragment() {
                     lifecycleScope.launchWhenCreated {
                         authViewModel.sendOtp(
                             User(
-                                country_code= binding.layoutPhone.ccp.selectedCountryNameCode,
+                                country_code= binding.layoutPhone.ccp.selectedCountryCodeWithPlus,
                                 mobile_number= binding.layoutPhone.editTextPhoneNumber.text.toString(),
                             )
                         )
                     }
+                }
             }
-          }
         }
         binding.includeToolbar.imageViewBack.setOnClickListener {
             listener?.goBack()
@@ -88,7 +89,8 @@ class ForgotPasswordFragment :BaseFragment() {
             binding.textViewForgotPassword.text = getString(R.string.label_change_phone_number)
             binding.textViewForgotPasswordSubHead.text = getString(R.string.label_mobile_number_subhead)
             binding.layoutPhone.editTextPhoneNumber.setText(session.phoneNumber)
-            binding.layoutPhone.ccp.setCountryForNameCode(session.countryCode)
+            //binding.layoutPhone.ccp.setCountryForNameCode(session.countryCode)
+            binding.layoutPhone.ccp.setCountryForPhoneCode(session.countryCode.toInt())
         }
     }
 
@@ -144,7 +146,7 @@ class ForgotPasswordFragment :BaseFragment() {
                         }
                     }
                     is Resource.Loading -> {}
-                     is Resource.Success -> {
+                    is Resource.Success -> {
                         lifecycleScope.launchWhenCreated {
                             authViewModel.sendOtp(
                                 User(

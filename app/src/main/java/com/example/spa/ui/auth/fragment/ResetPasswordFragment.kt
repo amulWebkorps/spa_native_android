@@ -53,21 +53,22 @@ class ResetPasswordFragment :BaseFragment() {
         }
         binding.buttonContinue.setOnClickListener {
             if (isValidationSuccess()){
-              if (hasInternet(requireContext())){
-                lifecycleScope.launchWhenCreated {
-                    authViewModel.resetPassword(session.token,
-                        User(
-                            country_code= session.countryCode,
-                            mobile_number= session.phoneNumber,
-                            password= binding.textInputPassword.text.toString(),
+                if (hasInternet(requireContext())){
+                    lifecycleScope.launchWhenCreated {
+                        authViewModel.resetPassword(session.token,
+                            User(
+                                country_code= session.countryCode,
+                                country_chars= session.countryChars,
+                                mobile_number= session.phoneNumber,
+                                password= binding.textInputPassword.text.toString(),
+                            )
                         )
-                    )
-                }
+                    }
 
-            }else{
-                  showMessage(binding.root,getString(R.string.no_internet_connection))
-             }
-          }
+                }else{
+                    showMessage(binding.root,getString(R.string.no_internet_connection))
+                }
+            }
         }
     }
 

@@ -16,7 +16,7 @@ class Session(context: Context)  {
 
     @SuppressLint("CommitPrefEdits")
     fun putBoolean(name: String, value: Boolean) {
-         editor = sharedPreferences.edit()
+        editor = sharedPreferences.edit()
         editor!!.putBoolean(name, value)
         editor.apply()
     }
@@ -40,8 +40,8 @@ class Session(context: Context)  {
 
 
     var isLogin: Boolean
-    get() = getBoolean(IS_LOGIN)
-    set(value) {putBoolean(IS_LOGIN, value)}
+        get() = getBoolean(IS_LOGIN)
+        set(value) {putBoolean(IS_LOGIN, value)}
 
     var isNotFirstTime: Boolean
         get() = getBoolean(IS_FIRST_TIME)
@@ -50,6 +50,10 @@ class Session(context: Context)  {
     var countryCode: String
         get() = getString(COUNTRY_CODE)
         set(value) {putString(COUNTRY_CODE, value)}
+
+    var countryChars: String
+        get() = getString(COUNTRY_CHARS)
+        set(value) {putString(COUNTRY_CHARS, value)}
 
     var phoneNumber: String
         get() = getString(PHONE_NUMBER)
@@ -72,23 +76,24 @@ class Session(context: Context)  {
 
     private val gson: Gson = Gson()
     var user: GetUser? = null
-    get() {
-        if (field == null) {
-            val userJSON = getString(USER_JSON)
-            field = gson.fromJson(userJSON, GetUser::class.java)
+        get() {
+            if (field == null) {
+                val userJSON = getString(USER_JSON)
+                field = gson.fromJson(userJSON, GetUser::class.java)
+            }
+            return field
         }
-        return field
-    }
-    set(value) {
-        field = value
-        val userJson = gson.toJson(value)
-        if (userJson != null)
-            putString(USER_JSON, userJson)
-    }
+        set(value) {
+            field = value
+            val userJson = gson.toJson(value)
+            if (userJson != null)
+                putString(USER_JSON, userJson)
+        }
 
     companion object {
         const val IS_LOGIN = "is-login"
         const val COUNTRY_CODE = "country-code"
+        const val COUNTRY_CHARS = "country-chars"
         const val PHONE_NUMBER = "phone-number"
         const val TOKEN = "token"
         const val USER_JSON = "user_json"

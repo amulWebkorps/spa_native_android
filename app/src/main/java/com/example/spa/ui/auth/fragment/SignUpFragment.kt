@@ -11,6 +11,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.spa.App
@@ -144,9 +145,11 @@ class SignUpFragment : BaseFragment() {
         }
 
         binding.buttonRegister.setOnClickListener {
+            //Toast.makeText(requireContext(),"top : "+binding.layoutPhone.ccp.selectedCountryCodeWithPlus,Toast.LENGTH_LONG).show()
             if (isValidationSuccess()) {
                 if (hasInternet(requireContext())) {
-                    session.countryCode = binding.layoutPhone.ccp.selectedCountryNameCode
+                    session.countryCode = binding.layoutPhone.ccp.selectedCountryCodeWithPlus
+                    session.countryChars = binding.layoutPhone.ccp.selectedCountryNameCode
                     session.phoneNumber = binding.layoutPhone.editTextPhoneNumber.text.toString()
                     toggleLoader(true)
                     CoroutineScope(Dispatchers.IO).launch {
@@ -176,40 +179,6 @@ class SignUpFragment : BaseFragment() {
 
         })
     }
-
-    private fun response() {
-
-        lifecycleScope.launchWhenCreated {
-            authViewModel.register.collect { result ->
-                when (result) {
-                    is Resource.Error -> {
-                        toggleLoader(false)
-                        result.message?.let { it ->
-                            showMessage(binding.root, it)
-                        }
-                    }
-                    is Resource.Loading -> {}
-                    is Resource.Success -> {
-                        toggleLoader(false)
-                        result.data?.let { it ->
-                            session.countryCode = it.country_code
-                            session.phoneNumber = it.mobile_number
-                            (requireActivity().application as App).session.user = it
-                            lifecycleScope.launchWhenCreated {
-                                authViewModel.sendOtp(
-                                    User(
-                                        country_code = it.country_code,
-                                        mobile_number = it.mobile_number,
-                                    )
-                                )
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
     private fun isValidEmail(): Boolean {
         try {
             validator.submit(binding.layoutEmail.textInputEmailAddress)
@@ -349,6 +318,10 @@ class SignUpFragment : BaseFragment() {
         )
         val countryCode: RequestBody = RequestBody.create(
             "text/plain".toMediaTypeOrNull(),
+            binding.layoutPhone.ccp.selectedCountryCodeWithPlus
+        )
+        val countryChars: RequestBody = RequestBody.create(
+            "text/plain".toMediaTypeOrNull(),
             binding.layoutPhone.ccp.selectedCountryNameCode
         )
         val password: RequestBody = RequestBody.create(
@@ -367,6 +340,7 @@ class SignUpFragment : BaseFragment() {
                 lastName,
                 mobileNumber,
                 countryCode,
+                countryChars,
                 dob,
                 address,
                 password,
@@ -378,6 +352,7 @@ class SignUpFragment : BaseFragment() {
                 toggleLoader(false)
                 call.body()?.let { it ->
                     session.countryCode = it.country_code
+                    session.countryChars = it.country_chars
                     session.phoneNumber = it.mobile_number
 //                (requireActivity().application as App).session.user = it
                     lifecycleScope.launchWhenCreated {

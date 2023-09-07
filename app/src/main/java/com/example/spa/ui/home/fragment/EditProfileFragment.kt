@@ -106,7 +106,7 @@ class EditProfileFragment : BaseFragment() {
             )
         )
         //binding.layoutPhone.ccp.setCountryForPhoneCode(session.countryCode.toInt())
-        binding.layoutPhone.ccp.setCountryForNameCode(session.countryCode)
+        binding.layoutPhone.ccp.setCountryForNameCode(session.countryChars)
         binding.layoutPhone.ccp.showArrow(false)
         binding.textInputEmailAddress.setText(session.user!!.email)
         binding.textInputEmailAddress.isClickable = false
@@ -330,7 +330,7 @@ class EditProfileFragment : BaseFragment() {
                             business_id_card = binding.textInputCardId.text.toString(),
                             about_me = binding.textInputAboutMe.text.toString(),
                             dob = sDOB,
-                            )
+                        )
                     )
                 if (call.isSuccessful) {
                     toggleLoader(false)

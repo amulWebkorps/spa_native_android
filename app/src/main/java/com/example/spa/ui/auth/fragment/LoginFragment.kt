@@ -54,13 +54,13 @@ class LoginFragment :  BaseFragment() {
         responseSendOtp()
 
         binding.textInputPassword.showPassword(binding.checkboxPassword.isChecked)
-          }
+    }
 
 
     private fun setClick() {
-   binding.viewForgotPassword.setOnClickListener {
-       listener?.replaceFragment(Screen.FORGOT_PASSWORD,"login")
-   }
+        binding.viewForgotPassword.setOnClickListener {
+            listener?.replaceFragment(Screen.FORGOT_PASSWORD,"login")
+        }
         binding.textViewCreateAccount.setSpan(getString(R.string.label_register),R.font.poppins_medium,R.color.colorBlue72){
             listener?.replaceFragment(Screen.SIGN_UP)
         }
@@ -74,19 +74,19 @@ class LoginFragment :  BaseFragment() {
         binding.buttonLogin.setOnClickListener {
             if (isValidationSuccess()) {
                 if (hasInternet(requireContext())){
-          toggleLoader(true)
-                lifecycleScope.launchWhenCreated {
-                    authViewModel.loginUser(
-                        User(
-                            country_code= binding.Phone.ccp.selectedCountryNameCode,
-                            mobile_number= binding.Phone.editTextPhoneNumber.text.toString(),
-                            password= binding.textInputPassword.text.toString(),
+                    toggleLoader(true)
+                    lifecycleScope.launchWhenCreated {
+                        authViewModel.loginUser(
+                            User(
+                                country_code= binding.Phone.ccp.selectedCountryCodeWithPlus,
+                                mobile_number= binding.Phone.editTextPhoneNumber.text.toString(),
+                                password= binding.textInputPassword.text.toString(),
+                            )
                         )
-                    )
-                }
-            }else{
+                    }
+                }else{
                     showMessage(binding.root,getString(R.string.no_internet_connection))
-            }
+                }
             }
         }
     }
@@ -107,31 +107,31 @@ class LoginFragment :  BaseFragment() {
         return true
     }
 
- private fun loginResponse() {
-     lifecycleScope.launchWhenCreated {
-         authViewModel.loginUser.collect { result ->
-             when (result) {
-                 is Resource.Error -> {
-                     toggleLoader(false)
-                     result.message?.let { showMessage(binding.root, it) }
-                 }
-                 is Resource.Loading -> {}
-                 is Resource.Success -> {
-                     toggleLoader(false)
-                     result.data?.let { it ->
-                         session.token = it.token
-                         Log.e("TAG", "loginResponse: $it", )
-                         lifecycleScope.launchWhenCreated {
-                             authViewModel.getUser(
-                                it.token
-                             )
-                         }
-                     }
-                 }
-             }
-         }
-     }
- }
+    private fun loginResponse() {
+        lifecycleScope.launchWhenCreated {
+            authViewModel.loginUser.collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        toggleLoader(false)
+                        result.message?.let { showMessage(binding.root, it) }
+                    }
+                    is Resource.Loading -> {}
+                    is Resource.Success -> {
+                        toggleLoader(false)
+                        result.data?.let { it ->
+                            session.token = it.token
+                            Log.e("TAG", "loginResponse: $it", )
+                            lifecycleScope.launchWhenCreated {
+                                authViewModel.getUser(
+                                    it.token
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 
     private fun getUserResponse() {
         lifecycleScope.launchWhenCreated {
@@ -147,6 +147,7 @@ class LoginFragment :  BaseFragment() {
                         result.data?.let { it ->
                             session.phoneNumber=it.mobile_number
                             session.countryCode=it.country_code
+                            session.countryChars =it.country_chars
                             (requireActivity().application as App).session.user=it
 
                             Log.e("TAG", "getUserResponse: $it", )

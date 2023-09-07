@@ -12,6 +12,9 @@ data class GetUser(
     @SerializedName("country_code")
     val country_code: String,
 
+    @SerializedName("country_chars")
+    val country_chars: String,
+
     @SerializedName("created_at")
     val created_at: String,
 

@@ -11,6 +11,9 @@ data class User(
     @SerializedName("country_code")
     val country_code: String?=null,
 
+    @SerializedName("country_chars")
+    val country_chars: String?=null,
+
     @SerializedName("email")
     val email: String?=null,
 

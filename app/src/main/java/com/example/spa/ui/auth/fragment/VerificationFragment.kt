@@ -38,7 +38,7 @@ class VerificationFragment : BaseFragment() {
         val value = requireArguments().getString(Constants.AUTH)
 
         binding.textViewPhoneVerificationNumber.text = "("+session.countryCode+")"+"-"+session.phoneNumber + " "+getString(
-                    R.string.change)
+            R.string.change)
         setClick()
         response()
         getUserResponse()
@@ -90,7 +90,7 @@ class VerificationFragment : BaseFragment() {
                                 otp_code = binding.otpView.text.toString()
                             )
                         )
-                }
+                    }
                 }else{
                     showMessage(binding.root,getString(R.string.no_internet_connection))
                 }
@@ -165,6 +165,7 @@ class VerificationFragment : BaseFragment() {
                         result.data?.let { it ->
                             session.phoneNumber=it.mobile_number
                             session.countryCode=it.country_code
+                            session.countryChars=it.country_chars
                             (requireActivity().application as App).session.user = it
                             session.isLogin = true
 
@@ -173,11 +174,11 @@ class VerificationFragment : BaseFragment() {
                             startActivity(intent)
 
                         }
-                        }
                     }
                 }
             }
         }
+    }
 
 
     private fun responseSendOtp(){
