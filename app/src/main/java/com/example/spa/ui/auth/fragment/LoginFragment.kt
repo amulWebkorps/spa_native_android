@@ -153,9 +153,10 @@ class LoginFragment :  BaseFragment() {
                             Log.e("TAG", "getUserResponse: $it", )
                             if (it.is_mobile_verified) {
                                 (requireActivity().application as App).session.isLogin = true
-                                val intent = Intent(requireContext(), HomeActivity::class.java)
-                                requireActivity().finish()
-                                startActivity(intent)
+                                listener?.replaceFragment(Screen.AFTER_SIGN_IN)
+                                //val intent = Intent(requireContext(), HomeActivity::class.java)
+                                //requireActivity().finish()
+                                //startActivity(intent)
                             }else{
                                 lifecycleScope.launchWhenCreated {
                                     authViewModel.sendOtp(

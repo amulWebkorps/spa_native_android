@@ -21,6 +21,7 @@ import com.example.spa.R
 import com.example.spa.data.request.VersionRequest
 import com.example.spa.databinding.ActivitySplashMainBinding
 import com.example.spa.ui.home.activity.HomeActivity
+import com.example.spa.utilities.Constants
 import com.example.spa.utilities.Resource
 import com.example.spa.utilities.core.Session
 import com.example.spa.utilities.hideView
@@ -37,9 +38,9 @@ class SplashMainActivity : AppCompatActivity() {
     lateinit var session: Session
     private lateinit var binding: ActivitySplashMainBinding
     private lateinit var update: Button
-    private lateinit var skip:Button
+    private lateinit var skip: Button
 
-   private val authViewModel: AuthViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,28 +64,45 @@ class SplashMainActivity : AppCompatActivity() {
 //        binding.textViewY.startAnimation(animation2)
 //        binding.textViewPs.startAnimation(animation2)
 
-        if (session.language == getString(R.string.french)){
+        if (session.language == getString(R.string.french)) {
             setAppLocale(this, "fr")
-        }else{
+        } else {
             setAppLocale(this, "en")
         }
 
-        Glide.with(this).asGif().load(R.drawable.splash_anim).into(object : ImageViewTarget<GifDrawable>(binding.splash) {
-            override fun setResource(resource: GifDrawable?) {
-                binding.splash.setImageDrawable(resource)
-            }
-        })
+        Glide.with(this).asGif().load(R.drawable.splash_anim)
+            .into(object : ImageViewTarget<GifDrawable>(binding.splash) {
+                override fun setResource(resource: GifDrawable?) {
+                    binding.splash.setImageDrawable(resource)
+                }
+            })
     }
 
 
-    private fun handler(){
+    private fun handler() {
         Handler(Looper.myLooper()!!).postDelayed({
-
-//            val intent= Intent(this, TutorialActivity::class.java)
-//            startActivity(intent)
-//            this.finishAffinity();
-
             when {
+                session.isLogin -> {
+                    val intent = Intent(this, AuthActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    val bundle = Bundle()
+                    bundle.putBoolean(Constants.COME_FROM_SPLASH, true)
+                    intent.putExtras(bundle)
+                    startActivity(intent)
+                    this.finishAffinity();
+
+                    //val intent= Intent(this, HomeActivity::class.java)
+                    //startActivity(intent)
+                    //this.finishAffinity();
+                }
+
+                else -> {
+                    val intent = Intent(this, TutorialActivity::class.java)
+                    startActivity(intent)
+                    this.finishAffinity();
+                }
+            }
+            /*when {
                  !session.isNotFirstTime -> {
                     val intent= Intent(this, TutorialActivity::class.java)
                     startActivity(intent)
@@ -104,12 +122,9 @@ class SplashMainActivity : AppCompatActivity() {
                         }
                     }
                 }
-            }
-       }, 1500)
+            }*/
+        }, 1500)
     }
-
-
-
 
 
 }

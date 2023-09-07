@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.activity.viewModels
@@ -28,21 +29,22 @@ import com.example.spa.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AuthActivity : AppCompatActivity() ,Listener {
+class AuthActivity : AppCompatActivity(), Listener {
 
     private val authViewModel: AuthViewModel by viewModels()
 
     private lateinit var binding: ActivityAuthBinding
     private lateinit var update: Button
     private lateinit var skip: Button
-    private lateinit var session : Session
+    private lateinit var session: Session
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
+        Log.e("error","rohit test")
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
-          session= Session(this)
+        session = Session(this)
         val pm: PackageManager = applicationContext.packageManager
         val pkgName = applicationContext.packageName
         var pkgInfo: PackageInfo? = null
@@ -52,7 +54,7 @@ class AuthActivity : AppCompatActivity() ,Listener {
             e.printStackTrace()
         }
         val ver: String = pkgInfo!!.versionName
-         session.appVersion = ver
+        session.appVersion = ver
 
         response()
         lifecycleScope.launchWhenCreated {
@@ -63,21 +65,27 @@ class AuthActivity : AppCompatActivity() ,Listener {
                 )
             )
         }
-        supportFragmentManager.beginTransaction().add(R.id.placeHolder, LoginFragment()).commit()
+        if (intent.extras?.get(Constants.COME_FROM_SPLASH) == true) {
+            supportFragmentManager.beginTransaction().add(R.id.placeHolder, AfterSignUpWelcomeScreen()).commit()
+        }else{
+            supportFragmentManager.beginTransaction().add(R.id.placeHolder, LoginFragment()).commit()
 
-        if (intent.extras?.get(Constants.SESSION_EXPIRE) == true){
-            showMessage(binding.root , getString(R.string.session_expire))
+        }
+
+        if (intent.extras?.get(Constants.SESSION_EXPIRE) == true) {
+            showMessage(binding.root, getString(R.string.session_expire))
         }
 
         if (intent.extras?.get(Constants.SCREEN_NAME) == Constants.RESET_PASSWORD) {
-            showMessage(binding.root,getString(R.string.reset_password_successfully))
-          }
+            showMessage(binding.root, getString(R.string.reset_password_successfully))
         }
+    }
 
-    override fun replaceFragment(screen: Screen,value:String?) {
+    override fun replaceFragment(screen: Screen, value: String?) {
         val fragment = when (screen) {
             Screen.LOGIN -> LoginFragment()
             Screen.SIGN_UP -> SignUpFragment()
+            Screen.AFTER_SIGN_IN -> AfterSignUpWelcomeScreen()
             Screen.VERIFICATION -> VerificationFragment()
             Screen.FORGOT_PASSWORD -> ForgotPasswordFragment()
             Screen.RESET_PASSWORD -> ResetPasswordFragment()
@@ -86,7 +94,7 @@ class AuthActivity : AppCompatActivity() ,Listener {
         val args = Bundle()
         args.putString(Constants.AUTH, value)
         fragment.arguments = args
-        val fm=supportFragmentManager.beginTransaction()
+        val fm = supportFragmentManager.beginTransaction()
         fm.replace(R.id.placeHolder, fragment)
             .addToBackStack(null)
         val bsc = supportFragmentManager.backStackEntryCount
@@ -95,15 +103,14 @@ class AuthActivity : AppCompatActivity() ,Listener {
         }
         fm.commit()
     }
+
     override fun goBack() {
         val fm: FragmentManager = this.supportFragmentManager
         fm.popBackStack()
     }
 
 
-
-
-    private fun showDialog(hideSkip : Boolean){
+    private fun showDialog(hideSkip: Boolean) {
         var dialog = Dialog(this)
         dialog.setContentView(R.layout.layout_update_app);
         dialog.window!!.setLayout(
@@ -115,26 +122,28 @@ class AuthActivity : AppCompatActivity() ,Listener {
         dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         skip = dialog.findViewById(R.id.buttonSkip)
         update = dialog.findViewById(R.id.buttonUpdate)
-        if (hideSkip){
+        if (hideSkip) {
             skip.hideView()
         }
         skip.setOnClickListener {
             dialog.dismiss()
-            }
+        }
         update.setOnClickListener {
             dialog.dismiss()
         }
         dialog.show();
     }
-    private fun response(){
+
+    private fun response() {
         lifecycleScope.launchWhenCreated {
             authViewModel.versionManager.collect { result ->
                 when (result) {
                     is Resource.Error -> {
-                        result.message?.let {it->
-                            showMessage(binding.root,it)
+                        result.message?.let { it ->
+                            showMessage(binding.root, it)
                         }
                     }
+
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         result.data?.let { it ->
@@ -142,9 +151,11 @@ class AuthActivity : AppCompatActivity() ,Listener {
                                 it.isForceUpdate -> {
                                     showDialog(true)
                                 }
+
                                 it.isSoftUpdate && !it.isForceUpdate -> {
                                     showDialog(false)
                                 }
+
                                 else -> {
 
                                 }

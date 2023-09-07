@@ -19,6 +19,7 @@ class Constants {
         const val MAX_PHONE = 10
         const val RESET_PASSWORD = "resetPassword"
         const val SESSION_EXPIRE = "sessionExpire"
+        const val COME_FROM_SPLASH = "comeFromSplash"
         const val OTP = "otp"
         const val TYPE = "type"
         const val ISOLATED = "isolated"

@@ -1,7 +1,7 @@
 package com.example.spa.base.listener
 
 enum class Screen {
-    LOGIN ,SIGN_UP,VERIFICATION,FORGOT_PASSWORD,RESET_PASSWORD
+    LOGIN ,SIGN_UP,AFTER_SIGN_IN,VERIFICATION,FORGOT_PASSWORD,RESET_PASSWORD
 }
 
 interface Listener {
