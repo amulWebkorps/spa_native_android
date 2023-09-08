@@ -13,7 +13,8 @@
         android:id="@+id/textViewEnglish"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/font_medium.black.16"
+        style="@style/font_medium.black"
+        android:textSize="@dimen/sp_16"
         android:padding="@dimen/dp_12"
         android:text="@string/english"/>
 

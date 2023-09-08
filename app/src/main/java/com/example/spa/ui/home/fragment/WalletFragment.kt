@@ -150,6 +150,7 @@ class WalletFragment:BaseFragment() {
         }
     }
     private fun getWithdraw(value: String) {
+        toggleLoader(true)
         if (hasInternet(requireContext())){
             getWithDrawResponse()
             lifecycleScope.launchWhenCreated {
@@ -187,6 +188,7 @@ class WalletFragment:BaseFragment() {
     }
 
     private fun getWallet() {
+        toggleLoader(true)
         if (hasInternet(requireContext())){
             getWalletResponse()
             lifecycleScope.launchWhenCreated {

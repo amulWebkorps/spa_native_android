@@ -2,6 +2,7 @@ package com.example.spa.ui.auth.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -68,6 +69,7 @@ class SelectLanguageFragment : BaseFragment(), LanguageAdapter.OnClick {
                 getString(R.string.french),
             )
         )
+        Log.e("TAG", "onViewCreated: ${session.language}", )
 
         adapter = LanguageAdapter(this, requireContext(), session.language)
         binding.recycleViewLanguage.adapter = adapter
@@ -82,6 +84,8 @@ class SelectLanguageFragment : BaseFragment(), LanguageAdapter.OnClick {
             setAppLocale(requireContext(), "en")
         }
         session.language = selectLanguage
+        Log.e("TAG", "select language: $selectLanguage", )
+        Log.e("TAG", "session language: ${session.language}", )
 
         if (value == Constants.SETTING) {
             val intent = Intent(requireContext(), HomeActivity::class.java)

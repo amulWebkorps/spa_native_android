@@ -46,7 +46,7 @@ class AfterSignUpWelcomeScreen :BaseFragment() {
             val intent = Intent(requireContext(), HomeActivity::class.java)
             requireActivity().finish()
             startActivity(intent)
-        }, 2500)
+        }, 3000)
 
     }
 }

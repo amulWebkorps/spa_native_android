@@ -65,8 +65,8 @@ class Session(context: Context)  {
         set(value) {putString(LANGUAGE, value)}
 
     var appVersion: String
-        get() = getString(LANGUAGE)
-        set(value) {putString(LANGUAGE, value)}
+        get() = getString(APP_VERSION)
+        set(value) {putString(APP_VERSION, value)}
 
     var token: String
         get() = getString(TOKEN)
@@ -100,5 +100,6 @@ class Session(context: Context)  {
         const val IS_OTP = "is_otp"
         const val IS_FIRST_TIME = "is_first_time"
         const val LANGUAGE = "language"
+        const val APP_VERSION = "app_version"
     }
 }

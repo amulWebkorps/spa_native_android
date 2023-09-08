@@ -21,10 +21,13 @@ class LanguageAdapter(val onClick:OnClick,val context: Context ,val language:Str
         var cardView = view.findViewById<CardView>(R.id.cardViewLanguage)
 
         fun bind(model:Language){
+
+            Log.e("TAG", "bind: $language", )
             title.text = model.language
             if (language == model.language) {
                 title.setTextColor(ContextCompat.getColor(context, R.color.colorBlue72));
             }
+
             cardView.setOnClickListener {
                 onClick.onClick(title.text.toString())
             }
@@ -32,6 +35,7 @@ class LanguageAdapter(val onClick:OnClick,val context: Context ,val language:Str
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): laungageViewHolder {
+
          return laungageViewHolder(
              LayoutInflater.from(parent.context).inflate(R.layout.layout_language,parent,false)
          )

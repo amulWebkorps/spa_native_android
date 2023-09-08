@@ -68,6 +68,7 @@ class SplashMainActivity : AppCompatActivity() {
             setAppLocale(this, "fr")
         } else {
             setAppLocale(this, "en")
+            session.language ==getString(R.string.english)
         }
 
         Glide.with(this).asGif().load(R.drawable.splash_anim)

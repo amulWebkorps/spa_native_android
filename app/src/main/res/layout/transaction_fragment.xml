@@ -21,23 +21,23 @@
         app:layout_constraintStart_toStartOf="parent"
         android:textFontWeight="500"/>
 
-    <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/textViewFilter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/filters"
-        style="@style/font_regular"
-        android:paddingEnd="@dimen/dp_4"
-        android:textColor="#7C8DA6"
-        android:textSize="8sp"
-        android:paddingStart="@dimen/dp_8"
-        android:drawablePadding="@dimen/dp_12"
-        android:background="@drawable/bg_filter"
-        android:layout_marginEnd="@dimen/dp_21"
-        android:drawableEnd="@drawable/ci_filter_outline"
-        app:layout_constraintTop_toTopOf="@id/textViewTransaction"
-        app:layout_constraintBottom_toBottomOf="@id/textViewTransaction"
-        app:layout_constraintEnd_toEndOf="parent"/>
+<!--    <androidx.appcompat.widget.AppCompatTextView-->
+<!--        android:id="@+id/textViewFilter"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="@string/filters"-->
+<!--        style="@style/font_regular"-->
+<!--        android:paddingEnd="@dimen/dp_4"-->
+<!--        android:textColor="#7C8DA6"-->
+<!--        android:textSize="8sp"-->
+<!--        android:paddingStart="@dimen/dp_8"-->
+<!--        android:drawablePadding="@dimen/dp_12"-->
+<!--        android:background="@drawable/bg_filter"-->
+<!--        android:layout_marginEnd="@dimen/dp_21"-->
+<!--        android:drawableEnd="@drawable/ci_filter_outline"-->
+<!--        app:layout_constraintTop_toTopOf="@id/textViewTransaction"-->
+<!--        app:layout_constraintBottom_toBottomOf="@id/textViewTransaction"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"/>-->
 
 
     <include

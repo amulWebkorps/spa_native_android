@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.activity.viewModels
@@ -130,9 +131,13 @@ class HomeActivity : AppCompatActivity() , Listener {
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when(it.itemId){
-                R.id.send->setCurrentFragment(firstFragment)
-                R.id.transaction->setCurrentFragment(secondFragment)
-                R.id.settings->setCurrentFragment(thirdFragment)
+                R.id.send->{setCurrentFragment(firstFragment)
+                    binding.includeToolbar.imageViewWallet.visibility = View.VISIBLE}
+                R.id.transaction->{setCurrentFragment(secondFragment)
+                    binding.includeToolbar.imageViewWallet.visibility = View.VISIBLE}
+                R.id.settings->{setCurrentFragment(thirdFragment)
+                        binding.includeToolbar.imageViewWallet.visibility = View.INVISIBLE
+                   }
             }
             true
         }
@@ -146,10 +151,12 @@ class HomeActivity : AppCompatActivity() , Listener {
     }
 
     private fun setCurrentFragment(fragment: Fragment)=
+
         supportFragmentManager.beginTransaction().apply {
-            replace(R.id.flFragment,fragment)
+            replace(R.id.flFragment, fragment)
             addToBackStack(null)
             commit()
+
     }
 
     override fun replaceFragment(screen: Screen, value: String?) {
