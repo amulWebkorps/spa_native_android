@@ -4,6 +4,7 @@ import com.example.spa.Url
 import com.example.spa.data.request.AddBankDetailRequest
 import com.example.spa.data.request.AddQRCodeRequest
 import com.example.spa.data.request.GraphRequest
+import com.example.spa.data.request.WithdrawlRequest
 import com.example.spa.data.response.*
 import com.example.spa.utilities.Constants
 import retrofit2.Response
@@ -32,6 +33,12 @@ interface SettingsApi {
 
     @POST(Url.QR_CODES)
     suspend fun getQRCodes(@Header("Authorization")token:String , @Body bankDetailRequest: AddQRCodeRequest): Response<AddQRCodeResponse>
+
+    @GET(Url.WALLET)
+    suspend fun getWallet(@Header("Authorization")token:String ): Response<WalletAmountResponse>
+
+    @POST(Url.WITHDRAWL_REQUESTS)
+    suspend fun getWithDrawlRequest(@Header("Authorization")token:String , @Body withdrawlRequest: WithdrawlRequest): Response<WithdrawlResponse>
 
 
 }

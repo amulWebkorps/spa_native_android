@@ -77,9 +77,11 @@
     <string name="share_qr_code">Partager le code QR</string>
     <string name="filters">Filters</string>
     <string name="message_logout">Voulez-vous vraiment vous déconnecter ?</string>
+    <string name="message_withdraw_popup">Pour retirer un montant, vous devez avoir au moins un compte bancaire</string>
     <string name="message_delete">Voulez-vous vraiment supprimer votre compte bancaire ?</string>
     <string name="button_yes">Oui</string>
     <string name="button_no">Non</string>
+    <string name="button_ok">D\'ACCORD</string>
     <string name="otp_send">OTP envoyé au numéro de mobile</string>
     <string name="session_expire">Veuillez vous reconnecter. Nous sommes désolés pour ce désagrément.</string>
     <string name="logout">déconnexion</string>

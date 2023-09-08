@@ -48,7 +48,7 @@ class TransactionFragment : BaseFragment() {
         setClick()
         resentTransactionResponse()
         page = 0
-        apiCall()
+         apiCall()
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             page = 0
@@ -82,8 +82,10 @@ class TransactionFragment : BaseFragment() {
 
     private fun apiCall() {
         if (hasInternet(requireContext())) {
+            Log.e("aaaa",session.token)
             binding.includeNoInternet.layoutNoInternet.hideView()
             binding.swipeRefreshLayout.showView()
+
 
             lifecycleScope.launch {
                 settingsViewModel.transactionList(
@@ -118,9 +120,9 @@ class TransactionFragment : BaseFragment() {
                         toggleLoader(false)
                         loading = false
                         result.data?.let { it ->
-                            Log.e("TAG", "resentTransactionResponse: ${it.list}")
-                            page = it.page_number
-                            if (it.page_number == 1) {
+                            Log.e("TAG", "resentTransactionResponse: ${page}")
+
+                            if (page <= 0) {
                                 if (it.list.isEmpty()) {
                                     binding.noDataFoundLayout.textViewNoBankAccountAdded.showView()
                                 } else {
@@ -131,6 +133,7 @@ class TransactionFragment : BaseFragment() {
                             } else {
                                 resentTransactionAdapter.setListItem2(it.list)
                             }
+                            page = it.page_number
                         }
                     }
                 }

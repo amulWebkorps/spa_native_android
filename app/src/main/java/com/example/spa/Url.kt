@@ -23,4 +23,6 @@ object Url {
     const val GRAPH_DATA = "$USER/graph_data"
     const val V2_USER_UPDATE = "$V2_USER/update"
     const val QR_CODES = "/qr_codes"
+    const val WALLET = "$USER/wallet"
+    const val WITHDRAWL_REQUESTS = "$BASE_URL/withdrawal_requests"
 }

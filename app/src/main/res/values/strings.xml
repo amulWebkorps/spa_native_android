@@ -67,7 +67,7 @@
     <string name="update_user_detail">Update Details</string>
     <string name="withdrawal">Withdrawal</string>
     <string name="total_amount">Total Amount</string>
-    <string name="_4000_aed">4000 AED</string>
+    <string name="_4000_aed">AED</string>
     <string name="enter_amount">Enter Amount*</string>
     <string name="label_logout">Log out</string>
     <string name="camera">Camera</string>
@@ -76,8 +76,10 @@
     <string name="share_qr_code">Share QR code</string>
     <string name="filters">Filters</string>
     <string name="message_logout">Are you sure want to logout?</string>
+    <string name="message_withdraw_popup">To withdraw amount you need to have atleast one bank account</string>
     <string name="message_delete">Are you sure want to delete bank account?</string>
     <string name="button_yes">Yes</string>
+    <string name="button_ok">OK</string>
     <string name="button_no">No</string>
     <string name="otp_send">OTP sent to mobile number</string>
     <string name="session_expire">Please log in again. We\'re sorry for this inconvenience.</string>

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.spa.data.request.AddBankDetailRequest
 import com.example.spa.data.request.AddQRCodeRequest
 import com.example.spa.data.request.GraphRequest
+import com.example.spa.data.request.WithdrawlRequest
 import com.example.spa.data.response.*
 import com.example.spa.repo.settings.SettingsRepository
 import com.example.spa.utilities.Resource
@@ -37,6 +38,12 @@ class SettingsViewModel @Inject constructor(
 
     private val _getQRCodes = MutableSharedFlow<Resource<AddQRCodeResponse>>()
     val getQRCodes = _getQRCodes.asSharedFlow()
+
+    private val _getWithdraw = MutableSharedFlow<Resource<WithdrawlResponse>>()
+    val getWithdraw = _getWithdraw.asSharedFlow()
+
+    private val _getWallet = MutableSharedFlow<Resource<WalletAmountResponse>>()
+    val getWallet = _getWallet.asSharedFlow()
 
 
     fun addBankDetail(token:String,addBankDetailRequest: AddBankDetailRequest){
@@ -160,6 +167,48 @@ class SettingsViewModel @Inject constructor(
                     }
                     is Resource.Success -> {
                         _getQRCodes.emit(Resource.Success(result.data))
+                    }
+                }
+                Log.e("TAG", "add bank detail: $result")
+            }
+        }
+    }
+
+    fun getWithdrawRequest(token:String,withdrawlRequest: WithdrawlRequest){
+        viewModelScope.launch {
+            settingsRepository.getWithdraw(token,withdrawlRequest).collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        result.message?.let {
+                            _getWithdraw.emit(Resource.Error(result.message))
+                        }
+                    }
+                    is Resource.Loading -> {
+                        _getWithdraw.emit(Resource.Loading(result.isLoading))
+                    }
+                    is Resource.Success -> {
+                        _getWithdraw.emit(Resource.Success(result.data))
+                    }
+                }
+                Log.e("TAG", "add bank detail: $result")
+            }
+        }
+    }
+
+    fun wallet(token:String){
+        viewModelScope.launch {
+            settingsRepository.wallet(token).collect { result ->
+                when (result) {
+                    is Resource.Error -> {
+                        result.message?.let {
+                            _getWallet.emit(Resource.Error(result.message))
+                        }
+                    }
+                    is Resource.Loading -> {
+                        _getWallet.emit(Resource.Loading(result.isLoading))
+                    }
+                    is Resource.Success -> {
+                        _getWallet.emit(Resource.Success(result.data))
                     }
                 }
                 Log.e("TAG", "add bank detail: $result")
