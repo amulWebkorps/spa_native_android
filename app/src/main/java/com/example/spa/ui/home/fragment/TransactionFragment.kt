@@ -28,7 +28,7 @@ class TransactionFragment : BaseFragment() {
     private var loading: Boolean = false
     private val settingsViewModel: SettingsViewModel by viewModels()
     var page = 0
-    val resentTransactionAdapter = ResentAdapter()
+    lateinit var resentTransactionAdapter :ResentAdapter
 
 
     private lateinit var binding: TransactionFragmentBinding
@@ -37,6 +37,7 @@ class TransactionFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        resentTransactionAdapter=ResentAdapter(requireContext())
         binding = TransactionFragmentBinding.inflate(layoutInflater)
         return binding.root
     }

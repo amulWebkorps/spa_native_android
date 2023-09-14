@@ -3,6 +3,7 @@ package com.example.spa.ui.home.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.spa.R
 import com.example.spa.data.response.TransactionList
 import com.example.spa.databinding.LayoutResentTransactionBinding
 import com.example.spa.utilities.formatDate
@@ -22,6 +23,7 @@ class ResentTransactionAdapter() :
     inner class AwardsShopViewHolder( val binding: LayoutResentTransactionBinding) :
         RecyclerView.ViewHolder(binding.root) {
         init {
+
             }
 
         }
