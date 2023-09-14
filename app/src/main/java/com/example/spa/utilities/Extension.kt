@@ -126,6 +126,52 @@ fun hasInternet(context: Context):Boolean{
 }
 
 
+fun String.getInFrench(context: Context):String{
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    try {
+        val date=dateFormat.parse(this)
+        val calendar = Calendar.getInstance()
+        calendar.time = date
+
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH) + 1 // Month is zero-based, so add 1
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+        return "$day  ${getMonthStringFun(month,context)}  $year"
+
+        println("Year: $year, Month: ${getMonthStringFun(month,context)}, Day: $day")
+        Log.e("TAG", "\"Year: $year, Month: $month, Day: $day\"", )
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+  return ""
+}
+fun monthNameToNumber(monthName: String,context: Context): String {
+    val months = listOf("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
+    val index = months.indexOf(monthName)
+    return getMonthStringFun(index,context)
+}
+
+
+fun getMonthStringFun(month: Int,context: Context): String {
+return when(month){
+    1->context.getString(R.string.jan)
+        2->context.getString(R.string.feb)
+    3->context.getString(R.string.mar)
+    4->context.getString(R.string.apr)
+    5->context.getString(R.string.may)
+    6->context.getString(R.string.jun)
+    7->context.getString(R.string.july)
+    8->context.getString(R.string.aug)
+    9->context.getString(R.string.sep)
+    10->context.getString(R.string.oct)
+    11->context.getString(R.string.nov)
+    12->context.getString(R.string.dec)
+    else->context.getString(R.string.jan)
+}
+}
+
 fun formatDate(date: String): String {
     val convertedDate = convertDate(date)
     return SimpleDateFormat("dd MMM yyyy").format(convertedDate)

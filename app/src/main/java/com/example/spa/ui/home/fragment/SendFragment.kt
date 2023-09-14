@@ -43,6 +43,7 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
     val list = ArrayList<AddMoney>()
     private lateinit var binding: FragmentSendBinding
     private lateinit var barChartStyle: BarChartStyle
+    var map2 = mutableMapOf<String,String>()
     var pos: Int = 0
     var LIST_MONTHLY =
         arrayOf(context.getString(R.string.weekly), context.getString(R.string.monthly))
@@ -51,8 +52,11 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
         context.getString(R.string.concierge_hotel_services),
         context.getString(R.string.transportations),
         context.getString(R.string.sale),
-        context.getString(R.string.other)
+        context.getString(R.string.Other)
     )
+
+
+
 
     var dialog: Dialog = Dialog(context)
     private lateinit var editText: AutoCompleteTextView
@@ -72,6 +76,12 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        map2.put("restoration", getString(R.string.restoration))
+        map2.put("concierge_hotel_services", getString(R.string.concierge_hotel_services))
+        map2.put("transportations", getString(R.string.transportations))
+        map2.put("sale", getString(R.string.sale))
+        map2.put("Other", getString(R.string.Other))
+
         setAdapter()
         setClick()
 //        resentTransactionResponse()
@@ -79,6 +89,15 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
         graphDataResponse()
         setRecycleView()
         // apiCallGraph("weekly")
+    }
+
+    private fun getKeyForValue(value: String): String {
+        for ((key, v) in map2) {
+            if (v == value) {
+                return key
+            }
+        }
+        return "" // Return a default value if the value is not found
     }
 
     private fun apiCall() {
@@ -200,9 +219,9 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                 send = dialog.findViewById(R.id.buttonSend)
                 send.setOnClickListener {
                     if (editText.text.toString() == getString(R.string.my_reason)) {
-                        showMessage(binding.root, "Please select reason")
+                        showMessage(binding.root, getString(R.string.please_select_reason))
                     } else {
-                        openActivity(Constants.SHARE_QR,binding.editTextAmount.text.toString(),editText.text.toString())
+                        openActivity(Constants.SHARE_QR,binding.editTextAmount.text.toString(),getKeyForValue(editText.text.toString()))
                         dialog.dismiss()
                     }
 
@@ -374,6 +393,7 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                                         monthlyTotalCount.add(it.list[i])
                                     }
                                 }
+                                Log.e("TAG", "graphDataResponse: ${listMonths}", )
                                 if (monthlyTotalCount.size == 0) {
                                     binding.barChart.hideView()
                                     binding.textViewGraphNoDataFound.showView()

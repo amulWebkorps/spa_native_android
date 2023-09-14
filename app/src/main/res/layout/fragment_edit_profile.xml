@@ -25,6 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_17"
                 android:text="@string/personal_details"
+                android:textAlignment="center"
                 android:textFontWeight="500"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

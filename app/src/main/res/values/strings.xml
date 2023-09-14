@@ -15,6 +15,8 @@
     <string name="label_confirm_password">Confirm Password*</string>
     <string name="label_password">Password*</string>
     <string name="don_t_have_an_account_register">Don’t have an account! Register</string>
+
+    <string name="don_t_have_an_account_register2">Don’t have an account! Register</string>
     <string name="error_enter_email">Please enter Email Id</string>
     <string name="error_enter_amount">Please enter valid Amount</string>
     <string name="error_password">Please enter password</string>
@@ -122,7 +124,7 @@
     <string name="labelnext">Next</string>
     <string name="getting_started">Get Started</string>
     <string name="english">English</string>
-    <string name="french">français</string>
+    <string name="french">Français</string>
     <string name="tutorial_1">Tutorial 1</string>
     <string name="tutorial_2">Tutorial 2</string>
     <string name="profile">Profile</string>
@@ -130,6 +132,12 @@
     <string name="resend">Resend</string>
     <string name="text_terms">Terms &amp; Conditions</string>
     <string name="add_bank_details">Add Bank Details</string>
+
+    <string name="add_bank_details_confirm">Add Bank Details</string>
+    <string name="grettings_message">Greeting\'s from My Tips, </string>
+
+    <string name="has_shared">has shared a payment link with you. Please click on the link to proceed with the payment :- </string>
+
     <string name="my_qr_code">My QR Code</string>
     <string name="transaction_successful">Transaction Successful!!</string>
     <string name="scan_qa_code_to_generate_payment_link_of_100_aed">Scan QA code to Generate Payment Link of %s AED</string>
@@ -139,11 +147,11 @@
     <string name="concierge_hotel_services"><![CDATA[Concierge & Hotel Services]]></string>
     <string name="transportations">Transportations</string>
     <string name="sale">Sale</string>
-    <string name="other">Other</string>
+    <string name="Other">Other</string>
     <string name="reason">Reason</string>
     <string name="my_reason">My Reason</string>
     <string name="change">Change</string>
-    <string name="date_of_birth_dob">Date Of Birth(Dob)</string>
+    <string name="date_of_birth_dob">Date Of Birth</string>
     <string name="change_language">Change Language</string>
     <string name="send">Send</string>
     <string name="settings">Settings</string>
@@ -156,4 +164,19 @@
     <string name="swipe_right_to_start">Swipe Right to Start</string>
     <string name="welcome_to_my_tips">Welcome to My Tips</string>
     <string name="manage_your_finance">Manage your Finance</string>
+    <string name="current">Current</string>
+    <string name="no_bank_account_added_yet">No bank account added yet</string>
+    <string name="please_select_reason">Please select reason</string>
+    <string name="jan">Jan</string>
+    <string name="feb">Feb</string>
+    <string name="mar">Mar</string>
+    <string name="apr">Apr</string>
+    <string name="jun">Jun</string>
+    <string name="may">May</string>
+    <string name="july">July</string>
+    <string name="sep">Sep</string>
+    <string name="aug">Aug</string>
+    <string name="oct">Oct</string>
+    <string name="nov">Nov</string>
+    <string name="dec">Dec</string>
 </resources>

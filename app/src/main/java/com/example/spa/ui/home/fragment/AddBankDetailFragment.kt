@@ -44,12 +44,12 @@ class AddBankDetailFragment:BaseFragment() {
     }
     private fun setView(){
 
-        val items = listOf("Saving", "Current")
+        val items = listOf(getString(R.string.saving), getString(R.string.current))
         val adapter = ArrayAdapter(requireContext(), R.layout.layout_item, items)
         (binding.textInputAccountType as? AutoCompleteTextView)?.setAdapter(adapter)
 
 
-        val items2 = listOf("Weekly", "Monthly","Quarterly","Yearly")
+        val items2 = listOf(getString(R.string.weekly), getString(R.string.monthly),getString(R.string.quarterly),getString(R.string.yearly))
         val adapter2 = ArrayAdapter(requireContext(), R.layout.layout_item, items2)
         (binding.textInputFrequencyType as? AutoCompleteTextView)?.setAdapter(adapter2)
 

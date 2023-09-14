@@ -91,8 +91,8 @@ class ShareQROneTimeFragment : BaseFragment() {
                 //shareIntent.putExtra(Intent.EXTRA_TEXT, app_url)
                 shareIntent.putExtra(
                     Intent.EXTRA_TEXT,
-                    "Greeting's from My Tips, ${session.user!!.first_name} ${session.user!!.last_name} has shared a payment link with you. Please click on the link to proceed with the payment :- $linkUrl"
-                )
+                    "${getString(R.string.grettings_message)} ${session.user!!.first_name} ${session.user!!.last_name} ${getString(R.string.has_shared)} ${linkUrl}"
+                   )
                 startActivity(Intent.createChooser(shareIntent, "Share Link"))
             }
         }

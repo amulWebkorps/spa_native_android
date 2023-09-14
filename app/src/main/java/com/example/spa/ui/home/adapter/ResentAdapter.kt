@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.spa.data.response.TransactionList
 import com.example.spa.databinding.LayoutTransactionBinding
 import com.example.spa.utilities.formatDate
+import com.example.spa.utilities.getInFrench
 
 class ResentAdapter() :
     RecyclerView.Adapter<ResentAdapter.AwardsShopViewHolder>() {
@@ -34,7 +35,7 @@ class ResentAdapter() :
         val item = arrayList[position]
         with(holder.itemView){
             holder.binding.apply {
-            textViewDate.text = formatDate(item.created_at)
+            textViewDate.text = item.created_at.getInFrench(context)
             textViewAED.text = "+AED "+item.amount
             textViewPlumbings.text = item.description
         }

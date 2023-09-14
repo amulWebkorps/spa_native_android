@@ -218,8 +218,9 @@
         style="@style/font_medium.grey7c.12"
         android:layout_gravity="center"
         android:layout_marginTop="@dimen/dp_17"
-        android:text="@string/don_t_have_an_account_register"
+        android:text="@string/don_t_have_an_account_register2"
         app:layout_constraintTop_toBottomOf="@id/buttonLogin"/>
+
 </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

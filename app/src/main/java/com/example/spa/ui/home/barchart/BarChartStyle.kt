@@ -9,6 +9,7 @@ import com.example.spa.data.response.GraphDataList
 import com.example.spa.utilities.coolNumberFormat
 import com.example.spa.utilities.formatDate
 import com.example.spa.utilities.formatDateGraph
+import com.example.spa.utilities.monthNameToNumber
 import com.github.mikephil.charting.charts.BarChart
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.BarDataSet
@@ -60,7 +61,7 @@ class BarChartStyle(
         }
 
         xAxis.apply {
-            valueFormatter = MyXAxisValueFormat(listDays, analytics)
+            valueFormatter = MyXAxisValueFormat(listDays, analytics,context)
 
 //            axisMinimum = 0f
             //axisMaximum = 29f*/
@@ -134,7 +135,7 @@ class BarChartStyle(
         }
     }
 
-    private class MyXAxisValueFormat(val listDays: List<GraphDataList>, val analytics: ANALYTICS) :
+    private class MyXAxisValueFormat(val listDays: List<GraphDataList>, val analytics: ANALYTICS,val context: Context) :
         ValueFormatter() {
         //val listDays = mutableListOf("Sun","Mon","Tue","Wed","Thu","Fri","Sat")
         override fun getFormattedValue(value: Float): String {
@@ -147,7 +148,8 @@ class BarChartStyle(
 //                        listDays[value.toInt()].month.subSequence(0, 3).toString()
 //                    }
                     is ANALYTICS.MONTH -> {
-                        listDays[value.toInt()].value_for.subSequence(0, 3).toString()
+//                        listDays[value.toInt()].value_for.subSequence(0, 3).toString()
+                         "${monthNameToNumber(listDays[value.toInt()].value_for.subSequence(0, 3).toString(), context)}"
                     }
                     else -> {
                         formatDateGraph(listDays[value.toInt()].date)

@@ -40,6 +40,7 @@ class BankDetailsFragment:BaseFragment(), BankDetailAdapter.OnClick {
         bankDeleteResponse()
         setAdapter()
         setClick()
+        binding.noDataFoundLayout.textViewNoBankAccountAdded.text = getString(R.string.no_bank_account_added_yet)
 
     }
 
