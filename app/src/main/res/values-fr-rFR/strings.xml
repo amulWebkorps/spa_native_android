@@ -105,7 +105,7 @@
     <string name="account_number_">Numéro de compte : </string>
     <string name="ifsc_code">IFSC Code</string>
     <string name="ifsc_code_">IFSC Code : </string>
-    <string name="terms_condition">En créant un compte, j\'accepte par la présente tous les termes et conditions</string>
+    <string name="terms_condition">En créant un compte, j\'accepte par la présente tous les Termes et Conditions</string>
     <string name="error_terms_condition">Veuillez sélectionner les termes et conditions</string>
     <string name="error_valid_amount">Veuillez saisir un montant valide</string>
     <string name="reset_password_successfully">Réinitialiser le mot de passe avec succès</string>
@@ -131,7 +131,7 @@
     <string name="profile">Profil</string>
     <string name="activity_progress">Progression de l\'activité</string>
     <string name="resend">Renvoyer</string>
-    <string name="text_terms">termes et conditions</string>
+    <string name="text_terms">Termes et Conditions</string>
     <string name="add_bank_details">Ajouter des coordonnées bancaires</string>
 
     <string name="add_bank_details_confirm">Confirmer</string>
