@@ -44,8 +44,8 @@ class AfterSignUpWelcomeScreen :BaseFragment() {
         binding.textViewWelcomeToMyTips.startAnimation(animation2)
         Handler(Looper.myLooper()!!).postDelayed({
             val intent = Intent(requireContext(), HomeActivity::class.java)
-            requireActivity().finish()
             startActivity(intent)
+            requireActivity().finish()
         }, 3000)
 
     }

@@ -23,7 +23,7 @@
     <string name="error_password">Veuillez entrer le mot de passe</string>
     <string name="error_valid_message">Veuillez saisir un identifiant de messagerie valide</string>
     <string name="label_register">Enregistrer</string>
-    <string name="already_have_an_account_sign_in">Vous avez déjà un compte! S\'identifier</string>
+    <string name="already_have_an_account_sign_in">Vous avez déjà un compte! Identification</string>
     <string name="error_min_password">Le mot de passe doit comporter au moins 8 chiffres</string>
     <string name="error_password_not_matched">Le mot de passe et le mot de passe de confirmation ne correspondent pas</string>
     <string name="empty_confirm_password">Veuillez saisir le mot de passe de confirmation</string>
@@ -105,7 +105,7 @@
     <string name="account_number_">Numéro de compte : </string>
     <string name="ifsc_code">IFSC Code</string>
     <string name="ifsc_code_">IFSC Code : </string>
-    <string name="terms_condition">En créant un compte, j\'accepte par la présente tous les Termes &amp; Les conditions</string>
+    <string name="terms_condition">En créant un compte, j\'accepte par la présente tous les termes et conditions</string>
     <string name="error_terms_condition">Veuillez sélectionner les termes et conditions</string>
     <string name="error_valid_amount">Veuillez saisir un montant valide</string>
     <string name="reset_password_successfully">Réinitialiser le mot de passe avec succès</string>
@@ -131,7 +131,7 @@
     <string name="profile">Profil</string>
     <string name="activity_progress">Progression de l\'activité</string>
     <string name="resend">Renvoyer</string>
-    <string name="text_terms">Termes &amp; Les conditions</string>
+    <string name="text_terms">termes et conditions</string>
     <string name="add_bank_details">Ajouter des coordonnées bancaires</string>
 
     <string name="add_bank_details_confirm">Confirmer</string>
