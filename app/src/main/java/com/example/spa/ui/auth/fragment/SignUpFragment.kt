@@ -17,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.spa.App
 import com.example.spa.R
 import com.example.spa.Url
+import com.example.spa.Url.TERMS_AND_CONDITIONS
 import com.example.spa.base.BaseFragment
 import com.example.spa.base.listener.Screen
 import com.example.spa.data.remote.AuthApi
@@ -129,8 +130,7 @@ class SignUpFragment : BaseFragment() {
             R.font.poppins_medium,
             R.color.colorBlue72
         ) {
-            val url = "http://www.google.com"
-            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(url)))
+            startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(TERMS_AND_CONDITIONS)))
         }
         binding.includeToolbar.imageViewBack.setOnClickListener {
             listener?.goBack()

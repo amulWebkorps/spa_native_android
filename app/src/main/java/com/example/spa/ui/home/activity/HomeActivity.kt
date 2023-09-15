@@ -168,7 +168,7 @@ class HomeActivity : AppCompatActivity() , Listener {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finish()
+        finishAffinity()
     }
 
     private fun showDialog(hideSkip : Boolean){

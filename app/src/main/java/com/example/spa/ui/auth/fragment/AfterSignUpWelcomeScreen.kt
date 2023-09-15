@@ -45,7 +45,7 @@ class AfterSignUpWelcomeScreen :BaseFragment() {
         Handler(Looper.myLooper()!!).postDelayed({
             val intent = Intent(requireContext(), HomeActivity::class.java)
             startActivity(intent)
-            requireActivity().finish()
+            //requireActivity().finish()
         }, 3000)
 
     }

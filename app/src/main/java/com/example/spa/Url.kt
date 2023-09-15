@@ -5,7 +5,8 @@ object Url {
 
     //    const val BASE_URL = "https://spa-native.herokuapp.com/"
     const val BASE_URL = "https://admin.mytipsdubai.com/"
-
+    const val TERMS_AND_CONDITIONS = "https://www.mytipsdubai.com/terms-and-conditions/"
+    //https://www.mytipsdubai.com/about-us/
     const val USER = "/users"
     const val V2_USER = "api/v2/users"
     const val LOGIN = "$USER/login"
