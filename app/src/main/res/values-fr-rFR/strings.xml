@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">SPA</string>
+    <string name="app_name">My Tips</string>
     <string name="string_my_tips">Mes conseils</string>
     <string name="you_can_create_create_your_own_profile_for_n_receiving_your_tips">Vous pouvez créer créer votre propre profil pour recevoir vos TIPS .</string>
     <string name="join_and_n_get_your_tips">Connectez-vous &amp; facilitez vos transactions</string>
@@ -42,7 +42,7 @@
     <string name="label_change_phone_number">Modifier le numéro</string>
     <string name="label_mobile_number_subhead">Entrez votre numéro pour le processus de réinitialisation</string>
     <string name="reset_password">Réinitialisation du mot de passe</string>
-    <string name="set_the_new_password_for_your_account_so_you_can_log_in_and_access_all_the_features">Définissez le nouveau mot de passe de votre compte afin de pouvoir vous connecter et accéder à toutes les fonctionnalités.</string>
+    <string name="set_the_new_password_for_your_account_so_you_can_log_in_and_access_all_the_features">Définissez votre nouveau mot de passe.</string>
     <string name="don_t_receive_your_code_resend">Vous n\'avez pas reçu votre code ? Renvoyer</string>
     <string name="arpit">Arpit</string>
     <string name="click_here_to_enter_amount">Cliquez ici, Pour entrer le montant
@@ -67,7 +67,7 @@
     <string name="error_enter_code">Veuillez saisir le code IFSC</string>
     <string name="error_account_holder_name">Veuillez saisir le nom du titulaire du compte</string>
     <string name="generate_qr_code">Générer un code QR</string>
-    <string name="update_user_detail">Enregistre</string>
+    <string name="update_user_detail">Enregistrer</string>
     <string name="withdrawal">Retrait</string>
     <string name="total_amount">Montant total</string>
     <string name="_4000_aed">4000 AED</string>
@@ -90,7 +90,7 @@
     <string name="label_bank_name">Nom de la banque*</string>
     <string name="account_type">Type de compte</string>
     <string name="account_type_">Type de compte : </string>
-    <string name="saving">Depot</string>
+    <string name="saving">Dépôt</string>
     <string name="error_bank_name">Veuillez saisir le nom de la banque</string>
     <string name="bank_detail_added_successfully">Coordonnées bancaires ajoutées avec succès</string>
     <string name="user_update_success">Données personnelles mises à jour avec succès</string>
@@ -135,10 +135,10 @@
     <string name="add_bank_details">Ajouter des coordonnées bancaires</string>
 
     <string name="add_bank_details_confirm">Confirmer</string>
-    <string name="my_qr_code">QR Reçu</string>
+    <string name="my_qr_code">Mon QR code</string>
     <string name="transaction_successful">Opération réussie !!</string>
-    <string name="scan_qa_code_to_generate_payment_link_of_100_aed">Scannez le code QR pour générer un lien de paiement de %s AED</string>
-    <string name="share_qr_one_time_text">Appréciez votre expérience, partagez, et obtenez vos tips immédiatemen.</string>
+    <string name="scan_qa_code_to_generate_payment_link_of_100_aed">Partagez le code QR pour générer un lien de paiement de %s AED</string>
+    <string name="share_qr_one_time_text">Appréciez votre expérience, partagez, et obtenez vos tips immédiatement.</string>
     <string name="withdraw">Retirer</string>
     <string name="restoration">Restauration</string>
     <string name="concierge_hotel_services"><![CDATA[Conciergerie & Services hôteliers]]></string>
@@ -160,10 +160,10 @@
     <string name="about_me_hint">Parlez-nous de vous....</string>
     <string name="swipe_right_to_start">Balayez vers la droite pour commencer</string>
     <string name="welcome_to_my_tips">Bienvenue dans MYTIPS</string>
-    <string name="manage_your_finance">Gérez vos finances</string>
+    <string name="manage_your_finance">Gérez vos transactions</string>
     <string name="current">Courant</string>
     <string name="no_bank_account_added_yet">Acum compte bancaire ajoute pour le moment</string>
-    <string name="grettings_message">Salutations de mes conseils, </string>
+    <string name="grettings_message">Bienvenue sur Mytips, </string>
     <string name="has_shared">a partagé un lien de paiement avec vous. Veuillez cliquer sur le lien pour procéder au paiement :- </string>
     <string name="please_select_reason">Please select reason</string>
     <string name="jan">Jan</string>
@@ -178,5 +178,22 @@
     <string name="oct">Oct</string>
     <string name="nov">Nov</string>
     <string name="dec">Dec</string>
+
+    <string name="january">Janvier</string>
+    <string name="february">Février</string>
+    <string name="march">Mars</string>
+    <string name="april">Avril</string>
+    <string name="mayFull">Mai</string>
+    <string name="june">Juin</string>
+    <string name="julyFull">Juillet</string>
+    <string name="august">Août</string>
+    <string name="september">Septembre</string>
+    <string name="october">Octobre</string>
+    <string name="november">Novembre</string>
+    <string name="december">Décembre</string>
+
+    <string name="add_qr_1">Bienvenue sur Mytips paiement, </string>
+    <string name="add_qr_2">a partagé un lien de paiement de </string>
+    <string name="add_qr_3">AED avec vous. Veuillez cliquer sur le lien pour procéder au paiement :- </string>
 
 </resources>

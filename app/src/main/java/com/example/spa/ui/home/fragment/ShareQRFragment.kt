@@ -66,8 +66,12 @@ class ShareQRFragment : BaseFragment() {
                 shareIntent.type = "text/plain"
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.app_name))
                 //val app_url = qrgEncoder!!.encodeAsBitmap().toString()
-                shareIntent.putExtra(Intent.EXTRA_TEXT,
-                    "Greeting's from My Tips, ${session.user!!.first_name} ${session.user!!.last_name} has shared a payment link of $amountQR AED with you. Please click on the link to proceed with the payment :- $linkUrl"
+//                shareIntent.putExtra(Intent.EXTRA_TEXT,
+//                    "Greeting's from My Tips, ${session.user!!.first_name} ${session.user!!.last_name} has shared a payment link of $amountQR AED with you. Please click on the link to proceed with the payment :- $linkUrl"
+//                )
+                shareIntent.putExtra(
+                    Intent.EXTRA_TEXT,
+                    "${getString(R.string.add_qr_1)} ${session.user!!.first_name} ${session.user!!.last_name} ${getString(R.string.add_qr_2)} ${amountQR} ${getString(R.string.add_qr_3)}${linkUrl}"
                 )
                 startActivity(Intent.createChooser(shareIntent, "Share Link"))
             }

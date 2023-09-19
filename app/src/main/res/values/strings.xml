@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SPA</string>
+    <string name="app_name">My Tips</string>
     <string name="string_my_tips">My Tips</string>
     <string name="you_can_create_create_your_own_profile_for_n_receiving_your_tips">You can create create your own profile for receiving your TIPS .</string>
     <string name="join_and_n_get_your_tips">Join and Get Your Tips</string>
@@ -179,4 +179,21 @@
     <string name="oct">Oct</string>
     <string name="nov">Nov</string>
     <string name="dec">Dec</string>
+
+    <string name="january">January</string>
+    <string name="february">February</string>
+    <string name="march">March</string>
+    <string name="april">April</string>
+    <string name="mayFull">May</string>
+    <string name="june">June</string>
+    <string name="julyFull">July</string>
+    <string name="august">August</string>
+    <string name="september">September</string>
+    <string name="october">October</string>
+    <string name="november">November</string>
+    <string name="december">December</string>
+
+    <string name="add_qr_1">Greeting\'s from My Tips, </string>
+    <string name="add_qr_2">has shared a payment link of </string>
+    <string name="add_qr_3">AED Please click on the link to proceed with the payment :- </string>
 </resources>

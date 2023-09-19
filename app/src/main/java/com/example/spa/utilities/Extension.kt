@@ -137,10 +137,11 @@ fun String.getInFrench(context: Context):String{
         val month = calendar.get(Calendar.MONTH) + 1 // Month is zero-based, so add 1
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
-        return "$day  ${getMonthStringFun(month,context)}  $year"
+        //return "$day ${getMonthStringFunList(month,context)} $year"
+        return "$day ${getMonthStringFunList(month,context)}"
 
-        println("Year: $year, Month: ${getMonthStringFun(month,context)}, Day: $day")
-        Log.e("TAG", "\"Year: $year, Month: $month, Day: $day\"", )
+        //println("Year: $year, Month: ${getMonthStringFun(month,context)}, Day: $day")
+        //Log.e("TAG", "\"Year: $year, Month: $month, Day: $day\"", )
     } catch (e: Exception) {
         e.printStackTrace()
     }
@@ -170,6 +171,24 @@ return when(month){
     12->context.getString(R.string.dec)
     else->context.getString(R.string.jan)
 }
+}
+
+fun getMonthStringFunList(month: Int,context: Context): String {
+    return when(month){
+        1->context.getString(R.string.january)
+        2->context.getString(R.string.february)
+        3->context.getString(R.string.march)
+        4->context.getString(R.string.april)
+        5->context.getString(R.string.mayFull)
+        6->context.getString(R.string.june)
+        7->context.getString(R.string.julyFull)
+        8->context.getString(R.string.august)
+        9->context.getString(R.string.september)
+        10->context.getString(R.string.october)
+        11->context.getString(R.string.november)
+        12->context.getString(R.string.december)
+        else->context.getString(R.string.jan)
+    }
 }
 
 fun formatDate(date: String): String {
