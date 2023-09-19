@@ -196,4 +196,5 @@
     <string name="add_qr_1">Greeting\'s from My Tips, </string>
     <string name="add_qr_2">has shared a payment link of </string>
     <string name="add_qr_3">AED Please click on the link to proceed with the payment :- </string>
+    <string name="submit">Submit</string>
 </resources>

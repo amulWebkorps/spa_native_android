@@ -74,7 +74,7 @@
     <LinearLayout
         android:id="@+id/layoutBottom"
         android:layout_width="match_parent"
-        android:layout_height="24dp"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/dp_24"
         android:layout_marginBottom="@dimen/dp_76"
         android:orientation="horizontal"
@@ -82,15 +82,18 @@
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
+            android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_splash_arrow1"/>
         <androidx.appcompat.widget.AppCompatImageView
+            android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_6"
             android:src="@drawable/ic_splash_arrow2"/>
         <androidx.appcompat.widget.AppCompatImageView
+            android:layout_gravity="center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dp_6"

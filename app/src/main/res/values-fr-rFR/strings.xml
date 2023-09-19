@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">My Tips</string>
-    <string name="string_my_tips">Mes conseils</string>
+    <string name="string_my_tips">My Tips</string>
     <string name="you_can_create_create_your_own_profile_for_n_receiving_your_tips">Vous pouvez créer créer votre propre profil pour recevoir vos TIPS .</string>
-    <string name="join_and_n_get_your_tips">Connectez-vous &amp; facilitez vos transactions</string>
+    <string name="join_and_n_get_your_tips"><![CDATA[Connectez-vous & Facilitez Vos Transactions]]></string>
     <string name="sign_in">Identification</string>
     <string name="sign_up">S\'inscrire</string>
     <string name="label_welcome_back">Content de vous revoir, continuez pour gérer vos transactions</string>
@@ -32,11 +32,11 @@
     <string name="error_valid_phone">Le numéro de mobile doit comporter au moins 8 chiffres et moins de 10 chiffres.</string>
     <string name="error_phone_number">Veuillez entrer le numéro de téléphone</string>
     <string name="phone_verification">Vérification par code SMS</string>
-    <string name="we_sent_a_code_to_your_number">Nous avons envoyé un code à votre numéro</string>
+    <string name="we_sent_a_code_to_your_number">Veuillez entrer le code reçu par SMS</string>
     <string name="error_enter_otp">Veuillez entrer otp</string>
     <string name="label_forgot_password">Mot de passe oublié</string>
     <string name="enter_your_mobile_number_for_the_verification_process_we_will_send_4_digit_code_to_your_number">Entrez votre numéro pour le processus de réinitialisation</string>
-    <string name="label_continue">Continuez</string>
+    <string name="label_continue">Continuer</string>
     <string name="message_permanently_denied">Refus permanent</string>
     <string name="message_camera_permission">Autorisation de l\'appareil photo requise pour capturer l\'image !</string>
     <string name="label_change_phone_number">Modifier le numéro</string>
@@ -105,7 +105,7 @@
     <string name="account_number_">Numéro de compte : </string>
     <string name="ifsc_code">IFSC Code</string>
     <string name="ifsc_code_">IFSC Code : </string>
-    <string name="terms_condition">En créant un compte, j\'accepte par la présente tous les Termes et Conditions</string>
+    <string name="terms_condition">En créant un compte, j\'entends accepter toutes les Termes et Conditions</string>
     <string name="error_terms_condition">Veuillez sélectionner les termes et conditions</string>
     <string name="error_valid_amount">Veuillez saisir un montant valide</string>
     <string name="reset_password_successfully">Réinitialiser le mot de passe avec succès</string>
@@ -147,7 +147,7 @@
     <string name="Other">Autre</string>
     <string name="reason">Raison</string>
     <string name="my_reason">Ma raison</string>
-    <string name="change">Changement</string>
+    <string name="change">Modifier</string>
     <string name="date_of_birth_dob">Date de naissance</string>
     <string name="change_language">Changer de langue</string>
     <string name="send">Envoyer</string>
@@ -195,5 +195,6 @@
     <string name="add_qr_1">Bienvenue sur Mytips paiement, </string>
     <string name="add_qr_2">a partagé un lien de paiement de </string>
     <string name="add_qr_3">AED avec vous. Veuillez cliquer sur le lien pour procéder au paiement :- </string>
+    <string name="submit">Soumettre</string>
 
 </resources>
