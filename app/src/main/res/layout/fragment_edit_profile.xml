@@ -236,7 +236,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dp_20"
-                    android:background="@color/colorBlueED"
+                    android:background="@drawable/bg_about"
                     android:gravity="top|start"
                     android:hint="@string/about_me_hint"
                     android:inputType="textMultiLine"

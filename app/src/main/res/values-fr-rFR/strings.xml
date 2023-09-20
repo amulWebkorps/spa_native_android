@@ -45,7 +45,7 @@
     <string name="set_the_new_password_for_your_account_so_you_can_log_in_and_access_all_the_features">Définissez votre nouveau mot de passe.</string>
     <string name="don_t_receive_your_code_resend">Vous n\'avez pas reçu votre code ? Renvoyer</string>
     <string name="arpit">Arpit</string>
-    <string name="click_here_to_enter_amount">Cliquez ici, Pour entrer le montant
+    <string name="click_here_to_enter_amount">Cliquez ici, pour entrer le montant
 </string>
     <string name="recent_transactions">Transactions récentes</string>
     <string name="aed_180_00">180,00 AED</string>
@@ -54,7 +54,7 @@
     <string name="transactions">Transaction</string>
     <string name="personal_details">Informations Personnelles</string>
     <string name="label_bank_details">Coordonnées Bancaires</string>
-    <string name="wallet">Porte monnaie</string>
+    <string name="wallet">Portefeuille</string>
     <string name="bank_detail">Coordonnées Bancaires</string>
     <string name="arpit_patidar">Arpit patidar</string>
     <string name="al_qadar_bank">Banque Al-Qadar</string>
@@ -86,7 +86,7 @@
     <string name="button_ok">D\'accord</string>
     <string name="otp_send">OTP envoyé au numéro de mobile</string>
     <string name="session_expire">Veuillez vous reconnecter. Nous sommes désolés pour ce désagrément.</string>
-    <string name="logout">déconnexion</string>
+    <string name="logout">Se déconnecter</string>
     <string name="label_bank_name">Nom de la banque*</string>
     <string name="account_type">Type de compte</string>
     <string name="account_type_">Type de compte : </string>
@@ -196,5 +196,6 @@
     <string name="add_qr_2">a partagé un lien de paiement de </string>
     <string name="add_qr_3">AED avec vous. Veuillez cliquer sur le lien pour procéder au paiement :- </string>
     <string name="submit">Soumettre</string>
+    <string name="confirm_account_number">Confirmer le numéro de compte*</string>
 
 </resources>
