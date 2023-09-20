@@ -45,6 +45,7 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
     private lateinit var barChartStyle: BarChartStyle
     var map2 = mutableMapOf<String,String>()
     var pos: Int = 0
+    var isGraphDataResponse: Boolean = false
     var LIST_MONTHLY =
         arrayOf(context.getString(R.string.weekly), context.getString(R.string.monthly))
     var LIST = arrayOf(
@@ -84,11 +85,10 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
 
         setAdapter()
         setClick()
-//        resentTransactionResponse()
-        //  apiCall()
-        graphDataResponse()
+        if (!isGraphDataResponse){
+            graphDataResponse()
+        }
         setRecycleView()
-        // apiCallGraph("weekly")
     }
 
     private fun getKeyForValue(value: String): String {
@@ -349,6 +349,8 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
     }
 
     private fun graphDataResponse() {
+        isGraphDataResponse=true
+        Log.e("graphDataResponse","rohit")
         lifecycleScope.launchWhenCreated {
             settingsViewModel.graphData.collect { result ->
                 toggleLoader(true)
