@@ -169,9 +169,10 @@ class VerificationFragment : BaseFragment() {
                             (requireActivity().application as App).session.user = it
                             session.isLogin = true
 
-                            val intent = Intent(requireContext(), HomeActivity::class.java)
-                            requireActivity().finish()
-                            startActivity(intent)
+                            //val intent = Intent(requireContext(), HomeActivity::class.java)
+                            //requireActivity().finish()
+                            //startActivity(intent)
+                            listener?.replaceFragment(Screen.AFTER_SIGN_IN)
 
                         }
                     }

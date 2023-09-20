@@ -286,9 +286,6 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
             )
         }
         listChartDayValues.forEachIndexed { index, chartDays ->
-            // if (chartDays.amount.toFloat() == 0f) {
-            //chartDays.amount = 100
-            //}
             listBarEntry.add(BarEntry(index.toFloat(), chartDays.amount.toFloat()))
         }
 
@@ -371,7 +368,7 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                                 for (i in 0 until it.list.size) {
                                     listDays.add(it.list[i])
                                     listChartDayValues.add(i, it.list[i])
-                                    if (it.list[i].amount != 0) {
+                                    if (it.list[i].amount > 0) {
                                         totalCount.add(it.list[i])
                                     }
                                 }
@@ -390,7 +387,7 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                                 for (i in 0 until it.list.size) {
                                     listMonths.add(it.list[i])
                                     listChartDayValues.add(i, it.list[i])
-                                    if (it.list[i].amount != 0) {
+                                    if (it.list[i].amount > 0) {
                                         monthlyTotalCount.add(it.list[i])
                                     }
                                 }
