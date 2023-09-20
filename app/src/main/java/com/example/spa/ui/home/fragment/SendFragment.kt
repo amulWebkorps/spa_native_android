@@ -350,7 +350,6 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
 
     private fun graphDataResponse() {
         isGraphDataResponse=true
-        Log.e("graphDataResponse","rohit")
         lifecycleScope.launchWhenCreated {
             settingsViewModel.graphData.collect { result ->
                 toggleLoader(true)
