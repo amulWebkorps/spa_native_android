@@ -69,6 +69,11 @@ class SelectLanguageFragment : BaseFragment(), LanguageAdapter.OnClick {
                 getString(R.string.french),
             )
         )
+        list.add(
+            Language(
+                getString(R.string.arabic),
+            )
+        )
         Log.e("TAG", "onViewCreated: ${session.language}", )
 
         adapter = LanguageAdapter(this, requireContext(), session.language)
@@ -80,7 +85,11 @@ class SelectLanguageFragment : BaseFragment(), LanguageAdapter.OnClick {
 
         if (selectLanguage == getString(R.string.french)) {
             setAppLocale(requireContext(), "fr")
-        } else {
+        }
+        if (selectLanguage == getString(R.string.arabic)) {
+            setAppLocale(requireContext(), "ar")
+        }
+        else {
             setAppLocale(requireContext(), "en")
         }
         session.language = selectLanguage

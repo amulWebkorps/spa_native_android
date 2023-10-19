@@ -66,7 +66,11 @@ class SplashMainActivity : AppCompatActivity() {
 
         if (session.language == getString(R.string.french)) {
             setAppLocale(this, "fr")
-        } else {
+        }
+        if (session.language == getString(R.string.arabic)) {
+            setAppLocale(this, "ar")
+        }
+        else {
             setAppLocale(this, "en")
             session.language ==getString(R.string.english)
         }

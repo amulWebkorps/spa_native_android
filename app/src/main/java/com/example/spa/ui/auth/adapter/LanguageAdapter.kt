@@ -47,7 +47,7 @@ class LanguageAdapter(val onClick:OnClick,val context: Context ,val language:Str
 
       }
 
-    override fun getItemCount(): Int = 2
+    override fun getItemCount(): Int = 3
 
 
     fun setListItem(list: List<Language>) {

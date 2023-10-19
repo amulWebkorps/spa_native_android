@@ -42,6 +42,7 @@ fun TextView.setSpan(
     Log.e("TAG", "setSpan3: ${clickableString}", )
         highlightColor = ContextCompat.getColor(context, R.color.white)
 
+
         spannableString.setSpan(
             CustomTypefaceSpan(ResourcesCompat.getFont(context!!, clickableFont), ""),
             clickablePartStart,

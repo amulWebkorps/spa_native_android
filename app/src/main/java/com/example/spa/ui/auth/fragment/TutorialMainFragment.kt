@@ -44,6 +44,10 @@ class TutorialMainFragment :  BaseFragment() {
                 setAppLocale(requireContext(), "en")
                 session.language  =  getString(R.string.english)
             }
+            getString(R.string.arabic) -> {
+                setAppLocale(requireContext(), "ar")
+                binding.textViewLanguage.text = session.language
+            }
             getString(R.string.french) -> {
                 setAppLocale(requireContext(), "fr")
                 binding.textViewLanguage.text = session.language

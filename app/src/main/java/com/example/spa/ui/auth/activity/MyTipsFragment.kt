@@ -76,6 +76,10 @@ class MyTipsFragment : BaseFragment() {
                 setAppLocale(requireContext(), "fr")
                 binding.textViewLanguage.text = session.language
             }
+            getString(R.string.arabic) -> {
+                setAppLocale(requireContext(), "ar")
+                binding.textViewLanguage.text = session.language
+            }
             else -> {
                 setAppLocale(requireContext(), "en")
                 session.language  =  getString(R.string.english)

@@ -197,5 +197,6 @@
     <string name="add_qr_3">AED avec vous. Veuillez cliquer sur le lien pour procéder au paiement :- </string>
     <string name="submit">Soumettre</string>
     <string name="confirm_account_number">Confirmer le numéro de compte*</string>
+    <string name="arabic">Arabic</string>
 
 </resources>
