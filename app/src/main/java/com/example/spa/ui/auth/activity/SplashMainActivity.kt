@@ -64,15 +64,17 @@ class SplashMainActivity : AppCompatActivity() {
 //        binding.textViewY.startAnimation(animation2)
 //        binding.textViewPs.startAnimation(animation2)
 
-        if (session.language == getString(R.string.french)) {
-            setAppLocale(this, "fr")
-        }
-        if (session.language == getString(R.string.arabic)) {
-            setAppLocale(this, "ar")
-        }
-        else {
-            setAppLocale(this, "en")
-            session.language ==getString(R.string.english)
+        when (session.language) {
+            getString(R.string.french) -> {
+                setAppLocale(this, "fr")
+            }
+            getString(R.string.arabic) -> {
+                setAppLocale(this, "ar")
+            }
+            else -> {
+                setAppLocale(this, "en")
+                session.language ==getString(R.string.english)
+            }
         }
 
         Glide.with(this).asGif().load(R.drawable.splash_anim)
