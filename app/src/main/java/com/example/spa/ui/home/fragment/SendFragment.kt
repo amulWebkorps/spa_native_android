@@ -43,7 +43,7 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
     val list = ArrayList<AddMoney>()
     private lateinit var binding: FragmentSendBinding
     private lateinit var barChartStyle: BarChartStyle
-    var map2 = mutableMapOf<String,String>()
+    var map2 = mutableMapOf<String, String>()
     var pos: Int = 0
     var isGraphDataResponse: Boolean = false
     var LIST_MONTHLY =
@@ -55,8 +55,6 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
         context.getString(R.string.sale),
         context.getString(R.string.Other)
     )
-
-
 
 
     var dialog: Dialog = Dialog(context)
@@ -85,7 +83,7 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
 
         setAdapter()
         setClick()
-        if (!isGraphDataResponse){
+        if (!isGraphDataResponse) {
             graphDataResponse()
         }
         setRecycleView()
@@ -221,7 +219,11 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                     if (editText.text.toString() == getString(R.string.my_reason)) {
                         showMessage(binding.root, getString(R.string.please_select_reason))
                     } else {
-                        openActivity(Constants.SHARE_QR,binding.editTextAmount.text.toString(),getKeyForValue(editText.text.toString()))
+                        openActivity(
+                            Constants.SHARE_QR,
+                            binding.editTextAmount.text.toString(),
+                            getKeyForValue(editText.text.toString())
+                        )
                         dialog.dismiss()
                     }
 
@@ -328,6 +330,7 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                             showMessage(binding.root, it)
                         }
                     }
+
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         toggleLoader(false)
@@ -346,17 +349,22 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
     }
 
     private fun graphDataResponse() {
-        isGraphDataResponse=true
+        isGraphDataResponse = true
         lifecycleScope.launchWhenCreated {
             settingsViewModel.graphData.collect { result ->
                 toggleLoader(true)
                 when (result) {
                     is Resource.Error -> {
                         toggleLoader(false)
-                        result.message?.let {
-                            showMessage(binding.root, it)
+                        if (result.code == 403){
+                            logoutMainApp(requireActivity())
+                        }else{
+                            result.message?.let {
+                                showMessage(binding.root, it)
+                            }
                         }
                     }
+
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         toggleLoader(false)
@@ -391,7 +399,7 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                                         monthlyTotalCount.add(it.list[i])
                                     }
                                 }
-                                Log.e("TAG", "graphDataResponse: ${listMonths}", )
+                                Log.e("TAG", "graphDataResponse: ${listMonths}")
                                 if (monthlyTotalCount.size == 0) {
                                     binding.barChart.hideView()
                                     binding.textViewGraphNoDataFound.showView()
@@ -414,18 +422,23 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                 "+20" -> {
                     editTextAmount.setText("20")
                 }
+
                 "+50" -> {
                     editTextAmount.setText("50")
                 }
+
                 "+100" -> {
                     editTextAmount.setText("100")
                 }
+
                 "+150" -> {
                     editTextAmount.setText("150")
                 }
+
                 "+170" -> {
                     editTextAmount.setText("170")
                 }
+
                 else -> {
                     editTextAmount.setText("")
                 }

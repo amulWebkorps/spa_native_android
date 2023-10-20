@@ -68,11 +68,14 @@ class SettingsService constructor(
         }
     }
 
-    override suspend fun deleteBankAccount(token:String,id: String): Flow<Resource<GeneralResponse>> {
+    override suspend fun deleteBankAccount(
+        token: String,
+        id: String
+    ): Flow<Resource<GeneralResponse>> {
         return flow {
             emit(Resource.Loading(true))
             try {
-                val response = settingsApi.deleteBankAccount(token,id)
+                val response = settingsApi.deleteBankAccount(token, id)
                 if (response.isSuccessful) {
                     emit(Resource.Loading(false))
                     emit(Resource.Success(response.body()))
@@ -95,13 +98,18 @@ class SettingsService constructor(
         return flow {
             emit(Resource.Loading(true))
             try {
-                val response = settingsApi.resentTransaction(token,page)
+                val response = settingsApi.resentTransaction(token, page)
                 if (response.isSuccessful) {
                     emit(Resource.Loading(false))
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0]!!.toString()))
+                    emit(
+                        Resource.Error(
+                            getErrorResponseArray(response.errorBody()).errors[0]!!.toString(),
+                            code = response.code()
+                        )
+                    )
 
                 }
             } catch (e: IOException) {
@@ -116,18 +124,23 @@ class SettingsService constructor(
 
     override suspend fun graphData(
         token: String,
-        type:String
+        type: String
     ): Flow<Resource<GraphResponse>> {
         return flow {
             emit(Resource.Loading(true))
             try {
-                val response = settingsApi.graphData(token,type)
+                val response = settingsApi.graphData(token, type)
                 if (response.isSuccessful) {
                     emit(Resource.Loading(false))
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
-                    emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0]!!.toString()))
+                    emit(
+                        Resource.Error(
+                            getErrorResponseArray(response.errorBody()).errors[0]!!.toString(),
+                            code = response.code()
+                        )
+                    )
 
                 }
             } catch (e: IOException) {

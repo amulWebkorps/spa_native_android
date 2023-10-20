@@ -20,6 +20,7 @@ class Constants {
         const val RESET_PASSWORD = "resetPassword"
         const val SESSION_EXPIRE = "sessionExpire"
         const val COME_FROM_SPLASH = "comeFromSplash"
+        const val COME_FROM_SUSPEND = "comeFromSuspend"
         const val OTP = "otp"
         const val TYPE = "type"
         const val ISOLATED = "isolated"

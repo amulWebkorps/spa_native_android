@@ -17,7 +17,6 @@ import com.example.spa.ui.home.activity.IsolatedActivity
 import com.example.spa.ui.home.adapter.ResentAdapter
 import com.example.spa.utilities.*
 import com.example.spa.viewmodel.SettingsViewModel
-import com.google.gson.Gson
 import kotlinx.coroutines.launch
 
 class TransactionFragment : BaseFragment() {
@@ -112,9 +111,14 @@ class TransactionFragment : BaseFragment() {
                     is Resource.Error -> {
                         toggleLoader(false)
                         loading = false
-                        result.message?.let {
-                            showMessage(binding.root, it)
+                        if (result.code == 403){
+                            logoutMainApp(requireActivity())
+                        }else{
+                            result.message?.let {
+                                showMessage(binding.root, it)
+                            }
                         }
+
                     }
                     is Resource.Loading -> {}
                     is Resource.Success -> {

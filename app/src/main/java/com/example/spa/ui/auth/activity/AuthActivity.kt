@@ -71,7 +71,9 @@ class AuthActivity : AppCompatActivity(), Listener {
             supportFragmentManager.beginTransaction().add(R.id.placeHolder, LoginFragment()).commit()
 
         }
+        if (intent.extras?.get(Constants.COME_FROM_SPLASH) == true) {
 
+        }
         if (intent.extras?.get(Constants.SESSION_EXPIRE) == true) {
             showMessage(binding.root, getString(R.string.session_expire))
         }
