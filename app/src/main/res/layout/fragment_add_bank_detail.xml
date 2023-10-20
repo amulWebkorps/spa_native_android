@@ -206,7 +206,7 @@
             android:background="@android:color/transparent"
             app:boxStrokeColor="@color/colorGrey7C"
             app:hintTextColor="@color/colorGrey7C"
-            android:hint="BIC/Swift*"
+            android:hint="@string/bic_swift"
             android:layout_marginHorizontal="@dimen/dp_20"
             app:layout_constraintTop_toBottomOf="@id/textViewSignUnSubHead">
 

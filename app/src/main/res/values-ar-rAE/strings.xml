@@ -141,11 +141,11 @@
 
     <string name="my_qr_code">رمز QR الخاص بي </string>
     <string name="transaction_successful">الصفقة منفذة</string>
-    <string name="scan_qa_code_to_generate_payment_link_of_100_aed">Scan QA code to Generate Payment Link of %s AED</string>
+    <string name="scan_qa_code_to_generate_payment_link_of_100_aed">امسح رمز QR لإنشاء رابط دفع بقيمة AED %s</string>
     <string name="share_qr_one_time_text">إذا استمتعت بتجربتك، ستكون MYTIPS محل تقدير كبير.</string>
     <string name="withdraw">سحب</string>
     <string name="restoration">خدمات المطاعم</string>
-    <string name="concierge_hotel_services"><![CDATA[Concierge & Hotel Services]]></string>
+    <string name="concierge_hotel_services">خدمات الكونسيرج والفنادق</string>
     <string name="transportations">مواصلات</string>
     <string name="sale">خدمات بيع</string>
     <string name="Other">آخر</string>
@@ -158,7 +158,7 @@
     <string name="settings">إعدادات</string>
     <string name="version">إصدار</string>
     <string name="label_address">العنوان (اختياري)</string>
-    <string name="b_id_card">بطاقة هوية الأعمال</string>
+    <string name="b_id_card">الرابط المهني</string>
     <string name="label_dob">تاريخ الميلاد(اختياري)</string>
     <string name="about_me">ْعَنِّي</string>
     <string name="about_me_hint">اخبرنا شيئا عن نفسك..</string>
@@ -213,4 +213,5 @@
     <string name="successfully_deleted">تم الحذف بنجاح</string>
     <string name="account_number_is_not_a_number">Account number is not a number</string>
     <string name="user_is_suspended">User is suspended</string>
+    <string name="bic_swift">بيك/سويفت*</string>
 </resources>
