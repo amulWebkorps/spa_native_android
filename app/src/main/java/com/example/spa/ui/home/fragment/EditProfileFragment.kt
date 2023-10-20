@@ -6,10 +6,10 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -22,7 +22,12 @@ import com.example.spa.data.request.User
 import com.example.spa.data.response.UpdateUserResponse
 import com.example.spa.databinding.FragmentEditProfileBinding
 import com.example.spa.ui.home.activity.HomeActivity
-import com.example.spa.utilities.*
+import com.example.spa.utilities.Constants
+import com.example.spa.utilities.Resource
+import com.example.spa.utilities.formatDateDOB
+import com.example.spa.utilities.getErrorResponseArray
+import com.example.spa.utilities.hasInternet
+import com.example.spa.utilities.showMessage
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
 import com.squareup.picasso.Picasso
@@ -37,7 +42,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.io.File
 import java.io.FileOutputStream
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.Calendar
+import java.util.Locale
 
 class EditProfileFragment : BaseFragment() {
 
@@ -78,6 +84,11 @@ class EditProfileFragment : BaseFragment() {
 
 
         binding.layoutPhone.editTextPhoneNumber.inputType = InputType.TYPE_NULL
+        if (session.language == getString(R.string.arabic)){
+            binding.layoutPhone.editTextPhoneNumber.gravity= Gravity.END
+        }else{
+            binding.layoutPhone.editTextPhoneNumber.gravity= Gravity.START
+        }
         binding.layoutPhone.ccp.setCcpClickable(false)
         binding.textInputFirstName.setText(session.user!!.first_name)
         binding.textInputLastName.setText(session.user!!.last_name)
