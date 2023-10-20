@@ -92,7 +92,7 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
     private fun getKeyForValue(value: String): String {
         for ((key, v) in map2) {
             if (v == value) {
-                return key
+                return v
             }
         }
         return "" // Return a default value if the value is not found
@@ -140,10 +140,24 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
     }
 
     private fun openActivity(fragment: String, amountQR: String, reasonQR: String) {
+        var engReason = ""
+        if (reasonQR == requireActivity().getString(R.string.restoration)) {
+            engReason = "Restoration"
+        } else if (reasonQR == requireActivity().getString(R.string.concierge_hotel_services)) {
+            engReason = "Concierge & Hotel Services"
+        } else if (reasonQR == requireActivity().getString(R.string.transportations)) {
+            engReason = "Transportations"
+        } else if (reasonQR == requireActivity().getString(R.string.sale)) {
+            engReason = "Sale"
+        } else if (reasonQR == requireActivity().getString(R.string.Other)) {
+            engReason = "Other"
+        } else {
+            engReason = reasonQR
+        }
         val intent = Intent(requireContext(), IsolatedActivity::class.java)
         intent.putExtra(Constants.SCREEN_NAME, fragment)
         intent.putExtra(Constants.AMOUNT_QR, amountQR)
-        intent.putExtra(Constants.REASON_QR, reasonQR)
+        intent.putExtra(Constants.REASON_QR, engReason)
         startActivity(intent)
     }
 
@@ -356,9 +370,9 @@ class SendFragment(context: Context) : BaseFragment(), SelectMoneyAdapter.Onclic
                 when (result) {
                     is Resource.Error -> {
                         toggleLoader(false)
-                        if (result.code == 403){
+                        if (result.code == 403) {
                             logoutMainApp(requireActivity())
-                        }else{
+                        } else {
                             result.message?.let {
                                 showMessage(binding.root, it)
                             }
