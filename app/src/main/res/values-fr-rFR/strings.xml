@@ -200,4 +200,16 @@
     <string name="arabic">Arabic</string>
     <string name="suspended_msg">Votre compte a été suspendu. Pour plus d\'informations contactez-nous à</string>
 
+    <!--    Backend Messages-->
+    <string name="mobile_number_is_incorrect">Le numéro de portable est incorrect</string>
+    <string name="country_code_is_incorrect">Le code du pays est incorrect</string>
+    <string name="password_is_incorrect">Le mot de passe est incorrect</string>
+    <string name="mobile_number_has_already_been_taken">Le numéro de portable a déjà été pris</string>
+    <string name="invalid_otp_code">code OTP invalide</string>
+    <string name="email_id_already_exists">Ld\'identifiant de messagerie existe déjà</string>
+    <string name="amount_can_be_more_than_wallet_balance">Le montant ne peut pas être supérieur au solde du portefeuille</string>
+    <string name="successfully_deleted">supprimé avec succès</string>
+    <string name="account_number_is_not_a_number">Account number is not a number</string>
+    <string name="user_is_suspended">User is suspended</string>
+
 </resources>

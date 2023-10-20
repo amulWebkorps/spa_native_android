@@ -135,6 +135,7 @@
 
     <androidx.appcompat.widget.AppCompatCheckBox
         android:id="@+id/checkboxPassword"
+        android:gravity="end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dp_13"

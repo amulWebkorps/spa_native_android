@@ -11,6 +11,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
 import com.example.spa.App
+import com.example.spa.R
 import com.example.spa.ui.auth.activity.AuthActivity
 import com.google.android.material.snackbar.Snackbar
 import com.google.gson.Gson
@@ -54,11 +55,32 @@ fun showToast(ctx: Context, msg: String, gravity: Int?) {
 
 fun showMessage(view: View, message: String, isError: Boolean = false) {
 
-
+    var newMsg=message
+    if (message == "Mobile number is incorrect"){
+        newMsg=view.context.getString(R.string.mobile_number_is_incorrect)
+    }else if (message == "Country code is incorrect"){
+        newMsg=view.context.getString(R.string.country_code_is_incorrect)
+    }else if (message == "password is incorrect"){
+        newMsg=view.context.getString(R.string.password_is_incorrect)
+    }else if (message == "Mobile number has already been taken"){
+        newMsg=view.context.getString(R.string.mobile_number_has_already_been_taken)
+    }else if (message == "invalid otp code"){
+        newMsg=view.context.getString(R.string.invalid_otp_code)
+    }else if (message == "Email Id already exists"){
+        newMsg=view.context.getString(R.string.email_id_already_exists)
+    }else if (message == "Amount can\\'t be more than wallet balance"){
+        newMsg=view.context.getString(R.string.amount_can_be_more_than_wallet_balance)
+    }else if (message == "successfully deleted"){
+        newMsg=view.context.getString(R.string.successfully_deleted)
+    }else if (message == "Account number is not a number"){
+        newMsg=view.context.getString(R.string.account_number_is_not_a_number)
+    }else if (message == "User is suspended"){
+        newMsg=view.context.getString(R.string.user_is_suspended)
+    }
     val snackbar: Snackbar = Snackbar
         .make(
             view,
-            message.toString(),
+            newMsg.toString(),
             Snackbar.LENGTH_LONG
         )
 

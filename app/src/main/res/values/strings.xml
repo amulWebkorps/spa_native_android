@@ -200,4 +200,16 @@
     <string name="confirm_account_number">Confirm Account Number*</string>
     <string name="arabic">Arabic</string>
     <string name="suspended_msg">Your account has been suspended. For more info contact us at</string>
+
+    <!--    Backend Messages-->
+    <string name="mobile_number_is_incorrect">Mobile number is incorrect</string>
+    <string name="country_code_is_incorrect">Country code is incorrect</string>
+    <string name="password_is_incorrect">password is incorrect</string>
+    <string name="mobile_number_has_already_been_taken">Mobile number has already been taken</string>
+    <string name="invalid_otp_code">invalid otp code</string>
+    <string name="email_id_already_exists">Email Id already exists</string>
+    <string name="amount_can_be_more_than_wallet_balance">Amount can\'t be more than wallet balance</string>
+    <string name="successfully_deleted">successfully deleted</string>
+    <string name="account_number_is_not_a_number">Account number is not a number</string>
+    <string name="user_is_suspended">User is suspended</string>
 </resources>

@@ -201,4 +201,16 @@
     <string name="confirm_account_number">تأكيد رقم الحساب*</string>
     <string name="arabic">Arabic</string>
     <string name="suspended_msg">تم تعليق حسابك. لمزيد من المعلومات اتصل بنا على</string>
+
+    <!--    Backend Messages-->
+    <string name="mobile_number_is_incorrect">رقم الجوال غير صحيح</string>
+    <string name="country_code_is_incorrect">رمز البلد غير صحيح</string>
+    <string name="password_is_incorrect">كلمة المرور غير صحيحة</string>
+    <string name="mobile_number_has_already_been_taken">لقد تم بالفعل أخذ رقم الهاتف المحمول</string>
+    <string name="invalid_otp_code">رمز OTP غير صالح</string>
+    <string name="email_id_already_exists">معرف البريد الإلكتروني موجود بالفعل</string>
+    <string name="amount_can_be_more_than_wallet_balance">لا يمكن أن يكون المبلغ أكثر من رصيد المحفظة</string>
+    <string name="successfully_deleted">تم الحذف بنجاح</string>
+    <string name="account_number_is_not_a_number">Account number is not a number</string>
+    <string name="user_is_suspended">User is suspended</string>
 </resources>

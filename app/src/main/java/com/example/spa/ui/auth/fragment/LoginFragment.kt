@@ -56,7 +56,6 @@ class LoginFragment : BaseFragment() {
         loginResponse()
         getUserResponse()
         responseSendOtp()
-
         binding.textInputPassword.showPassword(binding.checkboxPassword.isChecked)
     }
 
@@ -134,7 +133,7 @@ class LoginFragment : BaseFragment() {
                             result.message?.let {
                                 showMessage(
                                     binding.root,
-                                    it + " " + result.code
+                                    it
                                 )
                             }
                         }
