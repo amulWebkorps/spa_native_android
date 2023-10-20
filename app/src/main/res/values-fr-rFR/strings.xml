@@ -13,8 +13,8 @@
     <string name="label_last_name">Nom de famille*</string>
     <string name="label_phone_number">Numéro de téléphone*</string>
     <string name="label_email_address">Adresse e-mail*</string>
-    <string name="label_confirm_password">Confirmez le mot de passe*</string>
-    <string name="label_password">Mot de passe*</string>
+    <string name="label_confirm_password">Confirmez Le Mot De Passe*</string>
+    <string name="label_password">Mot De Passe*</string>
     <string name="don_t_have_an_account_register">Vous n\'avez pas de compte ! Enregistrer</string>
 
     <string name="don_t_have_an_account_register2">Vous n\'avez pas de compte ! Enregistrer</string>
@@ -79,7 +79,7 @@
     <string name="share_qr_code">Partager le code QR</string>
     <string name="filters">Filters</string>
     <string name="message_logout">Voulez-vous vraiment vous déconnecter ?</string>
-    <string name="message_withdraw_popup">Pour retirer un montant, vous devez avoir au moins un compte bancaire</string>
+    <string name="message_withdraw_popup">Pour retirer un montant, vous devez disposer d’au moins un compte bancaire.</string>
     <string name="message_delete">Voulez-vous vraiment supprimer votre compte bancaire ?</string>
     <string name="button_yes">Oui</string>
     <string name="button_no">Non</string>
@@ -99,13 +99,13 @@
     <string name="no_internet_connection">Veuillez vérifier votre connexion Internet</string>
     <string name="please_enter_confirm_account">Veuillez saisir le numéro de compte de confirmation</string>
     <string name="try_again">Réessayez</string>
-    <string name="no_data_found">Aucune donnée trouvée</string>
+    <string name="no_data_found">Pas de données disponibles.</string>
     <string name="active">Actif</string>
     <string name="inactive">Inactif</string>
     <string name="account_number_">Numéro de compte : </string>
     <string name="ifsc_code">BIC/Swift</string>
     <string name="ifsc_code_">BIC/Swift : </string>
-    <string name="terms_condition">En créant un compte, j\'entends accepter toutes les Termes et Conditions</string>
+    <string name="terms_condition">En créant un compte, j\'entends accepter tous les Termes et Conditions</string>
     <string name="error_terms_condition">Veuillez sélectionner les termes et conditions</string>
     <string name="error_valid_amount">Veuillez saisir un montant valide</string>
     <string name="reset_password_successfully">Le mot de passe a été modifié avec succès.</string>
@@ -197,7 +197,7 @@
     <string name="add_qr_3">AED avec vous. Veuillez cliquer sur le lien pour procéder au paiement :- </string>
     <string name="submit">Soumettre</string>
     <string name="confirm_account_number">Confirmer le numéro de compte*</string>
-    <string name="arabic">Arabic</string>
+    <string name="arabic">إنجليزي</string>
     <string name="suspended_msg">Votre compte a été suspendu. Pour plus d\'informations contactez-nous à</string>
 
     <!--    Backend Messages-->
@@ -205,12 +205,12 @@
     <string name="country_code_is_incorrect">Le code du pays est incorrect</string>
     <string name="password_is_incorrect">Le mot de passe est incorrect</string>
     <string name="mobile_number_has_already_been_taken">Le numéro de portable a déjà été pris</string>
-    <string name="invalid_otp_code">code OTP invalide</string>
+    <string name="invalid_otp_code">Veuillez entrer OTP</string>
     <string name="email_id_already_exists">Ld\'identifiant de messagerie existe déjà</string>
     <string name="amount_can_be_more_than_wallet_balance">Le montant ne peut pas être supérieur au solde du portefeuille</string>
     <string name="successfully_deleted">supprimé avec succès</string>
     <string name="account_number_is_not_a_number">Le numéro de compte nd\'est pas un numéro</string>
     <string name="user_is_suspended">Ld\'utilisateur est suspendu</string>
     <string name="bic_swift">BIC/Swift*</string>
-
+    <string name="no_transactions_yet">Aucune transaction trouvée</string>
 </resources>

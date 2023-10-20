@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.spa.R
 import com.example.spa.base.BaseFragment
 import com.example.spa.databinding.TransactionFragmentBinding
 import com.example.spa.ui.home.activity.IsolatedActivity
@@ -55,6 +56,7 @@ class TransactionFragment : BaseFragment() {
             apiCall()
             binding.swipeRefreshLayout.isRefreshing = false
         }
+        binding.noDataFoundLayout.textViewNoBankAccountAdded.setText(getString(R.string.no_transactions_yet))
     }
 
 

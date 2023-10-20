@@ -199,7 +199,7 @@
     <string name="add_qr_3">الرجاء الضغط على الرابط لمتابعة الدفع :- </string>
     <string name="submit">يُقدِّم</string>
     <string name="confirm_account_number">تأكيد رقم الحساب*</string>
-    <string name="arabic">Arabic</string>
+    <string name="arabic">إنجليزي</string>
     <string name="suspended_msg">تم تعليق حسابك. لمزيد من المعلومات اتصل بنا على</string>
 
     <!--    Backend Messages-->
@@ -214,4 +214,5 @@
     <string name="account_number_is_not_a_number">رقم الحساب ليس رقما</string>
     <string name="user_is_suspended">تم تعليق المستخدم</string>
     <string name="bic_swift">بيك/سويفت*</string>
+    <string name="no_transactions_yet">لم يتم العثور على أي معاملات</string>
 </resources>
