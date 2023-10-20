@@ -142,7 +142,7 @@
     <string name="my_qr_code">رمز QR الخاص بي </string>
     <string name="transaction_successful">الصفقة منفذة</string>
     <string name="scan_qa_code_to_generate_payment_link_of_100_aed">امسح رمز QR لإنشاء رابط دفع بقيمة AED %s</string>
-    <string name="share_qr_one_time_text">إذا استمتعت بتجربتك، ستكون MYTIPS محل تقدير كبير.</string>
+    <string name="share_qr_one_time_text">.إذا استمتعت بتجربتك، ستكون MYTIPS محل تقدير كبير</string>
     <string name="withdraw">سحب</string>
     <string name="restoration">خدمات المطاعم</string>
     <string name="concierge_hotel_services">خدمات الكونسيرج والفنادق</string>
