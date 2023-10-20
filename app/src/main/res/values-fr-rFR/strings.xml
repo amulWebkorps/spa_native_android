@@ -108,7 +108,7 @@
     <string name="terms_condition">En créant un compte, j\'entends accepter toutes les Termes et Conditions</string>
     <string name="error_terms_condition">Veuillez sélectionner les termes et conditions</string>
     <string name="error_valid_amount">Veuillez saisir un montant valide</string>
-    <string name="reset_password_successfully">Réinitialiser le mot de passe avec succès</string>
+    <string name="reset_password_successfully">Le mot de passe a été modifié avec succès.</string>
     <string name="forgot_your_password">Mot de passe oublié?</string>
     <string name="dot">: </string>
     <string name="weekly">Hebdomadaire</string>
@@ -209,8 +209,8 @@
     <string name="email_id_already_exists">Ld\'identifiant de messagerie existe déjà</string>
     <string name="amount_can_be_more_than_wallet_balance">Le montant ne peut pas être supérieur au solde du portefeuille</string>
     <string name="successfully_deleted">supprimé avec succès</string>
-    <string name="account_number_is_not_a_number">Account number is not a number</string>
-    <string name="user_is_suspended">User is suspended</string>
+    <string name="account_number_is_not_a_number">Le numéro de compte nd\'est pas un numéro</string>
+    <string name="user_is_suspended">Ld\'utilisateur est suspendu</string>
     <string name="bic_swift">BIC/Swift*</string>
 
 </resources>

@@ -107,7 +107,7 @@
     <string name="terms_condition">By creating an account, I hearby accept all the Terms &amp; Conditions</string>
     <string name="error_terms_condition">Please select terms and condition</string>
     <string name="error_valid_amount">Please enter a valid amount</string>
-    <string name="reset_password_successfully">Reset password successfully</string>
+    <string name="reset_password_successfully">Password changed succesfully.</string>
     <string name="forgot_your_password">Forgot your password?</string>
     <string name="dot">: </string>
     <string name="weekly">Weekly</string>
@@ -212,5 +212,7 @@
     <string name="successfully_deleted">successfully deleted</string>
     <string name="account_number_is_not_a_number">Account number is not a number</string>
     <string name="user_is_suspended">User is suspended</string>
+
+
     <string name="bic_swift">BIC/Swift*</string>
 </resources>
