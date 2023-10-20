@@ -51,7 +51,11 @@ class AuthService constructor(
                     emit(Resource.Success(response.body()))
                 } else {
                     emit(Resource.Loading(false))
+                    try {
                         emit(Resource.Error(getErrorResponseArray(response.errorBody()).errors[0].toString()!!))
+                    } catch (e: Exception) {
+                        emit(Resource.Error("Something went wrong"))
+                    }
                 }
             } catch (e: IOException) {
                 emit(Resource.Loading(false))

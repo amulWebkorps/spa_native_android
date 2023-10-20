@@ -213,4 +213,5 @@
     <string name="user_is_suspended">Ld\'utilisateur est suspendu</string>
     <string name="bic_swift">BIC/Swift*</string>
     <string name="no_transactions_yet">Aucune transaction trouvée</string>
+    <string name="something_went_wrong">Une erreur s\'est produite lors de la connexion au My Tips. Veuillez réessayer ultérieurement.</string>
 </resources>

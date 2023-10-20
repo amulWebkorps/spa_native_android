@@ -76,6 +76,8 @@ fun showMessage(view: View, message: String, isError: Boolean = false) {
         newMsg=view.context.getString(R.string.account_number_is_not_a_number)
     }else if (message == "User is suspended"){
         newMsg=view.context.getString(R.string.user_is_suspended)
+    }else if (message == "Something went wrong"){
+        newMsg=view.context.getString(R.string.something_went_wrong)
     }
     val snackbar: Snackbar = Snackbar
         .make(
