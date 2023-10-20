@@ -198,5 +198,6 @@
     <string name="submit">Soumettre</string>
     <string name="confirm_account_number">Confirmer le numéro de compte*</string>
     <string name="arabic">Arabic</string>
+    <string name="suspended_msg">Votre compte a été suspendu. Pour plus d\'informations contactez-nous à</string>
 
 </resources>

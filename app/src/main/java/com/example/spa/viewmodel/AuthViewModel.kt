@@ -120,7 +120,7 @@ class AuthViewModel @Inject constructor(
                 when (result) {
                     is Resource.Error -> {
                         result.message?.let {
-                            _loginUser.emit(Resource.Error(result.message))
+                            _loginUser.emit(Resource.Error(result.message,code=result.code))
                         }
                     }
                     is Resource.Loading -> {

@@ -200,4 +200,5 @@
     <string name="submit">يُقدِّم</string>
     <string name="confirm_account_number">تأكيد رقم الحساب*</string>
     <string name="arabic">Arabic</string>
+    <string name="suspended_msg">تم تعليق حسابك. لمزيد من المعلومات اتصل بنا على</string>
 </resources>

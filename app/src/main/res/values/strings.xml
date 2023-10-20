@@ -199,4 +199,5 @@
     <string name="submit">Submit</string>
     <string name="confirm_account_number">Confirm Account Number*</string>
     <string name="arabic">Arabic</string>
+    <string name="suspended_msg">Your account has been suspended. For more info contact us at</string>
 </resources>

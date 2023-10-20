@@ -10,7 +10,9 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.spa.App
 import com.example.spa.R
+import com.example.spa.Url.SUPPORT_MAIL
 import com.example.spa.base.BaseFragment
+import com.example.spa.base.DialogUtils
 import com.example.spa.base.listener.Screen
 import com.example.spa.data.request.User
 import com.example.spa.databinding.FragmentLoginBinding
@@ -19,15 +21,17 @@ import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 //import kotlinx.android.synthetic.main.layout_phone_number.view.*
 
 @AndroidEntryPoint
-class LoginFragment :  BaseFragment() {
+class LoginFragment : BaseFragment() {
 
 
 //    private lateinit var binding: FragmentLoginBinding
 
     private var _binding: FragmentLoginBinding? = null
+
     // This property is only valid between onCreateView and
 // onDestroyView.
     private val binding get() = _binding!!
@@ -59,10 +63,14 @@ class LoginFragment :  BaseFragment() {
 
     private fun setClick() {
         binding.viewForgotPassword.setOnClickListener {
-            listener?.replaceFragment(Screen.FORGOT_PASSWORD,"login")
+            listener?.replaceFragment(Screen.FORGOT_PASSWORD, "login")
         }
 
-        binding.textViewCreateAccount.setSpan(getString(R.string.label_register),R.font.poppins_medium,R.color.colorBlue72){
+        binding.textViewCreateAccount.setSpan(
+            getString(R.string.label_register),
+            R.font.poppins_medium,
+            R.color.colorBlue72
+        ) {
             listener?.replaceFragment(Screen.SIGN_UP)
         }
         binding.checkboxPassword.setOnClickListener {
@@ -74,19 +82,19 @@ class LoginFragment :  BaseFragment() {
         }
         binding.buttonLogin.setOnClickListener {
             if (isValidationSuccess()) {
-                if (hasInternet(requireContext())){
+                if (hasInternet(requireContext())) {
                     toggleLoader(true)
                     lifecycleScope.launchWhenCreated {
                         authViewModel.loginUser(
                             User(
-                                country_code= binding.Phone.ccp.selectedCountryCodeWithPlus,
-                                mobile_number= binding.Phone.editTextPhoneNumber.text.toString(),
-                                password= binding.textInputPassword.text.toString(),
+                                country_code = binding.Phone.ccp.selectedCountryCodeWithPlus,
+                                mobile_number = binding.Phone.editTextPhoneNumber.text.toString(),
+                                password = binding.textInputPassword.text.toString(),
                             )
                         )
                     }
-                }else{
-                    showMessage(binding.root,getString(R.string.no_internet_connection))
+                } else {
+                    showMessage(binding.root, getString(R.string.no_internet_connection))
                 }
             }
         }
@@ -102,7 +110,7 @@ class LoginFragment :  BaseFragment() {
                 .check()
 
         } catch (e: ApplicationException) {
-            showMessage(binding.root,e.message)
+            showMessage(binding.root, e.message)
             return false
         }
         return true
@@ -114,14 +122,30 @@ class LoginFragment :  BaseFragment() {
                 when (result) {
                     is Resource.Error -> {
                         toggleLoader(false)
-                        result.message?.let { showMessage(binding.root, it) }
+                        if (result.code == 403) {
+                            DialogUtils().showGeneralDialog(
+                                requireActivity(),
+                                message = getString(R.string.suspended_msg) + " " + SUPPORT_MAIL,
+                                negativeText = getString(R.string.button_ok),
+                                onNoClick = {
+
+                                })
+                        } else {
+                            result.message?.let {
+                                showMessage(
+                                    binding.root,
+                                    it + " " + result.code
+                                )
+                            }
+                        }
                     }
+
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         toggleLoader(false)
                         result.data?.let { it ->
                             session.token = it.token
-                            Log.e("TAG", "loginResponse: $it", )
+                            Log.e("TAG", "loginResponse: $it")
                             lifecycleScope.launchWhenCreated {
                                 authViewModel.getUser(
                                     it.token
@@ -142,28 +166,29 @@ class LoginFragment :  BaseFragment() {
                         toggleLoader(false)
                         result.message?.let { showMessage(binding.root, it) }
                     }
+
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         toggleLoader(false)
                         result.data?.let { it ->
-                            session.phoneNumber=it.mobile_number
-                            session.countryCode=it.country_code
-                            session.countryChars =it.country_chars
-                            (requireActivity().application as App).session.user=it
+                            session.phoneNumber = it.mobile_number
+                            session.countryCode = it.country_code
+                            session.countryChars = it.country_chars
+                            (requireActivity().application as App).session.user = it
 
-                            Log.e("TAG", "getUserResponse: $it", )
+                            Log.e("TAG", "getUserResponse: $it")
                             if (it.is_mobile_verified) {
                                 (requireActivity().application as App).session.isLogin = true
                                 listener?.replaceFragment(Screen.AFTER_SIGN_IN)
                                 //val intent = Intent(requireContext(), HomeActivity::class.java)
                                 //requireActivity().finish()
                                 //startActivity(intent)
-                            }else{
+                            } else {
                                 lifecycleScope.launchWhenCreated {
                                     authViewModel.sendOtp(
                                         User(
-                                            country_code= it.country_code,
-                                            mobile_number=it.mobile_number,
+                                            country_code = it.country_code,
+                                            mobile_number = it.mobile_number,
                                         )
                                     )
                                 }
@@ -175,21 +200,22 @@ class LoginFragment :  BaseFragment() {
         }
     }
 
-    private fun responseSendOtp(){
+    private fun responseSendOtp() {
         lifecycleScope.launchWhenCreated {
             authViewModel.sendOtp.collect { result ->
                 when (result) {
                     is Resource.Error -> {
                         toggleLoader(false)
                         result.message?.let {
-                            showMessage(binding.root,it)
+                            showMessage(binding.root, it)
                         }
                     }
+
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         toggleLoader(false)
                         listener?.replaceFragment(Screen.VERIFICATION)
-                        showMessage(binding.root , getString(R.string.otp_send))
+                        showMessage(binding.root, getString(R.string.otp_send))
                     }
                 }
             }

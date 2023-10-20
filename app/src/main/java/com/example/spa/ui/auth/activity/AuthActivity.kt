@@ -1,6 +1,7 @@
 package com.example.spa.ui.auth.activity
 
 import android.app.Dialog
+import android.content.Intent
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -14,7 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.commit
 import androidx.lifecycle.lifecycleScope
+import com.example.spa.App
 import com.example.spa.R
+import com.example.spa.Url.SUPPORT_MAIL
+import com.example.spa.base.DialogUtils
 import com.example.spa.base.listener.Listener
 import com.example.spa.base.listener.Screen
 import com.example.spa.data.request.VersionRequest
@@ -41,7 +45,7 @@ class AuthActivity : AppCompatActivity(), Listener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_auth)
-        Log.e("error","rohit test")
+        Log.e("error", "rohit test")
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
         session = Session(this)
@@ -66,14 +70,23 @@ class AuthActivity : AppCompatActivity(), Listener {
             )
         }
         if (intent.extras?.get(Constants.COME_FROM_SPLASH) == true) {
-            supportFragmentManager.beginTransaction().add(R.id.placeHolder, AfterSignUpWelcomeScreen()).commit()
-        }else{
-            supportFragmentManager.beginTransaction().add(R.id.placeHolder, LoginFragment()).commit()
+            supportFragmentManager.beginTransaction()
+                .add(R.id.placeHolder, AfterSignUpWelcomeScreen()).commit()
+        } else {
+            supportFragmentManager.beginTransaction().add(R.id.placeHolder, LoginFragment())
+                .commit()
 
         }
-        if (intent.extras?.get(Constants.COME_FROM_SPLASH) == true) {
+        if (intent.extras?.get(Constants.COME_FROM_SUSPEND) == true) {
+            DialogUtils().showGeneralDialog(
+                this,
+                message = getString(R.string.suspended_msg) + " " + SUPPORT_MAIL,
+                negativeText = getString(R.string.button_ok),
+                onNoClick = {
 
+                })
         }
+
         if (intent.extras?.get(Constants.SESSION_EXPIRE) == true) {
             showMessage(binding.root, getString(R.string.session_expire))
         }
@@ -168,6 +181,7 @@ class AuthActivity : AppCompatActivity(), Listener {
             }
         }
     }
+
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()
