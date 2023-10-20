@@ -51,11 +51,11 @@
     <string name="aed_180_00">+180.00 درهم</string>
     <string name="_20_november">20 نوفمبر</string>
     <string name="transaction">عملية</string>
-    <string name="transactions">عملية</string>
+    <string name="transactions">المعاملات</string>
     <string name="personal_details">معلومات شخصية</string>
     <string name="label_bank_details">التفاصيل المصرفية</string>
     <string name="wallet">محفظة</string>
-    <string name="bank_detail">محفظة</string>
+    <string name="bank_detail">التفاصيل المصرفية</string>
     <string name="arpit_patidar">Arpit patidar</string>
     <string name="al_qadar_bank">Al-Qadar Bank</string>
     <string name="account_number">رقم حساب</string>
@@ -199,7 +199,7 @@
     <string name="add_qr_3">الرجاء الضغط على الرابط لمتابعة الدفع :- </string>
     <string name="submit">يُقدِّم</string>
     <string name="confirm_account_number">تأكيد رقم الحساب*</string>
-    <string name="arabic">إنجليزي</string>
+    <string name="arabic">العربية</string>
     <string name="suspended_msg">تم تعليق حسابك. لمزيد من المعلومات اتصل بنا على</string>
 
     <!--    Backend Messages-->

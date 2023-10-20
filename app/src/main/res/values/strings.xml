@@ -198,7 +198,7 @@
     <string name="add_qr_3">AED Please click on the link to proceed with the payment :- </string>
     <string name="submit">Submit</string>
     <string name="confirm_account_number">Confirm Account Number*</string>
-    <string name="arabic">إنجليزي</string>
+    <string name="arabic">العربية</string>
     <string name="suspended_msg">Your account has been suspended. For more info contact us at</string>
 
     <!--    Backend Messages-->
