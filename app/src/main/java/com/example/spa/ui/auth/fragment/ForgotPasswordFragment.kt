@@ -17,6 +17,8 @@ import com.example.spa.utilities.Resource
 import com.example.spa.utilities.showMessage
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
+import com.hbb20.CountryCodePicker
+
 //import kotlinx.android.synthetic.main.layout_phone_number.view.*
 
 
@@ -42,7 +44,20 @@ class ForgotPasswordFragment :BaseFragment() {
         setClick()
         responseSendOtp()
         updateMobileNumberResponse()
-
+        updateCountryLang()
+    }
+    private fun updateCountryLang() {
+        when (session.language) {
+            getString(R.string.french) -> {
+                binding.layoutPhone.ccp.changeDefaultLanguage(CountryCodePicker.Language.FRENCH)
+            }
+            getString(R.string.arabic) -> {
+                binding.layoutPhone.ccp.changeDefaultLanguage(CountryCodePicker.Language.ARABIC)
+            }
+            else -> {
+                binding.layoutPhone.ccp.changeDefaultLanguage(CountryCodePicker.Language.ENGLISH)
+            }
+        }
     }
 
     private fun setClick() {

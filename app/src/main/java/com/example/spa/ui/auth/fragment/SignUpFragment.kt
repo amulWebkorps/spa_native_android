@@ -27,6 +27,7 @@ import com.example.spa.databinding.FragmentSignUpBinding
 import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
+import com.hbb20.CountryCodePicker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -69,6 +70,20 @@ class SignUpFragment : BaseFragment() {
 
         binding.textInputConfirmPassword.showPassword(binding.checkboxPassword.isChecked)
         binding.textInputPassword.showPassword(binding.checkboxPassword.isChecked)
+        updateCountryLang()
+    }
+    private fun updateCountryLang() {
+        when (session.language) {
+            getString(R.string.french) -> {
+                binding.layoutPhone.ccp.changeDefaultLanguage(CountryCodePicker.Language.FRENCH)
+            }
+            getString(R.string.arabic) -> {
+                binding.layoutPhone.ccp.changeDefaultLanguage(CountryCodePicker.Language.ARABIC)
+            }
+            else -> {
+                binding.layoutPhone.ccp.changeDefaultLanguage(CountryCodePicker.Language.ENGLISH)
+            }
+        }
     }
 
     private fun updateDateInView() {

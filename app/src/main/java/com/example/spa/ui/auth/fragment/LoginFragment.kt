@@ -20,6 +20,7 @@ import com.example.spa.ui.home.activity.HomeActivity
 import com.example.spa.utilities.*
 import com.example.spa.utilities.validation.ApplicationException
 import com.example.spa.viewmodel.AuthViewModel
+import com.hbb20.CountryCodePicker
 import dagger.hilt.android.AndroidEntryPoint
 
 //import kotlinx.android.synthetic.main.layout_phone_number.view.*
@@ -57,6 +58,21 @@ class LoginFragment : BaseFragment() {
         getUserResponse()
         responseSendOtp()
         binding.textInputPassword.showPassword(binding.checkboxPassword.isChecked)
+        updateCountryLang()
+    }
+
+    private fun updateCountryLang() {
+        when (session.language) {
+            getString(R.string.french) -> {
+                binding.Phone.ccp.changeDefaultLanguage(CountryCodePicker.Language.FRENCH)
+            }
+            getString(R.string.arabic) -> {
+                binding.Phone.ccp.changeDefaultLanguage(CountryCodePicker.Language.ARABIC)
+            }
+            else -> {
+                binding.Phone.ccp.changeDefaultLanguage(CountryCodePicker.Language.ENGLISH)
+            }
+        }
     }
 
 
