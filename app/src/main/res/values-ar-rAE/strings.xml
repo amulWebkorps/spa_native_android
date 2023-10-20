@@ -44,7 +44,7 @@
     <string name="label_mobile_number_subhead">أدخل رقم هاتفك لإجراء عملية التحقق وسنرسل رمزًا مكونًا من 4 أرقام إلى رقمك</string>
     <string name="reset_password">إعادة تعيين كلمة المرور</string>
     <string name="set_the_new_password_for_your_account_so_you_can_log_in_and_access_all_the_features">قم بتعيين كلمة المرور الجديدة لحسابك حتى تتمكن من تسجيل الدخول والوصول إلى كافة الميزات</string>
-    <string name="don_t_receive_your_code_resend">Don\'t receive your code? Resend</string>
+    <string name="don_t_receive_your_code_resend">لم تتلق الرمز الخاص بك؟ إعادة إرسال</string>
     <string name="arpit">Arpit</string>
     <string name="click_here_to_enter_amount">اضغط لإدخال مبلغ</string>
     <string name="recent_transactions">التحويلات الاخيرة</string>
