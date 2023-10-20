@@ -83,14 +83,16 @@ class SelectLanguageFragment : BaseFragment(), LanguageAdapter.OnClick {
 
     override fun onClick(selectLanguage: String) {
 
-        if (selectLanguage == getString(R.string.french)) {
-            setAppLocale(requireContext(), "fr")
-        }
-        if (selectLanguage == getString(R.string.arabic)) {
-            setAppLocale(requireContext(), "ar")
-        }
-        else {
-            setAppLocale(requireContext(), "en")
+        when (selectLanguage) {
+            getString(R.string.french) -> {
+                setAppLocale(requireContext(), "fr")
+            }
+            getString(R.string.arabic) -> {
+                setAppLocale(requireContext(), "ar")
+            }
+            else -> {
+                setAppLocale(requireContext(), "en")
+            }
         }
         session.language = selectLanguage
         Log.e("TAG", "select language: $selectLanguage", )
