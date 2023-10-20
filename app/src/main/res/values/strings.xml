@@ -63,7 +63,7 @@
     <string name="label_error_contact_number">Please enter account number</string>
     <string name="label_error_acc">minimum 10 numbers required in account number</string>
     <string name="error_account_not_matched">Account number and confirm account number does not match</string>
-    <string name="error_enter_code">Please enter IFSC code</string>
+    <string name="error_enter_code">Please enter BIC/Swift</string>
     <string name="error_account_holder_name">Please enter account holder\'s name</string>
     <string name="generate_qr_code">Generate QR Code</string>
     <string name="update_user_detail">Update Details</string>
@@ -102,8 +102,8 @@
     <string name="active">Active</string>
     <string name="inactive">Inactive</string>
     <string name="account_number_">Account Number : </string>
-    <string name="ifsc_code">IFSC Code</string>
-    <string name="ifsc_code_">IFSC Code : </string>
+    <string name="ifsc_code">BIC/Swift</string>
+    <string name="ifsc_code_">BIC/Swift : </string>
     <string name="terms_condition">By creating an account, I hearby accept all the Terms &amp; Conditions</string>
     <string name="error_terms_condition">Please select terms and condition</string>
     <string name="error_valid_amount">Please enter a valid amount</string>

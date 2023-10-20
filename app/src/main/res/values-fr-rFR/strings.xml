@@ -64,7 +64,7 @@
     <string name="label_error_contact_number">Veuillez saisir le numéro de compte</string>
     <string name="label_error_acc">Minimum de 10 numéros requis dans le numéro de compte</string>
     <string name="error_account_not_matched">Le numéro de compte et confirmer le numéro de compte ne correspond pas</string>
-    <string name="error_enter_code">Veuillez saisir le code IFSC</string>
+    <string name="error_enter_code">Veuillez saisir le BIC/Swift</string>
     <string name="error_account_holder_name">Veuillez saisir le nom du titulaire du compte</string>
     <string name="generate_qr_code">Générer un code QR</string>
     <string name="update_user_detail">Enregistrer</string>
@@ -103,8 +103,8 @@
     <string name="active">Actif</string>
     <string name="inactive">Inactif</string>
     <string name="account_number_">Numéro de compte : </string>
-    <string name="ifsc_code">IFSC Code</string>
-    <string name="ifsc_code_">IFSC Code : </string>
+    <string name="ifsc_code">BIC/Swift</string>
+    <string name="ifsc_code_">BIC/Swift : </string>
     <string name="terms_condition">En créant un compte, j\'entends accepter toutes les Termes et Conditions</string>
     <string name="error_terms_condition">Veuillez sélectionner les termes et conditions</string>
     <string name="error_valid_amount">Veuillez saisir un montant valide</string>
