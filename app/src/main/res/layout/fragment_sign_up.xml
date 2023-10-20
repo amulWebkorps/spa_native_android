@@ -231,7 +231,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/editTextPassword"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/dp_20"
                         android:layout_marginTop="@dimen/dp_24"
@@ -239,9 +239,10 @@
                         android:hint="@string/label_password"
                         app:boxStrokeColor="@color/colorGrey7C"
                         app:hintTextColor="@color/colorGrey7C"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/checkboxPassword"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:boxBackgroundMode="none">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputPassword"
@@ -256,6 +257,7 @@
 
                     </com.google.android.material.textfield.TextInputLayout>
 
+
                     <androidx.appcompat.widget.AppCompatCheckBox
                         android:id="@+id/checkboxPassword"
                         android:layout_width="wrap_content"
@@ -265,8 +267,16 @@
                         android:minWidth="0dp"
                         android:minHeight="0dp"
                         app:layout_constraintBottom_toBottomOf="@id/editTextPassword"
-                        app:layout_constraintEnd_toEndOf="@id/editTextPassword"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/editTextPassword" />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        app:layout_constraintStart_toStartOf="@id/editTextPassword"
+                        app:layout_constraintEnd_toEndOf="@id/checkboxPassword"
+                        android:background="@color/colorPrimaryDarkCC"
+                        app:layout_constraintTop_toBottomOf="@id/editTextPassword"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -276,7 +286,7 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/editTextConfirmPassword"
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/dp_20"
                         android:layout_marginTop="@dimen/dp_24"
@@ -284,9 +294,10 @@
                         android:hint="@string/label_confirm_password"
                         app:boxStrokeColor="@color/colorGrey7C"
                         app:hintTextColor="@color/colorGrey7C"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/checkboxConfirmPassword"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:boxBackgroundMode="none">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/textInputConfirmPassword"
@@ -312,9 +323,16 @@
                         android:minWidth="0dp"
                         android:minHeight="0dp"
                         app:layout_constraintBottom_toBottomOf="@id/editTextConfirmPassword"
-                        app:layout_constraintEnd_toEndOf="@id/editTextConfirmPassword"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/editTextConfirmPassword" />
 
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        app:layout_constraintStart_toStartOf="@id/editTextConfirmPassword"
+                        app:layout_constraintEnd_toEndOf="@id/checkboxConfirmPassword"
+                        android:background="@color/colorPrimaryDarkCC"
+                        app:layout_constraintTop_toBottomOf="@id/editTextConfirmPassword"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
